@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>13.2 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最大值减去最小值小于或等于num的子数组数量给定数组arr和整数num，返回有多少个子数组满足如下情况:max(arr[i..j]) - min(arr[i..j]) &amp;lt;= nummax(arr[i..j])表示子数组arr[i..j]中的最大值，min(arr[i..j])表示子数组arr[i..j]中的最小值。如果数组长度为 N，请实现时间复杂度为 O(N)的解法。
+思路有两个规律
+
+如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13.2">
+<meta property="og:url" content="http://duyao.github.io/2015/11/28/13.2/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="最大值减去最小值小于或等于num的子数组数量给定数组arr和整数num，返回有多少个子数组满足如下情况:max(arr[i..j]) - min(arr[i..j]) &amp;lt;= nummax(arr[i..j])表示子数组arr[i..j]中的最大值，min(arr[i..j])表示子数组arr[i..j]中的最小值。如果数组长度为 N，请实现时间复杂度为 O(N)的解法。
+思路有两个规律
+
+如">
+<meta property="og:updated_time" content="2015-11-29T02:14:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="13.2">
+<meta name="twitter:description" content="最大值减去最小值小于或等于num的子数组数量给定数组arr和整数num，返回有多少个子数组满足如下情况:max(arr[i..j]) - min(arr[i..j]) &amp;lt;= nummax(arr[i..j])表示子数组arr[i..j]中的最大值，min(arr[i..j])表示子数组arr[i..j]中的最小值。如果数组长度为 N，请实现时间复杂度为 O(N)的解法。
+思路有两个规律
+
+如">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-13.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/28/13.2/" class="article-date">
+  	<time datetime="2015-11-28T06:33:44.000Z" itemprop="datePublished">2015-11-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      13.2
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h1 id="最大值减去最小值小于或等于num的子数组数量"><a href="#最大值减去最小值小于或等于num的子数组数量" class="headerlink" title="最大值减去最小值小于或等于num的子数组数量"></a>最大值减去最小值小于或等于num的子数组数量</h1><p>给定数组arr和整数num，返回有多少个子数组满足如下情况:<br>max(arr[i..j]) - min(arr[i..j]) &lt;= num<br>max(arr[i..j])表示子数组arr[i..j]中的最大值，min(arr[i..j])表示子数组arr[i..j]中的最小值。如果数组长度为 N，请实现时间复杂度为 O(N)的解法。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>有两个规律</p>
+<ul>
+<li><p>如果max(arr[i..j]) - min(arr[i..j]) &lt;= num，那么ij往里缩，仍然满足要求<br>因为范围缩小后，最大值只能比当前最大值小，而最小值只能比当前大，那么差值会变小，故仍满组要求</p>
+</li>
+<li><p>如果max(arr[i..j]) - min(arr[i..j]) &gt; num，不满足要求，那么ij往外扩大，仍不满足要求<br>因为范围扩大，最大值可能比当前还大，最小值可能比当前值还小，那么差值会变大，仍不满足要求</p>
+</li>
+</ul>
+<p>利用双端队列，利用<a href="http://duyao.github.io/2015/11/28/13.1/" title="利用双端队列">双端队列</a>动态记录子数组的大小值</p>
+<p>qmax和qmin是双端队列，记录大小值的序号，且满足数组的顺序是有序的<br>由于过程中ij一直只增不减，且到末尾就停止，相当于2n次遍历，<br>而更新qmax和qmin时，所有的数字都是进出各一次队列，相当2n次遍历<br>故一共4n次遍历，时间复杂度是o(n)<br><a id="more"></a></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getNum</span>(<span class="params"><span class="keyword">int</span>[] arr, <span class="keyword">int</span> num</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(arr == <span class="literal">null</span> || arr.length == <span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	LinkedList&lt;Integer&gt; qmax = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</div><div class="line">	LinkedList&lt;Integer&gt; qmin = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(i &lt; arr.length)&#123;</div><div class="line">		<span class="keyword">while</span>(j &lt; arr.length)&#123;</div><div class="line">			<span class="comment">//更新qmax,满足依次递减</span></div><div class="line">			<span class="keyword">while</span>(!qmax.isEmpty() &amp;&amp; arr[j] &gt;= arr[qmax.getLast()])&#123;</div><div class="line">				qmax.removeLast();</div><div class="line">			&#125;</div><div class="line">			qmax.<span class="keyword">add</span>(j);</div><div class="line">			<span class="comment">//更新qmin,满足依次递增</span></div><div class="line">			<span class="keyword">while</span>(!qmin.isEmpty() &amp;&amp; arr[j] &lt;= arr[qmin.getLast()])&#123;</div><div class="line">				qmin.removeLast();</div><div class="line">			&#125;</div><div class="line">			qmin.<span class="keyword">add</span>(j);</div><div class="line">			<span class="comment">//判断是否不符条件，如果不符，后面的都不会符合</span></div><div class="line">			<span class="keyword">if</span>(arr[qmax.getFirst()] - arr[qmin.getFirst()] &lt;= num)&#123;</div><div class="line">				<span class="comment">//这里不能更新res，因为当i增加的时候j一直都是在最后，不会进入到此循环内，不能正确的计数</span></div><div class="line">				<span class="comment">//res ++;</span></div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			j++;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//更新窗口，因为i会变化，所以要将原来的pop</span></div><div class="line">		<span class="keyword">if</span>(qmax.getFirst() &lt;= i)&#123;</div><div class="line">			qmax.removeFirst();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(qmin.getFirst() &lt;= i)&#123;</div><div class="line">			qmin.removeFirst();</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//这里表示[i,i+1],[i,i+2],...,[i,j-1][i,j]都是符合条件的</span></div><div class="line">		<span class="comment">//一共是j-i组</span></div><div class="line">		res += j-i;</div><div class="line">		i++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/28/12.4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          12.4
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/28/13.1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">13.1</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="13.2" data-title="13.2" data-url="http://duyao.github.io/2015/11/28/13.2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

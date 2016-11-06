@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Spring IOC 容器 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="接口
+用于沟通的中介物的抽象化
+
+实体把自己提供给外界的一种抽象化说明，用来由内部操作分离出外部沟通方法，使其能被修改内部而不影响外界其他实体与其交互的方式
+
+java接口即声明，声明那些方法是对外公开的
+
+
+面向接口编程
+结构设计中，分清层次及其调用关系，每层只能向外(上层)提供一组功能接口，各层件仅依赖接口而非实现类
+
+接口实现的变动不影响各层间的调用，这一点在公共服务中尤为重要
+
+面向接口编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring IOC 容器">
+<meta property="og:url" content="http://duyao.github.io/2016/02/17/Spring IOC 容器/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="接口
+用于沟通的中介物的抽象化
+
+实体把自己提供给外界的一种抽象化说明，用来由内部操作分离出外部沟通方法，使其能被修改内部而不影响外界其他实体与其交互的方式
+
+java接口即声明，声明那些方法是对外公开的
+
+
+面向接口编程
+结构设计中，分清层次及其调用关系，每层只能向外(上层)提供一组功能接口，各层件仅依赖接口而非实现类
+
+接口实现的变动不影响各层间的调用，这一点在公共服务中尤为重要
+
+面向接口编">
+<meta property="og:updated_time" content="2016-02-17T02:38:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring IOC 容器">
+<meta name="twitter:description" content="接口
+用于沟通的中介物的抽象化
+
+实体把自己提供给外界的一种抽象化说明，用来由内部操作分离出外部沟通方法，使其能被修改内部而不影响外界其他实体与其交互的方式
+
+java接口即声明，声明那些方法是对外公开的
+
+
+面向接口编程
+结构设计中，分清层次及其调用关系，每层只能向外(上层)提供一组功能接口，各层件仅依赖接口而非实现类
+
+接口实现的变动不影响各层间的调用，这一点在公共服务中尤为重要
+
+面向接口编">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Spring IOC 容器" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/17/Spring IOC 容器/" class="article-date">
+  	<time datetime="2016-02-17T01:45:34.000Z" itemprop="datePublished">2016-02-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring IOC 容器
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
+<li><p>用于沟通的中介物的抽象化</p>
+</li>
+<li><p>实体把自己提供给外界的一种抽象化说明，用来由内部操作分离出外部沟通方法，使其能被修改内部而不影响外界其他实体与其交互的方式</p>
+</li>
+<li><p>java接口即声明，声明那些方法是对外公开的</p>
+</li>
+</ul>
+<h2 id="面向接口编程"><a href="#面向接口编程" class="headerlink" title="面向接口编程"></a>面向接口编程</h2><ul>
+<li><p>结构设计中，分清层次及其调用关系，每层只能向外(上层)提供一组功能接口，各层件仅依赖接口而非实现类</p>
+</li>
+<li><p>接口实现的变动不影响各层间的调用，这一点在公共服务中尤为重要</p>
+</li>
+<li><p><code>面向接口编程</code>中的<code>接口</code>式用于隐藏具体实现和实现多态的组件</p>
+</li>
+</ul>
+<h2 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h2><ul>
+<li><p>IOC<br><strong>控制反转</strong>，控制权的转移，应用程序本身不负责雨来对象的从创建和维护，而是有外部容器负责创建和维护</p>
+</li>
+<li><p>DI<br><strong>依赖注入</strong>，是其一种实现方式</p>
+</li>
+<li><p>目的<br>创建对象并且组装对象之间的关系</p>
+</li>
+<li><p>获得依赖对象的过程被反转，即获得依赖对象的过程由自身管理变为了由IOC容器主动注入，即IOC容器运行期间，动态的将某种依赖关系注入到对象之中</p>
+</li>
+</ul>
+<h2 id="Bean容器的初始化"><a href="#Bean容器的初始化" class="headerlink" title="Bean容器的初始化"></a>Bean容器的初始化</h2><h3 id="基础：两个包"><a href="#基础：两个包" class="headerlink" title="基础：两个包"></a>基础：两个包</h3><ul>
+<li>org.springframework.beans</li>
+<li>org.springframework.context</li>
+<li>BeanFactory提供配置结构和基本功能，加载并初始化Bean</li>
+<li>ApplicationContext保存了Bean对象并在Spring中被广泛使用</li>
+</ul>
+<h3 id="方式-ApplicationContext"><a href="#方式-ApplicationContext" class="headerlink" title="方式,ApplicationContext"></a>方式,ApplicationContext</h3><ul>
+<li>本地文件</li>
+<li>Classpath</li>
+<li>Web应用中依赖的servelt或Listener</li>
+</ul>
+<h2 id="Spring注入"><a href="#Spring注入" class="headerlink" title="Spring注入"></a>Spring注入</h2><p>Spring注入是指在启动Spring容器加载bean配置的时候，完成对变量的赋值行为</p>
+<ul>
+<li>设值注入</li>
+<li>构造注入</li>
+</ul>
+<h3 id="设值注入"><a href="#设值注入" class="headerlink" title="设值注入"></a>设值注入</h3><p>通过set方法进行注入</p>
+<p><code>spring-injection.xml</code><br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;bean <span class="built_in">id</span>=<span class="string">"injectionService"</span> <span class="built_in">class</span>=<span class="string">"com.imooc.ioc.injection.service.InjectionServiceImpl"</span>&gt; <span class="comment">--&gt;</span></div><div class="line">	&lt;<span class="keyword">property</span> <span class="built_in">name</span>=<span class="string">"injectionDAO"</span> <span class="keyword">ref</span>=<span class="string">"injectionDAO"</span>&gt;&lt;/<span class="keyword">property</span>&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;bean <span class="built_in">id</span>=<span class="string">"injectionDAO"</span> <span class="built_in">class</span>=<span class="string">"com.imooc.ioc.injection.dao.InjectionDAOImpl"</span>&gt;&lt;/bean&gt;</div></pre></td></tr></table></figure></p>
+<p><code>InjectionServiceImpl.java</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设值注入</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInjectionDAO</span><span class="params">(InjectionDAO injectionDAO)</span> </span>&#123;</div><div class="line">	<span class="keyword">this</span>.injectionDAO = injectionDAO;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="构造注入"><a href="#构造注入" class="headerlink" title="构造注入"></a>构造注入</h3><p>使用显示构造器来完成注入,构造器参数必须与配置文件的名字相同</p>
+<p><code>spring-injection.xml</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=<span class="string">"injectionService"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.imooc.ioc.injection.service.InjectionServiceImpl"</span>&gt;</div><div class="line">	<span class="xml"><span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"injectionDAO"</span> <span class="attr">ref</span>=<span class="string">"injectionDAO"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">&lt;bean id=<span class="string">"injectionDAO"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.imooc.ioc.injection.dao.InjectionDAOImpl"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
+<p><code>InjectionServiceImpl.java</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//构造器注入</span></div><div class="line"><span class="comment">//public InjectionServiceImpl(InjectionDAO injectionDAO1)无法实现注入</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">InjectionServiceImpl</span><span class="params">(InjectionDAO injectionDAO)</span> </span>&#123;</div><div class="line">	<span class="keyword">this</span>.injectionDAO = injectionDAO;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/17/Spring-Bean装配/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Spring Bean装配
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/16/133-Clone-Graph/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">133. Clone Graph</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Spring IOC 容器" data-title="Spring IOC 容器" data-url="http://duyao.github.io/2016/02/17/Spring IOC 容器/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>316. Remove Duplicate Letters | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="316. Remove Duplicate Letters
+区间寻找思路找到每个字母出现的最后位置，把整个串化为若干个区间，找到每个区间的最小值，然后把字符串中最小值删除
+TIPS
+
+区间开始一定是最小值第一次出现的地方
+区间结束是该原来的end或者新的end
+
+代码123456789101112131415161718192021222324252627282930313233343536373">
+<meta property="og:type" content="article">
+<meta property="og:title" content="316. Remove Duplicate Letters">
+<meta property="og:url" content="http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="316. Remove Duplicate Letters
+区间寻找思路找到每个字母出现的最后位置，把整个串化为若干个区间，找到每个区间的最小值，然后把字符串中最小值删除
+TIPS
+
+区间开始一定是最小值第一次出现的地方
+区间结束是该原来的end或者新的end
+
+代码123456789101112131415161718192021222324252627282930313233343536373">
+<meta property="og:updated_time" content="2016-05-12T12:52:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="316. Remove Duplicate Letters">
+<meta name="twitter:description" content="316. Remove Duplicate Letters
+区间寻找思路找到每个字母出现的最后位置，把整个串化为若干个区间，找到每个区间的最小值，然后把字符串中最小值删除
+TIPS
+
+区间开始一定是最小值第一次出现的地方
+区间结束是该原来的end或者新的end
+
+代码123456789101112131415161718192021222324252627282930313233343536373">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-316-Remove-Duplicate-Letters" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/12/316-Remove-Duplicate-Letters/" class="article-date">
+  	<time datetime="2016-05-12T09:06:52.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      316. Remove Duplicate Letters
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#区间寻找"><span class="toc-number">1.</span> <span class="toc-text">区间寻找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reference"><span class="toc-number">1.3.</span> <span class="toc-text">reference</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-number">2.</span> <span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reference-1"><span class="toc-number">2.3.</span> <span class="toc-text">reference</span></a></li></ol></li></ol>
+          </div>
+        
+        <p><a href="https://leetcode.com/problems/remove-duplicate-letters/" target="_blank" rel="external">316. Remove Duplicate Letters</a></p>
+<h2 id="区间寻找"><a href="#区间寻找" class="headerlink" title="区间寻找"></a>区间寻找</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>找到每个字母出现的最后位置，把整个串化为若干个区间，<br>找到每个区间的最小值，然后把字符串中最小值删除</p>
+<p><strong>TIPS</strong></p>
+<ul>
+<li>区间开始一定是最小值第一次出现的地方</li>
+<li>区间结束是该原来的end或者新的end</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> findMinPos(HashMap&lt;Character, Integer&gt; <span class="built_in">map</span>) &#123;</div><div class="line">	<span class="keyword">int</span> pos = Integer.MAX_VALUE;</div><div class="line">	<span class="built_in">for</span> (<span class="keyword">char</span> c : <span class="built_in">map</span>.keySet()) &#123;</div><div class="line">		<span class="keyword">int</span> x = <span class="built_in">map</span>.<span class="built_in">get</span>(c);</div><div class="line">		<span class="built_in">if</span> (x &lt; pos) &#123;</div><div class="line">			pos = x;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">return</span> pos;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 找到所有字母最后出现的位置，然后按照这些位置依次划分区间，找到每个区间中最小的字母</div><div class="line"> * </div><div class="line"> * @param s</div><div class="line"> * @return</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">String</span> removeDuplicateLetters(<span class="keyword">String</span> s) &#123;</div><div class="line">	<span class="built_in">if</span> (s == null || s.length() == <span class="number">0</span>) &#123;</div><div class="line">		<span class="built_in">return</span> <span class="string">""</span>;</div><div class="line">	&#125;</div><div class="line">	HashMap&lt;Character, Integer&gt; <span class="built_in">map</span> = <span class="keyword">new</span> HashMap&lt;Character, Integer&gt;();</div><div class="line">	<span class="keyword">char</span>[] c = s.toCharArray();</div><div class="line">	<span class="built_in">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c.length; i++) &#123;</div><div class="line">		<span class="built_in">map</span>.<span class="built_in">put</span>(c[i], i);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> start = <span class="number">0</span>, <span class="built_in">end</span> = findMinPos(<span class="built_in">map</span>);</div><div class="line">	<span class="keyword">char</span>[] res = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">map</span>.<span class="built_in">size</span>()];</div><div class="line">	<span class="keyword">char</span> <span class="built_in">min</span> = <span class="string">'z'</span> + <span class="number">1</span>;</div><div class="line">	<span class="built_in">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; res.length; j++) &#123;</div><div class="line">		<span class="comment">// 区间内部找最小值</span></div><div class="line">		<span class="built_in">for</span> (<span class="keyword">int</span> i = start; i &lt;= <span class="built_in">end</span>; i++) &#123;</div><div class="line">			<span class="comment">//这里一定是c[i] &lt; min，无等号，这样才能找到一个min出现的位置</span></div><div class="line">			<span class="built_in">if</span> (c[i] &lt; <span class="built_in">min</span> &amp;&amp; <span class="built_in">map</span>.containsKey(c[i])) &#123;</div><div class="line">				<span class="built_in">min</span> = c[i];</div><div class="line">				start = i + <span class="number">1</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 先remove掉min，后面才可以重新查找</span></div><div class="line">		res[j] = <span class="built_in">min</span>;</div><div class="line">		<span class="built_in">map</span>.<span class="built_in">remove</span>(<span class="built_in">min</span>);</div><div class="line">		</div><div class="line">		<span class="built_in">if</span> (<span class="built_in">min</span> == c[<span class="built_in">end</span>]) &#123;</div><div class="line">			<span class="built_in">end</span> = findMinPos(<span class="built_in">map</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 重置min</span></div><div class="line">		<span class="built_in">min</span> = <span class="string">'z'</span> + <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="built_in">return</span> <span class="keyword">new</span> <span class="keyword">String</span>(res);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h3><p><a href="https://leetcode.com/discuss/73777/easy-to-understand-iterative-java-solution" target="_blank" rel="external">easy-to-understand-iterative-java-solution</a></p>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>int[] count: 记录每个字母出现的次数</li>
+<li>boolean[] b: 是否已经被记录过</li>
+<li>Stack<character> stack: 结果集<br>当栈中栈顶元素比当前元素大，且元素没有被记录过，以后还会出现的，出栈顶<br>即栈中元素就是结果集，比栈顶大的元素才可以进栈</character></li>
+</ul>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">removeDuplicateLetters</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</div><div class="line">	boolean[] b = <span class="keyword">new</span> boolean[<span class="number">26</span>];</div><div class="line">	Stack&lt;Character&gt; <span class="built_in">stack</span> = <span class="keyword">new</span> Stack&lt;Character&gt;();</div><div class="line">	<span class="keyword">char</span>[] c = s.toCharArray();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c.length; i++) &#123;</div><div class="line">		count[c[i]-<span class="string">'a'</span>]++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c.length; i++) &#123;</div><div class="line">		count[c[i]-<span class="string">'a'</span>]--;</div><div class="line">		<span class="keyword">while</span>(!<span class="built_in">stack</span>.isEmpty() &amp;&amp; <span class="built_in">stack</span>.peek() &gt; c[i] &amp;&amp; !b[c[i]-<span class="string">'a'</span>]&amp;&amp; count[<span class="built_in">stack</span>.peek()-<span class="string">'a'</span>] &gt; <span class="number">0</span>)&#123;</div><div class="line">			b[<span class="built_in">stack</span>.peek()-<span class="string">'a'</span>] = <span class="literal">false</span>;</div><div class="line">			<span class="built_in">stack</span>.pop();</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(!b[c[i]-<span class="string">'a'</span>])&#123;</div><div class="line">			<span class="built_in">stack</span>.push(c[i]);</div><div class="line">			b[c[i]-<span class="string">'a'</span>] = <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	StringBuffer sb = <span class="keyword">new</span> StringBuffer();</div><div class="line">	<span class="keyword">while</span>(!<span class="built_in">stack</span>.isEmpty())&#123;</div><div class="line">		sb.insert(<span class="number">0</span>,<span class="built_in">stack</span>.pop());</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sb.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="reference-1"><a href="#reference-1" class="headerlink" title="reference"></a>reference</h3><p><a href="https://leetcode.com/discuss/75738/java-solution-using-stack-with-comments" target="_blank" rel="external">java-solution-using-stack-with-comments</a></p>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/21/jvm内存及gc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          jvm内存及gc
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/10/315-Count-of-Smaller-Numbers-After-Self/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">315. Count of Smaller Numbers After Self</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="316-Remove-Duplicate-Letters" data-title="316. Remove Duplicate Letters" data-url="http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

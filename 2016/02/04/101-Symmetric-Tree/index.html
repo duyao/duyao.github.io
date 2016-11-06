@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>101. Symmetric Tree | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="101. Symmetric Tree
+递归式recursively1234567891011121314151617181920212223242526public static boolean isSymmetric(TreeNode left, TreeNode right) &amp;#123;	if(left == null &amp;amp;&amp;amp; right == null)&amp;#123;		//">
+<meta property="og:type" content="article">
+<meta property="og:title" content="101. Symmetric Tree">
+<meta property="og:url" content="http://duyao.github.io/2016/02/04/101-Symmetric-Tree/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="101. Symmetric Tree
+递归式recursively1234567891011121314151617181920212223242526public static boolean isSymmetric(TreeNode left, TreeNode right) &amp;#123;	if(left == null &amp;amp;&amp;amp; right == null)&amp;#123;		//">
+<meta property="og:updated_time" content="2016-02-04T03:53:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="101. Symmetric Tree">
+<meta name="twitter:description" content="101. Symmetric Tree
+递归式recursively1234567891011121314151617181920212223242526public static boolean isSymmetric(TreeNode left, TreeNode right) &amp;#123;	if(left == null &amp;amp;&amp;amp; right == null)&amp;#123;		//">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-101-Symmetric-Tree" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/04/101-Symmetric-Tree/" class="article-date">
+  	<time datetime="2016-02-04T03:15:44.000Z" itemprop="datePublished">2016-02-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      101. Symmetric Tree
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <p><a href="https://leetcode.com/problems/symmetric-tree/" target="_blank" rel="external">101. Symmetric Tree</a></p>
+<h3 id="递归式recursively"><a href="#递归式recursively" class="headerlink" title="递归式recursively"></a>递归式recursively</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> boolean isSymmetric(<span class="type">TreeNode</span> <span class="keyword">left</span>, <span class="type">TreeNode</span> <span class="keyword">right</span>) &#123;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">left</span> == null &amp;&amp; <span class="keyword">right</span> == null)&#123;</div><div class="line">		<span class="comment">//不需要判断子树，一定对称</span></div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">left</span> != null &amp;&amp; <span class="keyword">right</span> != null )&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">left</span>.val != <span class="keyword">right</span>.val)&#123;</div><div class="line">			<span class="comment">//一定不对称，不要需要判断子树</span></div><div class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//左子树的右和右子树的左对比，这里左右子树都存在</span></div><div class="line">	<span class="keyword">return</span> isSymmetric(<span class="keyword">right</span>.<span class="keyword">right</span>, <span class="keyword">left</span>.<span class="keyword">left</span>) &amp; isSymmetric(<span class="keyword">right</span>.<span class="keyword">left</span>, <span class="keyword">left</span>.<span class="keyword">right</span>);</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> boolean isSymmetric(<span class="type">TreeNode</span> root) &#123;</div><div class="line">	<span class="keyword">if</span>(root == null)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="comment">//判断左右子树是否对称</span></div><div class="line">		<span class="keyword">return</span> isSymmetric(root.<span class="keyword">left</span>, root.<span class="keyword">right</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="循环式iteratively"><a href="#循环式iteratively" class="headerlink" title="循环式iteratively"></a>循环式iteratively</h3><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode left, TreeNode right)</span> </span>&#123;</div><div class="line">	<span class="comment">//左右队列分别进行判断</span></div><div class="line">	LinkedList&lt;TreeNode&gt; rlist = <span class="keyword">new</span> LinkedList&lt;TreeNode&gt;();</div><div class="line">	LinkedList&lt;TreeNode&gt; llist = <span class="keyword">new</span> LinkedList&lt;TreeNode&gt;();</div><div class="line">	rlist.offer(right);</div><div class="line">	llist.offer(left);</div><div class="line">	TreeNode lNode, rNode;</div><div class="line">	<span class="keyword">while</span> (!rlist.isEmpty() &amp;&amp; !llist.isEmpty()) &#123;</div><div class="line">		lNode = llist.poll();</div><div class="line">		rNode = rlist.poll();</div><div class="line">		<span class="keyword">if</span>(lNode == <span class="keyword">null</span> &amp;&amp; rNode == <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		&#125;<span class="function"><span class="keyword">else</span> <span class="title">if</span><span class="params">(lNode != <span class="keyword">null</span> &amp;&amp; rNode != <span class="keyword">null</span>)</span></span>&#123;</div><div class="line">			<span class="keyword">if</span>(lNode.val != rNode.val)&#123;</div><div class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="comment">//注意进入队列的顺序和位置</span></div><div class="line">				llist.offer(lNode.left);</div><div class="line">				rlist.offer(rNode.right);</div><div class="line">				</div><div class="line">				llist.offer(lNode.right);</div><div class="line">				rlist.offer(rNode.left);</div><div class="line">			&#125;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">	<span class="comment">//使用两个队列进行遍历</span></div><div class="line">	<span class="keyword">if</span>(root == <span class="keyword">null</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> <span class="title">isSymmetric</span><span class="params">(root.left,root.right)</span></span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称"><a href="#层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称" class="headerlink" title="层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称"></a>层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称</h3><blockquote>
+<p>wrong answer</p>
+</blockquote>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 层次遍历</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> travel(TreeNode root,<span class="keyword">int</span> tall) &#123;</div><div class="line">	String s = <span class="string">""</span>;</div><div class="line">	<span class="keyword">int</span> height = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</div><div class="line">		LinkedList&lt;TreeNode&gt; <span class="keyword">list</span> = <span class="keyword">new</span> LinkedList&lt;TreeNode&gt;();</div><div class="line">		<span class="keyword">list</span>.add(root);</div><div class="line">		TreeNode cur = <span class="keyword">new</span> TreeNode(<span class="number">0</span>);</div><div class="line">		TreeNode last = root;</div><div class="line">		<span class="keyword">while</span> (!<span class="keyword">list</span>.isEmpty() &amp;&amp; height != tall) &#123;</div><div class="line">			cur = <span class="keyword">list</span>.poll();</div><div class="line">			</div><div class="line">			<span class="keyword">if</span> (cur.val == Integer.MAX_VALUE) &#123;</div><div class="line">				</div><div class="line">					s += <span class="string">"*"</span>;</div><div class="line">				</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				s += cur.val;</div><div class="line">				<span class="comment">//空节点会是层数出错，因此要变化</span></div><div class="line">				<span class="comment">//空节点设置为值最大的节点</span></div><div class="line">				<span class="keyword">if</span>(cur.left == <span class="keyword">null</span>)&#123;</div><div class="line">					<span class="keyword">list</span>.offer(<span class="keyword">new</span> TreeNode(Integer.MAX_VALUE));</div><div class="line">				&#125;<span class="keyword">else</span>&#123;</div><div class="line">					<span class="keyword">list</span>.offer(cur.left);</div><div class="line"></div><div class="line">				&#125;</div><div class="line">				<span class="keyword">if</span>(cur.right == <span class="keyword">null</span>)&#123;</div><div class="line">					<span class="keyword">list</span>.offer(<span class="keyword">new</span> TreeNode(Integer.MAX_VALUE));</div><div class="line">				&#125;<span class="keyword">else</span>&#123;</div><div class="line">					<span class="keyword">list</span>.offer(cur.right);</div><div class="line"></div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			<span class="keyword">if</span>(cur == last)&#123;</div><div class="line">				last = <span class="keyword">list</span>.getLast();</div><div class="line">				height++;</div><div class="line">				System.out.println(s+f(s));</div><div class="line">				<span class="keyword">if</span>(!f(s))&#123;</div><div class="line">					<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">				&#125;</div><div class="line">				s = <span class="string">""</span>;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			</div><div class="line">			</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"><span class="comment">//		System.out.println("height = "+height);</span></div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> f(String s) &#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> j = s.length() - <span class="number">1</span>;</div><div class="line">	<span class="comment">// 0,1 2,3 4 5 6,</span></div><div class="line"></div><div class="line">	<span class="keyword">while</span> (i &lt; j) &#123;</div><div class="line">		<span class="keyword">if</span> (s.charAt(i) != s.charAt(j)) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		&#125;</div><div class="line">		i++;</div><div class="line">		j--;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> isSymmetric(TreeNode root) &#123;</div><div class="line">	<span class="keyword">if</span>(root == <span class="keyword">null</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> travel(root,getTall(root));</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> getTall(TreeNode root)&#123;</div><div class="line">	<span class="keyword">if</span>(root == <span class="keyword">null</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> Math.max(getTall(root.left), getTall(root.right)) + <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/12/62-Unique-Paths/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          62. Unique Paths
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/02/70-Climbing-Stairs/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">70. Climbing Stairs</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="101-Symmetric-Tree" data-title="101. Symmetric Tree" data-url="http://duyao.github.io/2016/02/04/101-Symmetric-Tree/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

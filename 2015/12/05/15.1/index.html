@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>15.1 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目给定一个N*N的矩阵matrix，在这个矩阵中只有0和1两种值，返回边框全是1的最大正方形的边长长度。例如:0111101001010010111101011其中，边框全是1的最大正方形的大小为4*4，所以返回4。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15.1">
+<meta property="og:url" content="http://duyao.github.io/2015/12/05/15.1/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="题目给定一个N*N的矩阵matrix，在这个矩阵中只有0和1两种值，返回边框全是1的最大正方形的边长长度。例如:0111101001010010111101011其中，边框全是1的最大正方形的大小为4*4，所以返回4。">
+<meta property="og:updated_time" content="2015-12-14T08:05:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="15.1">
+<meta name="twitter:description" content="题目给定一个N*N的矩阵matrix，在这个矩阵中只有0和1两种值，返回边框全是1的最大正方形的边长长度。例如:0111101001010010111101011其中，边框全是1的最大正方形的大小为4*4，所以返回4。">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-15.1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/05/15.1/" class="article-date">
+  	<time datetime="2015-12-05T12:20:13.000Z" itemprop="datePublished">2015-12-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      15.1
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个N*N的矩阵matrix，在这个矩阵中只有0和1两种值，返回边框全是1的最大正方形的边长长度。<br>例如:<br>01111<br>01001<br>01001<br>01111<br>01011<br>其中，边框全是1的最大正方形的大小为4*4，所以返回4。</p>
+<a id="more"></a>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>暴力的方法是对于每个点，判断是否有边长为n,-1,n-2…的正方形图案，<br>因此复杂度为O(n*n)[共有n*n个点]*O(n)[遍历n个边长的正方形图案]*O(n)[判断该正方形图案是正方形],即O(n^4)<br>优化的地方在判断是否是正方形的地方，<br>添加2个二维数组，分别记录当前位置下边和右边1的个数<br>则判断是否是正方形只需判断左上角下和右1的个数、右上角下方1的个数、左下角右方1的个数<br>优化后为O(1)<br>即总的时间复杂度为O(n*n)[共有n*n个点]*O(n)[遍历n个边长的正方形图案]*O(1)[判断该正方形图案是正方形]+O(n*n)[初始化二维数组]=O(n^3)</p>
+<p>例如right矩阵，有一行1 1 0 1 1，则right矩阵的值是2 1 2 2 1 </p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight inform7"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">public static void setMap(int<span class="comment">[]</span><span class="comment">[]</span> m, int<span class="comment">[]</span><span class="comment">[]</span> down, int<span class="comment">[]</span><span class="comment">[]</span> right)&#123;</div><div class="line">	for(int i = m.length - 1; i &gt;= 0; i--)&#123;</div><div class="line">		//最后一行</div><div class="line">		right<span class="comment">[i]</span><span class="comment">[m<span class="comment">[0]</span>.length - 1]</span> = m<span class="comment">[i]</span><span class="comment">[m<span class="comment">[0]</span>.length - 1]</span> == 1 ? 1 : 0;</div><div class="line">		for(int j = m<span class="comment">[0]</span>.length - 2; j &gt;= 0; j-- )&#123;</div><div class="line">			//主要看右边的</div><div class="line">			if(m<span class="comment">[i]</span><span class="comment">[j+1]</span>== 1)&#123;</div><div class="line">				right<span class="comment">[i]</span><span class="comment">[j]</span> = right<span class="comment">[i]</span><span class="comment">[j+1]</span> + m<span class="comment">[i]</span><span class="comment">[j]</span>;</div><div class="line">			&#125;else&#123;</div><div class="line">			//当前值是0，就只加自己的值</div><div class="line">				right<span class="comment">[i]</span><span class="comment">[j]</span> = m<span class="comment">[i]</span><span class="comment">[j]</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	for(int i = m<span class="comment">[0]</span>.length - 1; i &gt;= 0; i--)&#123;</div><div class="line">		down<span class="comment">[m.length - 1]</span><span class="comment">[i]</span> = m<span class="comment">[m<span class="comment">[0]</span>.length - 1]</span><span class="comment">[i]</span> == 1 ? 1 : 0;</div><div class="line">		for(int j = m.length - 2; j &gt;= 0; j-- )&#123;</div><div class="line">			if(m<span class="comment">[j+1]</span><span class="comment">[i]</span>== 1)&#123;</div><div class="line">				down<span class="comment">[j]</span><span class="comment">[i]</span> = down<span class="comment">[j+1]</span><span class="comment">[i]</span> + m<span class="comment">[i]</span><span class="comment">[j]</span>;</div><div class="line">			&#125;else&#123;</div><div class="line">				down<span class="comment">[j]</span><span class="comment">[i]</span> = m<span class="comment">[j]</span><span class="comment">[i]</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static int getLen(int<span class="comment">[]</span><span class="comment">[]</span> m)&#123;</div><div class="line">	int<span class="comment">[]</span><span class="comment">[]</span> down = new int<span class="comment">[m.length]</span><span class="comment">[m<span class="comment">[0]</span>.length]</span>;</div><div class="line">	int<span class="comment">[]</span><span class="comment">[]</span> right = new int<span class="comment">[m.length]</span><span class="comment">[m<span class="comment">[0]</span>.length]</span>;</div><div class="line">	setMap(m, down, right);</div><div class="line">	int len = 0;</div><div class="line">	for(int i = 0; i &lt; m.length; i++)&#123;</div><div class="line">		for(int j = 0; j &lt; m<span class="comment">[0]</span>.length; j++)&#123;</div><div class="line">			//k为生成的正方形边长</div><div class="line">			int x= Math.min(m.length - i, m<span class="comment">[0]</span>.length - j);</div><div class="line">			for(int k = x; k &gt; 0; k--)&#123;</div><div class="line">				//左上角下和右1的个数、右上角下方1的个数、左下角右方1的个数</div><div class="line">				if(m<span class="comment">[i]</span><span class="comment">[j]</span> == 1 &amp;&amp; right<span class="comment">[i]</span><span class="comment">[j]</span> &gt;= k &amp;&amp; down<span class="comment">[i]</span><span class="comment">[j]</span> &gt;= k &amp;&amp; </div><div class="line">						right<span class="comment">[i+k-1]</span><span class="comment">[j]</span> &gt;= k &amp;&amp; down<span class="comment">[i]</span><span class="comment">[j+k-1]</span> &gt;= k)&#123;</div><div class="line">					len = Math.max(k, len);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return len;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>给定一个整型矩阵matrix，其中的值只有0和1两种，求其中全是1的所有矩形区域中，最大的矩形区域为1的数量。<br>例如:<br>1110<br>其中，最大的矩形区域有 3 个 1，所以返回3。<br>再如:<br>1011<br>1111<br>1110<br>其中，最大的矩形区域有6个1，所以返回6。</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ul>
+<li><p>生成height[]<br>每行对应一个用height[]，表示以当前行为底，<strong>连续的1</strong>的个数<br>然后把这些数字看成一个柱状图，找到最大的矩形面积,不断更新</p>
+</li>
+<li><p>找最大面积<br>这个找最大面积的过程是依次遍历每个数字，然后分别往左右两边扩，直到遇到比它小的数字就停止，<br>这个间距就是矩形的长，宽就是遍历的该数字。<br>此过程的时间复杂度是O(1)，即遍历一次就能找到。</p>
+</li>
+</ul>
+<p>具体做法是生成一个栈，栈中存放<strong>数字的下标</strong>。<br>当栈空或者即将入栈的元素比栈顶大，就一直入栈。<br>直到遇到了比栈顶小的元素，此时开始出栈顶，那么出栈元素右边第一个比它小的就是当前元素，左边第一个比他小的就是新的栈顶元素。<br>这样就找到了每个矩形的面积，更新面积。<br>然后继续入栈出栈的过程。</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getMaxArea</span><span class="params">(<span class="keyword">int</span>[][] <span class="built_in">map</span>)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span>[] height = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="built_in">map</span>[<span class="number">0</span>].length];</div><div class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">	<span class="comment">//更新height</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">map</span>.length; i++)&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; height.length; j++)&#123;</div><div class="line">			<span class="comment">//height记录的是连续的1的个数</span></div><div class="line">			height[j] = <span class="built_in">map</span>[i][j] == <span class="number">0</span> ? <span class="number">0</span> : height[j] + <span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">		res = Math.max(res, fArea(height));</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">fArea</span><span class="params">(<span class="keyword">int</span>[] a)</span></span>&#123;</div><div class="line">	<span class="comment">//栈中存放数字的下标</span></div><div class="line">	Stack&lt;Integer&gt; <span class="built_in">stack</span> = <span class="keyword">new</span> Stack&lt;Integer&gt;();</div><div class="line">	<span class="keyword">int</span> maxArea = <span class="number">0</span>;</div><div class="line">	<span class="comment">//实现一次遍历就找面积</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length; i++)&#123;</div><div class="line">		<span class="comment">//对于栈不空时，当前元素小于等于栈顶时都要出栈，</span></div><div class="line">		<span class="keyword">while</span>(!<span class="built_in">stack</span>.empty() &amp;&amp; a[i] &lt;= a[<span class="built_in">stack</span>.peek()])&#123;</div><div class="line">			<span class="comment">//栈顶出栈，得到矩形的宽a[k]</span></div><div class="line">			<span class="keyword">int</span> k = <span class="built_in">stack</span>.pop();</div><div class="line">			<span class="comment">//左边第一个比a[k]小的值</span></div><div class="line">			<span class="keyword">int</span> left = <span class="built_in">stack</span>.empty()? <span class="number">-1</span>: <span class="built_in">stack</span>.peek();</div><div class="line">			<span class="comment">//右边第一个比a[k]小的值，同时注意存在相等的状况</span></div><div class="line">			<span class="keyword">int</span> right = a[k] == a[i] ? i+<span class="number">1</span> : i;</div><div class="line">			<span class="comment">//区间是左开右开</span></div><div class="line">			<span class="keyword">int</span> tmp = (right - left - <span class="number">1</span>)* a[k];</div><div class="line">			maxArea = Math.max(tmp, maxArea);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">stack</span>.push(i);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//遍历结束后仍然存在元素</span></div><div class="line">	<span class="keyword">while</span>(!<span class="built_in">stack</span>.empty())&#123;</div><div class="line">		<span class="comment">//栈顶出栈，得到矩形的宽a[k]</span></div><div class="line">		<span class="keyword">int</span> k = <span class="built_in">stack</span>.pop();</div><div class="line">		<span class="comment">//栈空时</span></div><div class="line">		<span class="keyword">int</span> right = <span class="built_in">stack</span>.empty()? a.length: k + <span class="number">1</span>;</div><div class="line">		<span class="keyword">int</span> left = <span class="built_in">stack</span>.empty()? <span class="number">-1</span>: <span class="built_in">stack</span>.peek();</div><div class="line">		<span class="comment">//区间是左开右开</span></div><div class="line">		<span class="keyword">int</span> tmp = (right - left - <span class="number">1</span>)* a[k];</div><div class="line">		maxArea = Math.max(tmp, maxArea);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> maxArea;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/13/16.1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          16.1
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/03/二分查找/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">二分查找</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="15.1" data-title="15.1" data-url="http://duyao.github.io/2015/12/05/15.1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

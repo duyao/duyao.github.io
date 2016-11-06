@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>shoppingSite | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="shoppingSite本文只要记录在开发工程中遇到的问题以及解决方法以及待改进
+
+技术
+
+struts2
+spring
+mybatis
+
+
+
+做项目时候，先将各种包，接口等做好然后依次配置xml,先从mybatis，spring，struts2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shoppingSite">
+<meta property="og:url" content="http://duyao.github.io/2015/10/31/shoppingSite/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="shoppingSite本文只要记录在开发工程中遇到的问题以及解决方法以及待改进
+
+技术
+
+struts2
+spring
+mybatis
+
+
+
+做项目时候，先将各种包，接口等做好然后依次配置xml,先从mybatis，spring，struts2">
+<meta property="og:updated_time" content="2015-11-09T14:34:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shoppingSite">
+<meta name="twitter:description" content="shoppingSite本文只要记录在开发工程中遇到的问题以及解决方法以及待改进
+
+技术
+
+struts2
+spring
+mybatis
+
+
+
+做项目时候，先将各种包，接口等做好然后依次配置xml,先从mybatis，spring，struts2">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-shoppingSite" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/31/shoppingSite/" class="article-date">
+  	<time datetime="2015-10-31T06:26:14.000Z" itemprop="datePublished">2015-10-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      shoppingSite
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/project/">project</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/note/">note</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h1 id="shoppingSite"><a href="#shoppingSite" class="headerlink" title="shoppingSite"></a>shoppingSite</h1><p>本文只要记录在开发工程中遇到的问题以及解决方法以及待改进</p>
+<ul>
+<li><p>技术</p>
+<ul>
+<li>struts2</li>
+<li>spring</li>
+<li>mybatis</li>
+</ul>
+</li>
+</ul>
+<p>做项目时候，先将各种包，接口等做好<br>然后依次配置xml,先从mybatis，spring，struts2</p>
+<a id="more"></a>
+<p>一些还能改进的地方</p>
+<ul>
+<li><p>待改进</p>
+<ul>
+<li>商品修改时，如果修改了类别，那么新类别数目+1，旧类别数目-1，删除也是</li>
+<li>购物车添加商品后，显示慢一步</li>
+<li>商品显示分页</li>
+<li>当前位置的显示，一直是手机</li>
+<li>清空购物车</li>
+</ul>
+</li>
+<li><p>未完成</p>
+<ul>
+<li>我的账户，订单</li>
+<li>管理员查询管理订单</li>
+<li>评价功能</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="配置spring的xml文件中的bean"><a href="#配置spring的xml文件中的bean" class="headerlink" title="配置spring的xml文件中的bean"></a>配置spring的<code>xml</code>文件中的<code>bean</code></h2><p>应该全部配置实例的？！！<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userMapper"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.mapper.MapperFactoryBean"</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!--接口--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapperInterface"</span> <span class="attr">value</span>=<span class="string">"com.dy.shoppingSite.dao.UserDao"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">ref</span>=<span class="string">"sqlSessionFactory"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--实例--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.dy.shoppingSite.service.impl.UserServiceImpl"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"userDao"</span> <span class="attr">ref</span>=<span class="string">"userMapper"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="spring-与-struts2-联合使用加入struts2-spring-plugin"><a href="#spring-与-struts2-联合使用加入struts2-spring-plugin" class="headerlink" title="spring 与 struts2 联合使用加入struts2-spring-plugin"></a>spring 与 struts2 联合使用加入<code>struts2-spring-plugin</code></h2><blockquote>
+<p>Exception starting filter struts2 Unable to load configuration.<br>[unknown location] at org.apache.struts2.dispatcher.Dispatcher.init</p>
+</blockquote>
+<p>报错原因是没有<code>struts2-spring-plugin</code></p>
+<hr>
+<h2 id="得到id随机数串"><a href="#得到id随机数串" class="headerlink" title="得到id随机数串"></a>得到id随机数串</h2><p>使用<code>UUID.randomUUID()</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getID</span><span class="params">()</span></span>&#123;</div><div class="line">	UUID uuid = UUID.randomUUID();</div><div class="line">	<span class="keyword">return</span> uuid.toString().replace(<span class="string">"-"</span>, <span class="string">""</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="ajax和jquery需要服务器端返回一个无参数的函数"><a href="#ajax和jquery需要服务器端返回一个无参数的函数" class="headerlink" title="ajax和jquery需要服务器端返回一个无参数的函数"></a>ajax和jquery需要服务器端返回一个无参数的函数</h2><p>使用ajax和jquery来实现，需要服务器端返回一个无参数的函数,参数传递使用response<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">isExist</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">boolean</span> b = userService.isExist(user.getName());</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		PrintWriter writer = ServletActionContext.getResponse().getWriter();</div><div class="line">		writer.print(b);</div><div class="line">		writer.flush();</div><div class="line">		writer.close();</div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="分页操作"><a href="#分页操作" class="headerlink" title="分页操作"></a>分页操作</h2><ul>
+<li><p>建立pageBean的实体类，使用泛型</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageBean</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">	<span class="comment">//数据</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">List</span>&lt;T&gt; data;</div><div class="line">	<span class="comment">//设置每页显示多少条，固定的</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> pageSize;</div><div class="line">	<span class="comment">//当前页的记录的标号，mysql中的参数</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> pageNo;</div><div class="line">	<span class="comment">//总页数</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> totalPage;</div><div class="line">	<span class="comment">//当前页数</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> page;</div><div class="line">	<span class="comment">//总的条数，即一共多少条记录</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> totalNum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在dao层进行查询得到data的值，比如<code>List&lt;Goods&gt;</code></p>
+</li>
+<li>在service层实现pageBean的封装,比如<code>totalPage</code></li>
+<li>在action中传入所需要的参数,比如<code>page</code></li>
+</ul>
+<hr>
+<h2 id="实现搜索条件保存和翻页的结合"><a href="#实现搜索条件保存和翻页的结合" class="headerlink" title="实现搜索条件保存和翻页的结合"></a>实现搜索条件保存和翻页的结合</h2><p>在项目中搜索栏中会有各种搜索条件，搜索完成后，需要分页浏览，<br>但是进入下一页时，要保证搜索条件仍然显示出来<br>这是需要用form表单将他们放在一起，并用jquery控制分页及整体form提交</p>
+<ul>
+<li>jquery检查到page发生变化，就向后台提交</li>
+</ul>
+<p>page是向后台传送的属性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">goPage</span>(<span class="params">p</span>)</span>&#123;</div><div class="line">		$(<span class="string">"#page"</span>).val(p);</div><div class="line">		$(<span class="string">"#form1"</span>).submit();</div><div class="line">	&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<ul>
+<li>使用form把搜索条件和页码一起控制</li>
+</ul>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="comment">&lt;!-- //为了解决 将搜索内容和page都传到后台--&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"goods_listGoodsByPage"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">id</span>=<span class="string">"form1"</span>'&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 因此添加hidden属性将page和goods一起传到后台,在jquery中goPage实现的 --&gt;</span></div><div class="line">	<span class="comment">&lt;!-- name是传到后台的属性名，id是jquery中使用的属性名 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"page"</span> <span class="attr">id</span>=<span class="string">"page"</span> /&gt;</span> </div><div class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">"auto"</span> <span class="attr">name</span>=<span class="string">"goods.categoryId"</span> <span class="attr">id</span>=<span class="string">"category"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>选择分类<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">items</span>=<span class="string">"$</span></span><span class="template-variable">&#123;categories&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> <span class="attr">var</span>=<span class="string">"category"</span>&gt;</span></span></div><div class="line">			<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;category.id&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span>$</span><span class="template-variable">&#123;category.name&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></div><div class="line">		<span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span> 商品名： <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"small"</span> <span class="attr">name</span>=<span class="string">"goods.name"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">type</span>=<span class="string">"text"</span></span></div><div class="line">		<span class="attr">value</span>=<span class="string">""</span>&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"sel"</span>&gt;</span>筛 选<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>分页实现</li>
+</ul>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'pages_bar'</span>&gt;</span></span></div><div class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'javascript:goPage(1)'</span> <span class="attr">id</span>=<span class="string">"first"</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">begin</span>=<span class="string">"1"</span> <span class="attr">end</span>=<span class="string">"$</span></span><span class="template-variable">&#123;pageBean.totalPage&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> <span class="attr">var</span>=<span class="string">"p"</span>&gt;</span></span></div><div class="line">		<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:goPage('$</span></span><span class="template-variable">&#123;p&#125;</span><span class="xml"><span class="tag"><span class="string">')"</span>&gt;</span>$</span><span class="template-variable">&#123;p&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></div><div class="line">	<span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'javascript:goPage($</span></span><span class="template-variable">&#123;pageBean.totalPage&#125;</span><span class="xml"><span class="tag"><span class="string">)'</span> <span class="attr">id</span>=<span class="string">"last"</span>&gt;</span>尾页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>当前第$</span><span class="template-variable">&#123;pageBean.page&#125;</span><span class="xml">页/共$</span><span class="template-variable">&#123;pageBean.totalPage&#125;</span><span class="xml">页<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="先得到旧数据，再更新"><a href="#先得到旧数据，再更新" class="headerlink" title="先得到旧数据，再更新"></a>先得到旧数据，再更新</h2><p>在实际中，比如要更新商品，要先得到旧数据，然后对旧数据进行修改，输入到数据库中<br>这样做的原因是，修改界面不一定所有的属性都要修改，所以直接拿新数据进行修改可能会产生空值<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public void updateGoods<span class="comment">(Goods goods)</span> &#123;</div><div class="line">	<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">	<span class="comment">//这里更新要先将beforeGoods拿来，然后把新的goods中属性付给beforeGoods</span></div><div class="line">	<span class="comment">//因为goods中不一定所有属性都进行更新，会产生空值，导致出错</span></div><div class="line">	Goods beforeGoods = goodsDao.getGoodsById<span class="comment">(goods.getId()</span>);</div><div class="line">	beforeGoods.setCategory<span class="comment">(goods.getCategory()</span>);</div><div class="line">	beforeGoods.setCategoryId<span class="comment">(goods.getCategoryId()</span>);	</div><div class="line">	goodsDao.updateGoods<span class="comment">(beforeGoods)</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="mybatis相关"><a href="#mybatis相关" class="headerlink" title="mybatis相关"></a>mybatis相关</h2><h3 id="传入多个同类型的参数，使用-序号-取出"><a href="#传入多个同类型的参数，使用-序号-取出" class="headerlink" title="传入多个同类型的参数，使用#{序号}取出"></a>传入多个同类型的参数，使用#{序号}取出</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getUserByNameAndPwd"</span> <span class="attr">resultType</span>=<span class="string">"User"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 传入多个参数可以使用map，通过名字来取出，对于同一类型的多个传入参数，可以使用列号来取出 --&gt;</span></div><div class="line">	select * from shop_user where name = #&#123;0&#125; and password = #&#123;1&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="jdbcType-VARCHAR可以传入空值，且不报错"><a href="#jdbcType-VARCHAR可以传入空值，且不报错" class="headerlink" title="jdbcType = VARCHAR可以传入空值，且不报错"></a>jdbcType = VARCHAR可以传入空值，且不报错</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- #&#123;avatar,jdbcType = VARCHAR&#125;当传入值为空的时候，使用varchar可以传入空值 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addUser"</span> <span class="attr">parameterType</span>=<span class="string">"User"</span>&gt;</span></div><div class="line">	insert into shop_user</div><div class="line">	values(#&#123;id&#125;, #&#123;name&#125;, #&#123;password&#125;, #&#123;phoneNum&#125;,</div><div class="line">	#&#123;money&#125;,</div><div class="line">	#&#123;avatar,jdbcType = VARCHAR&#125;, #&#123;regTime&#125;, #&#123;role&#125; )</div><div class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="得到多个相同类型的数据"><a href="#得到多个相同类型的数据" class="headerlink" title="得到多个相同类型的数据"></a>得到多个相同类型的数据</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- While this approach is simple, it will not perform well for large data </span></div><div class="line">	sets or lists. This problem is known as the "N+1 Selects Problem". In a nutshell, </div><div class="line">	the N+1 selects problem is caused. We can Nest Results for Association --&gt;</div><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getAddress"</span> <span class="attr">parameterType</span>=<span class="string">"string"</span> <span class="attr">resultType</span>=<span class="string">"Address"</span>&gt;</span></div><div class="line">	select * from shop_address where userid = #&#123;0&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>java可以直接用list取得<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;Address&gt; <span class="title">getAddress</span><span class="params">(String userid)</span> </span>&#123;</div><div class="line">	<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">	<span class="keyword">return</span> addressDao.getAddress(userid);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="column不一定是数据库中的名字，property是在java中get，set方法的那些属性"><a href="#column不一定是数据库中的名字，property是在java中get，set方法的那些属性" class="headerlink" title="column不一定是数据库中的名字，property是在java中get，set方法的那些属性"></a>column不一定是数据库中的名字，property是在java中get，set方法的那些属性</h3><p><code>association</code>查询一个属性，该属性和另一张表关联，从而查出另一站标的所有属性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--property是在java中get，set方法的那些属性 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"Goods"</span> <span class="attr">id</span>=<span class="string">"GoodsResultMap"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"goodsNo"</span> <span class="attr">property</span>=<span class="string">"goodsNo"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"category"</span> <span class="attr">javaType</span>=<span class="string">"Category"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 因为goods中也有name属性，因此查询出来的结果会重复。 故把category中的name重新命名为cname，这样就不会重复。 </span></div><div class="line">			由此可以看出column属性不一定是数据库中的列名， 而是查询后显示的列名 --&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"cname"</span> <span class="attr">property</span>=<span class="string">"name"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">association</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="parameterType不是hashmap等时，不需要加所属，反之必加-amp-hashmap注意判空-amp-bind实现模糊查询"><a href="#parameterType不是hashmap等时，不需要加所属，反之必加-amp-hashmap注意判空-amp-bind实现模糊查询" class="headerlink" title="parameterType不是hashmap等时，不需要加所属，反之必加&amp;hashmap注意判空&amp;bind实现模糊查询"></a>parameterType不是hashmap等时，不需要加所属，反之必加&amp;hashmap注意判空&amp;<code>bind</code>实现模糊查询</h3><p><code>parameterType</code>是<code>Goods</code>，是普通的java类型，因此不要<code>goods.name</code>,mybatis直接会用Goods中的get/set方法<br><figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getGoodses"</span> <span class="attr">resultMap</span>=<span class="string">"GoodsResultMap"</span> <span class="attr">parameterType</span>=<span class="string">"Goods"</span>&gt;</span></span></div><div class="line">	<span class="comment">&lt;!-- 这里给c.name使用别名cname，因为g中也name列，会重复 --&gt;</span></div><div class="line">	select g.*, c.name cname from shop_goods g, shop_category c where</div><div class="line">	g.categoryId = c.id</div><div class="line">	<span class="comment">&lt;!-- parameterType单一的情况下，就是只有goods或者只有string，(不是hashmap或者list等)， 查询时不需要加所属名字的，比如goods.name --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"categoryId != null and categoryId!= '' "</span>&gt;</span></div><div class="line">		and g.categoryId = #<span class="template-variable">&#123;categoryId&#125;</span><span class="xml"></span></div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"name != null and name != '' "</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 模糊查询，1.要用bind 将查询的东西与页面的显示联系起来 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">bind</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"'%' + name + '%'"</span> /&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 模糊查询，2.like关键字模糊查询 --&gt;</span></div><div class="line">		and g.name like #<span class="template-variable">&#123;name&#125;</span><span class="xml"></span></div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<ul>
+<li><p><code>parameterType</code>是<code>hashmap</code>，含有多种不同类型的值，一定要加上key值，才能取出，比如<code>goods.categoryId</code>,<br>mybatis直接会用hashmap中的get/set得到key值，然后在用key中的get/set方法得到属性值</p>
+</li>
+<li><p>hashmap中放多种key时，注意<strong>判断key是否为空</strong>，否则报错<code>source is null for getProperty(null, &quot;categoryId&quot;)</code></p>
+</li>
+<li><p><code>bind</code>实现模糊查询:<a href="https://mybatis.github.io/mybatis-3/dynamic-sql.html" title="https://mybatis.github.io/mybatis-3/dynamic-sql.html" target="_blank" rel="external">模糊查询</a></p>
+</li>
+</ul>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"listGoodsByPage"</span> <span class="attr">parameterType</span>=<span class="string">"hashmap"</span> <span class="attr">resultMap</span>=<span class="string">"GoodsResultMap"</span>&gt;</span></span></div><div class="line">	select g.*, c.name cname from shop_goods g, shop_category c</div><div class="line">	where</div><div class="line">	g.categoryId = c.id</div><div class="line">	<span class="comment">&lt;!--  一定要判断goods是否为空，否则会报错</span></div><div class="line">	source is null for getProperty(null, "categoryId") --&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"goods != null"</span>&gt;</span> </div><div class="line">		<span class="comment">&lt;!-- parameterType为hashmap的情况下，查询时一定要加key的名字，比如goods.name --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"goods.categoryId != null and goods.categoryId!= '' "</span>&gt;</span></div><div class="line">			and g.categoryId = #<span class="template-variable">&#123;goods.categoryId&#125;</span><span class="xml"></span></div><div class="line">		<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 这里要指出key值，因为hashmap中放了多个值，比如goods.name --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"goods.name != null and goods.name != '' "</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 模糊查询，1.要用bind 将查询的东西与页面的显示联系起来 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">bind</span> <span class="attr">name</span>=<span class="string">"goods.name"</span> <span class="attr">value</span>=<span class="string">"'%' + goods.name + '%'"</span> /&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 模糊查询，2.like关键字模糊查询 --&gt;</span></div><div class="line">			and g.name like #<span class="template-variable">&#123;goods.name&#125;</span><span class="xml"></span></div><div class="line">		<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span> </div><div class="line">	ORDER BY id LIMIT #<span class="template-variable">&#123;pageNo&#125;</span><span class="xml">, #</span><span class="template-variable">&#123;pageSize&#125;</span><span class="xml"></span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="struts2-相关"><a href="#struts2-相关" class="headerlink" title="struts2 相关"></a>struts2 相关</h2><h3 id="struts2-文件上传"><a href="#struts2-文件上传" class="headerlink" title="struts2 文件上传"></a>struts2 文件上传</h3><p><a href="https://struts.apache.org/docs/file-upload.html" title="https://struts.apache.org/docs/file-upload.html" target="_blank" rel="external">struts upload</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 上传头像</span></div><div class="line"><span class="comment">// struts2对于文件上传已经规定好了属性</span></div><div class="line"><span class="comment">// setX(File file),setXFileName(String fileName),setXContentType(String contentType)</span></div><div class="line"><span class="keyword">private</span> File avatar;</div><div class="line"><span class="keyword">private</span> String avatarFileName;</div><div class="line"><span class="comment">// 上传用户头像</span></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">uploadAvatar</span><span class="params">()</span> </span>&#123;</div><div class="line">	String userId = ((User) ActionContext.getContext().getSession()</div><div class="line">			.get(<span class="string">"user"</span>)).getId();</div><div class="line">	<span class="comment">// 得到文件存放的绝对地址</span></div><div class="line">	String path = ServletActionContext.getServletContext().getRealPath(</div><div class="line">			<span class="string">"/userAvatars"</span>);</div><div class="line">	System.out.println(path);</div><div class="line">	<span class="keyword">if</span> (avatar != <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="comment">// 得到才上传文件的后缀名</span></div><div class="line">		String suffix = avatarFileName.substring(avatarFileName</div><div class="line">				.lastIndexOf(<span class="string">"."</span>));</div><div class="line">		System.out.println(userId + suffix);</div><div class="line">		<span class="comment">// 得到新的文件，与上传文件相同，文件名是id+后缀名</span></div><div class="line">		File saveFile = <span class="keyword">new</span> File(<span class="keyword">new</span> File(path), userId + suffix);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">if</span> (!saveFile.getParentFile().exists()) &#123;</div><div class="line">				saveFile.getParentFile().mkdir();</div><div class="line">			&#125;</div><div class="line">			<span class="comment">// 把上传文件拷贝到服务器端/avatar</span></div><div class="line">			FileUtils.copyFile(avatar, saveFile);</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 存放到数据库中</span></div><div class="line">		userService.upadteAvatar(userId, <span class="string">"userAvatars/"</span> + userId + suffix);</div><div class="line">		<span class="comment">// 更新session</span></div><div class="line">		((User) ActionContext.getContext().getSession().get(<span class="string">"user"</span>))</div><div class="line">				.setAvatar(<span class="string">"userAvatars/"</span> + userId + suffix);</div><div class="line">		<span class="keyword">return</span> <span class="string">"usercenter"</span>;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> path;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="struts得到界面的值"><a href="#struts得到界面的值" class="headerlink" title="struts得到界面的值"></a>struts得到界面的值</h3><p>jsp中有captcha，要去后台验证是否正确<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"width:85px"</span> <span class="attr">type</span>=<span class="string">'text'</span> <span class="attr">class</span>=<span class="string">'normal'</span> <span class="attr">name</span>=<span class="string">'captcha'</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span>填写下图所示字符<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在action中可以直接定义该属性，要保持名字一致，并且使用set/get方法<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">String</span> captcha;</div><div class="line"><span class="keyword">public</span> <span class="keyword">String</span> getCaptcha() &#123;</div><div class="line">	<span class="built_in">return</span> captcha;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> setCaptcha(<span class="keyword">String</span> captcha) &#123;</div><div class="line">	<span class="keyword">this</span>.captcha = captcha;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="strut2-验证码"><a href="#strut2-验证码" class="headerlink" title="strut2 验证码"></a>strut2 验证码</h3><p>注意将<code>BufferedImage</code>转化为<code>ByteArrayInputStream</code>，才能在前端显示出来<br><code>RandomAction.java</code>后台验证<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> RandomAction &#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> ByteArrayInputStream <span class="built_in">image</span>;   </div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="keyword">String</span> execute()&#123;</div><div class="line">		RandomUtils randomUtils = RandomUtils.Instance();</div><div class="line">		<span class="comment">//验证码的图片</span></div><div class="line">		<span class="built_in">image</span> = randomUtils.getImage();</div><div class="line">		<span class="comment">//把验证码放入session中</span></div><div class="line">		ActionContext.getContext().getSession().<span class="built_in">put</span>(<span class="string">"vcode"</span>, randomUtils.getString());</div><div class="line">		System.out.<span class="built_in">println</span>(<span class="string">"vcode"</span>+randomUtils.getString());</div><div class="line">		System.out.<span class="built_in">println</span>(<span class="string">"session"</span>+ActionContext.getContext().getSession().<span class="built_in">get</span>(<span class="string">"vcode"</span>)</div><div class="line">				.toString());</div><div class="line">		<span class="built_in">return</span> <span class="string">"success"</span>;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> ByteArrayInputStream getImage() &#123;</div><div class="line">		<span class="built_in">return</span> <span class="built_in">image</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> setImage(ByteArrayInputStream <span class="built_in">image</span>) &#123;</div><div class="line">		<span class="keyword">this</span>.<span class="built_in">image</span> = <span class="built_in">image</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>RandomUtils.java</code>产生验证码<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> class RandomUtils &#123;</div><div class="line"></div><div class="line">	<span class="comment">// public static final char[] CHARS = &#123; '2', '3', '4', '5', '6', '7', '8',</span></div><div class="line">	<span class="comment">// '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M',</span></div><div class="line">	<span class="comment">// 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' &#125;;</span></div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">char</span>[] CHARS = &#123; <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>,</div><div class="line">			<span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>, &#125;;</div><div class="line">	<span class="keyword">private</span> ByteArrayInputStream <span class="built_in">image</span>;<span class="comment">// 图像</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">String</span> <span class="built_in">str</span>;<span class="comment">// 验证码</span></div><div class="line"></div><div class="line">	<span class="keyword">private</span> RandomUtils() &#123;</div><div class="line">		init();<span class="comment">// 初始化属性</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> RandomUtils Instance() &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> RandomUtils();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 取得验证码图片</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> ByteArrayInputStream getImage() &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.<span class="built_in">image</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 取得图片的验证码</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="keyword">String</span> getString() &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.<span class="built_in">str</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">void</span> init() &#123;</div><div class="line">		<span class="comment">// 在内存中创建图象</span></div><div class="line">		<span class="built_in">int</span> <span class="built_in">width</span> = <span class="number">85</span>, <span class="built_in">height</span> = <span class="number">20</span>;</div><div class="line">		BufferedImage <span class="built_in">image</span> = <span class="keyword">new</span> BufferedImage(<span class="built_in">width</span>, <span class="built_in">height</span>,</div><div class="line">				BufferedImage.TYPE_INT_RGB);</div><div class="line">		<span class="comment">// 获取图形上下文</span></div><div class="line">		Graphics g = <span class="built_in">image</span>.getGraphics();</div><div class="line">		<span class="comment">// 生成随机类</span></div><div class="line">		Random <span class="built_in">random</span> = <span class="keyword">new</span> Random();</div><div class="line">		<span class="comment">// 设定背景色</span></div><div class="line">		g.setColor(getRandColor(<span class="number">200</span>, <span class="number">250</span>));</div><div class="line">		g.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="built_in">width</span>, <span class="built_in">height</span>);</div><div class="line">		<span class="comment">// 设定字体</span></div><div class="line">		g.setFont(<span class="keyword">new</span> Font(<span class="string">"Times New Roman"</span>, Font.PLAIN, <span class="number">18</span>));</div><div class="line">		<span class="comment">// 随机产生155条干扰线，使图象中的认证码不易被其它程序探测到</span></div><div class="line">		g.setColor(getRandColor(<span class="number">160</span>, <span class="number">200</span>));</div><div class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">155</span>; i++) &#123;</div><div class="line">			<span class="built_in">int</span> x = <span class="built_in">random</span>.nextInt(<span class="built_in">width</span>);</div><div class="line">			<span class="built_in">int</span> y = <span class="built_in">random</span>.nextInt(<span class="built_in">height</span>);</div><div class="line">			<span class="built_in">int</span> xl = <span class="built_in">random</span>.nextInt(<span class="number">12</span>);</div><div class="line">			<span class="built_in">int</span> yl = <span class="built_in">random</span>.nextInt(<span class="number">12</span>);</div><div class="line">			g.drawLine(x, y, x + xl, y + yl);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 取随机产生的认证码(6位数字)</span></div><div class="line">		StringBuffer sRand = <span class="keyword">new</span> StringBuffer();</div><div class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</div><div class="line">			<span class="keyword">String</span> rand = <span class="keyword">String</span>.valueOf(CHARS[<span class="built_in">random</span>.nextInt(CHARS.length)]);</div><div class="line">			sRand.<span class="built_in">append</span>(rand);</div><div class="line"></div><div class="line">			<span class="comment">// 将认证码显示到图象中</span></div><div class="line">			g.setColor(<span class="keyword">new</span> Color(<span class="number">20</span> + <span class="built_in">random</span>.nextInt(<span class="number">110</span>), <span class="number">20</span> + <span class="built_in">random</span></div><div class="line">					.nextInt(<span class="number">110</span>), <span class="number">20</span> + <span class="built_in">random</span>.nextInt(<span class="number">110</span>)));</div><div class="line">			<span class="comment">// 调用函数出来的颜色相同，可能是因为种子太接近，所以只能直接生成</span></div><div class="line">			g.drawString(rand, <span class="number">13</span> * i + <span class="number">6</span>, <span class="number">16</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 赋值验证码</span></div><div class="line">		<span class="keyword">this</span>.<span class="built_in">str</span> = sRand.toString();</div><div class="line"></div><div class="line">		<span class="comment">// 图象生效</span></div><div class="line">		g.dispose();</div><div class="line">		ByteArrayInputStream input = <span class="keyword">null</span>;</div><div class="line">		ByteArrayOutputStream output = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			ImageOutputStream imageOut = ImageIO</div><div class="line">					.createImageOutputStream(output);</div><div class="line">			ImageIO.write(<span class="built_in">image</span>, <span class="string">"JPEG"</span>, imageOut);</div><div class="line">			imageOut.close();</div><div class="line">			input = <span class="keyword">new</span> ByteArrayInputStream(output.toByteArray());</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			System.out.<span class="built_in">println</span>(<span class="string">"验证码图片产生出现错误："</span> + e.toString());</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">this</span>.<span class="built_in">image</span> = input;<span class="comment">/* 赋值图像 */</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 给定范围获得随机颜色</div><div class="line">	 */</div><div class="line">	<span class="keyword">private</span> Color getRandColor(<span class="built_in">int</span> fc, <span class="built_in">int</span> bc) &#123;</div><div class="line">		Random <span class="built_in">random</span> = <span class="keyword">new</span> Random();</div><div class="line">		<span class="keyword">if</span> (fc &gt; <span class="number">255</span>)</div><div class="line">			fc = <span class="number">255</span>;</div><div class="line">		<span class="keyword">if</span> (bc &gt; <span class="number">255</span>)</div><div class="line">			bc = <span class="number">255</span>;</div><div class="line">		<span class="built_in">int</span> r = fc + <span class="built_in">random</span>.nextInt(bc - fc);</div><div class="line">		<span class="built_in">int</span> g = fc + <span class="built_in">random</span>.nextInt(bc - fc);</div><div class="line">		<span class="built_in">int</span> b = fc + <span class="built_in">random</span>.nextInt(bc - fc);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Color(r, g, b);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>前端显示<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">th</span> <span class="attr">valign</span>=<span class="string">"middle"</span>&gt;</span>验证码：<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"width:85px"</span> <span class="attr">type</span>=<span class="string">'text'</span> <span class="attr">class</span>=<span class="string">'normal'</span> <span class="attr">name</span>=<span class="string">'captcha'</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">label</span>&gt;</span>填写下图所示字符<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="跳转"><a href="#跳转" class="headerlink" title="跳转"></a>跳转</h3><p><code>redirectAction</code>直接跳转到action中<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;action <span class="built_in">name</span>=<span class="string">"address_*"</span> <span class="built_in">class</span>=<span class="string">"addressAction"</span> method=<span class="string">"&#123;1&#125;"</span>&gt;</div><div class="line">	&lt;<span class="literal">result</span> <span class="built_in">name</span>=<span class="string">"oprsuc"</span> type=<span class="string">"redirectAction"</span>&gt;address_list&lt;/<span class="literal">result</span>&gt;</div><div class="line">	&lt;<span class="literal">result</span> <span class="built_in">name</span>=<span class="string">"list"</span>&gt;/usercenter/address_list.jsp&lt;/<span class="literal">result</span>&gt;</div><div class="line">&lt;/action&gt;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="spring相关"><a href="#spring相关" class="headerlink" title="spring相关"></a>spring相关</h2><h3 id="spring事务"><a href="#spring事务" class="headerlink" title="spring事务"></a>spring事务</h3><p>一般在service层可以操作多个dao，因此要设置事务<br>service层，每个dao是一个对数据库的操作，下面这种2个dao一起添加的操作一定是事务<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">public</span> <span class="selector-tag">void</span> <span class="selector-tag">addGoods</span>(Goods goods) &#123;</div><div class="line">	<span class="selector-tag">goods</span><span class="selector-class">.setId</span>(MyUntil.getID());</div><div class="line">	<span class="selector-tag">goodsDao</span><span class="selector-class">.addGoods</span>(goods);</div><div class="line">	<span class="comment">//这是类别的更新，与商品添加一起完成</span></div><div class="line">	<span class="selector-tag">categoryDao</span><span class="selector-class">.updateGoodsNum</span>(goods.getCategoryId(), <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>添加<code>c3p0</code>，并在spring的xml文件中配置<br>不用添加任何其余代码就完成了事务的配置，基于AOP<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 添加事务的dataSource --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/shoppingsite"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"mysql"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span></span></div><div class="line">	<span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- REQUIRED表示不是事务就建立事务 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"*"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRED"</span> /&gt;</span></div><div class="line">		<span class="comment">&lt;!--SUPPORTS不是事务就不建立 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"get*"</span> <span class="attr">propagation</span>=<span class="string">"SUPPORTS"</span> <span class="attr">read-only</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 包名一定要写清楚，对应好 com.dy.shoppingSite.*.*(..)这个就不能对应，因为shoppingSite.*是包，也就没有方法--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"pointcut"</span> <span class="attr">expression</span>=<span class="string">"execution(* com.dy.shoppingSite.service.impl.*.*(..))"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"txAdvice"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="jsp"><a href="#jsp" class="headerlink" title="jsp"></a>jsp</h2><h3 id="c-forEach中的varStatus-amp-el表达式计算比较等要放在括号内"><a href="#c-forEach中的varStatus-amp-el表达式计算比较等要放在括号内" class="headerlink" title="c:forEach中的varStatus&amp;el表达式计算比较等要放在括号内"></a><code>c:forEach</code>中的<code>varStatus</code>&amp;el表达式计算比较等要放在括号内</h3><ul>
+<li><code>c:forEach</code>中的<code>varStatus</code><br><code>varStatus</code>有很多属性，<code>index</code>是序号，从0开始，也有<code>first</code>等<br>more:<a href="http://www.opencms-wiki.org/wiki/C:forEach" title="http://www.opencms-wiki.org/wiki/C:forEach" target="_blank" rel="external">varStatus</a></li>
+<li>el表达式计算比较等要放在括号内<br>比如<code>${string1 eq string 2}</code>而不是<code>${string1} eq ${string 2}</code><figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">c:set</span> <span class="attr">var</span>=<span class="string">"totalMoney"</span> <span class="attr">value</span>=<span class="string">"0"</span>&gt;</span><span class="tag">&lt;/<span class="name">c:set</span>&gt;</span></span></div><div class="line">	<span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">items</span>=<span class="string">"$</span></span><span class="template-variable">&#123;orderDetails&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> <span class="attr">var</span>=<span class="string">"orderDetail"</span> <span class="attr">varStatus</span>=<span class="string">"s"</span>&gt;</span></span></div><div class="line">		<span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- //传递orderDetail要使用index，直接传是不成功的 --&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 下标用s.index表示，http://www.opencms-wiki.org/wiki/C:forEach --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"orderDetails[$</span></span><span class="template-variable">&#123;s.index &#125;</span><span class="xml"><span class="tag"><span class="string">].goods.id"</span> <span class="attr">value</span>=<span class="string">"$</span></span></span><span class="template-variable">&#123;orderDetail.goods.id&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>/&gt;</span></span></div><div class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"orderDetails[$</span></span><span class="template-variable">&#123;s.index &#125;</span><span class="xml"><span class="tag"><span class="string">].nums"</span> <span class="attr">value</span>=<span class="string">"$</span></span></span><span class="template-variable">&#123;orderDetail.nums&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> /&gt;</span></span></div><div class="line">			<span class="tag">&lt;<span class="name">b</span> <span class="attr">class</span>=<span class="string">"red2"</span>&gt;</span>$<span class="template-variable">&#123;orderDetail.nums*orderDetail.goods.price2&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">b</span>&gt;</span></span></div><div class="line">		<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">c:set</span> <span class="attr">var</span>=<span class="string">"totalMoney"</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;totalMoney+orderDetail.nums*orderDetail.goods.price2&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>/&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/01/3.4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          3.4
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/29/git心得/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git心得</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="shoppingSite" data-title="shoppingSite" data-url="http://duyao.github.io/2015/10/31/shoppingSite/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>315. Count of Smaller Numbers After Self | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="315. Count of Smaller Numbers After Self
+多种解法
+二分搜索思路
+list存储有序的数字
+
+从最后开始，将该数组分为两部分一部分是没有排序的前面一部分是有序的后面，存储在list中
+对于位置i的元素x利用二分找到x应该插入的list的坐标po，因为list 有序，所以po同时也表示在list中有po个数字小于x则这个po就是应该整个数组中小于x的右边元素的个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="315. Count of Smaller Numbers After Self">
+<meta property="og:url" content="http://duyao.github.io/2016/05/10/315-Count-of-Smaller-Numbers-After-Self/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="315. Count of Smaller Numbers After Self
+多种解法
+二分搜索思路
+list存储有序的数字
+
+从最后开始，将该数组分为两部分一部分是没有排序的前面一部分是有序的后面，存储在list中
+对于位置i的元素x利用二分找到x应该插入的list的坐标po，因为list 有序，所以po同时也表示在list中有po个数字小于x则这个po就是应该整个数组中小于x的右边元素的个">
+<meta property="og:updated_time" content="2016-05-12T09:07:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="315. Count of Smaller Numbers After Self">
+<meta name="twitter:description" content="315. Count of Smaller Numbers After Self
+多种解法
+二分搜索思路
+list存储有序的数字
+
+从最后开始，将该数组分为两部分一部分是没有排序的前面一部分是有序的后面，存储在list中
+对于位置i的元素x利用二分找到x应该插入的list的坐标po，因为list 有序，所以po同时也表示在list中有po个数字小于x则这个po就是应该整个数组中小于x的右边元素的个">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-315-Count-of-Smaller-Numbers-After-Self" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/10/315-Count-of-Smaller-Numbers-After-Self/" class="article-date">
+  	<time datetime="2016-05-10T13:20:45.000Z" itemprop="datePublished">2016-05-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      315. Count of Smaller Numbers After Self
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二分搜索"><span class="toc-number">1.</span> <span class="toc-text">二分搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Merge-Sort"><span class="toc-number">2.</span> <span class="toc-text">Merge Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#int-nums-12-34-4-3-7-5-2-6-1"><span class="toc-number"></span> <span class="toc-text">int[] nums = {12,34,4,3,7,5,2,6,1};</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#result-gt-0-0-0-0-0-0-0-0-0"><span class="toc-number"></span> <span class="toc-text">result->0,0,0,0,0,0,0,0,0,</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#result-gt-1-1-0-0-0-0-0-0-0"><span class="toc-number"></span> <span class="toc-text">result->1,1,0,0,0,0,0,0,0,</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#result-gt-1-1-0-0-0-0-0-0-0-1"><span class="toc-number"></span> <span class="toc-text">result->1,1,0,0,0,0,0,0,0,</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#result-gt-3-3-1-0-0-0-0-0-0"><span class="toc-number"></span> <span class="toc-text">result->3,3,1,0,0,0,0,0,0,</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#result-gt-3-3-1-0-0-1-0-0-0"><span class="toc-number"></span> <span class="toc-text">result->3,3,1,0,0,1,0,0,0,</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#result-gt-3-3-1-0-0-1-0-1-0"><span class="toc-number"></span> <span class="toc-text">result->3,3,1,0,0,1,0,1,0,</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#result-gt-3-3-1-0-0-2-1-1-0"><span class="toc-number"></span> <span class="toc-text">result->3,3,1,0,0,2,1,1,0,</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#result-gt-7-7-3-2-4-2-1-1-0"><span class="toc-number"></span> <span class="toc-text">result->7,7,3,2,4,2,1,1,0,</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码-1"><span class="toc-number">0.1.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reference"><span class="toc-number">0.2.</span> <span class="toc-text">reference</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BST"><span class="toc-number">1.</span> <span class="toc-text">BST</span></a></li></ol>
+          </div>
+        
+        <p><a href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/" target="_blank" rel="external">315. Count of Smaller Numbers After Self</a></p>
+<p>多种解法</p>
+<h2 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>list存储有序的数字</li>
+</ul>
+<p>从最后开始，将该数组分为两部分<br>一部分是没有排序的前面<br>一部分是有序的后面，存储在list中</p>
+<p>对于位置i的元素x<br>利用二分找到x应该插入的list的坐标po，因为list 有序，所以po同时也表示在list中有po个数字小于x<br>则这个po就是应该整个数组中小于x的右边元素的个数</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//binary search</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">List</span>&lt;Integer&gt; countSmaller(<span class="keyword">int</span>[] nums) &#123;</div><div class="line">	<span class="keyword">List</span>&lt;Integer&gt; <span class="keyword">list</span> = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">	<span class="keyword">if</span>(nums == <span class="keyword">null</span> || nums.length == <span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">list</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//init</span></div><div class="line">	<span class="keyword">List</span>&lt;Integer&gt; sorted = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">	sorted.add(nums[nums.length<span class="number">-1</span>]);</div><div class="line">	<span class="keyword">list</span>.add(<span class="number">0</span>);</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = nums.length<span class="number">-2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">		<span class="keyword">int</span> po = getIndex(nums[i], sorted);</div><div class="line">		sorted.add(po,nums[i]);</div><div class="line">		<span class="keyword">list</span>.add(po);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//reverse</span></div><div class="line">	Collections.reverse(<span class="keyword">list</span>);</div><div class="line">	<span class="keyword">return</span> <span class="keyword">list</span>;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"><span class="comment">//smaller exclude equal</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> getIndex(<span class="keyword">int</span> val, <span class="keyword">List</span>&lt;Integer&gt; sorted)&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> j = sorted.size();</div><div class="line">	<span class="keyword">int</span> mid;</div><div class="line">	<span class="keyword">while</span>(i &lt; j)&#123;</div><div class="line">		mid = (i+j)/<span class="number">2</span>;</div><div class="line">		<span class="keyword">if</span>(val &lt;= sorted.get(mid))&#123;</div><div class="line">			j = mid;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			i = mid+<span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h2><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>利用merge sort思想，排序保存下标在index中<br>将数组分为左右两个组，左边组合并时候要加上右边组合并的个数</p>
+<ul>
+<li>过程分析<h1 id="int-nums-12-34-4-3-7-5-2-6-1"><a href="#int-nums-12-34-4-3-7-5-2-6-1" class="headerlink" title="int[] nums = {12,34,4,3,7,5,2,6,1};"></a>int[] nums = {12,34,4,3,7,5,2,6,1};</h1>start = 0, end = 1<br>nums-&gt;12,34,4,3,7,5,2,6,1,<br>index-&gt;0,1,2,3,4,5,6,7,8,<h1 id="result-gt-0-0-0-0-0-0-0-0-0"><a href="#result-gt-0-0-0-0-0-0-0-0-0" class="headerlink" title="result-&gt;0,0,0,0,0,0,0,0,0,"></a>result-&gt;0,0,0,0,0,0,0,0,0,</h1>start = 0, end = 2<br>nums-&gt;12,34,4,3,7,5,2,6,1,<br>index-&gt;2,0,1,3,4,5,6,7,8,<h1 id="result-gt-1-1-0-0-0-0-0-0-0"><a href="#result-gt-1-1-0-0-0-0-0-0-0" class="headerlink" title="result-&gt;1,1,0,0,0,0,0,0,0,"></a>result-&gt;1,1,0,0,0,0,0,0,0,</h1>start = 3, end = 4<br>nums-&gt;12,34,4,3,7,5,2,6,1,<br>index-&gt;2,0,1,3,4,5,6,7,8,<h1 id="result-gt-1-1-0-0-0-0-0-0-0-1"><a href="#result-gt-1-1-0-0-0-0-0-0-0-1" class="headerlink" title="result-&gt;1,1,0,0,0,0,0,0,0,"></a>result-&gt;1,1,0,0,0,0,0,0,0,</h1>start = 0, end = 4<br>nums-&gt;12,34,4,3,7,5,2,6,1,<br>index-&gt;3,2,4,0,1,5,6,7,8,<h1 id="result-gt-3-3-1-0-0-0-0-0-0"><a href="#result-gt-3-3-1-0-0-0-0-0-0" class="headerlink" title="result-&gt;3,3,1,0,0,0,0,0,0,"></a>result-&gt;3,3,1,0,0,0,0,0,0,</h1>start = 5, end = 6<br>nums-&gt;12,34,4,3,7,5,2,6,1,<br>index-&gt;3,2,4,0,1,6,5,7,8,<h1 id="result-gt-3-3-1-0-0-1-0-0-0"><a href="#result-gt-3-3-1-0-0-1-0-0-0" class="headerlink" title="result-&gt;3,3,1,0,0,1,0,0,0,"></a>result-&gt;3,3,1,0,0,1,0,0,0,</h1>start = 7, end = 8<br>nums-&gt;12,34,4,3,7,5,2,6,1,<br>index-&gt;3,2,4,0,1,6,5,8,7,<h1 id="result-gt-3-3-1-0-0-1-0-1-0"><a href="#result-gt-3-3-1-0-0-1-0-1-0" class="headerlink" title="result-&gt;3,3,1,0,0,1,0,1,0,"></a>result-&gt;3,3,1,0,0,1,0,1,0,</h1>start = 5, end = 8<br>nums-&gt;12,34,4,3,7,5,2,6,1,<br>index-&gt;3,2,4,0,1,8,6,5,7,<h1 id="result-gt-3-3-1-0-0-2-1-1-0"><a href="#result-gt-3-3-1-0-0-2-1-1-0" class="headerlink" title="result-&gt;3,3,1,0,0,2,1,1,0,"></a>result-&gt;3,3,1,0,0,2,1,1,0,</h1>start = 0, end = 8<br>nums-&gt;12,34,4,3,7,5,2,6,1,<br>index-&gt;8,6,3,2,5,7,4,0,1,<h1 id="result-gt-7-7-3-2-4-2-1-1-0"><a href="#result-gt-7-7-3-2-4-2-1-1-0" class="headerlink" title="result-&gt;7,7,3,2,4,2,1,1,0,"></a>result-&gt;7,7,3,2,4,2,1,1,0,</h1>[7, 7, 3, 2, 4, 2, 1, 1, 0]</li>
+</ul>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> List&lt;Integer&gt; countSmaller(<span class="keyword">int</span>[] nums) &#123;</div><div class="line">	<span class="built_in">if</span> (nums == null || nums.length == <span class="number">0</span>) &#123;</div><div class="line">		<span class="built_in">return</span> <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</div><div class="line">	<span class="keyword">int</span>[] sorted = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</div><div class="line">	<span class="comment">// 对该数组排序，存储的是该数字的序号，而不是值</span></div><div class="line">	<span class="built_in">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</div><div class="line">		sorted[i] = i;</div><div class="line">	&#125;</div><div class="line">	mergeSort(<span class="number">0</span>, nums.length - <span class="number">1</span>, nums, sorted, result);</div><div class="line">	List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">	<span class="built_in">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; result.length; i++) &#123;</div><div class="line">		list.add(result[i]);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="built_in">return</span> list;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> mergeSort(<span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>, <span class="keyword">int</span>[] nums, <span class="keyword">int</span>[] sorted,</div><div class="line">		<span class="keyword">int</span>[] result) &#123;</div><div class="line">	<span class="built_in">if</span> (<span class="built_in">end</span> &lt;= start) &#123;</div><div class="line">		<span class="built_in">return</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> mid = (start + <span class="built_in">end</span>) / <span class="number">2</span>;</div><div class="line">	mergeSort(start, mid, nums, sorted, result);</div><div class="line">	mergeSort(mid + <span class="number">1</span>, <span class="built_in">end</span>, nums, sorted, result);</div><div class="line"></div><div class="line">	merge(start, <span class="built_in">end</span>, nums, sorted, result);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> merge(<span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>, <span class="keyword">int</span>[] nums, <span class="keyword">int</span>[] sorted, <span class="keyword">int</span>[] result) &#123;</div><div class="line">	<span class="keyword">int</span> mid = (start + <span class="built_in">end</span>) / <span class="number">2</span>;</div><div class="line">	<span class="keyword">int</span> leftIndex = start;</div><div class="line">	<span class="keyword">int</span> rightIndex = mid + <span class="number">1</span>;</div><div class="line">	</div><div class="line">	<span class="comment">// 记录右边合并过的个数</span></div><div class="line">	<span class="keyword">int</span> rightCnt = <span class="number">0</span>;</div><div class="line">	</div><div class="line">	<span class="comment">//记录本次排序好的下标</span></div><div class="line">	<span class="keyword">int</span>[] newIndex = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="built_in">end</span> - start + <span class="number">1</span>];</div><div class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</div><div class="line">	</div><div class="line">	<span class="built_in">while</span> (leftIndex &lt;= mid &amp;&amp; rightIndex &lt;= <span class="built_in">end</span>) &#123;</div><div class="line">		<span class="comment">//比较的时候时根据已经排好序的数字进行比较</span></div><div class="line">		<span class="built_in">if</span> (nums[sorted[leftIndex]] &lt;= nums[sorted[rightIndex]]) &#123;</div><div class="line">			<span class="comment">//记录较小值的下标</span></div><div class="line">			newIndex[cnt] = sorted[leftIndex];</div><div class="line">			<span class="comment">//result中仍然是对应下标的小于right值</span></div><div class="line">			<span class="comment">//分为两组，左边组合并时，加上右边已经合并的个数</span></div><div class="line">			result[sorted[leftIndex]] += rightCnt;</div><div class="line">			leftIndex++;</div><div class="line">		&#125; <span class="built_in">else</span> &#123;</div><div class="line">			newIndex[cnt] = sorted[rightIndex];</div><div class="line">			rightIndex++;</div><div class="line">			rightCnt++;</div><div class="line">		&#125;</div><div class="line">		cnt++;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//剩余合并</span></div><div class="line">	<span class="built_in">while</span>(leftIndex &lt;= mid)&#123;</div><div class="line">		newIndex[cnt++] = sorted[leftIndex];</div><div class="line">		result[sorted[leftIndex]] += rightCnt;</div><div class="line">		leftIndex++;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">while</span>(rightIndex &lt;= <span class="built_in">end</span>)&#123;</div><div class="line">		newIndex[cnt++] = sorted[rightIndex];</div><div class="line">		rightIndex++;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//更新排序</span></div><div class="line">	<span class="built_in">for</span>(<span class="keyword">int</span> i = start; i &lt;= <span class="built_in">end</span>; i++)&#123;</div><div class="line">        sorted[i] = newIndex[i - start];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h3><p><a href="https://leetcode.com/discuss/74110/11ms-java-solution-using-merge-sort-with-explanation" target="_blank" rel="external">11ms-java-solution-using-merge-sort-with-explanation</a><br><a href="https://leetcode.com/discuss/73509/nlogn-time-space-mergesort-solution-with-detail-explanation" target="_blank" rel="external">nlogn-time-space-mergesort-solution-with-detail-explanation</a></p>
+<h2 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h2><p><a href="http://www.cnblogs.com/yrbbest/p/5068550.html" target="_blank" rel="external">http://www.cnblogs.com/yrbbest/p/5068550.html</a></p>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/12/316-Remove-Duplicate-Letters/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          316. Remove Duplicate Letters
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/06/42-Trapping-Rain-Water/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">42. Trapping Rain Water</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="315-Count-of-Smaller-Numbers-After-Self" data-title="315. Count of Smaller Numbers After Self" data-url="http://duyao.github.io/2016/05/10/315-Count-of-Smaller-Numbers-After-Self/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

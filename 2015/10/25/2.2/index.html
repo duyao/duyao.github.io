@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2.2 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="从5随机到7随机及其扩展基本题目题目给定一个等概率随机产生1~5的随机函数rand1To5如下：public int rand1To5() {return (int) (Math.random() * 5) + 1;}除此之外不能使用任何额外的随机机制，请用rand1To5实现等概率随机产生1~7的随机函数rand1To7。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.2">
+<meta property="og:url" content="http://duyao.github.io/2015/10/25/2.2/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="从5随机到7随机及其扩展基本题目题目给定一个等概率随机产生1~5的随机函数rand1To5如下：public int rand1To5() {return (int) (Math.random() * 5) + 1;}除此之外不能使用任何额外的随机机制，请用rand1To5实现等概率随机产生1~7的随机函数rand1To7。">
+<meta property="og:updated_time" content="2015-10-27T12:08:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2.2">
+<meta name="twitter:description" content="从5随机到7随机及其扩展基本题目题目给定一个等概率随机产生1~5的随机函数rand1To5如下：public int rand1To5() {return (int) (Math.random() * 5) + 1;}除此之外不能使用任何额外的随机机制，请用rand1To5实现等概率随机产生1~7的随机函数rand1To7。">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/25/2.2/" class="article-date">
+  	<time datetime="2015-10-25T14:09:49.000Z" itemprop="datePublished">2015-10-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2.2
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h1 id="从5随机到7随机及其扩展"><a href="#从5随机到7随机及其扩展" class="headerlink" title="从5随机到7随机及其扩展"></a>从5随机到7随机及其扩展</h1><h2 id="基本题目"><a href="#基本题目" class="headerlink" title="基本题目"></a>基本题目</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给定一个等概率随机产生1~5的随机函数rand1To5如下：<br>public int rand1To5() {<br>return (int) (Math.random() * 5) + 1;<br>}<br>除此之外不能使用任何额外的随机机制，请用rand1To5实现等概率随机产生1~7的随机函数rand1To7。</p>
+<hr>
+<a id="more"></a>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p><strong>插空</strong>和<strong>筛选</strong></p>
+<ul>
+<li>插空<br>5 * (<code>rand1To5</code>-1) -&gt; 等概率随机产生1~20</li>
+</ul>
+<p>5 <em> (<code>rand1To5</code>-1) + (<code>rand1To5</code>-1) -&gt; 等概率随机产生0~24 ,<br>5 </em> (<code>rand1To5</code>-1)和 <code>rand1To5</code>-1是两个独立的函数</p>
+<p>( 5 * (<code>rand1To5</code>-1) + (<code>rand1To5</code>-1) )% 7  不等随机产生 0~6，<br>产生3,2,1,0的概率更高，因为0~20等概率产生0~6，21~24又产生了0~3</p>
+<p>这里乘以5的原因是，<code>rand1To5</code>产生5个数</p>
+<ul>
+<li>筛选<br>由于0~3多产生了，因此不等概率，需要筛选<br>过程就是产生了大于20的数字，重新产生，这样，产生的每个数字都是0~20</li>
+</ul>
+<hr>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand1To5</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">//rand()%5，random0-4</span></div><div class="line">	<span class="comment">//rand()%5 + 1，random1-5 </span></div><div class="line">	<span class="keyword">return</span>  rand()%<span class="number">5</span> + <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand1To7</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> num;</div><div class="line">	<span class="keyword">do</span>&#123;</div><div class="line">		num = <span class="number">5</span>*(rand1To5()<span class="number">-1</span>)+rand1To5()<span class="number">-1</span>;</div><div class="line">	&#125;<span class="keyword">while</span>(num&gt;<span class="number">20</span>);<span class="comment">//´óÓÚ20É¸Ñ¡ </span></div><div class="line">	<span class="keyword">return</span> num%<span class="number">7</span>+<span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">200</span>;i++)&#123;</div><div class="line">		<span class="keyword">int</span> k =rand1To7();</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,k);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="补充题目"><a href="#补充题目" class="headerlink" title="补充题目"></a>补充题目</h2><p>给定一个以p概率产生0，以1-p概率产生1的随机函数rand01p如下：<br>public int rand01p() {<br>// you can change p as you like<br>double p = 0.83;<br>return Math.random() &lt; p ? 0 : 1;<br>}</p>
+<p>除此之外不能使用任何额外的随机机制，请用rand01p实现等概率随机产生1~6的随机函数rand1To6。</p>
+<hr>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>由于产生0和1概率不等，但是产生(0,1)和(1,0)组合的概率相等，可以把这个看做是0和1<br>然后题目就变成了用0-1产生1-6，仍然是插空和筛选</p>
+<hr>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand01p</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// you can change p as you like</span></div><div class="line">	<span class="keyword">double</span> p = <span class="number">0.83</span>;</div><div class="line">	<span class="keyword">return</span> rand()%<span class="number">2</span> &lt; p ? <span class="number">0</span> : <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand01</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//rand 0,1</span></div><div class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">int</span> a=rand01p();</div><div class="line">		<span class="keyword">int</span> b=rand01p();</div><div class="line">		<span class="keyword">if</span>(a==<span class="number">1</span> &amp;&amp; b==<span class="number">0</span>)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">0</span> &amp;&amp; b==<span class="number">1</span></div><div class="line">			)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand0To3</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> rand01()*<span class="number">2</span>+rand01();</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand1To6</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> a;</div><div class="line">	<span class="keyword">do</span>&#123;</div><div class="line">		a = <span class="number">4</span>*rand0To3() + rand0To3();</div><div class="line">		</div><div class="line">	&#125;<span class="keyword">while</span>(a&gt;<span class="number">11</span>);</div><div class="line">	<span class="keyword">return</span> a%<span class="number">6</span>+<span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//int a = rand1ToN(10);</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">		<span class="keyword">int</span> ans = rand1To6();</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里是先产生0-3，再产生1-6<br>但是按照进制的方法不知道这样子是否可以<br><code>rand01()</code>*2 *2 + <code>rand01()</code>*2 + <code>rand01()</code> —&gt; 产生0-7，然后再进行筛选</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//用01产生1-n的任何数，没看懂</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand1ToN</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">do</span>&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;n;n &gt;&gt;= <span class="number">1</span>,i++)&#123;</div><div class="line">			<span class="keyword">if</span>(rand01() == <span class="number">1</span>)&#123;</div><div class="line">				ans = (<span class="number">1</span>&lt;&lt;i);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;<span class="keyword">while</span>(ans &gt;= n);</div><div class="line">	<span class="keyword">return</span> ans +<span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="进阶题目"><a href="#进阶题目" class="headerlink" title="进阶题目"></a>进阶题目</h2><h3 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h3><p>给定一个等概率随机产生1~M的随机函数rand1ToM如下：<br>public int rand1ToM(int m) {<br>return (int) (Math.random() * m) + 1;<br>}<br>除此之外不能使用任何额外的随机机制。有两个输入参数分别为m和n，请用rand1ToM(m)实现等概率随机产生1~n的随机函数rand1ToN。</p>
+<hr>
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><p>把随机产生先化成0~m-1，然后看做是m进制的数字，看n最多能占几位，然后筛选<br>比如，从5产生7，由于1位5进制只能表示0-4，而2位5进制能表示0-24</p>
+<hr>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rand1ToM</span><span class="params">(<span class="keyword">int</span> m)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> (<span class="keyword">int</span>) (Math.random() * m) + <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rand1ToN</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span>[] nMSys = getMSysNum(n - <span class="number">1</span>, m);</div><div class="line">	<span class="keyword">int</span>[] randNum = getRanMSysNumLessN(nMSys, m);</div><div class="line">	<span class="keyword">return</span> getNumFromMSysNum(randNum, m) + <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 把value转成m进制的数</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] getMSysNum(<span class="keyword">int</span> value, <span class="keyword">int</span> m) &#123;</div><div class="line">	<span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">32</span>];</div><div class="line">	<span class="keyword">int</span> index = res.length - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (value != <span class="number">0</span>) &#123;</div><div class="line">		res[index--] = value % m;</div><div class="line">		value = value / m;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 等概率随机产生一个0~nMsys范围上的数，只不过是m进制表达的。</span></div><div class="line"><span class="comment">//没看懂！！</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] getRanMSysNumLessN(<span class="keyword">int</span>[] nMSys, <span class="keyword">int</span> m) &#123;</div><div class="line">	<span class="comment">//创造一个新数，和n-1的位数相等</span></div><div class="line">	<span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[nMSys.length];</div><div class="line">	<span class="comment">//下面应该是构造新数的过程</span></div><div class="line">	<span class="keyword">int</span> start = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (nMSys[start] == <span class="number">0</span>) &#123;</div><div class="line">		start++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> index = start;</div><div class="line">	<span class="comment">//应该最后创造的数不能比n-1大的标志</span></div><div class="line">	<span class="keyword">boolean</span> lastEqual = <span class="keyword">true</span>;</div><div class="line">	<span class="keyword">while</span> (index != nMSys.length) &#123;</div><div class="line">		res[index] = rand1ToM(m) - <span class="number">1</span>;</div><div class="line">		<span class="keyword">if</span> (lastEqual) &#123;</div><div class="line">			<span class="keyword">if</span> (res[index] &gt; nMSys[index]) &#123;</div><div class="line">				index = start;</div><div class="line">				lastEqual = <span class="keyword">true</span>;</div><div class="line">				<span class="keyword">continue</span>;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				lastEqual = res[index] == nMSys[index];</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		index++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 把m进制的数转成10进制</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumFromMSysNum</span><span class="params">(<span class="keyword">int</span>[] mSysNum, <span class="keyword">int</span> m)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != mSysNum.length; i++) &#123;</div><div class="line">		res = res * m + mSysNum[i];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/26/2.3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          2.3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/25/1.2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">1.2</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2.2" data-title="2.2" data-url="http://duyao.github.io/2015/10/25/2.2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

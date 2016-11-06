@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>4.1 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Manacher algorithm - Longest Palindromic SubstringO(N) time and O(N) space
+题目给定一个字符串str，返回str中的最长回文子串的长度。str=“123”。其中的最长回文子串“1”或者“2”或者“3”，所以返回1。str=“abc1234321ab”。其中的最长回文子串“1234321”，所以返回7。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4.1">
+<meta property="og:url" content="http://duyao.github.io/2015/11/04/4.1/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="Manacher algorithm - Longest Palindromic SubstringO(N) time and O(N) space
+题目给定一个字符串str，返回str中的最长回文子串的长度。str=“123”。其中的最长回文子串“1”或者“2”或者“3”，所以返回1。str=“abc1234321ab”。其中的最长回文子串“1234321”，所以返回7。">
+<meta property="og:updated_time" content="2015-11-05T06:25:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4.1">
+<meta name="twitter:description" content="Manacher algorithm - Longest Palindromic SubstringO(N) time and O(N) space
+题目给定一个字符串str，返回str中的最长回文子串的长度。str=“123”。其中的最长回文子串“1”或者“2”或者“3”，所以返回1。str=“abc1234321ab”。其中的最长回文子串“1234321”，所以返回7。">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-4.1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/04/4.1/" class="article-date">
+  	<time datetime="2015-11-04T14:17:21.000Z" itemprop="datePublished">2015-11-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      4.1
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h1 id="Manacher-algorithm-Longest-Palindromic-Substring"><a href="#Manacher-algorithm-Longest-Palindromic-Substring" class="headerlink" title="Manacher algorithm - Longest Palindromic Substring"></a>Manacher algorithm - Longest Palindromic Substring</h1><p>O(N) time and O(N) space</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个字符串str，返回str中的最长回文子串的长度。<br>str=“123”。其中的最长回文子串“1”或者“2”或者“3”，所以返回1。<br>str=“abc1234321ab”。其中的最长回文子串“1234321”，所以返回7。</p>
+<a id="more"></a>
+<hr>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li>解决字符串奇偶问题，在源字符串每个字符添加一个字符，包括首尾，这个字符是任意的</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">s</span>: a b c <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span> a b</div><div class="line"><span class="attribute">t</span>:<span class="number">#a</span><span class="number">#b</span><span class="number">#c</span><span class="number">#1</span><span class="number">#2</span><span class="number">#3</span><span class="number">#4</span><span class="number">#3</span><span class="number">#2</span><span class="number">#1</span><span class="number">#a</span><span class="number">#b</span>#</div></pre></td></tr></table></figure>
+<ul>
+<li>设定p[]表示的是以该字符为中心的最大回文半径</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">s</span>:a b c <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span> a b</div><div class="line"><span class="attribute">t</span>:<span class="number">#a</span><span class="number">#b</span><span class="number">#c</span><span class="number">#1</span><span class="number">#2</span><span class="number">#3</span><span class="number">#4</span><span class="number">#3</span><span class="number">#2</span><span class="number">#1</span><span class="number">#a</span><span class="number">#b</span>#</div><div class="line"><span class="attribute">p</span>:<span class="number">0101010101010701010101010</span></div></pre></td></tr></table></figure>
+<p>从p可以看出最大回文长度为7,因多了字符，所以不用除2</p>
+<ul>
+<li>求p[]的过程</li>
+</ul>
+<p>设置<code>index</code>和<code>r</code><br><code>index</code>:以index位置为中心<br><code>r</code>:以index位置为中心，最大的回文半径所在的坐标位置<br>这两个值是随时更新的</p>
+<p>三种情况：</p>
+<ol>
+<li>当i的对称点p[i_mirro]在回文半径r-index内部时，p[i]=p[i_mirro]</li>
+<li>当i的对称点p[i_mirro]在回文半径r-index位置上，p[i]=p[i_mirro],然后再继续遍历找p[i]</li>
+<li>当i的对称点p[i_mirro]在回文半径r-index外部时，直接遍历找p[i]</li>
+</ol>
+<p>see more: <a href="http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-ii.html" title="http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-ii.html" target="_blank" rel="external">Longest Palindromic Substring</a></p>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对字符串添加</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">char</span> [] changeToManacher(String s)&#123;</div><div class="line">	<span class="keyword">char</span> [] c = s.toCharArray();</div><div class="line">	<span class="keyword">char</span> [] res = <span class="keyword">new</span> <span class="keyword">char</span>[c.length * <span class="number">2</span> + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt;res.length; i++)&#123;</div><div class="line">		<span class="keyword">if</span>(i % <span class="number">2</span> == <span class="number">0</span>)&#123;</div><div class="line">			res[i] = <span class="string">'#'</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			res[i] = c[i/<span class="number">2</span>];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">Manacher</span><span class="params">(String s)</span></span>&#123;</div><div class="line">	<span class="keyword">char</span> [] t = changeToManacher(s);</div><div class="line">	<span class="keyword">int</span> [] p = <span class="keyword">new</span> <span class="keyword">int</span>[t.length];</div><div class="line">	<span class="keyword">int</span> index = <span class="number">0</span>, r = <span class="number">0</span>;</div><div class="line">	<span class="comment">//第一个和最后一个的p都是0</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; t.length -<span class="number">1</span> ; i++)&#123;</div><div class="line">		<span class="keyword">int</span> i_mirro = <span class="number">2</span>*index - i;<span class="comment">//i的关于index的对称点 = index + i - index</span></div><div class="line">		</div><div class="line">		</div><div class="line">		<span class="keyword">if</span>(r &lt; i)&#123;</div><div class="line">			<span class="comment">//当i在r之外,关于自己对称是p是0</span></div><div class="line">			p[i] = <span class="number">0</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="comment">//i在r内部，或在r的位置</span></div><div class="line">			<span class="comment">//在r的位置时，p为0</span></div><div class="line">			p[i] = Math.min(p[i_mirro], r-i);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//对于在外部或者在r位置的状况，只能遍历两侧是否为回文</span></div><div class="line">		<span class="keyword">while</span>(i + p[i] +<span class="number">1</span> &lt; t.length - <span class="number">1</span> &amp;&amp; i - p[i] -<span class="number">1</span> &gt; -<span class="number">1</span>)&#123;</div><div class="line">			<span class="keyword">if</span>(t[i + p[i] +<span class="number">1</span>] == t[i - p[i] -<span class="number">1</span>])&#123;</div><div class="line">				p[i]++;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//更新index和r</span></div><div class="line">		<span class="comment">//r是最长回文半径所在位置的坐标</span></div><div class="line">		<span class="keyword">if</span>(i + p[i] &gt; r)&#123;</div><div class="line">			r = i + p[i];</div><div class="line">			index = i;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//找到最长的回文长度</span></div><div class="line">	<span class="keyword">int</span> maxP = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> center = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; t.length - <span class="number">1</span>; i++)&#123;</div><div class="line">		<span class="keyword">if</span>(p[i] &gt; maxP)&#123;</div><div class="line">			maxP = p[i];</div><div class="line">			center = i;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> s.substring((center - maxP)/<span class="number">2</span>, maxP);</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/05/5.1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          5.1
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/02/shoppingSite-pom/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">shoppingSite_pom</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="4.1" data-title="4.1" data-url="http://duyao.github.io/2015/11/04/4.1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

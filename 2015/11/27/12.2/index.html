@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>12.2 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="设计有setAll功能的哈希表哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。现在想加一个 setAll 功能,就是把所有记录的 value 都设成统一的值。请设计并实现 这种有 setAll 功能的哈希表,并且 put、get、containsKey 和 setAll 四个操作的时间复杂度 都为 O(1)。
+思路setAll是把所有数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12.2">
+<meta property="og:url" content="http://duyao.github.io/2015/11/27/12.2/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="设计有setAll功能的哈希表哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。现在想加一个 setAll 功能,就是把所有记录的 value 都设成统一的值。请设计并实现 这种有 setAll 功能的哈希表,并且 put、get、containsKey 和 setAll 四个操作的时间复杂度 都为 O(1)。
+思路setAll是把所有数据">
+<meta property="og:updated_time" content="2015-11-28T15:15:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12.2">
+<meta name="twitter:description" content="设计有setAll功能的哈希表哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。现在想加一个 setAll 功能,就是把所有记录的 value 都设成统一的值。请设计并实现 这种有 setAll 功能的哈希表,并且 put、get、containsKey 和 setAll 四个操作的时间复杂度 都为 O(1)。
+思路setAll是把所有数据">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-12.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/27/12.2/" class="article-date">
+  	<time datetime="2015-11-27T12:45:33.000Z" itemprop="datePublished">2015-11-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      12.2
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h1 id="设计有setAll功能的哈希表"><a href="#设计有setAll功能的哈希表" class="headerlink" title="设计有setAll功能的哈希表"></a>设计有setAll功能的哈希表</h1><p>哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。<br>现在想加一个 setAll 功能,就是把所有记录的 value 都设成统一的值。<br>请设计并实现 这种有 setAll 功能的哈希表,并且 put、get、containsKey 和 setAll 四个操作的时间复杂度 都为 O(1)。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>setAll是把所有数据设置为同一个值,但是时间复杂度是 O(1)</p>
+<ul>
+<li><p>普通做法<br>遍历hashMap然后把值都修改成同一个值<br>这样的时间复杂度一定不是O(1)</p>
+</li>
+<li><p>O(1)做法<br>因此提出时间戳的概念，就是setAll变为单独一个部分，加上一个时间戳，普通数据也加上一个时间戳<br>取数据的时候要判断是从setAll取还是从普通数据取，这个取决于对应的时间戳</p>
+</li>
+</ul>
+<p>在普通的hashMap中value就是一个普通的值，<br>而这里把普通数据value设置为一个带有时间戳的value，即一个新的数据结构，包含时间戳和value<br>每次对于添加value都要更新时间戳</p>
+<a id="more"></a>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//value值是带有时间戳的</span></div><div class="line"><span class="keyword">public</span> static <span class="class"><span class="keyword">class</span> <span class="title">MyValue</span>&lt;<span class="type">V</span>&gt;</span>&#123;</div><div class="line">	<span class="keyword">private</span> V value;</div><div class="line">	<span class="keyword">private</span> long time;</div><div class="line">	<span class="keyword">public</span> MyValue(V value, long time)&#123;</div><div class="line">		<span class="keyword">this</span>.time = time;</div><div class="line">		<span class="keyword">this</span>.value = value;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">public</span> V getValue()&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.value;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">public</span> long getTime()&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.time;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> static <span class="class"><span class="keyword">class</span> <span class="title">MyHashMap</span>&lt;<span class="type">K, V</span>&gt;</span>&#123;</div><div class="line">	<span class="comment">//hashMap的value是带有时间戳的value</span></div><div class="line">	<span class="keyword">private</span> HashMap&lt;K, MyValue&lt;V&gt;&gt; baseMap;</div><div class="line">	<span class="keyword">private</span> long time;</div><div class="line">	<span class="comment">//setAll变为单独的区域</span></div><div class="line">	<span class="keyword">private</span> MyValue&lt;V&gt; setAll;</div><div class="line">	<span class="comment">//初始化</span></div><div class="line">	<span class="keyword">public</span> MyHashMap()&#123;</div><div class="line">		<span class="keyword">this</span>.baseMap = new HashMap&lt;K, MyValue&lt;V&gt;&gt;();</div><div class="line">		<span class="keyword">this</span>.time = <span class="number">0</span>;</div><div class="line">		<span class="keyword">this</span>.setAll = new MyValue&lt;V&gt;(<span class="literal">null</span>, <span class="number">-1</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//普通的containsKey</span></div><div class="line">	<span class="keyword">public</span> boolean containsKey(K key)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.baseMap.containsKey(key);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//添加时要添加时间戳</span></div><div class="line">	<span class="keyword">public</span> void put(K key, V value) &#123;</div><div class="line">		<span class="keyword">this</span>.baseMap.put(key, new MyValue&lt;V&gt;(value, <span class="keyword">this</span>.time++));</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//将setAll单独设置成为一个区域，而不是改变所有的值</span></div><div class="line">	<span class="keyword">public</span> void setAll(V value)&#123;</div><div class="line">		<span class="keyword">this</span>.setAll = new MyValue&lt;V&gt;(value, time++);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//取值时，要根据时间戳来判断取出setAll还是myValue</span></div><div class="line">	<span class="keyword">public</span> V <span class="keyword">get</span>(K key)&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>.containsKey(key))&#123;</div><div class="line">			<span class="keyword">if</span>(<span class="keyword">this</span>.baseMap.<span class="keyword">get</span>(key).time &gt; <span class="keyword">this</span>.setAll.time)&#123;</div><div class="line">				<span class="keyword">return</span> <span class="keyword">this</span>.baseMap.<span class="keyword">get</span>(key).getValue();</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="keyword">return</span> <span class="keyword">this</span>.setAll.getValue();</div><div class="line">			&#125;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/27/12.3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          12.3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/27/11.3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">11.3</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="12.2" data-title="12.2" data-url="http://duyao.github.io/2015/11/27/12.2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

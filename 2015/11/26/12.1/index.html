@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>12.1 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="两个单链表相交的一系列问题单链表可能有环,也可能无环。给定两个单链表的头节点 head1 和 head2, 这两个链表可能相交,也可能不相交。请实现一个函数,如果两个链表相交,请返回相交 的第一个节点;如果不相交,返回 null 即可。要求:如果链表1的长度为N，链表2的长度为M，时间复杂度请达到O(N+M)，额外空间复杂度请达到O(1)。
+思路本题目可以拆分为2大问题
+
+是否有环
+是否相交
+
+然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12.1">
+<meta property="og:url" content="http://duyao.github.io/2015/11/26/12.1/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="两个单链表相交的一系列问题单链表可能有环,也可能无环。给定两个单链表的头节点 head1 和 head2, 这两个链表可能相交,也可能不相交。请实现一个函数,如果两个链表相交,请返回相交 的第一个节点;如果不相交,返回 null 即可。要求:如果链表1的长度为N，链表2的长度为M，时间复杂度请达到O(N+M)，额外空间复杂度请达到O(1)。
+思路本题目可以拆分为2大问题
+
+是否有环
+是否相交
+
+然">
+<meta property="og:updated_time" content="2015-12-08T12:35:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12.1">
+<meta name="twitter:description" content="两个单链表相交的一系列问题单链表可能有环,也可能无环。给定两个单链表的头节点 head1 和 head2, 这两个链表可能相交,也可能不相交。请实现一个函数,如果两个链表相交,请返回相交 的第一个节点;如果不相交,返回 null 即可。要求:如果链表1的长度为N，链表2的长度为M，时间复杂度请达到O(N+M)，额外空间复杂度请达到O(1)。
+思路本题目可以拆分为2大问题
+
+是否有环
+是否相交
+
+然">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-12.1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/26/12.1/" class="article-date">
+  	<time datetime="2015-11-26T14:01:58.000Z" itemprop="datePublished">2015-11-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      12.1
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h1 id="两个单链表相交的一系列问题"><a href="#两个单链表相交的一系列问题" class="headerlink" title="两个单链表相交的一系列问题"></a>两个单链表相交的一系列问题</h1><p>单链表可能有环,也可能无环。给定两个单链表的头节点 head1 和 head2, 这两个链表可能相交,也可能不相交。<br>请实现一个函数,如果两个链表相交,请返回相交 的第一个节点;如果不相交,返回 null 即可。<br>要求:如果链表1的长度为N，链表2的长度为M，时间复杂度请达到O(N+M)，额外空间复杂度请达到O(1)。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>本题目可以拆分为2大问题</p>
+<ul>
+<li>是否有环</li>
+<li>是否相交</li>
+</ul>
+<p>然后又可以拆分为多个子问题</p>
+<ul>
+<li>判断单链表是否有环，如果有找出入环点</li>
+<li>两个无环链表是否相交</li>
+<li>两个有环链表是否相交</li>
+<li>一个有环链表和一个无环链表是否相交</li>
+</ul>
+<a id="more"></a>
+<h2 id="判断单链表是否有环，如果有找出入环点"><a href="#判断单链表是否有环，如果有找出入环点" class="headerlink" title="判断单链表是否有环，如果有找出入环点"></a>判断单链表是否有环，如果有找出入环点</h2><ul>
+<li>快指针一次走两步，慢指针一次走一步，直到快慢指针相遇</li>
+<li>新指针从链表头开始走，慢指针从刚刚位置继续走</li>
+<li>新指针和慢指针相遇的地方就是入环点</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">// 判断链表是否有环</div><div class="line">	public static <span class="keyword">Node</span> <span class="title">getLoopNode</span>(<span class="keyword">Node</span> <span class="title">head</span>) &#123;</div><div class="line">		if(head == null || head.next ==null || head.next.next ==null)&#123;</div><div class="line">			return null;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">Node</span> <span class="title">nq</span> = head;</div><div class="line">		<span class="keyword">Node</span> <span class="title">ns</span> = head.next.next;</div><div class="line">		//循环使得快慢指针相遇</div><div class="line">		while (ns != nq) &#123;</div><div class="line">			if(ns == null || nq == null)&#123;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">			ns = ns.next;</div><div class="line">			nq = nq.next.next;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">Node</span> <span class="title">node</span> = head;</div><div class="line">		//新指针和慢指针遍历，直到相遇</div><div class="line">		while (ns != <span class="keyword">node</span><span class="title">) &#123;</span></div><div class="line">			if(ns == null || <span class="keyword">node</span> <span class="title">== null</span>)&#123;</div><div class="line">				return null;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">node</span> <span class="title">= node</span>.next;</div><div class="line">			ns = ns.next;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		return <span class="keyword">node</span><span class="title">;</span></div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="两个无环链表是否相交"><a href="#两个无环链表是否相交" class="headerlink" title="两个无环链表是否相交"></a>两个无环链表是否相交</h2><blockquote>
+<p>如果两个没有环的链表相交于某一节点，那么在这个节点之后的所有节点都是两个链表共有的</p>
+</blockquote>
+<p>因此这两个链表的最后一个节点一定是公共的<br>所以先遍历两个链表，判断末尾节点是否是同一个，同时设置一个计数，表示两个链表长度的差值<br>然后让长的链表先从头走过这个差值，然后长短一起走，直到发现第一个公共节点</p>
+<p>这个长度差值还可以体现在求链表倒数第k个结点。<br>即有2个指针指向链表，一个先走k步，然后两者一起走，直到有一个为空为止。<br>这样非空的指针指向的就是倒数k的节点<br>因为两者一个都相差k步，所有快的走完全程，慢的就停在了倒数k步上</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 无环的时候找公共的节点</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> Node noLoop(Node head1, Node head2) &#123;</div><div class="line">	<span class="comment">// n是记录长链表比短链表长多少，然后让长链表走过这一段，之后一起走，找到公共节点</span></div><div class="line">	<span class="keyword">int</span> n = <span class="number">0</span>;</div><div class="line">	<span class="comment">// head1走完全程</span></div><div class="line">	Node n1 = head1;</div><div class="line">	<span class="keyword">while</span> (n1.<span class="keyword">next</span> != <span class="keyword">null</span>) &#123;</div><div class="line">		n++;</div><div class="line">		n1 = n1.<span class="keyword">next</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// head2走完全程</span></div><div class="line">	Node n2 = head2;</div><div class="line">	<span class="keyword">while</span> (n2.<span class="keyword">next</span> != <span class="keyword">null</span>) &#123;</div><div class="line">		n--;</div><div class="line">		n2 = n2.<span class="keyword">next</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 最后一个节点不相同，则一定没有公共节点</span></div><div class="line">	<span class="keyword">if</span> (n1 != n2) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 把n1设置为长度更长的链表</span></div><div class="line">	n1 = n &gt; <span class="number">0</span> ? head1 : head2;</div><div class="line">	n2 = n1 == head1 ? head2 : head1;</div><div class="line">	<span class="comment">// n1把多出来的部分走过</span></div><div class="line">	n = Math.<span class="keyword">abs</span>(n);</div><div class="line">	<span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</div><div class="line">		n--;</div><div class="line">		n1 = n1.<span class="keyword">next</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// n1==n2时就是公共节点</span></div><div class="line">	<span class="keyword">while</span> (n1 != n2) &#123;</div><div class="line">		n1 = n1.<span class="keyword">next</span>;</div><div class="line">		n2 = n2.<span class="keyword">next</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> n1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="两个有环链表是否相交"><a href="#两个有环链表是否相交" class="headerlink" title="两个有环链表是否相交"></a>两个有环链表是否相交</h2><ul>
+<li><p>两个入环点相同<br>说明相交点在环内，只需要判断一链表上俩指针相遇的那个节点，在不在另一条链表上</p>
+</li>
+<li><p>两个入环点不同<br>说明相交点不在环内，则类似于两个无环链表的遍历，只是遍历到入环点就停止</p>
+</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">public static <span class="keyword">Node</span> <span class="title">bothLoop</span>(<span class="keyword">Node</span> <span class="title">head1</span>, <span class="keyword">Node</span> <span class="title">loop1</span>, <span class="keyword">Node</span> <span class="title">head2</span>, <span class="keyword">Node</span> <span class="title">loop2</span>) &#123;</div><div class="line">	if (loop1 == loop2) &#123;</div><div class="line">		// 入环点相同，相交点在环外</div><div class="line">		// 方法类似无环链表求公共点</div><div class="line">		// 先求长度差，然后长的走过长度差，之后一起走，直到相遇</div><div class="line">		int n = <span class="number">0</span>;</div><div class="line">		<span class="keyword">Node</span> <span class="title">n1</span> = head1;</div><div class="line">		//遍历到入环点停止，而不是为空</div><div class="line">		while (n1.next != loop1) &#123;</div><div class="line">			n++;</div><div class="line">			n1 = n1.next;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">Node</span> <span class="title">n2</span> = head2;</div><div class="line">		//遍历到入环点停止，而不是为空</div><div class="line">		while (n2.next != loop2) &#123;</div><div class="line">			n--;</div><div class="line">			n2 = n2.next;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		n1 = n &gt; <span class="number">0</span> ? head1 : head2;</div><div class="line">		n2 = n1 == head1 ? head2 : head1;</div><div class="line">		n = Math.abs(n);</div><div class="line">		//长的走过多余的部分</div><div class="line">		while (n != <span class="number">0</span>) &#123;</div><div class="line">			n--;</div><div class="line">			n1 = n1.next;</div><div class="line">		&#125;</div><div class="line">		//一起走，直到相遇</div><div class="line">		while (n1 != n2) &#123;</div><div class="line">			n1 = n1.next;</div><div class="line">			n2 = n2.next;</div><div class="line">		&#125;</div><div class="line">		return n1;</div><div class="line">	&#125; else &#123;</div><div class="line">		// 入环点不同，只要遍历一个环，检查另一个入环点是否在其中即可</div><div class="line">		<span class="keyword">Node</span> <span class="title">node</span> = loop1;</div><div class="line">		do &#123;</div><div class="line">			// loop2是否在loop1中</div><div class="line">			if (<span class="keyword">node</span> <span class="title">== loop2</span>) &#123;</div><div class="line">				return <span class="keyword">node</span><span class="title">;</span></div><div class="line">			&#125;</div><div class="line">			node = <span class="keyword">node</span>.<span class="title">next</span>;</div><div class="line">		&#125; while (<span class="keyword">node</span> <span class="title">!= loop1</span>);</div><div class="line">		// 不在其中，则不相交</div><div class="line">		return null;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="一个有环链表和一个无环链表是否相交"><a href="#一个有环链表和一个无环链表是否相交" class="headerlink" title="一个有环链表和一个无环链表是否相交"></a>一个有环链表和一个无环链表是否相交</h2><p>一个有环链表和一个无环链表<strong>不可能相交</strong></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">Node <span class="title">getIntersectNode</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (head1 == <span class="keyword">null</span> || head2 == <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">	Node loop1 = getLoopNode(head1);</div><div class="line">	Node loop2 = getLoopNode(head2);</div><div class="line">	<span class="comment">// 12都没有环</span></div><div class="line">	<span class="keyword">if</span> (loop1 == <span class="keyword">null</span> &amp;&amp; loop2 == <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> <span class="title">noLoop</span><span class="params">(head1, head2)</span></span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 12都有环</span></div><div class="line">	<span class="keyword">if</span> (loop1 != <span class="keyword">null</span> &amp;&amp; loop2 != <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> <span class="title">bothLoop</span><span class="params">(head1, loop1, head2, loop2)</span></span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 一个有环一个无环，不可能相交！</span></div><div class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/27/11.3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          11.3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/26/11.2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">11.2</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="12.1" data-title="12.1" data-url="http://duyao.github.io/2015/11/26/12.1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

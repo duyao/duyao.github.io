@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>8.1 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目给定整数N，返回斐波那契数列的第N项。123456789public int f1(int n) &amp;#123;	if (n &amp;lt; 1) &amp;#123;	return 0;	&amp;#125;	if (n == 1 || n == 2) &amp;#123;	return 1;	&amp;#125;	return f1(n - 1) + f1(n - 2);&amp;#125;
+上面的时间复杂度是O(2^N)要求：时间复杂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.1">
+<meta property="og:url" content="http://duyao.github.io/2015/11/16/8.1/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="题目给定整数N，返回斐波那契数列的第N项。123456789public int f1(int n) &amp;#123;	if (n &amp;lt; 1) &amp;#123;	return 0;	&amp;#125;	if (n == 1 || n == 2) &amp;#123;	return 1;	&amp;#125;	return f1(n - 1) + f1(n - 2);&amp;#125;
+上面的时间复杂度是O(2^N)要求：时间复杂">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;a&space;&&space;b\\&space;c&space;&&space;d&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(4),f(3))=(f(3),f(2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(3),f(2))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}=(1,1)*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(c(n),c(n-1),c(n-2))=(c(n-1),c(n-1),c(n-3))*\begin{bmatrix}&space;a&space;&&space;b&&space;c\\&space;d&&space;e&&space;f\\&space;g&space;&h&space;&&space;i&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(c(n),c(n-1),c(n-2))=(3,2,1)*\begin{bmatrix}&space;1&space;&&space;1&0\\&space;0&&space;0&1\\&space;1&space;&0&space;&0&space;\end{bmatrix}^{n-3}">
+<meta property="og:updated_time" content="2015-11-17T05:03:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8.1">
+<meta name="twitter:description" content="题目给定整数N，返回斐波那契数列的第N项。123456789public int f1(int n) &amp;#123;	if (n &amp;lt; 1) &amp;#123;	return 0;	&amp;#125;	if (n == 1 || n == 2) &amp;#123;	return 1;	&amp;#125;	return f1(n - 1) + f1(n - 2);&amp;#125;
+上面的时间复杂度是O(2^N)要求：时间复杂">
+<meta name="twitter:image" content="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;a&space;&&space;b\\&space;c&space;&&space;d&space;\end{bmatrix}">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-8.1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/16/8.1/" class="article-date">
+  	<time datetime="2015-11-16T09:35:50.000Z" itemprop="datePublished">2015-11-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      8.1
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定整数N，返回斐波那契数列的第N项。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (n &lt; <span class="number">1</span>) &#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>) &#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> f1(n - <span class="number">1</span>) + f1(n - <span class="number">2</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面的时间复杂度是O(2^N)<br>要求：时间复杂度O(logN)的解法<br><a id="more"></a></p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>由递推公式<code>f(n),f(n-1))=(f(n-1),f(n-2)</code>可以化作<br><a href="https://www.codecogs.com/eqnedit.php?latex=(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;a&space;&&space;b\\&space;c&space;&&space;d&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;a&space;&&space;b\\&space;c&space;&&space;d&space;\end{bmatrix}" title="(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix} a & b\\ c & d \end{bmatrix}"></a><br>当含有f(n-3)时，行列式是3阶的<br>可以代入求出行列式<br><a href="https://www.codecogs.com/eqnedit.php?latex=(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" title="(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}"></a><br>于是有<br><a href="https://www.codecogs.com/eqnedit.php?latex=(f(4),f(3))=(f(3),f(2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(4),f(3))=(f(3),f(2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" title="(f(4),f(3))=(f(3),f(2))*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}"></a></p>
+<p><a href="https://www.codecogs.com/eqnedit.php?latex=(f(3),f(2))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(3),f(2))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" title="(f(3),f(2))=(f(2),f(1))*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}"></a><br>…<br>依次带入得到<br><a href="https://www.codecogs.com/eqnedit.php?latex=(f(n),f(n-1))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}=(1,1)*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}=(1,1)*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}" title="(f(n),f(n-1))=(f(2),f(1))*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}^{n-2}=(1,1)*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}^{n-2}"></a><br>因此该题目的关键是求行列式的幂运算<br>集合的幂运算和普通数字的目运算相同，都可以是用二分法<br>假设有整数是10，如何最快的求解10的75次方。</p>
+<ol>
+<li>75的2进制形式为1001011。</li>
+<li>10的75次方=(10^64) <em> (10^8) </em> (10^2) * (10^1)。在这个过程中，我们先求出10^1，然<br>后根据10^1求出10^2，再根据10^2求出10^4， …，最后根据10^32求出10^64次方，即75的<br>⼆进制形式总共有多少位，我们就使用了几次次乘法。</li>
+<li>在步骤2的过程中，把应该累乘的值乘起来即可。 10^64、 10^8、 10^2、 10^1应该累<br>乘起来，因为64、 8、 2、 1对应到75的2进制中，相应的位上是1。而10^32、 10^16、 10^4<br>不应该累乘，因为32、 16、 4对应到75的2进制中，相应的位上是0。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//整数的幂运算</span></div><div class="line"><span class="function"><span class="keyword">public</span>  <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (n == <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> result = <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (n != <span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="comment">//n%2 != 0</span></div><div class="line">		<span class="keyword">if</span> ((n &amp; <span class="number">1</span>) != <span class="number">0</span>)</div><div class="line">			result *= x;</div><div class="line">		x *= x;</div><div class="line">		<span class="comment">//n/=2</span></div><div class="line">		n &gt;&gt;= <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 计算矩阵的幂运算</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[][] matrixPower(<span class="keyword">int</span>[][] m, <span class="keyword">int</span> p) &#123;</div><div class="line">	<span class="keyword">int</span>[][] res = <span class="keyword">new</span> <span class="keyword">int</span>[m.length][m[<span class="number">0</span>].length];</div><div class="line">	<span class="comment">// 初始化结果矩阵为单位阵，即对角线是1，其余位置是0，相当于整数中的1</span></div><div class="line">	<span class="comment">//相当于设置res=1</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m.length; i++) &#123;</div><div class="line">		res[i][i] = <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">int</span>[][] tmp = m;</div><div class="line">	<span class="keyword">while</span> (p != <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (p % <span class="number">2</span> != <span class="number">0</span>) &#123;</div><div class="line">			res = muliMatrix(res, tmp);</div><div class="line">		&#125;</div><div class="line">		tmp = muliMatrix(tmp, tmp);</div><div class="line">		p /= <span class="number">2</span>;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 矩阵相乘的运算</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[][] muliMatrix(<span class="keyword">int</span>[][] m1, <span class="keyword">int</span>[][] m2) &#123;</div><div class="line">	<span class="keyword">int</span>[][] res = <span class="keyword">new</span> <span class="keyword">int</span>[m1.length][m2[<span class="number">0</span>].length];</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m1.length; i++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m2[<span class="number">0</span>].length; j++) &#123;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; m2.length; k++) &#123;</div><div class="line">				res[i][j] += m1[i][k] * m2[k][j];</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span>(n &lt; <span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		</div><div class="line">		<span class="keyword">int</span>[][] a = &#123;&#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;&#125;;</div><div class="line">		<span class="keyword">int</span>[][] res = matrixPower(a, n<span class="number">-2</span>);</div><div class="line">		<span class="keyword">return</span> res[<span class="number">0</span>][<span class="number">0</span>] + res[<span class="number">1</span>][<span class="number">0</span>];</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>假设农场中成熟的母牛每年只会生1头小母牛，并且永远不会死。第一年农场有1只成熟的母牛，从第二年开始，母牛将开始生小母牛。每只小母牛3年之后成熟又可以开始生小母牛。给定整数N，求出N年后牛的数量。</p>
+<p>N=6。第1年1头成熟母牛记为a。第2年a生了新的小母牛记为b，总牛数为2。第3年a生了新的小母牛记为c，总牛数为3。第4年a生了新的小母牛记为d，总牛数为4。第5年b成熟了，a和b分别生了新的小母牛，总牛数为6。第6年c也成熟了，a、b和c分别生了新的小母牛，总牛数为9。返回9。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>递推公式为<code>C(n)=C(n-1)+C(n-3)，C(1)=1， C(2)=2， C(3)=3， C(4)=4， C(5)=6</code><br>因此可以化为3阶<br><a href="https://www.codecogs.com/eqnedit.php?latex=(c(n),c(n-1),c(n-2))=(c(n-1),c(n-1),c(n-3))*\begin{bmatrix}&space;a&space;&&space;b&&space;c\\&space;d&&space;e&&space;f\\&space;g&space;&h&space;&&space;i&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(c(n),c(n-1),c(n-2))=(c(n-1),c(n-1),c(n-3))*\begin{bmatrix}&space;a&space;&&space;b&&space;c\\&space;d&&space;e&&space;f\\&space;g&space;&h&space;&&space;i&space;\end{bmatrix}" title="(c(n),c(n-1),c(n-2))=(c(n-1),c(n-1),c(n-3))*\begin{bmatrix} a & b& c\\ d& e& f\\ g &h & i \end{bmatrix}"></a><br>带入求解的到<br><a href="https://www.codecogs.com/eqnedit.php?latex=(c(n),c(n-1),c(n-2))=(3,2,1)*\begin{bmatrix}&space;1&space;&&space;1&0\\&space;0&&space;0&1\\&space;1&space;&0&space;&0&space;\end{bmatrix}^{n-3}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(c(n),c(n-1),c(n-2))=(3,2,1)*\begin{bmatrix}&space;1&space;&&space;1&0\\&space;0&&space;0&1\\&space;1&space;&0&space;&0&space;\end{bmatrix}^{n-3}" title="(c(n),c(n-1),c(n-2))=(3,2,1)*\begin{bmatrix} 1 & 1&0\\ 0& 0&1\\ 1 &0 &0 \end{bmatrix}^{n-3}"></a></p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public int c(int n) &#123;</div><div class="line">	if (n &lt; <span class="number">1</span>) &#123;</div><div class="line">		return <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	if (n == <span class="number">1</span> || n == <span class="number">2</span> || n == <span class="number">3</span>) &#123;</div><div class="line">		return n;</div><div class="line">	&#125;</div><div class="line">	int[][] base = &#123; &#123; <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span> &#125;, &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span> &#125;, &#123; <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span> &#125; &#125;;</div><div class="line">	int[][] res = matrixPower(base, n - <span class="number">3</span>);</div><div class="line">	return <span class="number">3</span> * res[<span class="number">0</span>][<span class="number">0</span>] + <span class="number">2</span> * res[<span class="number">1</span>][<span class="number">0</span>] + res[<span class="number">2</span>][<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><strong>如果递归式严格符合F(n)=a<em>F(n-1)+b</em>F(n-2)+…+k<em>F(n-i)，那么它就是i阶的递推式，必<br>然有与i</em>i的状态矩阵有关的矩阵乘法的表达。一律可以用加速矩阵乘法的动态规划将时间复<br>杂度降为O(logN)。</strong></p>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/16/8.2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          8.2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/15/jQuery事件与应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">jQuery事件与应用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="8.1" data-title="8.1" data-url="http://duyao.github.io/2015/11/16/8.1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>10.2 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="排成一条线的纸牌博弈问题给定一个整型数组arr，代表数值不同的纸牌排成一条线。玩家A和玩家B依次拿走每张纸牌，规定玩家A先拿，玩家B后拿，但是每个玩家每次只能拿走最左或最右的纸牌，玩家A和玩家B都绝顶聪明。请返回最后获胜者的分数。例如:arr=[1,2,100,4]。开始时玩家A只能拿走1或4。如果玩家A拿走1，则排列变为[2,100,4]，接下来玩家B可以拿走2或4，然后继续轮到玩家A。如果开始">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10.2">
+<meta property="og:url" content="http://duyao.github.io/2015/11/25/10.2/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="排成一条线的纸牌博弈问题给定一个整型数组arr，代表数值不同的纸牌排成一条线。玩家A和玩家B依次拿走每张纸牌，规定玩家A先拿，玩家B后拿，但是每个玩家每次只能拿走最左或最右的纸牌，玩家A和玩家B都绝顶聪明。请返回最后获胜者的分数。例如:arr=[1,2,100,4]。开始时玩家A只能拿走1或4。如果玩家A拿走1，则排列变为[2,100,4]，接下来玩家B可以拿走2或4，然后继续轮到玩家A。如果开始">
+<meta property="og:updated_time" content="2015-11-27T12:59:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10.2">
+<meta name="twitter:description" content="排成一条线的纸牌博弈问题给定一个整型数组arr，代表数值不同的纸牌排成一条线。玩家A和玩家B依次拿走每张纸牌，规定玩家A先拿，玩家B后拿，但是每个玩家每次只能拿走最左或最右的纸牌，玩家A和玩家B都绝顶聪明。请返回最后获胜者的分数。例如:arr=[1,2,100,4]。开始时玩家A只能拿走1或4。如果玩家A拿走1，则排列变为[2,100,4]，接下来玩家B可以拿走2或4，然后继续轮到玩家A。如果开始">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-10.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/25/10.2/" class="article-date">
+  	<time datetime="2015-11-25T05:11:16.000Z" itemprop="datePublished">2015-11-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      10.2
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h1 id="排成一条线的纸牌博弈问题"><a href="#排成一条线的纸牌博弈问题" class="headerlink" title="排成一条线的纸牌博弈问题"></a>排成一条线的纸牌博弈问题</h1><p>给定一个整型数组arr，代表数值不同的纸牌排成一条线。玩家A和玩家B依次拿走每张纸牌，规定玩家A先拿，玩家B后拿，但是每个玩家每次只能拿走最左或最右的纸牌，玩家A和玩家B都绝顶聪明。请返回最后获胜者的分数。<br>例如:<br>arr=[1,2,100,4]。<br>开始时玩家A只能拿走1或4。如果玩家A拿走1，则排列变为[2,100,4]，接下来玩家B可以拿走2或4，然后继续轮到玩家A。如果开始时玩家A拿走4，则排列变为[1,2,100]，接下来玩家B可以拿走1或100，然后继续轮到玩家A。玩家A作为绝顶聪明的人不会先拿4，因为拿了4之后玩家B将拿走100。所以玩家A会先拿1，让排列变为[2,100,4]，接下来玩家B不管怎么选，100都会被玩家A拿走。玩家A会获胜，分数为101。所以返回101。<br>arr=[1,100,2]。<br>开始时玩家A不管拿1还是2，玩家B作为绝顶聪明的人，都会把100拿走。玩家B会获胜，分数为100。所以返回100。<br><a id="more"></a></p>
+<h1 id="思路及代码"><a href="#思路及代码" class="headerlink" title="思路及代码"></a>思路及代码</h1><h2 id="暴力递归"><a href="#暴力递归" class="headerlink" title="暴力递归"></a>暴力递归</h2><p>设置2个递归函数，一个是先拿f，一个是后拿s<br>结果是看f先拿整体区域和s后拿整体区域的最大值</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 先拿时，[i,j]段获得钱数</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f</span>(<span class="params"><span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j</span>) </span>&#123;</div><div class="line">	<span class="comment">//对于i=j，即只有一个元素，作为先拿者，一定会拿走</span></div><div class="line">	<span class="keyword">if</span> (i == j) &#123;</div><div class="line">		<span class="keyword">return</span> arr[i];</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 面对[i,j]，先拿着只能取两端的值，然后后拿剩余的值</span></div><div class="line">	<span class="comment">// 因此先拿arr[i]后拿剩余i+1的部分s(arr, i + 1, j)</span></div><div class="line">	<span class="comment">// 先拿着一定会选取最大的拿走</span></div><div class="line">	<span class="keyword">return</span> Math.max(arr[i] + s(arr, i + <span class="number">1</span>, j), arr[j] + s(arr, i, j - <span class="number">1</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 后拿时，[i,j]段获得钱数</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">s</span>(<span class="params"><span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j</span>) </span>&#123;</div><div class="line">	<span class="comment">//对于i=j，即只有一个元素，作为后拿者，一定拿不到，所以返回0</span></div><div class="line">	<span class="keyword">if</span> (i == j) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//面对[i,j]，后拿着只能先拿除了两端以外的值，是先拿，因此是f(arr, i + 1, j)</span></div><div class="line">	<span class="comment">//但是在本次，拿不到两端值，因为先拿者已经拿走，故无arr[i]+f(arr, i + 1, j)</span></div><div class="line">	<span class="comment">//也没有arr[i+1]+f(arr, i + 1, j)，因为面对的区间是[i,j]要么拿边界，要么不拿</span></div><div class="line">	<span class="comment">//由于先拿的人选择是最大的，而总和是一定的，因此，后者只能是最小min</span></div><div class="line">	<span class="keyword">return</span> Math.min(f(arr, i + <span class="number">1</span>, j), f(arr, i, j - <span class="number">1</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">win1</span>(<span class="params"><span class="keyword">int</span>[] arr</span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//先拿或者后拿的最大值</span></div><div class="line">	<span class="keyword">return</span> Math.max(f(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>), s(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="优化递归"><a href="#优化递归" class="headerlink" title="优化递归"></a>优化递归</h2><p>f和s记录每个区间上的值</p>
+<ul>
+<li>f[i][j]表示先拿[i,j]区间上，能获得的最大值</li>
+<li>s[i][j]表示后拿[i,j]区间上，能获得的最大值</li>
+</ul>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public static int win2(int<span class="string">[]</span> arr) &#123;</div><div class="line">	if (arr == null || arr.length == <span class="number">0</span>) &#123;</div><div class="line">		return <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	//f<span class="string">[i]</span><span class="string">[j]</span> 表示先拿的<span class="string">[i,j]</span>的位置可以获得的最大钱数</div><div class="line">	int<span class="string">[]</span><span class="string">[]</span> f = new int<span class="string">[arr.length]</span><span class="string">[arr.length]</span>;</div><div class="line">	int<span class="string">[]</span><span class="string">[]</span> s = new int<span class="string">[arr.length]</span><span class="string">[arr.length]</span>;</div><div class="line">	</div><div class="line">	for (int j = <span class="number">0</span>; j &lt; arr.length; j++) &#123;</div><div class="line">		//初始化，先拿者面对arr<span class="string">[j]</span>一定会全部拿走，而后拿者只能拿走<span class="number">0</span></div><div class="line">		f<span class="string">[j]</span><span class="string">[j]</span> = arr<span class="string">[j]</span>;</div><div class="line">		s<span class="string">[j]</span><span class="string">[j]</span> = <span class="number">0</span>;</div><div class="line">		//i=j-<span class="number">1</span>而j必须以<span class="number">0</span>开始，但不会报错，因为i &gt;= <span class="number">0</span></div><div class="line">		for(int i = j-<span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</div><div class="line">			f<span class="string">[i]</span><span class="string">[j]</span> = Math.max(arr<span class="string">[i]</span> + s<span class="string">[i+1]</span><span class="string">[j]</span>, arr<span class="string">[j]</span> + s<span class="string">[i]</span><span class="string">[j-1]</span>);</div><div class="line">			s<span class="string">[i]</span><span class="string">[j]</span> = Math.min(f<span class="string">[i+1]</span><span class="string">[j]</span>, f<span class="string">[i]</span><span class="string">[j-1]</span>);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	return Math.max(f<span class="string">[0]</span><span class="string">[arr.length-1]</span>, s<span class="string">[0]</span><span class="string">[arr.length-1]</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/26/11.1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          11.1
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/25/10.1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">10.1</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="10.2" data-title="10.2" data-url="http://duyao.github.io/2015/11/25/10.2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

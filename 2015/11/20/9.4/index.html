@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>9.4 | Du Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="字符串的交错组成给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持原来在str1中的顺序，属于str2的字符之间保持原来在str2中的顺序，那么称aim是str1和str2的交错组成。实现一个函数，判断aim是否是str1和str2交错组成。str1=“AB”，str2=“12”。那么“AB12”、“A1B2”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.4">
+<meta property="og:url" content="http://duyao.github.io/2015/11/20/9.4/index.html">
+<meta property="og:site_name" content="Du Yao's blog">
+<meta property="og:description" content="字符串的交错组成给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持原来在str1中的顺序，属于str2的字符之间保持原来在str2中的顺序，那么称aim是str1和str2的交错组成。实现一个函数，判断aim是否是str1和str2交错组成。str1=“AB”，str2=“12”。那么“AB12”、“A1B2”">
+<meta property="og:updated_time" content="2015-11-24T12:50:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9.4">
+<meta name="twitter:description" content="字符串的交错组成给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持原来在str1中的顺序，属于str2的字符之间保持原来在str2中的顺序，那么称aim是str1和str2的交错组成。实现一个函数，判断aim是否是str1和str2交错组成。str1=“AB”，str2=“12”。那么“AB12”、“A1B2”">
+  
+    <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Du Yao</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Make progress step by step</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/note">学习笔记</a></li>
+				        
+							<li><a href="/categories/algorithm">算法学习</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Mybatis/" style="font-size: 13.75px;">Mybatis</a> <a href="/tags/algorithm/" style="font-size: 18.75px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/java/" style="font-size: 16.25px;">java</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/niuke/" style="font-size: 20px;">niuke</a> <a href="/tags/project/" style="font-size: 11.25px;">project</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/words/" style="font-size: 10px;">words</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Du Yao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Du Yao</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Make progress step by step</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/note">学习笔记</a></li>
+		        
+					<li><a href="/categories/algorithm">算法学习</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/duyao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/duyao_dy@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-9.4" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/20/9.4/" class="article-date">
+  	<time datetime="2015-11-20T02:47:58.000Z" itemprop="datePublished">2015-11-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      9.4
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <!-- Table of Contents -->
+        
+        <h1 id="字符串的交错组成"><a href="#字符串的交错组成" class="headerlink" title="字符串的交错组成"></a>字符串的交错组成</h1><p>给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持原来在str1中的顺序，属于str2的字符之间保持原来在str2中的顺序，那么称aim是str1和str2的交错组成。实现一个函数，判断aim是否是str1和str2交错组成。<br>str1=“AB”，str2=“12”。那么“AB12”、“A1B2”、“A12B”、“1A2B”和“1AB2”等等都是str1和str2交错组成。</p>
+<a id="more"></a>
+<h2 id="思路-amp-amp-代码"><a href="#思路-amp-amp-代码" class="headerlink" title="思路 &amp;&amp; 代码"></a>思路 &amp;&amp; 代码</h2><h3 id="经典动态规划"><a href="#经典动态规划" class="headerlink" title="经典动态规划"></a>经典动态规划</h3><p>如果str1的长度为M， str2的长度为N，经典动态规划的方法可以达到时间复杂度O(M*N)，额外空间复杂度O(M*N)。</p>
+<p>首先aim如果是str1和str2的交错组成， aim的长度一定是M+N，否则直接返回false。<br>然后生成大小为(M+1)*(N+1)布尔类型的矩阵dp。<br>dp[i][j]的值代表aim[0..i+j-1]能否被str1[0..i-1]和str2[0..j-1]交错组成。</p>
+<p>计算dp矩阵的时候，是从左到右再从上到下的计算的， dp[M][N]就是dp矩阵中最右下角的值，<br>就表示aim整体能否被str1整体和str2整体交错组成，也就是最终结果。具体说明dp矩阵每个位置的值是如何计算。</p>
+<p>1， dp[0][0]=true。 aim为空串时，当然可以被str1为空串和str2为空串交错组成。<br>2，矩阵dp第一列即dp[0..M-1][0]。 dp[i][0]表示aim[0..i-1]能否只被str1[0..i-1]交错组成。<br>如果aim[0..i-1]等于str1[0..i-1]，则令dp[i][0]=true，否则令dp[i][0]=false。<br>3，矩阵dp第一行即dp[0][0..N-1]。 dp[0][j]表示aim[0..j-1]能否只被str2[0..j-1]交错组成。<br>如果aim[0..j-1]等于str1[0..j-1]，则令dp[i][0]=true，否则令dp[i][0]=false。<br>4，对于其他位置(i,j)， dp[i][j]的值由下面的情况决定。<br>1） dp[i-1][j]代表aim[0..i+j-2]能否被str1[0..i-2]和str2[0..j-1]交错组成，如果可以，<br>那么如果再有str1[i-1]等于aim[i+j-1]，说明str1[i-1]可以作为交错组成aim[0..i+j-1]的最<br>后一个字符。令dp[i][j]=true。<br>2） dp[i][j-1]代表aim[0..i+j-2]能否被str1[0..i-1]和str2[0..j-2]交错组成，如果可以，<br>那么如果再有str2[j-1]等于aim[i+j-1]，说明str1[j-1]可以作为交错组成aim[0..i+j-1]的最<br>后一个字符。令dp[i][j]=true。<br>3）如果情况1）和情况2）都不满足，令dp[i][j]=false。<br>具体过程请参看如下代码中的isCross1方法。<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">boolean</span> isCross1(<span class="keyword">String</span> str1, <span class="keyword">String</span> str2, <span class="keyword">String</span> aim) &#123;</div><div class="line">	<span class="keyword">if</span> (str1 == <span class="keyword">null</span> || str2 == <span class="keyword">null</span> || aim == <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">char</span>[] char1 = str1.toCharArray();</div><div class="line">	<span class="built_in">char</span>[] char2 = str2.toCharArray();</div><div class="line">	<span class="built_in">char</span>[] caim = aim.toCharArray();</div><div class="line">	<span class="keyword">if</span> (char1.length + char2.length != caim.length) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 多增加一行和一列，为空值，方便计算</span></div><div class="line">	<span class="built_in">int</span> row = char1.length + <span class="number">1</span>;</div><div class="line">	<span class="built_in">int</span> col = char2.length + <span class="number">1</span>;</div><div class="line">	<span class="built_in">boolean</span>[][] dp = <span class="keyword">new</span> <span class="built_in">boolean</span>[row][col];</div><div class="line">	dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">true</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; row; i++) &#123;</div><div class="line">		<span class="comment">// str1[0,i-1]交错aim[0,i-1]</span></div><div class="line">		<span class="keyword">if</span>(char1[i<span class="number">-1</span>] != caim[i<span class="number">-1</span>])&#123;</div><div class="line">			<span class="comment">//遇到不等就退出循环，初始化时是false</span></div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		dp[i][<span class="number">0</span>] = <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; col; i++) &#123;</div><div class="line">		<span class="comment">// str2[0,i-1]交错aim[0,i-1]</span></div><div class="line">		<span class="keyword">if</span>(char2[i<span class="number">-1</span>] != caim[i<span class="number">-1</span>])&#123;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		dp[<span class="number">0</span>][i] = <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">	<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; row; i++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> j = <span class="number">1</span>; j &lt; col; j++) &#123;</div><div class="line">			<span class="keyword">if</span> (caim[i + j - <span class="number">1</span>] == char1[i - <span class="number">1</span>] &amp;&amp; dp[i - <span class="number">1</span>][j]</div><div class="line">					|| caim[i + j - <span class="number">1</span>] == char2[j - <span class="number">1</span>] &amp;&amp; dp[i][j - <span class="number">1</span>]) &#123;</div><div class="line">				dp[i][j] = <span class="keyword">true</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> dp[row - <span class="number">1</span>][col - <span class="number">1</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="经典动态规划方法结合空间压缩的方法。"><a href="#经典动态规划方法结合空间压缩的方法。" class="headerlink" title="经典动态规划方法结合空间压缩的方法。"></a>经典动态规划方法结合空间压缩的方法。</h3><p>如果结合空间压缩的技巧可以把额外空间复杂度减至O(min{M,N})。<br>实际进行空间压缩的时候，比较str1和str2哪个长度较小，长度较小的那个作为列对应的字符串，<br>然后生成和较短字符串长度一样的一维数组dp，滚动更新即可。<br>具体请参看如下代码中的isCross2方法。<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//压缩空间，只用一行表示一个数组，然后滚动更新</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">boolean</span> isCross2(<span class="keyword">String</span> str1, <span class="keyword">String</span> str2, <span class="keyword">String</span> aim) &#123;</div><div class="line">	<span class="keyword">if</span> (str1 == <span class="keyword">null</span> || str2 == <span class="keyword">null</span> || aim == <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">char</span>[] ch1 = str1.toCharArray();</div><div class="line">	<span class="built_in">char</span>[] ch2 = str2.toCharArray();</div><div class="line">	<span class="built_in">char</span>[] chaim = aim.toCharArray();</div><div class="line">	<span class="keyword">if</span> (chaim.length != ch1.length + ch2.length) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//选出长短，长的在外循环，短的在循环内，因为使得不断更新短的数值</span></div><div class="line">	<span class="built_in">char</span>[] longs = ch1.length &gt;= ch2.length ? ch1 : ch2;</div><div class="line">	<span class="built_in">char</span>[] shorts = ch1.length &lt; ch2.length ? ch1 : ch2;</div><div class="line">	<span class="built_in">boolean</span>[] dp = <span class="keyword">new</span> <span class="built_in">boolean</span>[shorts.length + <span class="number">1</span>];</div><div class="line">	dp[<span class="number">0</span>] = <span class="keyword">true</span>;</div><div class="line">	<span class="comment">//初始化该行</span></div><div class="line">	<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= shorts.length; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (shorts[i - <span class="number">1</span>] != chaim[i - <span class="number">1</span>]) &#123;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		dp[i] = <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//滚动更新的过程</span></div><div class="line">	<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= longs.length; i++) &#123;</div><div class="line">		<span class="comment">//更新该行的第一列</span></div><div class="line">		dp[<span class="number">0</span>] = dp[<span class="number">0</span>] &amp;&amp; longs[i - <span class="number">1</span>] == chaim[i - <span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> j = <span class="number">1</span>; j &lt;= shorts.length; j++) &#123;</div><div class="line">			<span class="comment">//此时只更新到j-1，而j还没有更新，表示的是上一行的j值，即要更新位置的上面</span></div><div class="line">			<span class="comment">//j-1已经更新，表示的是要更新位置的左边</span></div><div class="line">			<span class="keyword">if</span> ((longs[i - <span class="number">1</span>] == chaim[i + j - <span class="number">1</span>] &amp;&amp; dp[j])</div><div class="line">					|| (shorts[j - <span class="number">1</span>] == chaim[i + j - <span class="number">1</span>] &amp;&amp; dp[j - <span class="number">1</span>])) &#123;</div><div class="line">				dp[j] = <span class="keyword">true</span>;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				dp[j] = <span class="keyword">false</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> dp[shorts.length];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/25/10.1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          10.1
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/19/9.3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">9.3</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="9.4" data-title="9.4" data-url="http://duyao.github.io/2015/11/20/9.4/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Du Yao
+    	</div>
+      	
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
