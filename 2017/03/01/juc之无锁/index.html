@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>juc之无锁 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="jvm">
+    <meta name="description" content="无锁java.util.concurrent.atomic包中的类 CASCAS-compareAndSet算法的过程是这样：它包含3个参数CAS(V,E,N)。V表示要更新的变量，E表示预期值，N表示新值。仅当V值等于E值时，才会将V的值设为N，如果V值和E值不同，则说明已经有其他线程做了更新，则当前线程什么都不做。最后，CAS返回当前V的真实值。CAS操作是抱着乐观的态度进行的，它总是认为自己">
+<meta name="keywords" content="jvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="juc之无锁">
+<meta property="og:url" content="http://duyao.github.io/2017/03/01/juc之无锁/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="无锁java.util.concurrent.atomic包中的类 CASCAS-compareAndSet算法的过程是这样：它包含3个参数CAS(V,E,N)。V表示要更新的变量，E表示预期值，N表示新值。仅当V值等于E值时，才会将V的值设为N，如果V值和E值不同，则说明已经有其他线程做了更新，则当前线程什么都不做。最后，CAS返回当前V的真实值。CAS操作是抱着乐观的态度进行的，它总是认为自己">
+<meta property="og:updated_time" content="2017-04-23T09:36:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="juc之无锁">
+<meta name="twitter:description" content="无锁java.util.concurrent.atomic包中的类 CASCAS-compareAndSet算法的过程是这样：它包含3个参数CAS(V,E,N)。V表示要更新的变量，E表示预期值，N表示新值。仅当V值等于E值时，才会将V的值设为N，如果V值和E值不同，则说明已经有其他线程做了更新，则当前线程什么都不做。最后，CAS返回当前V的真实值。CAS操作是抱着乐观的态度进行的，它总是认为自己">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">juc之无锁</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">juc之无锁</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-01T00:40:21.000Z" itemprop="datePublished" class="page-time">
+  2017-03-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#无锁"><span class="post-toc-number">1.</span> <span class="post-toc-text">无锁</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CAS"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">CAS</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#无锁类的使用"><span class="post-toc-number">2.</span> <span class="post-toc-text">无锁类的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AtomicInteger"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">AtomicInteger</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主要接口"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">主要接口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#接口实现"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">接口实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#unsafe"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">unsafe</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AtomicReference"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">AtomicReference</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AtomicStampedReference"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">AtomicStampedReference</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AtomicIntegerArray"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">AtomicIntegerArray</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主要接口-1"><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">主要接口</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AtomicIntegerFieldUpdater"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">AtomicIntegerFieldUpdater</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主要方法"><span class="post-toc-number">2.6.1.</span> <span class="post-toc-text">主要方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-number">2.6.2.</span> <span class="post-toc-text">使用</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#其他问题"><span class="post-toc-number">3.</span> <span class="post-toc-text">其他问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Long、AtomicLong、LongAdder"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Long、AtomicLong、LongAdder</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#无锁的Vector实现"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">无锁的Vector实现</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-juc之无锁"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">juc之无锁</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月01日 8:40" datetime="2017-03-01T00:40:21.000Z"  itemprop="datePublished">2017-03-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="无锁"><a href="#无锁" class="headerlink" title="无锁"></a>无锁</h1><p>java.util.concurrent.atomic包中的类</p>
+<h2 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h2><p>CAS-compareAndSet算法的过程是这样：它包含3个参数CAS(V,E,N)。V表示要更新的变量，E表示预期值，N表示新值。仅当V值等于E值时，才会将V的值设为N，如果V值和E值不同，则说明已经有其他线程做了更新，则当前线程什么都不做。最后，CAS返回当前V的真实值。<br>CAS操作是抱着乐观的态度进行的，它总是认为自己可以成功完成操作。当多个线程同时使用CAS操作一个变量时，只有一个会胜出，并成功更新，其余均会失败。失败的线程不会被挂起，仅是被告知失败，并且允许再次尝试，当然也允许失败的线程放弃操作。<br>基于这样的原理，CAS操作即时没有锁，也可以发现其他线程对当前线程的干扰，并进行恰当的处理。</p>
+<h1 id="无锁类的使用"><a href="#无锁类的使用" class="headerlink" title="无锁类的使用"></a>无锁类的使用</h1><h2 id="AtomicInteger"><a href="#AtomicInteger" class="headerlink" title="AtomicInteger"></a>AtomicInteger</h2><p>继承于<code>Number</code>，主要使用处理器提供的CMPXCHG指令实现的</p>
+<h3 id="主要接口"><a href="#主要接口" class="headerlink" title="主要接口"></a>主要接口</h3><p>其内部有一个volatile的value，unsafe是一个底层调用c语言来实现的类，offset是偏移量<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> value;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Unsafe unsafe = Unsafe.getUnsafe();</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> valueOffset;</div></pre></td></tr></table></figure></p>
+<p>所有的操作都是调用cas实现，比较value和期望值来实现的<br>public final boolean compareAndSet(int expect, int u)//如果当前值为expect，则设置为u</p>
+<p>value的get和set方法<br>public final int get() //取得当前值<br>public final void set(int newValue) //设置当前值</p>
+<p>其余的函数基本是就是调用cas来实现的<br>public final int getAndSet(int newValue) //设置新值，并返回旧值<br>public final int getAndIncrement() //当前值加1，返回旧值<br>public final int getAndDecrement() //当前值减1，返回旧值<br>public final int getAndAdd(int delta) //当前值增加delta，返回旧值<br>public final int incrementAndGet() //当前值加1，返回新值<br>public final int decrementAndGet() //当前值减1，返回新值<br>public final int addAndGet(int delta) //当前值增加delta，返回新值</p>
+<h3 id="接口实现"><a href="#接口实现" class="headerlink" title="接口实现"></a>接口实现</h3><p>在jdk1.7中大部分的方法都是使用cas函数，在死循环中不停的比较，得出正确结果后退出的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndIncrement</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (;;) &#123;</div><div class="line">        <span class="keyword">int</span> current = get();</div><div class="line">        <span class="keyword">int</span> next = current + <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (compareAndSet(current, next))</div><div class="line">            <span class="keyword">return</span> current;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">compareAndSet</span><span class="params">(<span class="keyword">int</span> expect, <span class="keyword">int</span> update)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> unsafe.compareAndSwapInt(<span class="keyword">this</span>, valueOffset, expect, update);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在jdk1.8中，使用unsafe实现，jdk1.8中更新了unsafe<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndIncrement</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> unsafe.getAndAddInt(<span class="keyword">this</span>, valueOffset, <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="unsafe"><a href="#unsafe" class="headerlink" title="unsafe"></a>unsafe</h2><p>Java无法直接访问底层操作系统，而是通过本地（native）方法来访问。不过尽管如此，JVM还是开了一个后门，JDK中有一个类Unsafe，它提供了硬件级别的原子操作。<br>Unsafe类是一个可以执行不安全、容易犯错的操作的一个特殊类。虽然Unsafe类中所有方法都是public的，但是这个类只能在一些被信任的代码中使用。</p>
+<ul>
+<li>根据偏移量设置值<br>根据offset得到一个数值的位置，这样就可以设置</li>
+<li>park()<br>停止操作</li>
+<li>底层的CAS操作</li>
+<li>非公开API，在不同版本的JDK中， 可能有较大差异</li>
+</ul>
+<h2 id="AtomicReference"><a href="#AtomicReference" class="headerlink" title="AtomicReference"></a>AtomicReference</h2><p>对引用进行修改，是一个模板类，抽象化了数据类型<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		AtomicReference&lt;String&gt; string = <span class="keyword">new</span> AtomicReference&lt;&gt;(<span class="string">"abc"</span>);</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">				<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">						<span class="meta">@Override</span></div><div class="line">						<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">								<span class="keyword">if</span> (string.compareAndSet(<span class="string">"abc"</span>, <span class="string">"def"</span>)) &#123;</div><div class="line">										System.out.println(Thread.currentThread().getId() + <span class="string">"changed"</span>);</div><div class="line"></div><div class="line">								&#125; <span class="keyword">else</span> &#123;</div><div class="line">										System.out.println(Thread.currentThread().getId() + <span class="string">"failed"</span>);</div><div class="line">								&#125;</div><div class="line"></div><div class="line">						&#125;</div><div class="line">				&#125;).start();</div><div class="line"></div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="AtomicStampedReference"><a href="#AtomicStampedReference" class="headerlink" title="AtomicStampedReference"></a>AtomicStampedReference</h2><p>主要解决了ABA问题，aba是不仅要求结果的正确性还对数据修改的过程敏感。<br>因为CAS需要在操作值的时候检查下值有没有发生变化，如果没有发生变化则更新。<br>但是如果一个值原来是A，变成了B，又变成了A，那么使用CAS进行检查时会发现它的值没有发生变化，但是实际上却变化了。<br>ABA问题的解决思路就是使用版本号。在变量前面追加上版本号，每次变量更新的时候把版本号加一，那么A－B－A 就会变成1A-2B－3A。</p>
+<p>实现过程中加入了版本号pair<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">final</span> T reference;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> stamp;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Pair</span><span class="params">(T reference, <span class="keyword">int</span> stamp)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.reference = reference;</div><div class="line">        <span class="keyword">this</span>.stamp = stamp;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">static</span> &lt;T&gt; <span class="function">Pair&lt;T&gt; <span class="title">of</span><span class="params">(T reference, <span class="keyword">int</span> stamp)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Pair&lt;T&gt;(reference, stamp);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="AtomicIntegerArray"><a href="#AtomicIntegerArray" class="headerlink" title="AtomicIntegerArray"></a>AtomicIntegerArray</h2><p>支持无锁的数组<br>通过计算每个数字在位置(利用base和shift)该改变数值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Unsafe unsafe = Unsafe.getUnsafe();</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> base = unsafe.arrayBaseOffset(<span class="keyword">int</span>[].class);</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> shift;</div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span>[] array;</div></pre></td></tr></table></figure></p>
+<h3 id="主要接口-1"><a href="#主要接口-1" class="headerlink" title="主要接口"></a>主要接口</h3><p>//获得数组第i个下标的元素<br>public final int get(int i)<br>//获得数组的长度<br>public final int length()<br>//将数组第i个下标设置为newValue，并返回旧的值<br>public final int getAndSet(int i, int newValue)<br>//进行CAS操作，如果第i个下标的元素等于expect，则设置为update，设置成功返回true<br>public final boolean compareAndSet(int i, int expect, int update)<br>//将第i个下标的元素加1<br>public final int getAndIncrement(int i)<br>//将第i个下标的元素减1<br>public final int getAndDecrement(int i)<br>//将第i个下标的元素增加delta（delta可以是负数）</p>
+<h2 id="AtomicIntegerFieldUpdater"><a href="#AtomicIntegerFieldUpdater" class="headerlink" title="AtomicIntegerFieldUpdater"></a>AtomicIntegerFieldUpdater</h2><p>让普通变量也享受原子操作</p>
+<h3 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h3><p>//构造方法<br><code>public static &lt;U&gt; AtomicIntegerFieldUpdater&lt;U&gt; newUpdater(Class&lt;U&gt; tclass, String fieldName)</code></p>
+<p>其余方法和AtomicInteger类似</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li><p>Updater只能修改它可见范围内的变量<br>因为Updater使用反射得到这个变量。如果变量不可见，就会出错。<br>比如如果变量为private，就是不可行的。</p>
+</li>
+<li><p>必须是volatile类型<br>为了确保变量被正确的读取，它必须是volatile类型的。<br>如果我们原有代码中未申明这个类型，那么简单得申明一下就行，这不会引起什么问题</p>
+</li>
+<li><p>不支持static字段<br>由于CAS操作会通过对象实例中的偏移量直接进行赋值，因此，它不支持static字段（Unsafe.objectFieldOffset()不支持静态变量）。</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AtomicIntegerFieldUpdaterDemo</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> id;</div><div class="line">        <span class="comment">//必须为volatile类型</span></div><div class="line">        <span class="keyword">volatile</span> <span class="keyword">int</span> score;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//构造方法，一个参数是类，第二是参数名</span></div><div class="line">        AtomicIntegerFieldUpdater updater = AtomicIntegerFieldUpdater.</div><div class="line">                newUpdater(Student.class, <span class="string">"score"</span>);</div><div class="line">        Random r = <span class="keyword">new</span> Random();</div><div class="line">        Student stu = <span class="keyword">new</span> Student();</div><div class="line">        <span class="comment">//验证结果是否正确</span></div><div class="line">        AtomicInteger comparedInteger = <span class="keyword">new</span> AtomicInteger();</div><div class="line">        Thread[] threads = <span class="keyword">new</span> Thread[<span class="number">1000</span>];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</div><div class="line">            threads[i] = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                    <span class="keyword">if</span> (r.nextInt() &gt; <span class="number">10</span>) &#123;</div><div class="line">                        updater.incrementAndGet(stu);</div><div class="line">                        comparedInteger.incrementAndGet();</div><div class="line"></div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">            threads[i].start();</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        <span class="comment">//等待所有线程完成</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                threads[i].join();</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"comparedInteger = "</span> + comparedInteger.get());</div><div class="line">        System.out.println(<span class="string">"stu.score = "</span> + stu.score);</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h1><h2 id="Long、AtomicLong、LongAdder"><a href="#Long、AtomicLong、LongAdder" class="headerlink" title="Long、AtomicLong、LongAdder"></a>Long、AtomicLong、LongAdder</h2><p>在java中对于long的操作不是原子性，尤其是32位操作系统，因为long是64bit的</p>
+<p>因此要使用AtomicLong，涉及并发的地方都是使用CAS操作，在硬件层次上去做 compare and set操作。效率非常高。<br>AtomicLong的实现方式是内部有个value 变量，当多线程并发自增，自减时，均通过CAS 指令从机器指令级别操作保证并发的原子性</p>
+<p>LongAdder是java8中新添加的类<br>唯一会制约AtomicLong高效的原因是高并发，高并发意味着CAS的失败几率更高， 重试次数更多，越多线程重试，CAS失败几率又越高，变成恶性循环，AtomicLong效率降低。<br>因此在LongAdder中，在低并发时，还是CAS操作，因为低并发时，casBase操作基本都会成功，只有并发高到一定程度了，才会进入分支中分段更新的操作，将单一value的更新压力分担到多个value中去，降低单个value的 “热度”，这样就减少并发。<br><strong>低并发时LongAdder和AtomicLong性能差不多，高并发时LongAdder更高效！</strong></p>
+<p><a href="http://coolshell.cn/articles/11454.html" target="_blank" rel="external">http://coolshell.cn/articles/11454.html</a></p>
+<h2 id="无锁的Vector实现"><a href="#无锁的Vector实现" class="headerlink" title="无锁的Vector实现"></a>无锁的Vector实现</h2><p>待完成</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-23T09:36:40.000Z" itemprop="dateUpdated">2017年4月23日 17:36</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/01/juc之无锁/" target="_blank" rel="external">http://duyao.github.io/2017/03/01/juc之无锁/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/">jvm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/01/juc之无锁/&title=《juc之无锁》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/01/juc之无锁/&title=《juc之无锁》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/01/juc之无锁/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《juc之无锁》 — Du Yao's blog&url=http://duyao.github.io/2017/03/01/juc之无锁/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/01/juc之无锁/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/02/网络知识点总结/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">网络知识点总结</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/27/问答-个性化展示/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">问答-个性化展示</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="juc之无锁" data-title="juc之无锁" data-url="http://duyao.github.io/2017/03/01/juc之无锁/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/01/juc之无锁/&title=《juc之无锁》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/01/juc之无锁/&title=《juc之无锁》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/01/juc之无锁/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《juc之无锁》 — Du Yao's blog&url=http://duyao.github.io/2017/03/01/juc之无锁/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/01/juc之无锁/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/01/juc之无锁/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

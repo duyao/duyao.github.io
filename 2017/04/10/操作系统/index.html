@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>操作系统 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="os">
+    <meta name="description" content="进程管理进程程序是指令的集合，进程是程序的真正运行。同一个程序对应多个进程，允许多个用户云运行同一程序。                                                                                             进程状态图              线程线程被称为轻量级进程，是程序执行流的最小单元。线程是进程中的一个实体">
+<meta name="keywords" content="os">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统">
+<meta property="og:url" content="http://duyao.github.io/2017/04/10/操作系统/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="进程管理进程程序是指令的集合，进程是程序的真正运行。同一个程序对应多个进程，允许多个用户云运行同一程序。                                                                                             进程状态图              线程线程被称为轻量级进程，是程序执行流的最小单元。线程是进程中的一个实体">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/jincheng.jpg">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/duojifankui.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/mmemory.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/cunchubijiao.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/pagem.jpg">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/duanm.jpg">
+<meta property="og:updated_time" content="2017-05-25T03:47:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统">
+<meta name="twitter:description" content="进程管理进程程序是指令的集合，进程是程序的真正运行。同一个程序对应多个进程，允许多个用户云运行同一程序。                                                                                             进程状态图              线程线程被称为轻量级进程，是程序执行流的最小单元。线程是进程中的一个实体">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/jincheng.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">操作系统</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">操作系统</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-10T06:42:30.000Z" itemprop="datePublished" class="page-time">
+  2017-04-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#进程管理"><span class="post-toc-number">1.</span> <span class="post-toc-text">进程管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">进程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">线程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程通信"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">进程通信</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调度算法"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">调度算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#调度的基本准则"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">调度的基本准则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#调度算法-1"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">调度算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#先来先服务-FCFS-调度算法"><span class="post-toc-number">1.4.2.1.</span> <span class="post-toc-text">先来先服务(FCFS)调度算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#短作业优先-SJF-调度算法"><span class="post-toc-number">1.4.2.2.</span> <span class="post-toc-text">短作业优先(SJF)调度算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#优先级调度算法"><span class="post-toc-number">1.4.2.3.</span> <span class="post-toc-text">优先级调度算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#高响应比优先调度算法"><span class="post-toc-number">1.4.2.4.</span> <span class="post-toc-text">高响应比优先调度算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#时间片轮转调度算法"><span class="post-toc-number">1.4.2.5.</span> <span class="post-toc-text">时间片轮转调度算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#多级反馈队列调度算法（集合了前几种算法的优点）"><span class="post-toc-number">1.4.2.6.</span> <span class="post-toc-text">多级反馈队列调度算法（集合了前几种算法的优点）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#死锁"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">死锁</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#产生原因"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">产生原因</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#死锁产生的必要条件"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">死锁产生的必要条件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#死锁的处理策略"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">死锁的处理策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#预防"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">预防</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#避免"><span class="post-toc-number">1.8.2.</span> <span class="post-toc-text">避免</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#检测和解除"><span class="post-toc-number">1.8.3.</span> <span class="post-toc-text">检测和解除</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他问题"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">其他问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#内存管理"><span class="post-toc-number">2.</span> <span class="post-toc-text">内存管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#逻辑地址和物理地址"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">逻辑地址和物理地址</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内存分配"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">内存分配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#碎片"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">碎片</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#连续分配"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">连续分配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单一连续存储管理"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">单一连续存储管理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分区式存储管理"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">分区式存储管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#固定分区-nxedpartitioning-。"><span class="post-toc-number">2.3.2.1.</span> <span class="post-toc-text">固定分区(nxedpartitioning)。</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#动态分区-dynamic-partitioning-。"><span class="post-toc-number">2.3.2.2.</span> <span class="post-toc-text">动态分区(dynamic partitioning)。</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本内存管理"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">基本内存管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本分页存储管理"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">基本分页存储管理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本分段存储管理"><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">基本分段存储管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#段页式管理方式"><span class="post-toc-number">2.4.2.0.1.</span> <span class="post-toc-text">段页式管理方式</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#请求分页、段-虚拟内存管理"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">请求分页、段(虚拟内存管理)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#请求分页过程"><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">请求分页过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#页表机制"><span class="post-toc-number">2.5.1.1.</span> <span class="post-toc-text">页表机制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#缺页中断机构"><span class="post-toc-number">2.5.1.2.</span> <span class="post-toc-text">缺页中断机构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#地址变换机构"><span class="post-toc-number">2.5.1.3.</span> <span class="post-toc-text">地址变换机构</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常见的页面置换功能"><span class="post-toc-number">2.5.2.</span> <span class="post-toc-text">常见的页面置换功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最佳置换算法-OPT"><span class="post-toc-number">2.5.2.1.</span> <span class="post-toc-text">最佳置换算法(OPT)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#先进先出-FIFO-页面置换算法"><span class="post-toc-number">2.5.2.2.</span> <span class="post-toc-text">先进先出(FIFO)页面置换算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最近最久未使用-LRU-置换算法"><span class="post-toc-number">2.5.2.3.</span> <span class="post-toc-text">最近最久未使用(LRU)置换算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#时钟-CLOCK-置换算法"><span class="post-toc-number">2.5.2.4.</span> <span class="post-toc-text">时钟(CLOCK)置换算法</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#抖动（颠簸）"><span class="post-toc-number">2.5.3.</span> <span class="post-toc-text">抖动（颠簸）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工作集（驻留集）"><span class="post-toc-number">2.5.4.</span> <span class="post-toc-text">工作集（驻留集）</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-操作系统"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">操作系统</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年04月10日 14:42" datetime="2017-04-10T06:42:30.000Z"  itemprop="datePublished">2017-04-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>程序是指令的集合，进程是程序的真正运行。<br>同一个程序对应多个进程，允许多个用户云运行同一程序。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/jincheng.jpg" alt="进程状态图" title="">
+                </div>
+                <div class="image-caption">进程状态图</div>
+            </figure></p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>线程被称为轻量级进程，是程序执行流的最小单元。<br>线程是进程中的一个实体，是系统独立调度和执行的最小单位。<br>线程自己不拥有资源，只拥有一点必不可少的资源。可以与同一进程的其他线程共享资源。<br>进程与线程的区别：<a href="https://duyao.github.io/2017/02/25/%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91/">https://duyao.github.io/2017/02/25/%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91/</a></p>
+<h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><p>（1）管道（Pipe）：管道可用于具有亲缘关系进程间的通信，允许一个进程和另一个与它有共同祖先的进程之间进行通信。<br>（2）命名管道（named pipe）：命名管道克服了管道没有名字的限制，因此，除具有管道所具有的功能外，它还允许无亲缘关系进程间的通信。命名管道在文件系统中有对应的文件名。命名管道通过命令mkfifo或系统调用mkfifo来创建。<br>（3）信号（Signal）：信号是比较复杂的通信方式，用于通知接受进程有某种事件发生，除了用于进程间通信外，进程还可以发送 信号给进程本身；Linux除了支持Unix早期信号语义函数sigal外，还支持语义符合Posix.1标准的信号函数sigaction（实际上，该函数是基于BSD的，BSD为了实现可靠信号机制，又能够统一对外接口，用sigaction函数重新实现了signal函数）。<br>（4）消息（Message）队列：消息队列是消息的链接表，包括Posix消息队列system V消息队列。有足够权限的进程可以向队列中添加消息，被赋予读权限的进程则可以读走队列中的消息。消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺<br>（5）共享内存：使得多个进程可以访问同一块内存空间，是最快的可用IPC形式。是针对其他通信机制运行效率较低而设计的。往往与其它通信机制，如信号量结合使用，来达到进程间的同步及互斥。<br>（6）内存映射（mapped memory）：内存映射允许任何多个进程间通信，每一个使用该机制的进程通过把一个共享的文件映射到自己的进程地址空间来实现它。<br>（7）信号量（semaphore）：主要作为进程间以及同一进程不同线程之间的同步手段。<br>（8）套接口（Socket）：更为一般的进程间通信机制，可用于不同机器之间的进程间通信。起初是由Unix系统的BSD分支开发出来的，但现在一般可以移植到其它类Unix系统上：Linux和System V的变种都支持套接字。</p>
+<h2 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h2><h3 id="调度的基本准则"><a href="#调度的基本准则" class="headerlink" title="调度的基本准则"></a>调度的基本准则</h3><p>不同的调度算法具有不同的特性，在选择调度算法时，必须考虑算法所具有的特性。为了比较处理机调度算法的性能，人们提出很多评价准则，下面介绍主要的几种：<br>1) CPU利用率。CPU是计算机系统中最重要和昂贵的资源之一，所以应尽可能使CPU 保持“忙”状态，使这一资源利用率最髙。<br>2) 系统吞吐量。表示单位时间内CPU完成作业的数量。长作业需要消耗较长的处理机时间，因此会降低系统的吞吐量。而对于短作业，它们所需要消耗的处理机时间较短，因此能提高系统的吞吐量。调度算法和方式的不同，也会对系统的吞吐量产生较大的影响。<br>3) 周转时间。是指从<strong>作业提交到作业完成</strong>所经历的时间，包括<strong>作业等待、在就绪队列中排队、在处理机上运行以及进行输入/输出操作所花费时间</strong>的总和。</p>
+<p>作业的周转时间可用公式表示如下：</p>
+<blockquote>
+<p>周转时间 = 作业完成时间 - 作业提交时间 = 等待时间 + 实际运行时间</p>
+</blockquote>
+<p>平均周转时间是指多个作业周转时间的平均值：</p>
+<blockquote>
+<p>平均周转时间 = (作业1的周转时间 + … + 作业 n 的周转时间) / n</p>
+</blockquote>
+<p>带权周转时间是指<strong>作业周转时间与作业实际运行时间的比值</strong>，<br>平均带权周转时间是指多个作业带权周转时间的平均值：</p>
+<blockquote>
+<p>平均带权周转时间 = (作业1的带权周转时间 + … + 作业 n 的带权周转时间) / n</p>
+</blockquote>
+<p>4) 等待时间。=开始时间—提交时间。<br>是指进程处于等处理机状态时间之和，等待时间越长，用户满意度越低。处理机调度算法实际上并不影响作业执行或输入/输出操作的时间，只影响作业在就绪队列中等待所花的时间。因此，衡量一个调度算法优劣常常只需简单地考察等待时间。</p>
+<p>5) 响应时间。是指从用户提交请求到系统首次产生响应所用的时间。在交互式系统中，周转时间不可能是最好的评价准则，一般釆用响应时间作为衡量调度算法的重要准则之一。从用户角度看，调度策略应尽量降低响应时间，使响应时间处在用户能接受的范围之内。</p>
+<p>要想得到一个满足所有用户和系统要求的算法几乎是不可能的。设计调度程序，一方面要满足特定系统用户的要求（如某些实时和交互进程快速响应要求)，另一方面要考虑系统整体效率（如减少整个系统进程平均周转时间），同时还要考虑调度算法的开销。</p>
+<h3 id="调度算法-1"><a href="#调度算法-1" class="headerlink" title="调度算法"></a>调度算法</h3><h4 id="先来先服务-FCFS-调度算法"><a href="#先来先服务-FCFS-调度算法" class="headerlink" title="先来先服务(FCFS)调度算法"></a>先来先服务(FCFS)调度算法</h4><p>FCFS调度算法是一种最简单的调度算法，该调度算法既可以用于作业调度也可以用于进程调度。</p>
+<p>FCFS调度算法属于<strong>不可剥夺算法</strong>。从表面上看，它对所有作业都是公平的，但若一个长作业先到达系统，就会使后面许多短作业等待很长时间，因此它不能作为分时系统和实时系统的主要调度策略。但它常被结合在其他调度策略中使用。例如，在使用优先级作为调度策略的系统中，往往对多个具有相同优先级的进程按FCFS原则处理。</p>
+<p>FCFS调度算法的特点是算法简单，但效率低；<strong>对长作业比较有利，但对短作业不利</strong>（相对SJF和高响应比）；<strong>有利于CPU繁忙型作业，而不利于I/O繁忙型作业</strong>。</p>
+<h4 id="短作业优先-SJF-调度算法"><a href="#短作业优先-SJF-调度算法" class="headerlink" title="短作业优先(SJF)调度算法"></a>短作业优先(SJF)调度算法</h4><p>短作业（进程）优先调度算法（Shortest Job First ）是指对短作业（进程）优先调度的算法。该调度算法既可以用于作业调度也可以用于进程调度。</p>
+<p>SJF调度算法也存在不容忽视的缺点：<br>该算法对长作业不利，容易对长作业产生饥饿现象。<br>该算法完全未考虑作业的紧迫程度，因而不能保证紧迫性作业会被及时处理。<br>注意，<strong>SJF调度算法的平均等待时间、平均周转时间最少</strong>。</p>
+<h4 id="优先级调度算法"><a href="#优先级调度算法" class="headerlink" title="优先级调度算法"></a>优先级调度算法</h4><p>优先级调度算法又称优先权调度算法，该算法既可以用于作业调度，也可以用于进程调度，该算法中的优先级用于描述作业运行的紧迫程度。</p>
+<p>根据新的更高优先级进程能否抢占正在执行的进程，可将该调度算法分为：</p>
+<p>1)非剥夺式优先级调度算法:<br>当某一个进程正在处理机上运行时，即使有某个更为重要或紧迫的进程进入就绪队列，仍然让正在运行的进程继续运行，直到由于其自身的原因而主动让出处理机时（任务完成或等待事件），才把处理机分配给更为重要或紧迫的进程。<br>2)剥夺式优先级调度算法:<br>当一个进程正在处理机上运行时，若有某个更为重要或紧迫的进程进入就绪队列，则立即暂停正在运行的进程，将处理机分配给更重要或紧迫的进程。</p>
+<p>而根据进程创建后其优先级是否可以改变，可以将进程优先级分为以下两种：<br>1)静态优先级。优先级是在创建进程时确定的，且在进程的整个运行期间保持不变。确定静态优先级的主要依据有进程类型、进程对资源的要求、用户要求。<br>2)动态优先级。在进程运行过程中，根据进程情况的变化动态调整优先级。动态调整优先级的主要依据为进程占有CPU时间的长短、就绪进程等待CPU时间的长短。</p>
+<h4 id="高响应比优先调度算法"><a href="#高响应比优先调度算法" class="headerlink" title="高响应比优先调度算法"></a>高响应比优先调度算法</h4><p>高响应比优先调度算法主要用于作业调度，该算法是<strong>对FCFS调度算法和SJF调度算法的一种综合平衡</strong>，同时考虑每个作业的等待时间和估计的运行时间。在每次进行作业调度时，先计算后备作业队列中每个作业的响应比，从中选出响应比最高的作业投入运行。</p>
+<p>响应比的变化规律可描述为：</p>
+<blockquote>
+<p>响应比=(等待时间+要求服务时间)/要求服务时间</p>
+</blockquote>
+<p>根据公式可知：<br>当作业的等待时间相同时，则要求服务时间越短，其响应比越高，有利于短作业。<br>当要求服务时间相同时，作业的响应比由其等待时间决定，等待时间越长，其响应比越高，因而它实现的是先来先服务。<br>对于长作业，作业的响应比可以随等待时间的增加而提高，当其等待时间足够长时，其响应比便可升到很高，从而也可获得处理机。克服了饥饿状态，兼顾了长作业。</p>
+<h4 id="时间片轮转调度算法"><a href="#时间片轮转调度算法" class="headerlink" title="时间片轮转调度算法"></a>时间片轮转调度算法</h4><p>时间片轮转调度算法主要适用于分时系统。在这种算法中，系统将所有就绪进程按到达时间的先后次序排成一个队列，进程调度程序总是选择就绪队列中第一个进程执行，即先来先服务的原则，但仅能运行一个时间片，如100ms。在使用完一个时间片后，即使进程并未完成其运行，它也必须释放出（被剥夺）处理机给下一个就绪的进程，而被剥夺的进程返回到就绪队列的末尾重新排队，等候再次运行。</p>
+<p>在时间片轮转调度算法中，时间片的大小对系统性能的影响很大。如果时间片足够大，以至于所有进程都能在一个时间片内执行完毕，则时间片轮转调度算法就退化为先来先服务调度算法。如果时间片很小，那么处理机将在进程间过于频繁切换，使处理机的开销增大，而真正用于运行用户进程的时间将减少。因此时间片的大小应选择适当。</p>
+<p>时间片的长短通常由以下因素确定：系统的响应时间、就绪队列中的进程数目和系统的处理能力。</p>
+<h4 id="多级反馈队列调度算法（集合了前几种算法的优点）"><a href="#多级反馈队列调度算法（集合了前几种算法的优点）" class="headerlink" title="多级反馈队列调度算法（集合了前几种算法的优点）"></a>多级反馈队列调度算法（集合了前几种算法的优点）</h4><p>多级反馈队列调度算法是时间片轮转调度算法和优先级调度算法的综合和发展。通过动态调整进程优先级和时间片大小，多级反馈队列调度算法可以兼顾多方面的系统目标。例如，为提高系统吞吐量和缩短平均周转时间而照顾短进程；为获得较好的I/O设备利用率和缩短响应时间而照顾I/O型进程；同时，也不必事先估计进程的执行时间。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/duojifankui.png" alt="多级反馈队列" title="">
+                </div>
+                <div class="image-caption">多级反馈队列</div>
+            </figure>
+<p>多级反馈队列调度算法的实现思想如下：<br>应设置多个就绪队列，并为各个队列赋予不同的优先级，第1级队列的优先级最高，第2级队列次之，其余队列的优先级逐次降低。<br>赋予各个队列中进程执行时间片的大小也各不相同，在优先级越高的队列中，每个进程的运行时间片就越小。例如，第2级队列的时间片要比第1级队列的时间片长一倍， ……第i+1级队列的时间片要比第i级队列的时间片长一倍。<br>当一个新进程进入内存后，首先将它放入第1级队列的末尾，按FCFS原则排队等待调度。当轮到该进程执行时，如它能在该时间片内完成，便可准备撤离系统；如果它在一个时间片结束时尚未完成，调度程序便将该进程转入第2级队列的末尾，再同样地按FCFS 原则等待调度执行；如果它在第2级队列中运行一个时间片后仍未完成，再以同样的方法放入第3级队列……如此下去，当一个长进程从第1级队列依次降到第 n 级队列后，<strong>在第 n 级队列中便釆用时间片轮转的方式运行</strong>。<br>仅当第1级队列为空时，调度程序才调度第2级队列中的进程运行；仅当第1 ~ (i-1)级队列均为空时，才会调度第i级队列中的进程运行。如果处理机正在执行第i级队列中的某进程时，又有新进程进入优先级较高的队列（第 1 ~ (i-1)中的任何一个队列），则此时<strong>新进程将抢占正在运行进程的处理机</strong>，即由调度程序把正在运行的进程放回到第i级队列的末尾，把处理机分配给新到的更高优先级的进程。</p>
+<p>多级反馈队列的优势有：<br>终端型作业用户：短作业优先。<br>短批处理作业用户：周转时间较短。<br>长批处理作业用户：经过前面几个队列得到部分执行，不会长期得不到处理。</p>
+<p><a href="http://blog.csdn.net/bigpudding24/article/details/48608483" target="_blank" rel="external">http://blog.csdn.net/bigpudding24/article/details/48608483</a></p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h2 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h2><p>资源的竞争和进程推进顺序的不合理</p>
+<h2 id="死锁产生的必要条件"><a href="#死锁产生的必要条件" class="headerlink" title="死锁产生的必要条件"></a>死锁产生的必要条件</h2><p>互不请环<br>（1） 互斥条件：一个资源每次只能被一个进程使用。<br>（2） 请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。<br>（3） 不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。<br>（4） 循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</p>
+<h2 id="死锁的处理策略"><a href="#死锁的处理策略" class="headerlink" title="死锁的处理策略"></a>死锁的处理策略</h2><h3 id="预防"><a href="#预防" class="headerlink" title="预防"></a>预防</h3><p>破坏必要条件</p>
+<h3 id="避免"><a href="#避免" class="headerlink" title="避免"></a>避免</h3><p>（1）有序资源分配法<br>这种算法资源按某种规则系统中的所有资源统一编号（例如打印机为1、磁带机为2、磁盘为3、等等），申请时必须以上升的次序。系统要求申请进程：<br>　　1、对它所必须使用的而且属于同一类的所有资源，必须一次申请完；<br>　　2、在申请不同类资源时，必须按各类设备的编号依次申请。例如：进程PA，使用资源的顺序是R1，R2； 进程PB，使用资源的顺序是R2，R1；若采用动态分配有可能形成环路条件，造成死锁。</p>
+<p>采用有序资源分配法：R1的编号为1，R2的编号为2；<br>PA：申请次序应是：R1，R2<br>PB：申请次序应是：R1，R2<br>这样就破坏了环路条件，避免了死锁的发生<br>（2）银行算法<br>避免死锁算法中最有代表性的算法是Dijkstra E.W 于1968年提出的银行家算法：<br><strong>系统处于安全状态时，一定不会发生死锁；系统处于不安全状态时，不一定会发生死锁；</strong><br>该算法需要检查申请者对资源的最大需求量，如果系统现存的各类资源可以满足申请者的请求，就满足申请者的请求。<br>这样申请者就可很快完成其计算，然后释放它占用的资源，从而保证了系统中的所有进程都能完成，所以可避免死锁的发生。<br><a href="http://blog.csdn.net/only06/article/details/53381153" target="_blank" rel="external">http://blog.csdn.net/only06/article/details/53381153</a></p>
+<h3 id="检测和解除"><a href="#检测和解除" class="headerlink" title="检测和解除"></a>检测和解除</h3><p>可以通过<strong>资源分配图检测</strong>检测死锁的存在<br><a href="http://c.biancheng.net/cpp/html/2607.html" target="_blank" rel="external">http://c.biancheng.net/cpp/html/2607.html</a></p>
+<p>死锁的解除方法主要有：<br>资源剥夺、撤销进程、进程回退</p>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><p>某系统中有11台打印机，N个进程共享打印机资源，每个进程要求3台，当N的取值不超过（）时系统不会发生死锁。<br>设有m个资源，n个进程，每个进程要调用k个资源，一次只能调用一个，则：<br><code>m&gt;n(k-1)</code> 对应找满足条件的值即可。</p>
+<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><p>内存管理主要包括虚地址、地址变换、内存分配和回收、内存扩充、内存共享和保护等功能。</p>
+<h2 id="逻辑地址和物理地址"><a href="#逻辑地址和物理地址" class="headerlink" title="逻辑地址和物理地址"></a>逻辑地址和物理地址</h2><p>程序编译后，每个目标模块都是从0号单元开始编址，成为该目标模块的相对地址(逻辑地址)。当连接程序将每个模块连接成一个完整的可执行目标程序是，连接程序顺序依次按各个模块的相对地址构成同一的从0号单元开始编制的逻辑地址空间。<br>物理地址空间是内存中物理单元的集合，是地址转换的最终地址，进程在运行时执行指令和访问数据最后都要通过物理地址来存取主存。当转入程序将可执行代码装入到内存中的时候，必须通过地址转换将逻辑地址转换为物理地址。这个过程叫做重定位。</p>
+<p><a href="http://blog.csdn.net/yusiguyuan/article/details/9664887" target="_blank" rel="external">http://blog.csdn.net/yusiguyuan/article/details/9664887</a></p>
+<h2 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h2><p>内存分配分为连续分配和不连续分配。<br>连续分配是指为用户分配一个连续的内存空间，主要包括单一连续分配、分区管理（固定分区分配和动态分区分配）<br>不连续分配允许一个程序分散的转入到不相邻的内存空间中：根据分区大小是否<strong>分页</strong>和<strong>分段</strong>存储管理两种方式；<br>在分页管理中，又根据运行作业时是否要把作业的所有页面装入到内存才能运行分为<strong>基本分页</strong>和<strong>请求分业</strong>。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/mmemory.png" alt="内存分配分类" title="">
+                </div>
+                <div class="image-caption">内存分配分类</div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/cunchubijiao.png" alt="存储方法的比较" title="">
+                </div>
+                <div class="image-caption">存储方法的比较</div>
+            </figure></p>
+<h3 id="碎片"><a href="#碎片" class="headerlink" title="碎片"></a>碎片</h3><p>在内存管理中，<strong>内部碎片是已经被分配出去的的内存空间大于请求所需的内存空间</strong>。<br>外部碎片是指还没有分配出去，但是<strong>由于大小太小而无法分配给申请空间的新进程的内存空间空闲块</strong>。</p>
+<h2 id="连续分配"><a href="#连续分配" class="headerlink" title="连续分配"></a>连续分配</h2><p>连续分配是指为一个用户程序分配连续的内存空间。连续分配有单一连续存储管理和分区式储管理两种方式。</p>
+<h3 id="单一连续存储管理"><a href="#单一连续存储管理" class="headerlink" title="单一连续存储管理"></a>单一连续存储管理</h3><p>在这种管理方式中，内存被分为两个区域：系统区和用户区。<br>应用程序装入到用户区，可使用用户区全部空间。<br>其特点是，最简单，适用于单用户、单任务的操作系统。CP／M和 DOS 2．0以下就是采用此种方式。<br>这种方式的最大优点就是易于管理。但也存在着一些问题和不足之处，例如对要求内存空间少的程序，造成内存浪费；程序全部装入，使得很少使用的程序部分也占用—定数量的内存。</p>
+<h3 id="分区式存储管理"><a href="#分区式存储管理" class="headerlink" title="分区式存储管理"></a>分区式存储管理</h3><p>为了支持多道程序系统和分时系统，支持多个程序并发执行，引入了分区式存储管理。<br>分区式存储管理是把内存分为一些大小相等或不等的分区，操作系统占用其中一个分区，其余的分区由应用程序使用，每个应用程序占用一个或几个分区。<br>分区式存储管理虽然可以支持并发，但难以进行内存分区的共享。<br>分区式存储管理引人了两个新的问题：内碎片和外碎片。<br>内碎片是占用分区内未被利用的空间，外碎片是占用分区之间难以利用的空闲分区(通常是小空闲分区)。<br>为实现分区式存储管理，操作系统应维护的数据结构为分区表或分区链表。表中各表项一般包括每个分区的起始地址、大小及状态(是否已分配)。<br>分区式存储管理常采用的一项技术就是内存紧缩(compaction)。</p>
+<h4 id="固定分区-nxedpartitioning-。"><a href="#固定分区-nxedpartitioning-。" class="headerlink" title="固定分区(nxedpartitioning)。"></a>固定分区(nxedpartitioning)。</h4><p>固定式分区的特点是把内存划分为若干个固定大小的连续分区。分区大小可以相等：这种作法只适合于多个相同程序的并发执行(处理多个类型相同的对象)。分区大小也可以不等：有多个小分区、适量的中等分区以及少量的大分区。根据程序的大小，分配当前空闲的、适当大小的分区。<br>优点：易于实现，开销小。<br>缺点主要有两个：内碎片造成浪费；分区总数固定，限制了并发执行的程序数目。</p>
+<h4 id="动态分区-dynamic-partitioning-。"><a href="#动态分区-dynamic-partitioning-。" class="headerlink" title="动态分区(dynamic partitioning)。"></a>动态分区(dynamic partitioning)。</h4><p>动态分区的特点是动态创建分区：在装入程序时按其初始要求分配，或在其执行过程中通过系统调用进行分配或改变分区大小。<br>与固定分区相比较其优点是：<strong>没有内碎片，有外碎片</strong>。<br>动态分区的分区分配就是寻找某个空闲分区，其大小需大于或等于程序的要求。若是大于要求，则将该分区分割成两个分区，其中一个分区为要求的大小并标记为“占用”，而另一个分区为余下部分并标记为“空闲”。<br>分区分配的先后次序通常是从内存低端到高端。<br>动态分区的分区释放过程中有一个要注意的问题是，将相邻的空闲分区合并成一个大的空闲分区。</p>
+<p>下面列出了几种常用的分区分配算法：</p>
+<blockquote>
+<p>首次适应算法</p>
+</blockquote>
+<p>最自然的过程，只是按照空闲分区表(空闲区链)中的空闲分区的地址从低到高找到第一个可以满足需要的空闲分区即可。<br>该算法的分配和释放的时间性能较好，较大的空闲分区可以被保留在内存高端。但随着低端分区不断划分会产生较多小分区，每次分配时查找时间开销便会增大。</p>
+<blockquote>
+<p>循环首次适应算法(next fit)</p>
+</blockquote>
+<p>按分区在内存的先后次序，从<strong>上次分配的分区起</strong>查找(到最后{区时再从头开始}，找到符合要求的第一个分区进行分配)。该算法的分配和释放的时间性能较好，使空闲分区分布得更均匀，但较大空闲分区不易保留。</p>
+<blockquote>
+<p>最佳适配法(best-fit)</p>
+</blockquote>
+<p>按分区在内存的先后次序从头查找，找到其大小与要求相差最小的空闲分区进行分配。从个别来看，外碎片较小；但从整体来看，会形成较多外碎片优点是较大的空闲分区可以被保留。</p>
+<blockquote>
+<p>最坏适配法(worst- fit)</p>
+</blockquote>
+<p>按分区在内存的先后次序从头查找，找到最大的空闲分区进行分配。基本不留下小空闲分区，不易形成外碎片。但由于较大的空闲分区不被保留，当对内存需求较大的进程需要运行时，其要求不易被满足。</p>
+<p>为了解决分区分配带来的碎片问题，引入了伙伴系统:无论已分配分区或空闲分区，其大小均为2的k次幂。在系统运行过程中，由于不断的划分，可能会形成若干个不连续的空闲分区，将这些空闲分区根据分区的大小进行分类，对于每一类具有相同大小的所有空闲分区，单独设立一个空闲分区双向链表。这样，不同大小的空闲分区形成了k个空闲分区链表。</p>
+<p><a href="http://blog.csdn.net/hguisu/article/details/5713164" target="_blank" rel="external">http://blog.csdn.net/hguisu/article/details/5713164</a></p>
+<h2 id="基本内存管理"><a href="#基本内存管理" class="headerlink" title="基本内存管理"></a>基本内存管理</h2><p>是不连续分配的分配方式，主要分为分页、分段、段页</p>
+<h3 id="基本分页存储管理"><a href="#基本分页存储管理" class="headerlink" title="基本分页存储管理"></a>基本分页存储管理</h3><p>将程序的逻辑地址空间划分为固定大小的页(page)，而物理内存划分为同样大小的页框(page frame)。<br>程序加载时，可将任意一页放人内存中任意一个页框，这些页框不必连续，从而实现了离散分配。<br>该方法需要CPU的硬件支持，来实现逻辑地址和物理地址之间的映射。<br>在页式存储管理方式中地址结构由两部构成，前一部分是页号，后一部分为页内地址w（位移量）<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/pagem.jpg" alt="地址转换的过程" title="">
+                </div>
+                <div class="image-caption">地址转换的过程</div>
+            </figure></p>
+<p>页式管理方式的优点是：<br>1）没有外碎片，每个内碎片不超过页大比前面所讨论的几种管理方式的最大进步是，<br>2）一个程序不必连续存放。<br>3）便于改变程序占用空间的大小(主要指随着程序运行，动态生成的数据增多，所要求的地址空间相应增长)。<br>缺点是：要求程序全部装入内存，没有足够的内存，程序就不能执行<br><a href="http://baike.baidu.com/link?url=BYjmowZdQZ1QHn0BXSXYdEBmB1e41Bp1_w9VTTlexXYUCD4g4zhC1t_1xMJbTqdAE0x1VMKPC2usTDHGuq66Fdv09zwQJBdaBwWy5KrpyUSnZfeklsh_uf5qUCZaSwNtbQ3YJeCr6OCiO3JpLpgaeoemLaFa3GV6-rSsEfQRfBe7sC3H6IXRohgjvyQCYAW0gpEBLH-ShOjqEOsZ1tjsOq" target="_blank" rel="external">http://baike.baidu.com/link?url=BYjmowZdQZ1QHn0BXSXYdEBmB1e41Bp1_w9VTTlexXYUCD4g4zhC1t_1xMJbTqdAE0x1VMKPC2usTDHGuq66Fdv09zwQJBdaBwWy5KrpyUSnZfeklsh_uf5qUCZaSwNtbQ3YJeCr6OCiO3JpLpgaeoemLaFa3GV6-rSsEfQRfBe7sC3H6IXRohgjvyQCYAW0gpEBLH-ShOjqEOsZ1tjsOq</a></p>
+<h3 id="基本分段存储管理"><a href="#基本分段存储管理" class="headerlink" title="基本分段存储管理"></a>基本分段存储管理</h3><p>在分段存储管理方式中，作业的地址空间被划分为若干个段，每个段定义了一组逻辑信息。例如，有主程序段MAIN、子程序段X、数据段D及栈段S等。每个段都有自己的名字。为了实现简单起见，通常可用一个段号来代替段名，每个段都从0开始编址，并采用一段连续的地址空间。段的长度由相应的逻辑信息组的长度决定，因而各段长度不等。整个作业的地址空间由于是分成多个段，因而是二维的，亦即，其逻辑地址由段号(段名)和段内地址所组成。<br>在段式存储管理中，将程序的地址空间划分为若干个段(segment)，这样每个进程有一个二维的地址空间。<br>其逻辑地址由段号和段内偏移组成<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/duanm.jpg" alt="地址转换的过程" title="">
+                </div>
+                <div class="image-caption">地址转换的过程</div>
+            </figure><br>总的来说，段式存储管理的优点是：没有内碎片，外碎片可以通过内存紧缩来消除；便于实现内存共享。缺点与页式存储管理的缺点相同，进程必须全部装入内存。</p>
+<p>为了实现段式管理，操作系统需要如下的数据结构来实现进程的地址空间到物理内存空间的映射，并跟踪物理内存的使用情况，以便在装入新的段的时候，合理地分配内存空间。<br><a href="http://baike.baidu.com/link?url=56HfbLNhe7kwyaavpBIffXZ3PHkXDjBaOEYBXDk4bHW8Z5U0ACQerZEIlj7_3vI1fdFUrmfhnoh6ag4_EVZYKRucH4PXpuH7z8Qo7UbF02rzFWhI0oV979I5MPDdl_TBnRjpt8rPhUKV7NIdap7jGU8U8U51uuBBubcOeMTAkfwXcjFS0aMsr7rypj_xtf9JpdgML50Ee8N4L4kayRfZFa" target="_blank" rel="external">http://baike.baidu.com/link?url=56HfbLNhe7kwyaavpBIffXZ3PHkXDjBaOEYBXDk4bHW8Z5U0ACQerZEIlj7_3vI1fdFUrmfhnoh6ag4_EVZYKRucH4PXpuH7z8Qo7UbF02rzFWhI0oV979I5MPDdl_TBnRjpt8rPhUKV7NIdap7jGU8U8U51uuBBubcOeMTAkfwXcjFS0aMsr7rypj_xtf9JpdgML50Ee8N4L4kayRfZFa</a></p>
+<h5 id="段页式管理方式"><a href="#段页式管理方式" class="headerlink" title="段页式管理方式"></a>段页式管理方式</h5><h2 id="请求分页、段-虚拟内存管理"><a href="#请求分页、段-虚拟内存管理" class="headerlink" title="请求分页、段(虚拟内存管理)"></a>请求分页、段(虚拟内存管理)</h2><p>基本的内存管理方式有两个特征：<br>一次性：作业必须全部一次性装入，才能运行<br>驻留性：作业被装入内存后，就一直驻留在内存中，其任何以一部分都不会被换出，直至作业运行完毕。</p>
+<p>基于程序局部性原理，可以将程序的一部分装入内存中，而其余部分留在外存，就可以让程序执行。程序执行过程中，当访问信息不存在内存的时候，有操作系统将所需要的部分调入内存，然后继续执行程序。另一方面，操作系统将内存中暂不使用的内容换出到外存，从而腾出空间存放将要调入内存的信息，这样，操作系统好像为用户提供了一个比实际大很多的存储器，称为虚拟存储器。</p>
+<p>虚拟内存的实现有以下三种方式：</p>
+<ul>
+<li>请求分页存储管理</li>
+<li>请求分段存储管理</li>
+<li>请求段页存储管理</li>
+</ul>
+<p>不管使用哪一种方式都需要一定的硬件支持，一般需要以下几方面：</p>
+<ol>
+<li>一定容量的内存和外存</li>
+<li>页表机制或者段表机制，作为主要的数据结构</li>
+<li>中断机构，当用户程序要范文的部分尚未调入内存的时候，则产生中断</li>
+<li>地址变换机构，逻辑地址到物理地址的转换</li>
+</ol>
+<p>请求分页系统建立在基本的分页系统之上，为了支持虚拟内存功能而增加了请求调页功能和页面置换功能。</p>
+<h3 id="请求分页过程"><a href="#请求分页过程" class="headerlink" title="请求分页过程"></a>请求分页过程</h3><h4 id="页表机制"><a href="#页表机制" class="headerlink" title="页表机制"></a>页表机制</h4><p>在请求分页系统中所需要的主要数据结构是页表。其基本作用仍然是将用户空间中的逻辑地址变换为内存空间中的物理地址。<br>由于只将应用程序的一部分调入内存，还有一部分仍在盘上，故需在页表中再增加若干项，供程序（数据）在换进、换出时参考。<br>在请求分页系统中的每个页表项如下所示：<br><code>页号 | 物理块号 | 状态位P | 访问字段A | 修改位M | 外存地址</code><br>各字段的说明如下：<br>—- 状态位P：用于指示该页是否已调入内存，供程序访问时参考。<br>—- 访问字段A：用于记录本页在一段时间内被访问的次数，或记录本页最近已有多长时间未被访问，供选择换出页面时参考。<br>—- 修改位M：表示该页在调入内存后是否被修改过。供置换页面时参考。<br>由于内存中的每一页都在外存上有一份副本，因此，若未被修改，在置换该页时就不需要将该页写回到外存上，以减少系统的开销和<br>启动磁盘的次数；若已被修改，则必须将该页重写到外存上，以保证外存中所保留的始终是最新副本。<br>—- 外存地址：用于指出该页在外存上的地址，通常是物理块号，供调入该页时参考。</p>
+<h4 id="缺页中断机构"><a href="#缺页中断机构" class="headerlink" title="缺页中断机构"></a>缺页中断机构</h4><p><strong>在请求分页系统中，每当所要访问的页面不在内存中时，便产生一次缺页中断，请求OS将所缺之页调入内存</strong>。<br>缺页中断作为中断，同样需要经历诸如保护CPU现场、分析中断原因、转入缺页中断处理程序进行处理、恢复CPU现场等几个步骤。<br>但缺页中断又是一种特殊的中断，它与一般的中断相比，有着明显的区别，主要表现在下面两个方面：<br>a. 在指令执行期间产生和处理中断信号。通常，CPU都是在一条指令执行完成后，才检查是否有中断请求到达。若有，便去响应，否则，继续执行下一条指令。然而，缺页中断是在指令执行期间，发现所要访问的指令或数据不在内存时所产生和处理的。<br>b. 一条指令在执行期间，可能产生多次缺页中断。所以，系统中的硬件机构应能保存多次中断时的状态，并保证最后能返回到中断前产生缺页中断的指令处继续执行。</p>
+<h4 id="地址变换机构"><a href="#地址变换机构" class="headerlink" title="地址变换机构"></a>地址变换机构</h4><p><strong>请求分页系统中的地址变换机构，是在分页系统地址变换机构的基础上，为实现虚拟存储器而增加了某些功能而形成的，<br>如产生和处理缺页中断，以及从内存中换出一页的功能等等</strong>。</p>
+<p>变换算法<br>虚拟存储器地址变换基本上有3种形虚拟存储器工作过程式：全联想变换、直接变换和组联想变换。<br>任何逻辑空间页面能够变换到物理空间任何页面位置的方式称为全联想变换。<br>每个逻辑空间页面只能变换到物理空间一个特定页面的方式称为直接变换。<br>组联想变换是指各组之间是直接变换，而组内各页间则是全联想变换。</p>
+<p>在进行地址变换时，首先去检索快表，试图从中找出所要访问的页。<br>若找到，便修改页表项中的访问位。对于写指令，还需将修改位置成“1”，然后利用页表项中给出的物理块号和页内地址形成物理地址。地址变换过程到此结束。<br>如果在快表中未找到该页的页表项时，应到内存中去查找页表，再根据找到的页表项中的状态位P，了解该页是否已调入内存。<br>若该页已调入内存，这时应将此页的页表项写入快表，当快表已满时，应先调出按某种算法所确定的页的页表项；然后再写入该页的页表项。<br>若该页尚未调入内存，这时应产生缺页中断，请求OS从外存把该页调入内存。</p>
+<h3 id="常见的页面置换功能"><a href="#常见的页面置换功能" class="headerlink" title="常见的页面置换功能"></a>常见的页面置换功能</h3><p>常见的置换算法有以下四种。</p>
+<h4 id="最佳置换算法-OPT"><a href="#最佳置换算法-OPT" class="headerlink" title="最佳置换算法(OPT)"></a>最佳置换算法(OPT)</h4><p>最佳(Optimal, OPT)置换算法所选择的被淘汰页面将是以后永不使用的，或者是在最长时间内不再被访问的页面,这样可以保证获得最低的缺页率。但由于人们目前无法预知进程在内存下的若千页面中哪个是未来最长时间内不再被访问的，因而该算法无法实现。</p>
+<h4 id="先进先出-FIFO-页面置换算法"><a href="#先进先出-FIFO-页面置换算法" class="headerlink" title="先进先出(FIFO)页面置换算法"></a>先进先出(FIFO)页面置换算法</h4><p><strong>优先淘汰最早进入内存的页面</strong>，亦即在内存中驻留时间最久的页面。该算法实现简单，只需把调入内存的页面根据先后次序链接成队列，设置一个指针总指向最早的页面。但该算法与进程实际运行时的规律不适应，因为在进程中，有的页面经常被访问。</p>
+<p>FIFO算法还会产生当所分配的物理块数增大而页故障数不减反增的异常现象，这是由 Belady于1969年发现，故称为Belady异常<br><strong>只有FIFO算法可能出现Belady 异常，而LRU和OPT算法永远不会出现Belady异常。</strong></p>
+<h4 id="最近最久未使用-LRU-置换算法"><a href="#最近最久未使用-LRU-置换算法" class="headerlink" title="最近最久未使用(LRU)置换算法"></a>最近最久未使用(LRU)置换算法</h4><p>选择最近最长时间未访问过的页面予以淘汰，它认为过去一段时间内未访问过的页面，在最近的将来可能也不会被访问。该算法为每个页面设置一个访问字段，来记录页面自上次被访问以来所经历的时间，淘汰页面时选择现有页面中值最大的予以淘汰。</p>
+<p>实际上，LRU算法根据各页以前的情况，是“向前看”的，而最佳置换算法则根据各页以后的使用情况，是“向后看”的。</p>
+<p><strong>LRU性能较好，但需要寄存器和栈的硬件支持</strong>。<br>LRU是堆栈类的算法。理论上可以证明，堆栈类算法不可能出现Belady异常。<br>FIFO算法基于队列实现，不是堆栈类算法。</p>
+<h4 id="时钟-CLOCK-置换算法"><a href="#时钟-CLOCK-置换算法" class="headerlink" title="时钟(CLOCK)置换算法"></a>时钟(CLOCK)置换算法</h4><p>LRU算法的性能接近于OPT,但是实现起来比较困难，且开销大；FIFO算法实现简单，但性能差。所以操作系统的设计者尝试了很多算法，试图用比较小的开销接近LRU的性能，这类算法都是CLOCK算法的变体。</p>
+<p>简单的CLOCK算法是给每一帧关联一个附加位，称为使用位。当某一页首次装入主存时，该帧的使用位设置为1;当该页随后再被访问到时，它的使用位也被置为1。对于页替换算法，用于替换的候选帧集合看做一个循环缓冲区，并且有一个指针与之相关联。当某一页被替换时，该指针被设置成指向缓冲区中的下一帧。当需要替换一页时，操作系统扫描缓冲区，以查找使用位被置为0的一帧。每当遇到一个使用位为1的帧时，操作系统就将该位重新置为0；如果在这个过程开始时，缓冲区中所有帧的使用位均为0，则选择遇到的第一个帧替换；如果所有帧的使用位均为1,则指针在缓冲区中完整地循环一周，把所有使用位都置为0，并且停留在最初的位置上，替换该帧中的页。由于该算法循环地检查各页面的情况，故称为CLOCK算法，又称为最近未用(Not Recently Used, NRU)算法。</p>
+<p><a href="http://c.biancheng.net/cpp/html/2614.html" target="_blank" rel="external">http://c.biancheng.net/cpp/html/2614.html</a></p>
+<h3 id="抖动（颠簸）"><a href="#抖动（颠簸）" class="headerlink" title="抖动（颠簸）"></a>抖动（颠簸）</h3><p>在页面置换过程中，最糟糕的情况是刚刚换出的页面又马上换入主存，刚刚换入主存的页面又要换出去，这种频繁的页面调度行为称为抖动或者颠簸。<br>即如果一个进程在换页的时间多于执行事件，这个进程就在抖动<br><strong>频繁地发生缺页中断主要原因是进程频繁访问的页面数高于可用的物理页帧数</strong>, 最直接有效的方法当然是撤销部分进程。<br>虚拟内存技术可以在内存中保留更多的进程以提髙系统效率。在稳定状态，几乎主存的所有空间都被进程块占据，处理机和操作系统可以直接访问到尽可能多的进程。但如果管理不当，处理机的大部分时间都将用于交换块，即请求调入页面的操作，而不是执行进程的指令，这就会大大降低系统效率。</p>
+<h3 id="工作集（驻留集）"><a href="#工作集（驻留集）" class="headerlink" title="工作集（驻留集）"></a>工作集（驻留集）</h3><p>工作集（或驻留集）是指在某段时间间隔内，进程要访问的页面集合。经常被使用的页面需要在工作集中，而长期不被使用的页面要从工作集中被丢弃。为了防止系统出现抖动现象，需要选择合适的工作集大小。</p>
+<p>工作集模型的原理是：让操作系统跟踪每个进程的工作集，并为进程分配大于其工作集的物理块。如果还有空闲物理块，则可以再调一个进程到内存以增加多道程序数。如果所有工作集之和增加以至于超过了可用物理块的总数，那么操作系统会暂停一个进程，将其页面调出并且将其物理块分配给其他进程，防止出现抖动现象。</p>
+<p>正确选择工作集的大小，对存储器的利用率和系统吞吐量的提嵩，都将产生重要影响。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-25T03:47:12.000Z" itemprop="dateUpdated">2017年5月25日 11:47</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/04/10/操作系统/" target="_blank" rel="external">http://duyao.github.io/2017/04/10/操作系统/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/10/操作系统/&title=《操作系统》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/10/操作系统/&title=《操作系统》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/10/操作系统/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统》 — Du Yao's blog&url=http://duyao.github.io/2017/04/10/操作系统/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/10/操作系统/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/12/剑指offer/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">剑指offer</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/05/设计模式-单例模式和工厂模式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">设计模式-单例模式和工厂模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="操作系统" data-title="操作系统" data-url="http://duyao.github.io/2017/04/10/操作系统/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/10/操作系统/&title=《操作系统》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/10/操作系统/&title=《操作系统》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/10/操作系统/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《操作系统》 — Du Yao's blog&url=http://duyao.github.io/2017/04/10/操作系统/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/10/操作系统/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/04/10/操作系统/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

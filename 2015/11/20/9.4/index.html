@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>9.4 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="字符串的交错组成给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持原来在str1中的顺序，属于str2的字符之间保持原来在str2中的顺序，那么称aim是str1和str2的交错组成。实现一个函数，判断aim是否是str1和str2交错组成。str1=“AB”，str2=“12”。那么“AB12”、“A1B2”">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.4">
+<meta property="og:url" content="http://duyao.github.io/2015/11/20/9.4/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="字符串的交错组成给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持原来在str1中的顺序，属于str2的字符之间保持原来在str2中的顺序，那么称aim是str1和str2的交错组成。实现一个函数，判断aim是否是str1和str2交错组成。str1=“AB”，str2=“12”。那么“AB12”、“A1B2”">
+<meta property="og:updated_time" content="2015-11-24T12:50:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9.4">
+<meta name="twitter:description" content="字符串的交错组成给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持原来在str1中的顺序，属于str2的字符之间保持原来在str2中的顺序，那么称aim是str1和str2的交错组成。实现一个函数，判断aim是否是str1和str2交错组成。str1=“AB”，str2=“12”。那么“AB12”、“A1B2”">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">9.4</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">9.4</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-20T02:47:58.000Z" itemprop="datePublished" class="page-time">
+  2015-11-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#字符串的交错组成"><span class="post-toc-number">1.</span> <span class="post-toc-text">字符串的交错组成</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路-amp-amp-代码"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">思路 && 代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#经典动态规划"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">经典动态规划</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#经典动态规划方法结合空间压缩的方法。"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">经典动态规划方法结合空间压缩的方法。</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-9.4"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">9.4</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月20日 10:47" datetime="2015-11-20T02:47:58.000Z"  itemprop="datePublished">2015-11-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="字符串的交错组成"><a href="#字符串的交错组成" class="headerlink" title="字符串的交错组成"></a>字符串的交错组成</h1><p>给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持原来在str1中的顺序，属于str2的字符之间保持原来在str2中的顺序，那么称aim是str1和str2的交错组成。实现一个函数，判断aim是否是str1和str2交错组成。<br>str1=“AB”，str2=“12”。那么“AB12”、“A1B2”、“A12B”、“1A2B”和“1AB2”等等都是str1和str2交错组成。</p>
+<a id="more"></a>
+<h2 id="思路-amp-amp-代码"><a href="#思路-amp-amp-代码" class="headerlink" title="思路 &amp;&amp; 代码"></a>思路 &amp;&amp; 代码</h2><h3 id="经典动态规划"><a href="#经典动态规划" class="headerlink" title="经典动态规划"></a>经典动态规划</h3><p>如果str1的长度为M， str2的长度为N，经典动态规划的方法可以达到时间复杂度O(M*N)，额外空间复杂度O(M*N)。</p>
+<p>首先aim如果是str1和str2的交错组成， aim的长度一定是M+N，否则直接返回false。<br>然后生成大小为(M+1)*(N+1)布尔类型的矩阵dp。<br>dp[i][j]的值代表aim[0..i+j-1]能否被str1[0..i-1]和str2[0..j-1]交错组成。</p>
+<p>计算dp矩阵的时候，是从左到右再从上到下的计算的， dp[M][N]就是dp矩阵中最右下角的值，<br>就表示aim整体能否被str1整体和str2整体交错组成，也就是最终结果。具体说明dp矩阵每个位置的值是如何计算。</p>
+<p>1， dp[0][0]=true。 aim为空串时，当然可以被str1为空串和str2为空串交错组成。<br>2，矩阵dp第一列即dp[0..M-1][0]。 dp[i][0]表示aim[0..i-1]能否只被str1[0..i-1]交错组成。<br>如果aim[0..i-1]等于str1[0..i-1]，则令dp[i][0]=true，否则令dp[i][0]=false。<br>3，矩阵dp第一行即dp[0][0..N-1]。 dp[0][j]表示aim[0..j-1]能否只被str2[0..j-1]交错组成。<br>如果aim[0..j-1]等于str1[0..j-1]，则令dp[i][0]=true，否则令dp[i][0]=false。<br>4，对于其他位置(i,j)， dp[i][j]的值由下面的情况决定。<br>1） dp[i-1][j]代表aim[0..i+j-2]能否被str1[0..i-2]和str2[0..j-1]交错组成，如果可以，<br>那么如果再有str1[i-1]等于aim[i+j-1]，说明str1[i-1]可以作为交错组成aim[0..i+j-1]的最<br>后一个字符。令dp[i][j]=true。<br>2） dp[i][j-1]代表aim[0..i+j-2]能否被str1[0..i-1]和str2[0..j-2]交错组成，如果可以，<br>那么如果再有str2[j-1]等于aim[i+j-1]，说明str1[j-1]可以作为交错组成aim[0..i+j-1]的最<br>后一个字符。令dp[i][j]=true。<br>3）如果情况1）和情况2）都不满足，令dp[i][j]=false。<br>具体过程请参看如下代码中的isCross1方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public static boolean isCross1(String str1, String str2, String aim) &#123;</div><div class="line">	if (str1 == null || str2 == null || aim == null) &#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	char[] char1 = str1.toCharArray();</div><div class="line">	char[] char2 = str2.toCharArray();</div><div class="line">	char[] caim = aim.toCharArray();</div><div class="line">	if (char1.length + char2.length != caim.length) &#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	// 多增加一行和一列，为空值，方便计算</div><div class="line">	int row = char1.length + 1;</div><div class="line">	int col = char2.length + 1;</div><div class="line">	boolean[][] dp = new boolean[row][col];</div><div class="line">	dp[0][0] = true;</div><div class="line">	for (int i = 1; i &lt; row; i++) &#123;</div><div class="line">		// str1[0,i-1]交错aim[0,i-1]</div><div class="line">		if(char1[i-1] != caim[i-1])&#123;</div><div class="line">			//遇到不等就退出循环，初始化时是false</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		dp[i][0] = true;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	for (int i = 1; i &lt; col; i++) &#123;</div><div class="line">		// str2[0,i-1]交错aim[0,i-1]</div><div class="line">		if(char2[i-1] != caim[i-1])&#123;</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		dp[0][i] = true;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">	for (int i = 1; i &lt; row; i++) &#123;</div><div class="line">		for (int j = 1; j &lt; col; j++) &#123;</div><div class="line">			if (caim[i + j - 1] == char1[i - 1] &amp;&amp; dp[i - 1][j]</div><div class="line">					|| caim[i + j - 1] == char2[j - 1] &amp;&amp; dp[i][j - 1]) &#123;</div><div class="line">				dp[i][j] = true;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return dp[row - 1][col - 1];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="经典动态规划方法结合空间压缩的方法。"><a href="#经典动态规划方法结合空间压缩的方法。" class="headerlink" title="经典动态规划方法结合空间压缩的方法。"></a>经典动态规划方法结合空间压缩的方法。</h3><p>如果结合空间压缩的技巧可以把额外空间复杂度减至O(min{M,N})。<br>实际进行空间压缩的时候，比较str1和str2哪个长度较小，长度较小的那个作为列对应的字符串，<br>然后生成和较短字符串长度一样的一维数组dp，滚动更新即可。<br>具体请参看如下代码中的isCross2方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">//压缩空间，只用一行表示一个数组，然后滚动更新</div><div class="line">public static boolean isCross2(String str1, String str2, String aim) &#123;</div><div class="line">	if (str1 == null || str2 == null || aim == null) &#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	char[] ch1 = str1.toCharArray();</div><div class="line">	char[] ch2 = str2.toCharArray();</div><div class="line">	char[] chaim = aim.toCharArray();</div><div class="line">	if (chaim.length != ch1.length + ch2.length) &#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	//选出长短，长的在外循环，短的在循环内，因为使得不断更新短的数值</div><div class="line">	char[] longs = ch1.length &gt;= ch2.length ? ch1 : ch2;</div><div class="line">	char[] shorts = ch1.length &lt; ch2.length ? ch1 : ch2;</div><div class="line">	boolean[] dp = new boolean[shorts.length + 1];</div><div class="line">	dp[0] = true;</div><div class="line">	//初始化该行</div><div class="line">	for (int i = 1; i &lt;= shorts.length; i++) &#123;</div><div class="line">		if (shorts[i - 1] != chaim[i - 1]) &#123;</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		dp[i] = true;</div><div class="line">	&#125;</div><div class="line">	//滚动更新的过程</div><div class="line">	for (int i = 1; i &lt;= longs.length; i++) &#123;</div><div class="line">		//更新该行的第一列</div><div class="line">		dp[0] = dp[0] &amp;&amp; longs[i - 1] == chaim[i - 1];</div><div class="line">		for (int j = 1; j &lt;= shorts.length; j++) &#123;</div><div class="line">			//此时只更新到j-1，而j还没有更新，表示的是上一行的j值，即要更新位置的上面</div><div class="line">			//j-1已经更新，表示的是要更新位置的左边</div><div class="line">			if ((longs[i - 1] == chaim[i + j - 1] &amp;&amp; dp[j])</div><div class="line">					|| (shorts[j - 1] == chaim[i + j - 1] &amp;&amp; dp[j - 1])) &#123;</div><div class="line">				dp[j] = true;</div><div class="line">			&#125; else &#123;</div><div class="line">				dp[j] = false;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return dp[shorts.length];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-24T12:50:50.000Z" itemprop="dateUpdated">2015年11月24日 20:50</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/20/9.4/" target="_blank" rel="external">http://duyao.github.io/2015/11/20/9.4/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/20/9.4/&title=《9.4》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/20/9.4/&title=《9.4》 — Du Yao's blog&source=字符串的交错组成给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/20/9.4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《9.4》 — Du Yao's blog&url=http://duyao.github.io/2015/11/20/9.4/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/20/9.4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/25/10.1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">10.1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/19/9.3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">9.3</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="9.4" data-title="9.4" data-url="http://duyao.github.io/2015/11/20/9.4/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/20/9.4/&title=《9.4》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/20/9.4/&title=《9.4》 — Du Yao's blog&source=字符串的交错组成给定三个字符串str1、str2和aim。如果aim包含且仅包含来自str1和str2的所有字符，而且在aim中属于str1的字符之间保持..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/20/9.4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《9.4》 — Du Yao's blog&url=http://duyao.github.io/2015/11/20/9.4/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/20/9.4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/20/9.4/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

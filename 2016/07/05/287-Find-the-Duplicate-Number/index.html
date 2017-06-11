@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>287. Find the Duplicate Number | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,algorithm">
+    <meta name="description" content="287. Find the Duplicate Number 思路1该题目思路是与处理链表中带环位置相同的142. Linked List Cycle II过程1 - 设置快慢两个指针，快指针一次走两步，慢指针一次走一步，在点a两个指针相遇过程2 - 快指针从头开始，慢指针从A点开始，两个指针都一次走一步，则他们必在入环位置相遇 证明  过程1 - 快指针走的路程为2s，慢指针走的路程为s，圆环长">
+<meta name="keywords" content="leetcode,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="287. Find the Duplicate Number">
+<meta property="og:url" content="http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="287. Find the Duplicate Number 思路1该题目思路是与处理链表中带环位置相同的142. Linked List Cycle II过程1 - 设置快慢两个指针，快指针一次走两步，慢指针一次走一步，在点a两个指针相遇过程2 - 快指针从头开始，慢指针从A点开始，两个指针都一次走一步，则他们必在入环位置相遇 证明  过程1 - 快指针走的路程为2s，慢指针走的路程为s，圆环长">
+<meta property="og:updated_time" content="2016-07-05T14:10:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="287. Find the Duplicate Number">
+<meta name="twitter:description" content="287. Find the Duplicate Number 思路1该题目思路是与处理链表中带环位置相同的142. Linked List Cycle II过程1 - 设置快慢两个指针，快指针一次走两步，慢指针一次走一步，在点a两个指针相遇过程2 - 快指针从头开始，慢指针从A点开始，两个指针都一次走一步，则他们必在入环位置相遇 证明  过程1 - 快指针走的路程为2s，慢指针走的路程为s，圆环长">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">287. Find the Duplicate Number</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">287. Find the Duplicate Number</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-05T13:10:32.000Z" itemprop="datePublished" class="page-time">
+  2016-07-05
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路1"><span class="post-toc-number">1.</span> <span class="post-toc-text">思路1</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路2"><span class="post-toc-number">3.</span> <span class="post-toc-text">思路2</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-287-Find-the-Duplicate-Number"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">287. Find the Duplicate Number</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年07月05日 21:10" datetime="2016-07-05T13:10:32.000Z"  itemprop="datePublished">2016-07-05</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="https://leetcode.com/problems/find-the-duplicate-number/" target="_blank" rel="external">287. Find the Duplicate Number</a></p>
+<h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>该题目思路是与处理链表中带环位置相同的<br><a href="https://leetcode.com/problems/linked-list-cycle-ii/" target="_blank" rel="external">142. Linked List Cycle II</a><br>过程1 - 设置快慢两个指针，快指针一次走两步，慢指针一次走一步，在点a两个指针相遇<br>过程2 - 快指针从头开始，慢指针从A点开始，两个指针都一次走一步，则他们必在入环位置相遇</p>
+<p>证明</p>
+<blockquote>
+<p>过程1 - 快指针走的路程为2s，慢指针走的路程为s，圆环长度为c，n为绕的圈数<br>则 s + n <em> c = 2s ==&gt; s = n </em> c …..①<br>从开始到入环位置距离为x，相遇点A到入环位置为a<br>则 s = x + a …②<br>结合①②得到 x + a = n <em> c ==&gt; x = (n-1) </em> c + c-a<br>即过程2 就是 x = (n-1) * c + c-a的过程</p>
+</blockquote>
+<p>在本题目中没有链表和指针，但是题目已经表示nums中的值都是[1 , n]的数字<br>因此可以模拟指针的过程</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public int findDuplicate(int[] nums) &#123;</div><div class="line">	int fast = nums[0];</div><div class="line">	int slow = 0;</div><div class="line">	while (fast != slow) &#123;</div><div class="line">		fast = nums[nums[fast]];</div><div class="line">		slow = nums[slow];</div><div class="line">	&#125;</div><div class="line">	fast = 0;</div><div class="line">	while (fast != slow) &#123;</div><div class="line">		fast = nums[fast];</div><div class="line">		slow = nums[slow];</div><div class="line">	&#125;</div><div class="line">	return slow;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h2><p><a href="https://discuss.leetcode.com/topic/25580/two-solutions-with-explanation-o-nlog-n-and-o-n-time-o-1-space-without-changing-the-input-array/27" target="_blank" rel="external">二分</a><br>找到中间数，然后计算数组中小于和大于中间数的个数，个数哪边大就说明那个方向有重复数字<br>继续遍历，缩小范围，直到找到该数字为止</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public int findDuplicate1(int[] nums) &#123;</div><div class="line">	int s = 0;</div><div class="line">	int e = nums.length - 1;</div><div class="line">	while (s &lt; e) &#123;</div><div class="line">		int cnt = 0;</div><div class="line">		int m = (s + e) / 2;</div><div class="line">		// 遍历所有的数字</div><div class="line">		for (int i = 0; i &lt; nums.length; i++) &#123;</div><div class="line">			if (nums[i] &lt;= m) &#123;</div><div class="line">				cnt++;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		if (m &lt; cnt) &#123;</div><div class="line">			e = m;</div><div class="line">		&#125; else &#123;</div><div class="line">			s = m + 1;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	return s;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-07-05T14:10:56.000Z" itemprop="dateUpdated">2016年7月5日 22:10</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2016/07/05/287-Find-the-Duplicate-Number/" target="_blank" rel="external">http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/&title=《287. Find the Duplicate Number》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/&title=《287. Find the Duplicate Number》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《287. Find the Duplicate Number》 — Du Yao's blog&url=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/07/16/73-Set-Matrix-Zeroes/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">73. Set Matrix Zeroes</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/07/05/268-Missing-Number/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">268. Missing Number</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="287-Find-the-Duplicate-Number" data-title="287. Find the Duplicate Number" data-url="http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/&title=《287. Find the Duplicate Number》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/&title=《287. Find the Duplicate Number》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《287. Find the Duplicate Number》 — Du Yao's blog&url=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2016/07/05/287-Find-the-Duplicate-Number/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

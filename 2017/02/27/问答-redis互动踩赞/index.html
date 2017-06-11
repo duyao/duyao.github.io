@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>问答-redis互动踩赞 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="wenda">
+    <meta name="description" content="Redis是一个开源，高级的键值存储和一个适用的解决方案，用于构建高性能，可扩展的Web应用程序。传统数据库中经常要查询最新的、最热的，很可能因为访问请求大的时候写硬盘可能导致锁竞争从而导致程序阻塞变慢，而redis就能解决这个问题 Redis有三个主要特点，使它优越于其它键值数据存储系统  Redis将其数据库完全保存在内存中，仅使用磁盘进行持久化。 与其它键值数据存储相比，Redis有一组相对">
+<meta name="keywords" content="wenda">
+<meta property="og:type" content="article">
+<meta property="og:title" content="问答-redis互动踩赞">
+<meta property="og:url" content="http://duyao.github.io/2017/02/27/问答-redis互动踩赞/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="Redis是一个开源，高级的键值存储和一个适用的解决方案，用于构建高性能，可扩展的Web应用程序。传统数据库中经常要查询最新的、最热的，很可能因为访问请求大的时候写硬盘可能导致锁竞争从而导致程序阻塞变慢，而redis就能解决这个问题 Redis有三个主要特点，使它优越于其它键值数据存储系统  Redis将其数据库完全保存在内存中，仅使用磁盘进行持久化。 与其它键值数据存储相比，Redis有一组相对">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/rhash.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/rlist.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/rset.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/rsortset.png">
+<meta property="og:updated_time" content="2017-04-26T10:11:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="问答-redis互动踩赞">
+<meta name="twitter:description" content="Redis是一个开源，高级的键值存储和一个适用的解决方案，用于构建高性能，可扩展的Web应用程序。传统数据库中经常要查询最新的、最热的，很可能因为访问请求大的时候写硬盘可能导致锁竞争从而导致程序阻塞变慢，而redis就能解决这个问题 Redis有三个主要特点，使它优越于其它键值数据存储系统  Redis将其数据库完全保存在内存中，仅使用磁盘进行持久化。 与其它键值数据存储相比，Redis有一组相对">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/rhash.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">问答-redis互动踩赞</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">问答-redis互动踩赞</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-27T06:45:18.000Z" itemprop="datePublished" class="page-time">
+  2017-02-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#redis使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">redis使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sorted-set数据结构"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">sorted set数据结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#java中调用redis"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">java中调用redis</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#redis持久化"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">redis持久化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#RDB-的优点"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">RDB 的优点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#RDB-的缺点"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">RDB 的缺点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#AOF-的优点"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">AOF 的优点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#AOF-的缺点"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">AOF 的缺点</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#踩赞的实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">踩赞的实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#互粉的实现"><span class="post-toc-number">3.</span> <span class="post-toc-text">互粉的实现</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-问答-redis互动踩赞"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">问答-redis互动踩赞</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年02月27日 14:45" datetime="2017-02-27T06:45:18.000Z"  itemprop="datePublished">2017-02-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Redis是一个开源，高级的键值存储和一个适用的解决方案，用于构建高性能，可扩展的Web应用程序。<br>传统数据库中经常要查询最新的、最热的，很可能因为访问请求大的时候写硬盘可能导致锁竞争从而导致程序阻塞变慢，而redis就能解决这个问题</p>
+<p>Redis有三个主要特点，使它优越于其它键值数据存储系统</p>
+<ul>
+<li>Redis将其数据库完全保存在内存中，仅使用磁盘进行持久化。</li>
+<li>与其它键值数据存储相比，Redis有一组相对丰富的数据类型。</li>
+<li>Redis可以将数据复制到任意数量的从机中。</li>
+</ul>
+<p>以下是Redis的一些优点。</p>
+<ul>
+<li>异常快<br>Redis非常快，每秒可执行大约110000次的设置(SET)操作，每秒大约可执行81000次的读取/获取(GET)操作。</li>
+<li>支持丰富的数据类型<br>Redis支持开发人员常用的大多数数据类型，例如列表，集合，排序集和散列等等。这使得Redis很容易被用来解决各种问题，因为我们知道哪些问题可以更好使用地哪些数据类型来处理解决。</li>
+<li>操作具有原子性<br>所有Redis操作都是原子操作，这确保如果两个客户端并发访问，Redis服务器能接收更新的值。</li>
+<li>多实用工具<br>Redis是一个多实用工具，可用于多种用例，如：缓存，消息队列(Redis本地支持发布/订阅)，应用程序中的任何短期数据，例如，web应用程序中的会话，网页命中计数等。</li>
+</ul>
+<p>缺点</p>
+<ol>
+<li><p>Redis不具备自动容错和恢复功能，主机从机的宕机都会导致前端部分读写请求失败，需要等待机器重启或者手动切换前端的IP才能恢复。</p>
+</li>
+<li><p>主机宕机，宕机前有部分数据未能及时同步到从机，切换IP后还会引入数据不一致的问题，降低了系统的可用性。</p>
+</li>
+<li><p>Redis的主从复制采用全量复制，复制过程中主机会fork出一个子进程对内存做一份快照，并将子进程的内存快照保存为文件发送给从机，这一过程需要确保主机有足够多的空余内存。若快照文件较大，对集群的服务能力会产生较大的影响，而且复制过程是在从机新加入集群或者从机和主机网络断开重连时都会进行，也就是网络波动都会造成主机和从机间的一次全量的数据复制，这对实际的系统运营造成了不小的麻烦。</p>
+</li>
+<li><p>Redis较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂。为避免这一问题，运维人员在系统上线时必须确保有足够的空间，这对资源造成了很大的浪费。</p>
+</li>
+</ol>
+<p><a href="http://www.yiibai.com/redis/" target="_blank" rel="external">http://www.yiibai.com/redis/</a><br><a href="https://redis.io/" target="_blank" rel="external">https://redis.io/</a></p>
+<p>java中实现redis需要导包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">	&lt;groupId&gt;redis.clients&lt;/groupId&gt;</div><div class="line">	&lt;artifactId&gt;jedis&lt;/artifactId&gt;</div><div class="line">	&lt;version&gt;2.8.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="redis使用"><a href="#redis使用" class="headerlink" title="redis使用"></a>redis使用</h2><p>其中主要的数据类型有</p>
+<ul>
+<li><p>字符串</p>
+</li>
+<li><p>hashes<br>hash表<br><a href="https://redis.io/commands#hash" target="_blank" rel="external">https://redis.io/commands#hash</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/rhash.png" alt="sorted" title="">
+                </div>
+                <div class="image-caption">sorted</div>
+            </figure></li>
+<li>lists<br>双向链表，其中bp开头的可是实现阻塞的功能<br><a href="https://redis.io/commands#list" target="_blank" rel="external">https://redis.io/commands#list</a><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/rlist.png" alt="lists" title="">
+                </div>
+                <div class="image-caption">lists</div>
+            </figure></li>
+<li><p>sets<br>集，不允许元素重复,同时还可以做一些运算，比如交集、并集、补集等<br><a href="https://redis.io/commands#set" target="_blank" rel="external">https://redis.io/commands#set</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/rset.png" alt="sets" title="">
+                </div>
+                <div class="image-caption">sets</div>
+            </figure>
+</li>
+<li><p>sorted sets<br>有序集，每个点都有自己的分数，用来排序<br><a href="https://redis.io/commands#sorted_set" target="_blank" rel="external">https://redis.io/commands#sorted_set</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/rsortset.png" alt="sorted" title="">
+                </div>
+                <div class="image-caption">sorted</div>
+            </figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//选择数据库，一共是1-16个</div><div class="line">select 6</div><div class="line">//查找所有的键值，可以用正则表达式</div><div class="line">keys *</div></pre></td></tr></table></figure>
+<h3 id="sorted-set数据结构"><a href="#sorted-set数据结构" class="headerlink" title="sorted set数据结构"></a>sorted set数据结构</h3><p>在java中实现sortedset使用的是红黑树，redis使用了跳表，查询、插入、删除时间复杂度期望值O（logn）</p>
+<p>分数，节点，表头</p>
+<p><a href="http://redisbook.com/preview/skiplist/datastruct.html" target="_blank" rel="external">http://redisbook.com/preview/skiplist/datastruct.html</a><br><a href="http://blog.csdn.net/ict2014/article/details/17394259" target="_blank" rel="external">http://blog.csdn.net/ict2014/article/details/17394259</a><br><a href="http://www.leoox.com/?p=347" target="_blank" rel="external">http://www.leoox.com/?p=347</a></p>
+<h3 id="java中调用redis"><a href="#java中调用redis" class="headerlink" title="java中调用redis"></a>java中调用redis</h3><p>需要建立一个redisAdaptor来开启redis，封装各种命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">@Service</div><div class="line">public class JedisAdapter implements InitializingBean &#123;</div><div class="line">    private static final Logger logger = LoggerFactory.getLogger(JedisAdapter.class);</div><div class="line">    private JedisPool pool;</div><div class="line">    @Override</div><div class="line">    public void afterPropertiesSet() throws Exception &#123;</div><div class="line">        pool = new JedisPool(&quot;redis://localhost:6379/10&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Jedis getJedis() &#123;</div><div class="line">       return pool.getResource();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //开启线程</div><div class="line">    public Transaction multi(Jedis jedis) &#123;</div><div class="line">        try &#123;</div><div class="line">            return jedis.multi();</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            logger.error(&quot;发生异常&quot; + e.getMessage());</div><div class="line">        &#125; finally &#123;</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">		//执行事务</div><div class="line">		public List&lt;Object&gt; exec(Transaction tx, Jedis jedis) &#123;</div><div class="line">				try &#123;</div><div class="line">						return tx.exec();</div><div class="line">				&#125; catch (Exception e) &#123;</div><div class="line">						logger.error(&quot;发生异常&quot; + e.getMessage());</div><div class="line">						tx.discard();</div><div class="line">				&#125; finally &#123;</div><div class="line">						if (tx != null) &#123;</div><div class="line">								try &#123;</div><div class="line">										tx.close();</div><div class="line">								&#125; catch (IOException ioe) &#123;</div><div class="line">										// ..</div><div class="line">								&#125;</div><div class="line">						&#125;</div><div class="line"></div><div class="line">						if (jedis != null) &#123;</div><div class="line">								jedis.close();</div><div class="line">						&#125;</div><div class="line">				&#125;</div><div class="line">				return null;</div><div class="line">		&#125;</div><div class="line"></div><div class="line"></div><div class="line">    //封装，因为这里面要用到关闭资源等</div><div class="line">    public long sadd(String key, String value) &#123;</div><div class="line">        Jedis jedis = null;</div><div class="line">        try &#123;</div><div class="line">            jedis = pool.getResource();</div><div class="line">            return jedis.sadd(key, value);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            logger.error(&quot;发生异常&quot; + e.getMessage());</div><div class="line">        &#125; finally &#123;</div><div class="line">            if (jedis != null) &#123;</div><div class="line">                jedis.close();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="redis持久化"><a href="#redis持久化" class="headerlink" title="redis持久化"></a>redis持久化</h3><ul>
+<li>RDB 持久化可以在指定的时间间隔内生成数据集的时间点快照（point-in-time snapshot）。</li>
+<li>AOF 持久化记录服务器执行的所有写操作命令，并在服务器启动时，通过重新执行这些命令来还原数据集。<br>AOF 文件中的命令全部以 Redis 协议的格式来保存，新命令会被追加到文件的末尾。 Redis 还可以在后台对 AOF 文件进行<strong>重写（rewrite）</strong> ，使得 AOF 文件的体积不会超出保存数据集状态所需的实际大小。</li>
+<li>Redis 还可以同时使用 AOF 持久化和 RDB 持久化。<br>在这种情况下， 当 Redis 重启时， 它会优先使用 AOF 文件来还原数据集， 因为 AOF 文件保存的数据集通常比 RDB 文件所保存的数据集更完整。</li>
+</ul>
+<p>你甚至可以关闭持久化功能，让数据只在服务器运行时存在。</p>
+<h4 id="RDB-的优点"><a href="#RDB-的优点" class="headerlink" title="RDB 的优点"></a>RDB 的优点</h4><p><strong>RDB 是一个非常紧凑（compact）的文件，它保存了 Redis 在某个时间点上的数据集。</strong> 这种文件非常适合用于进行备份： 比如说，你可以在最近的 24 小时内，每小时备份一次 RDB 文件，并且在每个月的每一天，也备份一个 RDB 文件。 这样的话，即使遇上问题，也可以随时将数据集还原到不同的版本。</p>
+<p>RDB 非常适用于<strong>灾难恢复（disaster recovery）</strong> ：它只有一个文件，并且内容都非常紧凑，可以（在加密后）将它传送到别的数据中心，或者亚马逊 S3 中。</p>
+<p>RDB 可以最大化 Redis 的性能：父进程在保存 RDB 文件时唯一要做的就是 fork 出一个子进程，然后这个子进程就会处理接下来的所有保存工作，父进程无须执行任何磁盘 I/O 操作。</p>
+<p>RDB 在恢复大数据集时的速度比 AOF 的恢复速度要快。</p>
+<h4 id="RDB-的缺点"><a href="#RDB-的缺点" class="headerlink" title="RDB 的缺点"></a>RDB 的缺点</h4><p><strong>如果你需要尽量避免在服务器故障时丢失数据，那么 RDB 不适合你。</strong> 虽然 Redis 允许你设置不同的保存点（save point）来控制保存 RDB 文件的频率， 但是， 因为RDB 文件需要保存整个数据集的状态， 所以它并不是一个轻松的操作。 因此你可能会至少 5 分钟才保存一次 RDB 文件。 在这种情况下， 一旦发生故障停机， 你就可能会丢失好几分钟的数据。</p>
+<p>每次保存 RDB 的时候，Redis 都要 fork() 出一个子进程，并由子进程来进行实际的持久化工作。 在数据集比较庞大时， fork() 可能会非常耗时，造成服务器在某某毫秒内停止处理客户端； 如果数据集非常巨大，并且 CPU 时间非常紧张的话，那么这种停止时间甚至可能会长达整整一秒。 虽然 AOF 重写也需要进行 fork() ，但无论 AOF 重写的执行间隔有多长，数据的耐久性都不会有任何损失。</p>
+<h4 id="AOF-的优点"><a href="#AOF-的优点" class="headerlink" title="AOF 的优点"></a>AOF 的优点</h4><p>使用 AOF 持久化会让 Redis 变得非常耐久（much more durable）：你可以设置不同的 fsync 策略，比如无 fsync ，每秒钟一次 fsync ，或者每次执行写入命令时 fsync 。 AOF 的默认策略为每秒钟 fsync 一次，在这种配置下，Redis 仍然可以保持良好的性能，并且就算发生故障停机，也最多只会丢失一秒钟的数据（ fsync 会在后台线程执行，所以主线程可以继续努力地处理命令请求）。</p>
+<p>AOF 文件是一个只进行追加操作的日志文件（append only log）， 因此对 AOF 文件的写入不需要进行 seek ， 即使日志因为某些原因而包含了未写入完整的命令（比如写入时磁盘已满，写入中途停机，等等）， redis-check-aof 工具也可以轻易地修复这种问题。</p>
+<p>Redis 可以在 AOF 文件体积变得过大时，自动地在后台对 AOF 进行重写： 重写后的新 AOF 文件包含了恢复当前数据集所需的最小命令集合。 整个重写操作是绝对安全的，因为 Redis 在创建新 AOF 文件的过程中，会继续将命令追加到现有的 AOF 文件里面，即使重写过程中发生停机，现有的 AOF 文件也不会丢失。 而一旦新 AOF 文件创建完毕，Redis 就会从旧 AOF 文件切换到新 AOF 文件，并开始对新 AOF 文件进行追加操作。<br>因为 AOF 的运作方式是不断地将命令追加到文件的末尾， 所以随着写入命令的不断增加， AOF 文件的体积也会变得越来越大。<br>举个例子， 如果你对一个计数器调用了 100 次 INCR ， 那么仅仅是为了保存这个计数器的当前值， AOF 文件就需要使用 100 条记录（entry）。<br>然而在实际上， 只使用一条 SET 命令已经足以保存计数器的当前值了， 其余 99 条记录实际上都是多余的。<br>为了处理这种情况， Redis 支持一种有趣的特性： 可以在不打断服务客户端的情况下， 对 AOF 文件进行重建（rebuild）。<br>执行 BGREWRITEAOF 命令， <strong>Redis 将生成一个新的 AOF 文件， 这个文件包含重建当前数据集所需的最少命令。</strong></p>
+<p>AOF 文件有序地保存了对数据库执行的所有写入操作， 这些写入操作以 Redis 协议的格式保存， 因此 AOF 文件的内容非常容易被人读懂， 对文件进行分析（parse）也很轻松。 导出（export） AOF 文件也非常简单： 举个例子， 如果你不小心执行了 FLUSHALL 命令， 但只要 AOF 文件未被重写， 那么只要停止服务器， 移除 AOF 文件末尾的 FLUSHALL 命令， 并重启 Redis ， 就可以将数据集恢复到 FLUSHALL 执行之前的状态。</p>
+<h4 id="AOF-的缺点"><a href="#AOF-的缺点" class="headerlink" title="AOF 的缺点"></a>AOF 的缺点</h4><p>对于相同的数据集来说，AOF 文件的体积通常要大于 RDB 文件的体积。<br>根据所使用的 fsync 策略，AOF 的速度可能会慢于 RDB 。 在一般情况下， 每秒 fsync 的性能依然非常高， 而关闭 fsync 可以让 AOF 的速度和 RDB 一样快， 即使在高负荷之下也是如此。 不过在处理巨大的写入载入时，RDB 可以提供更有保证的最大延迟时间（latency）。<br>AOF 在过去曾经发生过这样的 bug ： 因为个别命令的原因，导致 AOF 文件在重新载入时，无法将数据集恢复成保存时的原样。 （举个例子，阻塞命令 BRPOPLPUSH 就曾经引起过这样的 bug 。） 测试套件里为这种情况添加了测试： 它们会自动生成随机的、复杂的数据集， 并通过重新载入这些数据来确保一切正常。 虽然这种 bug 在 AOF 文件中并不常见， 但是对比来说， RDB 几乎是不可能出现这种 bug 的。</p>
+<p><a href="http://doc.redisfans.com/topic/persistence.html" target="_blank" rel="external">http://doc.redisfans.com/topic/persistence.html</a></p>
+<h2 id="踩赞的实现"><a href="#踩赞的实现" class="headerlink" title="踩赞的实现"></a>踩赞的实现</h2><p>基本原理是将踩赞等记录存到redis中，redis使用<code>set</code>存储实体与点赞人的关系<br>key = LIKE:实体类型:实体id<br>value = 用户id</p>
+<p>比如用户2点赞了评论(实体类型是1)5</p>
+<ul>
+<li><p>添加赞<br><code>sadd LIKE:1:5 2</code><br>同时还要去掉踩的记录<br><code>srem DISLIKE:1:5:2</code><br>Java代码实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//事务</div><div class="line">Jedis jedis = jedisAdapter.getJedis();</div><div class="line">Transaction tx = jedisAdapter.multi(jedis);</div><div class="line">jedisAdapter.sadd(likeKey, String.valueOf(userId));</div><div class="line">jedisAdapter.srem(disLikeKey, String.valueOf(userId));</div><div class="line">List&lt;Object&gt; ret = jedisAdapter.exec(tx, jedis);</div></pre></td></tr></table></figure>
+</li>
+<li><p>取出喜欢的记录<br><code>smembers LIKE:2:1</code></p>
+</li>
+<li><p>统计喜欢的记录数<br><code>scard LIKE:2:1</code></p>
+</li>
+</ul>
+<h2 id="互粉的实现"><a href="#互粉的实现" class="headerlink" title="互粉的实现"></a>互粉的实现</h2><p>原理和踩赞的实现相似，但是粉丝使用sorted set存储数据，因为涉及到排序</p>
+<p>key = FOLLOWER:实体类型:实体id<br>value = 用户id</p>
+<p>比如用户2关注了当前用户(实体类型是1)5</p>
+<ul>
+<li><p>添加关注<br>要同时添加两个实体的集合，所以加上事务<br>zadd 关键字 分数 值，这里分数是用来排序的<br>实体粉丝关注当前用户<br><code>zadd FOLLOWER:1:5 9 2</code>分数是9<br>当前用户对实体关注加1<br><code>zadd FOLLOWEE:2:1 9 5</code></p>
+</li>
+<li><p>查看关注者<br>zrange 关键字 位置1 位置2，zrange是查看位置的元素，即从第0个到第-1个，-1表示倒数第一个<br><code>zrange FOLLOWER:1:5 0 -1 withscores</code><br>zrevrange 关键字 位置1 位置2，倒序查看<br><code>zrange FOLLOWER:1:5 0 10 withscores</code><br>如果以时间为分数，那么反向查看就是查看最新的</p>
+</li>
+<li><p>得到粉丝个数<br>zcard 关键字<br><code>zecard FOLLOWER:1:5</code></p>
+</li>
+<li><p>取消关注<br>要同时取消双方的，且为一个事务<br><code>zrem FOLLOWER:1:5 1</code></p>
+</li>
+<li><p>找出几个用户最近关注的10个问题<br>ZUNIONSTORE 求并集<br><a href="http://www.runoob.com/redis/sorted-sets-zunionstore.html" target="_blank" rel="external">http://www.runoob.com/redis/sorted-sets-zunionstore.html</a></p>
+</li>
+<li><p>找出两个人共同关注的<br>ZINTERSTORE 求交集<br><a href="http://www.runoob.com/redis/sorted-sets-zinterstore.html" target="_blank" rel="external">http://www.runoob.com/redis/sorted-sets-zinterstore.html</a></p>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-26T10:11:30.000Z" itemprop="dateUpdated">2017年4月26日 18:11</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/02/27/问答-redis互动踩赞/" target="_blank" rel="external">http://duyao.github.io/2017/02/27/问答-redis互动踩赞/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wenda/">wenda</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/&title=《问答-redis互动踩赞》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/&title=《问答-redis互动踩赞》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《问答-redis互动踩赞》 — Du Yao's blog&url=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/02/27/问答-个性化展示/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">问答-个性化展示</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/27/问答-异步队列/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">问答-异步队列</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="问答-redis互动踩赞" data-title="问答-redis互动踩赞" data-url="http://duyao.github.io/2017/02/27/问答-redis互动踩赞/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/&title=《问答-redis互动踩赞》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/&title=《问答-redis互动踩赞》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《问答-redis互动踩赞》 — Du Yao's blog&url=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/02/27/问答-redis互动踩赞/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

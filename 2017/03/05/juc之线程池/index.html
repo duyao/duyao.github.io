@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>juc之线程池 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="jvm">
+    <meta name="description" content="基本使用                                                                                             比较图              Executor是一个顶层接口，在它里面只声明了一个方法execute(Runnable)，返回值为void，参数为Runnable类型，从字面意思可以理解，就是用来执行传">
+<meta name="keywords" content="jvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="juc之线程池">
+<meta property="og:url" content="http://duyao.github.io/2017/03/05/juc之线程池/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="基本使用                                                                                             比较图              Executor是一个顶层接口，在它里面只声明了一个方法execute(Runnable)，返回值为void，参数为Runnable类型，从字面意思可以理解，就是用来执行传">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/executor.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/forkjoin.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/worksteal.png">
+<meta property="og:updated_time" content="2017-04-25T02:31:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="juc之线程池">
+<meta name="twitter:description" content="基本使用                                                                                             比较图              Executor是一个顶层接口，在它里面只声明了一个方法execute(Runnable)，返回值为void，参数为Runnable类型，从字面意思可以理解，就是用来执行传">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/executor.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">juc之线程池</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">juc之线程池</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-05T08:40:21.000Z" itemprop="datePublished" class="page-time">
+  2017-03-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程池的种类"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">线程池的种类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#状态"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">状态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原理"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#执行规则"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">执行规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线程池监控"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">线程池监控</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#扩展和增强线程池"><span class="post-toc-number">2.</span> <span class="post-toc-text">扩展和增强线程池</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#回调接口"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">回调接口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拒绝策略"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">拒绝策略</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义ThreadFactory"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">自定义ThreadFactory</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程池数量的选择"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">线程池数量的选择</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ForkJoin"><span class="post-toc-number">3.</span> <span class="post-toc-text">ForkJoin</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工作窃取（work-stealing）"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">工作窃取（work-stealing）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ForkJoin计算过程"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">ForkJoin计算过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">例子</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-juc之线程池"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">juc之线程池</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月05日 16:40" datetime="2017-03-05T08:40:21.000Z"  itemprop="datePublished">2017-03-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/executor.png" alt="比较图" title="">
+                </div>
+                <div class="image-caption">比较图</div>
+            </figure>
+<p>Executor是一个顶层接口，在它里面只声明了一个方法execute(Runnable)，返回值为void，参数为Runnable类型，从字面意思可以理解，就是用来执行传进去的任务的；<br>然后ExecutorService接口继承了Executor接口，并声明了一些方法：submit、invokeAll、invokeAny以及shutDown等；<br>抽象类AbstractExecutorService实现了ExecutorService接口，基本实现了ExecutorService中声明的所有方法；<br>然后ThreadPoolExecutor继承了类AbstractExecutorService。</p>
+<h2 id="线程池的种类"><a href="#线程池的种类" class="headerlink" title="线程池的种类"></a>线程池的种类</h2><p>我们可以通过ThreadPoolExecutor来创建一个线程池。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span>  ThreadPoolExecutor(<span class="keyword">int</span> corePoolSize, <span class="keyword">int</span> maximumPoolSize,</div><div class="line">  <span class="keyword">long</span> keepAliveTime, TimeUnit unit,</div><div class="line">  BlockingQueue&lt;Runnable&gt; workQueue,</div><div class="line">  ThreadFactory threadFactory,</div><div class="line">  RejectedExecutionHandler handler);</div></pre></td></tr></table></figure></p>
+<p>创建一个线程池需要输入几个参数：</p>
+<ul>
+<li><p>corePoolSize（线程池的基本大小）<br>当提交一个任务到线程池时，线程池会创建一个线程来执行任务，即使其他空闲的基本线程能够执行新任务也会创建线程，等到需要执行的任务数大于线程池基本大小时就不再创建。如果调用了线程池的prestartAllCoreThreads方法，线程池会提前创建并启动所有基本线程。</p>
+</li>
+<li><p>runnableTaskQueue（任务队列）<br>用于保存等待执行的任务的阻塞队列。 可以选择以下几个阻塞队列。</p>
+<ul>
+<li>ArrayBlockingQueue：是一个基于数组结构的有界阻塞队列<br>此队列按 FIFO（先进先出）原则对元素进行排序。</li>
+<li>LinkedBlockingQueue：一个基于链表结构的阻塞队列<br>此队列按FIFO （先进先出） 排序元素，吞吐量通常要高于ArrayBlockingQueue。静态工厂方法Executors.newFixedThreadPool()使用了这个队列。</li>
+<li>SynchronousQueue：一个不存储元素的阻塞队列<br>每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQueue，静态工厂方法Executors.newCachedThreadPool使用了这个队列。</li>
+<li>PriorityBlockingQueue：一个具有优先级的无限阻塞队列。</li>
+</ul>
+</li>
+</ul>
+<p>直接提交。工作队列的默认选项是 SynchronousQueue，它将任务直接提交给线程而不保持它们。在此，如果不存在可用于立即运行任务的线程，则试图把任务加入队列将失败，因此会构造一个新的线程。此策略可以避免在<strong>处理可能具有内部依赖性的请求集时出现锁</strong>。直接提交通常要求无界 maximumPoolSizes 以避免拒绝新提交的任务。当命令以超过队列所能处理的平均数连续到达时，此策略允许无界线程具有增长的可能性。</p>
+<p>它将任务直接提交给线程而不保存它们。在此，如果不存在可用于立即运行任务的线程，<br>则试图把任务加入队列将失败，因此会构造一个新的线程。此策略可以避免在处理可能具有内部依赖性的请求集时出现锁。<br>直接提交通常要求无界 maximumPoolSizes 以避免拒绝新提交的任务。<br>当命令以超过队列所能处理的平均数连续到达时，此策略允许无界线程具有增长的可能性。<br>SynchronousQueue线程安全的Queue，可以存放若干任务（但当前只允许有且只有一个任务在等待），其中每个插入操作必须等待另一个线程的对应移除操作，也就是说A任务进入队列，B任务必须等A任务被移除之后才能进入队列，否则执行异常策略。<br>你来一个我扔一个，所以说SynchronousQueue没有任何内部容量。</p>
+<p>比如：核心线程数为2，最大线程数为3；使用SynchronousQueue。<br>当前有2个核心线程在运行，又来了个A任务，两个核心线程没有执行完当前任务，根据如果运行的线程等于或多于 corePoolSize，<br>则 Executor 始终首选将请求加入队列，而不添加新的线程。所以A任务被添加到队列，此时的队列是SynchronousQueue，<br>当前不存在可用于立即运行任务的线程，因此会构造一个新的线程，此时又来了个B任务，两个核心线程还没有执行完。<br>新创建的线程正在执行A任务，所以B任务进入Queue后，最大线程数为3，发现没地方仍了。就只能执行异常策略(RejectedExecutionException)。</p>
+<p>无界队列。使用无界队列（例如，不具有预定义容量的 LinkedBlockingQueue）将导致在所有 corePoolSize 线程都忙时新任务在队列中等待。这样，创建的线程就不会超过 corePoolSize。（因此，maximumPoolSize的值也就无效了。）当每个任务完全独立于其他任务，即任务执行互不影响时，适合于使用无界队列；例如，在 Web页服务器中。这种排队可用于处理瞬态突发请求，当命令以超过队列所能处理的平均数连续到达时，此策略允许无界线程具有增长的可能性。</p>
+<p>有界队列。当使用有限的 maximumPoolSizes时，有界队列（如 ArrayBlockingQueue）<strong>有助于防止资源耗尽，但是可能较难调整和控制</strong>。队列大小和最大池大小可能需要相互折衷：使用大型队列和小型池可以最大限度地降低 CPU 使用率、操作系统资源和上下文切换开销，但是可能导致人工降低吞吐量。如果任务频繁阻塞（例如，如果它们是 I/O边界），则系统可能为超过您许可的更多线程安排时间。使用小型队列通常要求较大的池大小，CPU使用率较高，但是可能遇到不可接受的调度开销，这样也会降低吞吐量。  </p>
+<ul>
+<li><p>maximumPoolSize（线程池最大大小）<br>线程池允许创建的最大线程数。如果队列满了，并且已创建的线程数小于最大线程数，则线程池会再创建新的线程执行任务。值得注意的是如果使用了无界的任务队列这个参数就没什么效果。</p>
+</li>
+<li><p>ThreadFactory<br>用于设置创建线程的工厂，可以通过线程工厂给每个创建出来的线程设置更有意义的名字。</p>
+</li>
+<li><p>RejectedExecutionHandler（饱和策略）<br>当队列和线程池都满了，说明线程池处于饱和状态，那么必须采取一种策略处理提交的新任务。这个策略默认情况下是AbortPolicy，表示无法处理新任务时抛出异常。以下是JDK1.5提供的四种策略。</p>
+<ul>
+<li>AbortPolicy：直接抛出异常。</li>
+<li>CallerRunsPolicy：只用调用者所在线程来运行任务。</li>
+<li>DiscardOldestPolicy：丢弃队列里最近的一个任务，并执行当前任务。</li>
+<li>DiscardPolicy：不处理，丢弃掉。<br>当然也可以根据应用场景需要来实现RejectedExecutionHandler接口自定义策略。如记录日志或持久化不能处理的任务。</li>
+</ul>
+</li>
+<li><p>keepAliveTime（线程活动保持时间）<br>线程池的工作线程空闲后，保持存活的时间。所以如果任务很多，并且每个任务执行的时间比较短，可以调大这个时间，提高线程的利用率。</p>
+</li>
+<li><p>TimeUnit（线程活动保持时间的单位）<br>可选的单位有天（DAYS），小时（HOURS），分钟（MINUTES），毫秒(MILLISECONDS)，微秒(MICROSECONDS, 千分之一毫秒)和毫微秒(NANOSECONDS, 千分之一微秒)。</p>
+</li>
+</ul>
+<p>线程池可以分为以下几个种类</p>
+<ul>
+<li><p>固定大小线程池newFixedThreadPool<br>超过最大数量就会加入到LinkedBlockingQueue，这个队列的数量是没有限制的，因此如果一直插入就会消耗内存</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</div><div class="line">                               <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                               <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>newSingleThreadExecutor<br>创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">(ThreadFactory threadFactory)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService</div><div class="line">        (<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>,</div><div class="line">                                <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                                <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;(),</div><div class="line">                                threadFactory));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>newCachedThreadPool<br>创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。<br>CachedThreadPool中线程实例默认超时时间为60s，超过这个时间，线程实例停止并被移出CachedThreadPool，适用于生存期短、异步的线程任务。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</div><div class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</div><div class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>newScheduledThreadPool<br>创建一个定长线程池，支持定时及周期性任务执行。</p>
+</li>
+</ul>
+<h2 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h2><p>当创建线程池后，初始时，线程池处于RUNNING状态；<br>如果调用了shutdown()方法，则线程池处于SHUTDOWN状态，此时线程池不能够接受新的任务，它会等待所有任务执行完毕；<br>如果调用了shutdownNow()方法，则线程池处于STOP状态，此时线程池不能接受新的任务，并且会去尝试终止正在执行的任务；<br>当线程池处于SHUTDOWN或STOP状态，并且所有工作线程已经销毁，任务缓存队列已经清空或执行结束后，线程池被设置为TERMINATED状态</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//任务缓存队列，用来存放等待执行的任务</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> BlockingQueue&lt;Runnable&gt; workQueue;  </div><div class="line"><span class="comment">//线程池的主要状态锁，对线程池状态（比如线程池大小、runState等）的改变都要使用这个锁            </span></div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock mainLock = <span class="keyword">new</span> ReentrantLock();</div><div class="line"><span class="comment">//用来存放工作集</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> HashSet&lt;Worker&gt; workers = <span class="keyword">new</span> HashSet&lt;Worker&gt;();  </div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">long</span>  keepAliveTime;    <span class="comment">//线程存货时间   </span></div><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> allowCoreThreadTimeOut;   <span class="comment">//是否允许为核心线程设置存活时间</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span>   corePoolSize;     <span class="comment">//核心池的大小（即线程池中的线程数目大于这个参数时，提交的任务会被放进任务缓存队列）</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span>   maximumPoolSize;   <span class="comment">//线程池最大能容忍的线程数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span>   poolSize;       <span class="comment">//线程池中当前的线程数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> RejectedExecutionHandler handler; <span class="comment">//任务拒绝策略</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> ThreadFactory threadFactory;   <span class="comment">//线程工厂，用来创建线程</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> largestPoolSize;   <span class="comment">//用来记录线程池中曾经出现过的最大线程数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">long</span> completedTaskCount;   <span class="comment">//用来记录已经执行完毕的任务个数</span></div></pre></td></tr></table></figure>
+<h3 id="执行规则"><a href="#执行规则" class="headerlink" title="执行规则"></a>执行规则</h3><p>这规则主要体现在execute方法中，里面有很多if语句的判断：</p>
+<p>1）如果当前线程池中的线程数目小于corePoolSize，则每来一个任务，就会创建一个线程去执行这个任务；</p>
+<p>2）如果当前线程池中的线程数目&gt;=corePoolSize，则每来一个任务，会尝试将其添加到任务缓存队列当中，<br>若添加成功，则该任务会等待空闲线程将其取出去执行；若添加失败（一般来说是任务缓存队列已满），则会尝试创建新的线程去执行这个任务；</p>
+<p>3）如果当前线程池中的线程数目达到maximumPoolSize，则会采取任务拒绝策略进行处理；</p>
+<p>4）如果线程池中的线程数量大于 corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止，直至线程池中的线程数目不大于corePoolSize；</p>
+<p>5）如果允许为核心池中的线程设置存活时间，那么核心池中的线程空闲时间超过keepAliveTime，线程也会被终止。</p>
+<p>同时线程池中的线程主要靠workers这个set来管理线程，添加删除等操作都需要获得锁mainLock。<br>提交的线程都是被封装后的<code>Worker</code>，其中有一个<code>runWorker()</code>的方法就是线程执行的过程，里面会调用<code>afterExecute</code>等方法，实现自己的策略。</p>
+<p><strong>当前线程运行完后，再到workQueue阻塞队列中去获取一个task出来，继续运行，这样就保证了线程池中有一定的线程一直在运行；</strong><br>此时若跳出了while循环，只有workQueue队列为空才会出现或出现了类似于shutdown的操作，自然运行队列会减少1，当再有新的线程进来的时候，就又开始向worker里面放数据了，这样以此类推，实现了线程池的功能。</p>
+<p>同时需要注意的是在线程池中实现线程的使用run方法启动启动线程，因为run方法直接调用不会启动新的线程，也是因为这样，导致了你无法获取到你自己的线程的状态，因为线程池是直接调用的run方法，而不是start方法来运行。</p>
+<p>这里有一个非常巧妙的设计方式，假如我们来设计线程池，可能会有一个任务分派线程，当发现有线程空闲时，就从任务缓存队列中取一个任务交给空闲线程执行。但是在这里，并没有采用这样的方式，因为这样会要额外地对任务分派线程进行管理，无形地会增加难度和复杂度，这里直接让执行完任务的线程去任务缓存队列里面取任务来执行。</p>
+<h3 id="线程池监控"><a href="#线程池监控" class="headerlink" title="线程池监控"></a>线程池监控</h3><p>通过线程池提供的参数进行监控。线程池里有一些属性在监控线程池的时候可以使用</p>
+<p>taskCount：线程池需要执行的任务数量。<br>completedTaskCount：线程池在运行过程中已完成的任务数量。小于或等于taskCount。<br>largestPoolSize：线程池曾经创建过的最大线程数量。通过这个数据可以知道线程池是否满过。如等于线程池的最大大小，则表示线程池曾经满了。<br>getPoolSize:线程池的线程数量。如果线程池不销毁的话，池里的线程不会自动销毁，所以这个大小只增不减。<br>getActiveCount：获取活动的线程数。</p>
+<h1 id="扩展和增强线程池"><a href="#扩展和增强线程池" class="headerlink" title="扩展和增强线程池"></a>扩展和增强线程池</h1><p>在线程池中，如果一个线程抛异常，并不会影响其他线程的执行，这个线程会被停止，同时该线程池也不会报错，只是结果输出的时候少一个。<br>这时候可以使用future.get()每一个结果。这样就能找出错误来。<br>或者可以使用回调接口增强线程池。</p>
+<h2 id="回调接口"><a href="#回调接口" class="headerlink" title="回调接口"></a>回调接口</h2><ul>
+<li>beforeExecute</li>
+<li>afterExecute</li>
+<li>terminated</li>
+</ul>
+<p>通过继承线程池并重写线程池的beforeExecute，afterExecute和terminated方法，我们可以在任务执行前，执行后和线程池关闭前干一些事情。<br>如监控任务的平均执行时间，最大执行时间和最小执行时间等。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExtendedExecutor</span> <span class="keyword">extends</span> <span class="title">ThreadPoolExecutor</span> </span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">afterExecute</span><span class="params">(Runnable r, Throwable t)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.afterExecute(r, t);</div><div class="line">        <span class="keyword">if</span> (t == <span class="keyword">null</span> &amp;&amp; r <span class="keyword">instanceof</span> Future&lt;?&gt;) &#123;</div><div class="line">          <span class="keyword">try</span> &#123;</div><div class="line">            Object result = ((Future&lt;?&gt;) r).get();</div><div class="line">          &#125; <span class="keyword">catch</span> (CancellationException ce) &#123;</div><div class="line">              t = ce;</div><div class="line">          &#125; <span class="keyword">catch</span> (ExecutionException ee) &#123;</div><div class="line">              t = ee.getCause();</div><div class="line">          &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</div><div class="line">              Thread.currentThread().interrupt(); <span class="comment">// ignore/reset</span></div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (t != <span class="keyword">null</span>)</div><div class="line">          System.out.println(t);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="拒绝策略"><a href="#拒绝策略" class="headerlink" title="拒绝策略"></a>拒绝策略</h2><h2 id="自定义ThreadFactory"><a href="#自定义ThreadFactory" class="headerlink" title="自定义ThreadFactory"></a>自定义ThreadFactory</h2><p>使用<code>new ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,
+           BlockingQueue&lt;Runnable&gt; workQueue,ThreadFactory threadFactory);</code>传入一个ThreadFactory，实现方法<br>比如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ExecutorService ctp =  Executors.newCachedThreadPool(<span class="keyword">new</span> ThreadFactory() &#123;  </div><div class="line">  <span class="keyword">private</span> AtomicInteger count = <span class="keyword">new</span> AtomicInteger();  </div><div class="line">  <span class="function"><span class="keyword">public</span> Thread <span class="title">newThread</span><span class="params">(Runnable r)</span> </span>&#123;  </div><div class="line">      <span class="keyword">int</span> c = count.incrementAndGet();  </div><div class="line">      System.out.println(<span class="string">"create no "</span> + c + <span class="string">" Threads"</span>);  </div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> WorkThread(r,count);  </div><div class="line"></div><div class="line">      &#125;  </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>ThreadFactory是一个接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ThreadFactory</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Constructs a new &#123;<span class="doctag">@code</span> Thread&#125;.  Implementations may also initialize</div><div class="line">     * priority, name, daemon status, &#123;<span class="doctag">@code</span> ThreadGroup&#125;, etc.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> r a runnable to be executed by new thread instance</div><div class="line">     * <span class="doctag">@return</span> constructed thread, or &#123;<span class="doctag">@code</span> null&#125; if the request to</div><div class="line">     *         create a thread is rejected</div><div class="line">     */</div><div class="line">    <span class="function">Thread <span class="title">newThread</span><span class="params">(Runnable r)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="线程池数量的选择"><a href="#线程池数量的选择" class="headerlink" title="线程池数量的选择"></a>线程池数量的选择</h2><p>线程池的大小需要考虑cpu数量、内存大小等因素。<br>Ncpu = cpu数量<br>Ucpu = 目标cpu的使用率，0&lt;=Ucpu&lt;=1<br>W/C = 等待时间与计算时间的比率<br>为了保持处理器达到期望的使用率，最优的池大小等于Nthread = Ncpu * Ucpu * (1 + W\/C)<br>我们可以通过<code>Runtime.getRuntime().availableProcessors()</code>方法获得当前设备的CPU个数。</p>
+<p>要想合理的配置线程池，就必须首先分析任务特性，可以从以下几个角度来进行分析：<br>任务的性质：CPU密集型任务，IO密集型任务和混合型任务。<br>任务的优先级：高，中和低。<br>任务的执行时间：长，中和短。<br>任务的依赖性：是否依赖其他系统资源，如数据库连接。</p>
+<p>任务性质不同的任务可以用不同规模的线程池分开处理。</p>
+<ul>
+<li>CPU密集型任务配置尽可能小的线程，如配置Ncpu+1个线程的线程池。</li>
+<li>IO密集型任务则由于线程并不是一直在执行任务，则配置尽可能多的线程，如2*Ncpu。</li>
+<li>混合型的任务，如果可以拆分，则将其拆分成一个CPU密集型任务和一个IO密集型任务，只要这两个任务执行的时间相差不是太大，那么分解后执行的吞吐率要高于串行执行的吞吐率，如果这两个任务执行时间相差太大，则没必要进行分解。</li>
+<li>优先级不同的任务可以使用优先级队列PriorityBlockingQueue来处理。它可以让优先级高的任务先得到执行，需要注意的是如果一直有优先级高的任务提交到队列里，那么优先级低的任务可能永远不能执行。</li>
+<li>执行时间不同的任务可以交给不同规模的线程池来处理，或者也可以使用优先级队列，让执行时间短的任务先执行。</li>
+<li>依赖数据库连接池的任务，因为线程提交SQL后需要等待数据库返回结果，如果等待的时间越长CPU空闲时间就越长，那么线程数应该设置越大，这样才能更好的利用CPU。</li>
+</ul>
+<p>建议使用有界队列，有界队列能增加系统的稳定性和预警能力，可以根据需要设大一点，比如几千。有一次我们组使用的后台任务线程池的队列和线程池全满了，不断的抛出抛弃任务的异常，通过排查发现是数据库出现了问题，导致执行SQL变得非常缓慢，因为后台任务线程池里的任务全是需要向数据库查询和插入数据的，所以导致线程池里的工作线程全部阻塞住，任务积压在线程池里。如果当时我们设置成无界队列，线程池的队列就会越来越多，有可能会撑满内存，导致整个系统不可用，而不只是后台任务出现问题。当然我们的系统所有的任务是用的单独的服务器部署的，而我们使用不同规模的线程池跑不同类型的任务，但是出现这样问题时也会影响到其他任务。<br><a href="http://www.infoq.com/cn/articles/java-threadPool" target="_blank" rel="external">http://www.infoq.com/cn/articles/java-threadPool</a></p>
+<h1 id="ForkJoin"><a href="#ForkJoin" class="headerlink" title="ForkJoin"></a>ForkJoin</h1><p>其思想是分而治之<br>底层使用双端队列(就是数组)实现，使用的是<code>unsafe</code>中的无锁CAS机制，所以有很锁算地址的操作<br>同时将很多变量放在一个int中表示，这样可以保证数值之间的一致性，另一个方面就是CAS操作仅仅是面向一个变量的，多个变量是不支持CAS操作的<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/forkjoin.png" alt="比较图" title="">
+                </div>
+                <div class="image-caption">比较图</div>
+            </figure></p>
+<h2 id="工作窃取（work-stealing）"><a href="#工作窃取（work-stealing）" class="headerlink" title="工作窃取（work-stealing）"></a>工作窃取（work-stealing）</h2><p>工作窃取算法是指某个线程从其他队列里窃取任务来执行。工作窃取的运行流程<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/worksteal.png" alt="比较图" title="">
+                </div>
+                <div class="image-caption">比较图</div>
+            </figure><br>那么为什么需要使用工作窃取算法呢？假如我们需要做一个比较大的任务，我们可以把这个任务分割为若干互不依赖的子任务，为了减少线程间的竞争，于是把这些子任务分别放到不同的队列里，并为每个队列创建一个单独的线程来执行队列里的任务，线程和队列一一对应，比如A线程负责处理A队列里的任务。但是有的线程会先把自己队列里的任务干完，而其他线程对应的队列里还有任务等待处理。干完活的线程与其等着，不如去帮其他线程干活，于是它就去其他线程的队列里窃取一个任务来执行。而在这时它们会访问同一个队列，所以为了减少窃取任务线程和被窃取任务线程之间的竞争，通常会使用双端队列，被窃取任务线程永远从双端队列的头部拿任务执行，而窃取任务的线程永远从双端队列的尾部拿任务执行。</p>
+<p>工作窃取算法的优点是充分利用线程进行并行计算，并减少了线程间的竞争，其缺点是在某些情况下还是存在竞争，比如双端队列里只有一个任务时。并且消耗了更多的系统资源，比如创建多个线程和多个双端队列。</p>
+<h2 id="ForkJoin计算过程"><a href="#ForkJoin计算过程" class="headerlink" title="ForkJoin计算过程"></a>ForkJoin计算过程</h2><p>第一步分割任务。首先我们需要有一个fork类来把大任务分割成子任务，有可能子任务还是很大，所以还需要不停的分割，直到分割出的子任务足够小。</p>
+<p>第二步执行任务并合并结果。分割的子任务分别放在双端队列里，然后几个启动线程分别从双端队列里获取任务执行。子任务执行完的结果都统一放在一个队列里，启动一个线程从队列里拿数据，然后合并这些数据。</p>
+<p>Fork/Join使用两个类来完成以上两件事情：</p>
+<ul>
+<li><p>ForkJoinTask<br>我们要使用ForkJoin框架，必须首先创建一个ForkJoin任务。它提供在任务中执行fork()和join()操作的机制，通常情况下我们不需要直接继承ForkJoinTask类，而只需要继承它的子类，Fork/Join框架提供了以下两个子类：</p>
+<ul>
+<li>RecursiveAction：用于没有返回结果的任务。</li>
+<li>RecursiveTask ：用于有返回结果的任务。</li>
+</ul>
+</li>
+<li><p>ForkJoinPool<br>ForkJoinTask需要通过ForkJoinPool来执行，任务分割出的子任务会添加到当前工作线程所维护的双端队列中，进入队列的头部。当一个工作线程的队列里暂时没有任务时，它会随机从其他工作线程的队列的尾部获取一个任务。</p>
+</li>
+</ul>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForkJoinDemo</span> <span class="keyword">extends</span> <span class="title">RecursiveTask</span>&lt;<span class="title">Long</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THREADHOLD = <span class="number">10000</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> start;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> end;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ForkJoinDemo</span><span class="params">(<span class="keyword">long</span> start, <span class="keyword">long</span> end)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.start = start;</div><div class="line">        <span class="keyword">this</span>.end = end;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Long <span class="title">compute</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span> sum = <span class="number">0</span>;</div><div class="line">        <span class="keyword">boolean</span> canCompute = (end - start) &lt; THREADHOLD;</div><div class="line">        <span class="comment">//分为可以执行和不能执行</span></div><div class="line">        <span class="keyword">if</span> (canCompute) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">long</span> i = start; i &lt; end; i++) &#123;</div><div class="line">                sum += i;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">//分成100个小任务</span></div><div class="line">            <span class="keyword">long</span> step = (start + end) / <span class="number">100</span>;</div><div class="line">            ArrayList&lt;ForkJoinDemo&gt; subTasks = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">            <span class="keyword">long</span> pos = start;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</div><div class="line">                <span class="keyword">long</span> lastOne = pos + step;</div><div class="line">                <span class="comment">//最后一个任务不够100</span></div><div class="line">                <span class="keyword">if</span> (lastOne &gt; end) &#123;</div><div class="line">                    lastOne = end;</div><div class="line">                &#125;</div><div class="line">                ForkJoinDemo subTask = <span class="keyword">new</span> ForkJoinDemo(pos, lastOne);</div><div class="line">                pos += step+<span class="number">1</span>;</div><div class="line">                subTasks.add(subTask);</div><div class="line">                <span class="comment">//提交到大任务</span></div><div class="line">                subTask.fork();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span> (ForkJoinDemo t : subTasks) &#123;</div><div class="line">                <span class="comment">//等待</span></div><div class="line">                sum += t.join();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ForkJoinPool forkJoinPool = <span class="keyword">new</span> ForkJoinPool();</div><div class="line">        ForkJoinDemo task = <span class="keyword">new</span> ForkJoinDemo(<span class="number">0</span>, <span class="number">200000L</span>);</div><div class="line"></div><div class="line">        ForkJoinTask&lt;Long&gt; result = forkJoinPool.submit(task);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//会抛出异常</span></div><div class="line">            <span class="keyword">long</span> res = result.get();</div><div class="line">            System.out.println(<span class="string">"sum = "</span> + res);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="http://www.infoq.com/cn/articles/fork-join-introduction" target="_blank" rel="external">http://www.infoq.com/cn/articles/fork-join-introduction</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-25T02:31:04.000Z" itemprop="dateUpdated">2017年4月25日 10:31</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/05/juc之线程池/" target="_blank" rel="external">http://duyao.github.io/2017/03/05/juc之线程池/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/">jvm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/05/juc之线程池/&title=《juc之线程池》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/05/juc之线程池/&title=《juc之线程池》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/05/juc之线程池/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《juc之线程池》 — Du Yao's blog&url=http://duyao.github.io/2017/03/05/juc之线程池/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/05/juc之线程池/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/06/138-Copy-List-with-Random-Pointer/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">138. Copy List with Random Pointer</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/02/网络知识点总结/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">网络知识点总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="juc之线程池" data-title="juc之线程池" data-url="http://duyao.github.io/2017/03/05/juc之线程池/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/05/juc之线程池/&title=《juc之线程池》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/05/juc之线程池/&title=《juc之线程池》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/05/juc之线程池/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《juc之线程池》 — Du Yao's blog&url=http://duyao.github.io/2017/03/05/juc之线程池/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/05/juc之线程池/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/05/juc之线程池/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

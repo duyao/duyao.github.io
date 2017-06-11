@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>问答-登录注册 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="wenda">
+    <meta name="description" content="技术要点注册登录 密码不是原密码加上salt，再MD5加密存入数据库  TokenToken是一个任意字符串。只有服务器和微信后台知道这个字符串，token成了这两台服务器之间的密钥，可以防止恶意请求，Token机制在服务端不需要存储session信息有了token，就可以实现免密码登录对Token认证机制注意的地方：  一个Token就是一些信息的集合； 在Token中包含足够多的信息，以便在后">
+<meta name="keywords" content="wenda">
+<meta property="og:type" content="article">
+<meta property="og:title" content="问答-登录注册">
+<meta property="og:url" content="http://duyao.github.io/2017/02/17/问答-登录注册/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="技术要点注册登录 密码不是原密码加上salt，再MD5加密存入数据库  TokenToken是一个任意字符串。只有服务器和微信后台知道这个字符串，token成了这两台服务器之间的密钥，可以防止恶意请求，Token机制在服务端不需要存储session信息有了token，就可以实现免密码登录对Token认证机制注意的地方：  一个Token就是一些信息的集合； 在Token中包含足够多的信息，以便在后">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/threadLocalMap.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/handlerInterceptor.png">
+<meta property="og:updated_time" content="2017-04-11T01:24:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="问答-登录注册">
+<meta name="twitter:description" content="技术要点注册登录 密码不是原密码加上salt，再MD5加密存入数据库  TokenToken是一个任意字符串。只有服务器和微信后台知道这个字符串，token成了这两台服务器之间的密钥，可以防止恶意请求，Token机制在服务端不需要存储session信息有了token，就可以实现免密码登录对Token认证机制注意的地方：  一个Token就是一些信息的集合； 在Token中包含足够多的信息，以便在后">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/threadLocalMap.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">问答-登录注册</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">问答-登录注册</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-17T12:48:25.000Z" itemprop="datePublished" class="page-time">
+  2017-02-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#技术要点"><span class="post-toc-number">1.</span> <span class="post-toc-text">技术要点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注册登录"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">注册登录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Token"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Token</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#token结构"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">token结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何保存token"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">如何保存token</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ThreadLocal"><span class="post-toc-number">1.2.2.1.</span> <span class="post-toc-text">ThreadLocal</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#拦截器Interceptor"><span class="post-toc-number">1.2.2.2.</span> <span class="post-toc-text">拦截器Interceptor</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#未登录跳转"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">未登录跳转</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#邮件注册"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">邮件注册</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#技术细节"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">技术细节</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单服务器"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">简单服务器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Http-Method"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">Http Method</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#velocity相关"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">velocity相关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#response-和-request"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">response 和 request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重定向和error"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">重定向和error</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IoC"><span class="post-toc-number">1.4.6.</span> <span class="post-toc-text">IoC</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AOP"><span class="post-toc-number">1.4.7.</span> <span class="post-toc-text">AOP</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-问答-登录注册"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">问答-登录注册</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年02月17日 20:48" datetime="2017-02-17T12:48:25.000Z"  itemprop="datePublished">2017-02-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="技术要点"><a href="#技术要点" class="headerlink" title="技术要点"></a>技术要点</h1><h2 id="注册登录"><a href="#注册登录" class="headerlink" title="注册登录"></a>注册登录</h2><ul>
+<li>密码不是原密码加上salt，再MD5加密存入数据库</li>
+</ul>
+<h2 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h2><p>Token是一个任意字符串。只有服务器和微信后台知道这个字符串，token成了这两台服务器之间的密钥，可以防止恶意请求，<br>Token机制在服务端不需要存储session信息<br>有了token，就可以实现免密码登录<br>对Token认证机制注意的地方：</p>
+<ul>
+<li>一个Token就是一些信息的集合；</li>
+<li>在Token中包含足够多的信息，以便在后续请求中减少查询数据库的几率；</li>
+<li>服务端需要对cookie和HTTP Authrorization Header进行Token信息的检查；</li>
+<li>基于上一点，你可以用一套token认证代码来面对浏览器类客户端和非浏览器类客户端</li>
+</ul>
+<h3 id="token结构"><a href="#token结构" class="headerlink" title="token结构"></a>token结构</h3><ul>
+<li>每个用户设置一个token，服务器端token关联userid</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> userId;</div><div class="line"><span class="keyword">private</span> Date expired;<span class="comment">//date.setTime(date.getTime() + 1000*3600*24);</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> status;<span class="comment">// 0有效，1无效</span></div><div class="line"><span class="keyword">private</span> String ticket;<span class="comment">//uuid</span></div></pre></td></tr></table></figure>
+<p>服务器端还有一张表，用来记录token，这个思想类似于session共享。<br>可应用在免密码登录的场景中，电脑登录了网站，现在用手机扫码登录网站，扫码的过程就是讲这个用户的token从数据库取出，然后传递给手机端，这样无需密码登陆了。<br>token存在数据中，这样所有的服务就可以获取到，再比如登录淘宝就能直接登录支付宝</p>
+<h3 id="如何保存token"><a href="#如何保存token" class="headerlink" title="如何保存token"></a>如何保存token</h3><ul>
+<li><p>对于浏览器端<br>只需要保存在cookie中，用户登录的时候就把token与用户关联起来，同时使用HttpServletResponse设置cookie</p>
+</li>
+<li><p>对于服务器端<br>首先需要数据库保存各种token<br>另一方面，由于token把用户关联起来了，因此我们在得到token的同时也可以得到该用户的信息。<br>这个用户信息在网页间请求是需要的，因此服务器应该保存所有在线的用户信息，这就用到了ThreadLocal<br>同时这个用户信息在网页间请求是需要验证的，因此需要拦截器interceptor</p>
+</li>
+</ul>
+<h4 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h4><p>ThreadLocal本意是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">This class provides thread-local variables.</div><div class="line">These variables differ from their normal counterparts in that each thread that accesses one (via its &#123;@code get&#125; or &#123;@code set&#125; method) has its own, independently initialized copy of the variable.  </div><div class="line">&#123;@code ThreadLocal&#125; instances are typically private static fields in classes that wish to associate state with a thread (e.g.,a user ID or Transaction ID)</div></pre></td></tr></table></figure></p>
+<p>ThreadLocal类用来提供线程内部的局部变量。这些变量在多线程环境下访问(通过get或set方法访问)时能保证各个线程里的变量相对独立于其他线程内的变量，ThreadLocal实例通常来说都是private static类型.<br>ThreadLocal的主要应用场景为按线程多实例（每个线程对应一个实例）的对象的访问，并且这个对象很多地方都要用到。例如：同一个网站登录用户，每个用户服务器会为其开一个线程，每个线程中创建一个ThreadLocal，里面存用户基本信息等，在很多页面跳转时，会显示用户信息或者得到用户的一些信息等频繁操作，这样多线程之间并没有联系而且当前线程也可以及时获取想要的数据。</p>
+<ul>
+<li>实现原理</li>
+</ul>
+<p>ThreadLocal可以看做是一个容器，容器里面存放着属于当前线程的变量。ThreadLocal类提供了四个对外开放的接口方法，这也是用户操作ThreadLocal类的基本方法：<br>(1) void set(Object value)设置当前线程的线程局部变量的值。<br>值得注意的是，set方法中设置的值应该是new出来的对象，而不是在外面new好的对象指针！<br>(2) public Object get()该方法返回当前线程所对应的线程局部变量。<br>(3) public void remove()将当前线程局部变量的值删除，目的是为了减少内存的占用，该方法是JDK 5.0新增的方法。需要指出的是，当线程结束后，对应该线程的局部变量将自动被垃圾回收，所以显式调用该方法清除线程的局部变量并不是必须的操作，但它可以加快内存回收的速度。<br>(4) protected Object initialValue()返回该线程局部变量的初始值，该方法是一个protected的方法，显然是为了让子类覆盖而设计的。这个方法是一个延迟调用方法，在线程第1次调用get()或set(Object)时才执行，并且仅执行1次，ThreadLocal中的缺省实现直接返回一个null。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> Returns the value in the current thread's copy of this</div><div class="line"> thread-local variable.  If the variable has no value for thecurrent thread, it is first initialized to the value returned by an invocation of the &#123;<span class="doctag">@link</span> #initialValue&#125; method.</div><div class="line">  <span class="doctag">@return</span> the current thread's value of this thread-local</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</div><div class="line">    Thread t = Thread.currentThread();<span class="comment">//当前线程</span></div><div class="line">    ThreadLocalMap map = getMap(t);<span class="comment">//获取当前线程对应的ThreadLocalMap</span></div><div class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</div><div class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);<span class="comment">//获取对应ThreadLocal的变量值</span></div><div class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">            T result = (T)e.value;</div><div class="line">            <span class="keyword">return</span> result;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> setInitialValue();<span class="comment">//若当前线程还未创建ThreadLocalMap，则返回调用此方法并在其中调用createMap方法进行创建并返回初始值。</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//设置变量的值</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</div><div class="line">   Thread t = Thread.currentThread();</div><div class="line">   ThreadLocalMap map = getMap(t);</div><div class="line">   <span class="keyword">if</span> (map != <span class="keyword">null</span>)</div><div class="line">       map.set(<span class="keyword">this</span>, value);</div><div class="line">   <span class="keyword">else</span></div><div class="line">       createMap(t, value);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">private</span> T <span class="title">setInitialValue</span><span class="params">()</span> </span>&#123;</div><div class="line">   T value = initialValue();</div><div class="line">   Thread t = Thread.currentThread();</div><div class="line">   ThreadLocalMap map = getMap(t);</div><div class="line">   <span class="keyword">if</span> (map != <span class="keyword">null</span>)</div><div class="line">       map.set(<span class="keyword">this</span>, value);</div><div class="line">   <span class="keyword">else</span></div><div class="line">       createMap(t, value);</div><div class="line">   <span class="keyword">return</span> value;</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">为当前线程创建一个ThreadLocalMap的threadlocals,并将第一个值存入到当前map中</div><div class="line"><span class="doctag">@param</span> t the current thread</div><div class="line"><span class="doctag">@param</span> firstValue value for the initial entry of the map</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">createMap</span><span class="params">(Thread t, T firstValue)</span> </span>&#123;</div><div class="line">    t.threadLocals = <span class="keyword">new</span> ThreadLocalMap(<span class="keyword">this</span>, firstValue);</div><div class="line">&#125;</div><div class="line"><span class="comment">//删除当前线程中ThreadLocalMap对应的ThreadLocal</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</div><div class="line">       ThreadLocalMap m = getMap(Thread.currentThread());</div><div class="line">       <span class="keyword">if</span> (m != <span class="keyword">null</span>)</div><div class="line">           m.remove(<span class="keyword">this</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从线程Thread的角度来看，每个线程内部都会持有一个对ThreadLocalMap实例的引用ThreadLocals，ThreadLocalMap实例相当于线程的局部变量空间，存储着线程各自的数据。<br>其实在ThreadLocal类中有一个静态内部类ThreadLocalMap(其类似于Map)，用键值对的形式存储每一个线程的变量副本，<br>ThreadLocalMap中元素的key为当前ThreadLocal对象，而value对应线程的变量副本，每个线程可能存在多个ThreadLocal。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/threadLocalMap.png" alt="ThredLocal" title="">
+                </div>
+                <div class="image-caption">ThredLocal</div>
+            </figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>&#123;</div><div class="line">  <span class="comment">//map中的每个节点Entry,其键key是ThreadLocal并且还是弱引用，这也导致了后续会产生内存泄漏问题的原因。</span></div><div class="line"> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;</div><div class="line">           Object value;</div><div class="line">           Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</div><div class="line">               <span class="keyword">super</span>(k);</div><div class="line">               value = v;</div><div class="line">   &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 初始化容量为16，以为对其扩充也必须是2的指数</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INITIAL_CAPACITY = <span class="number">16</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 真正用于存储线程的每个ThreadLocal的数组，将ThreadLocal和其对应的值包装为一个Entry。</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> Entry[] table;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">///....其他的方法和操作都和map的类似</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="http://www.iteye.com/topic/1141743" target="_blank" rel="external">http://www.iteye.com/topic/1141743</a><br><a href="http://www.jianshu.com/p/33c5579ef44f" target="_blank" rel="external">http://www.jianshu.com/p/33c5579ef44f</a></p>
+<ul>
+<li>内存泄漏</li>
+</ul>
+<p>每个thread中都存在一个map, map的类型是<code>ThreadLocal.ThreadLocalMap</code>.<br>Map中的key为一个threadlocal实例. 这个Map的确使用了弱引用,不过弱引用只是针对key. 每个key都弱引用指向threadlocal. 当把threadlocal实例置为null以后,没有任何强引用指向threadlocal实例,所以threadlocal将会被gc回收.<br>但是,我们的value却不能回收,因为存在一条从current thread连接过来的强引用. 只有当前thread结束以后, current thread就不会存在栈中,强引用断开, Current Thread, Map, value将全部被GC回收.</p>
+<p><a href="http://www.cnblogs.com/onlywujun/p/3524675.html" target="_blank" rel="external">http://www.cnblogs.com/onlywujun/p/3524675.html</a><br><a href="http://www.importnew.com/22039.html" target="_blank" rel="external">http://www.importnew.com/22039.html</a><br><a href="https://my.oschina.net/xianggao/blog/392440?fromerr=CLZtT4xC" target="_blank" rel="external">https://my.oschina.net/xianggao/blog/392440?fromerr=CLZtT4xC</a></p>
+<ul>
+<li>实现<br>HostHolder通过aop可以在服务器端任何一个位置使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">public class HostHolder &#123;</div><div class="line">    private static ThreadLocal&lt;User&gt; users = new ThreadLocal&lt;User&gt;();</div><div class="line"></div><div class="line">    public User getUser() &#123;</div><div class="line">        return users.get();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setUser(User user) &#123;</div><div class="line">        users.set(user);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void clear() &#123;</div><div class="line">        users.remove();;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="拦截器Interceptor"><a href="#拦截器Interceptor" class="headerlink" title="拦截器Interceptor"></a>拦截器Interceptor</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/handlerInterceptor.png" alt="HandlerInterceptor" title="">
+                </div>
+                <div class="image-caption">HandlerInterceptor</div>
+            </figure>
+<p>一般情况下，一个拦截器功能</p>
+<ul>
+<li>注册拦截器<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">public class WendaWebConfiguration extends WebMvcConfigurerAdapter &#123;</div><div class="line">    @Autowired</div><div class="line">    PassportInterceptor passportInterceptor;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    LoginRequiredInterceptor loginRequiredInterceptor;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</div><div class="line">      //拦截器有顺序问题，注意先后</div><div class="line">        registry.addInterceptor(passportInterceptor);</div><div class="line">        //第二个拦截器</div><div class="line">        registry.addInterceptor(loginRequiredInterceptor).addPathPatterns(&quot;/user/*&quot;);</div><div class="line">        super.addInterceptors(registry);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="未登录跳转"><a href="#未登录跳转" class="headerlink" title="未登录跳转"></a>未登录跳转</h3><p>再注册一个拦截器，访问<code>/user/ *</code>这样的页面，就回执行该拦截器<br><code>registry.addInterceptor(loginRequiredInterceptor).addPathPatterns(&quot;/user/ *&quot;);</code><br>同时，能返回原来要访问的网址，在request中添加一个参数，记录当前访问的页面，然后进拦截器跳转</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class LoginRequredInterceptor implements HandlerInterceptor &#123;</div><div class="line">    @Autowired</div><div class="line">    HostHolder hostHolder;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception &#123;</div><div class="line">        if (hostHolder.getUser() == null) &#123;</div><div class="line">          //next字段记录该值</div><div class="line">            httpServletResponse.sendRedirect(&quot;/reglogin?next=&quot; + httpServletRequest.getRequestURI());</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同样地功能还有，查看付费内容等</p>
+<h2 id="邮件注册"><a href="#邮件注册" class="headerlink" title="邮件注册"></a>邮件注册</h2><h2 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h2><h3 id="简单服务器"><a href="#简单服务器" class="headerlink" title="简单服务器"></a>简单服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//访问的网址</div><div class="line">@RequestMapping(path = &#123;&quot;/&quot;, &quot;/index&quot;&#125;)</div><div class="line">@ResponseBody</div><div class="line">public String Index() &#123;</div><div class="line">    return &quot;hello, world!&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@RequestMapping(path = &#123;&quot;/profile/&#123;groupId&#125;/&#123;userId&#125;&quot;&#125;)</div><div class="line">@ResponseBody</div><div class="line">public String Profile(@PathVariable(&quot;userId&quot;) int userId,</div><div class="line">                      @PathVariable(&quot;groupId&quot;) String groupId,</div><div class="line">                      @RequestParam(&quot;key&quot;) int key,</div><div class="line">                      //看文档时，函数名字是填写的字段的名称，这种默认字段可以用在查询某个值是没有指定页数，可以默认为第一页</div><div class="line">                      @RequestParam(name = &quot;value&quot;, defaultValue = &quot;default&quot; , required = false) String value) &#123;</div><div class="line">    return String.format(&quot;profile: groupId - %s, userId - %d , key = %d, value = %s&quot;, groupId , userId ,key, value);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Http-Method"><a href="#Http-Method" class="headerlink" title="Http Method"></a>Http Method</h3><ul>
+<li>get 获取接口信息</li>
+<li>post 提交数据到服务器</li>
+<li>put 支持幂等性的POST，就是提交很多次post结果都一样，只产生一次效果</li>
+<li>delete 删除服务器的资源</li>
+<li>head 紧急查看http的头</li>
+<li>opitions 查看支持的方法</li>
+</ul>
+<h3 id="velocity相关"><a href="#velocity相关" class="headerlink" title="velocity相关"></a>velocity相关</h3><p><a href="https://velocity.apache.org/engine/devel/user-guide.html" target="_blank" rel="external">语法规则</a></p>
+<ul>
+<li>$!表示变量</li>
+<li>#表示一个函数</li>
+<li>foreach遍历</li>
+<li>parse解析变量，include不解析变量</li>
+<li>macro定义宏</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">#*</div><div class="line">注释块</div><div class="line">*#</div><div class="line"></div><div class="line">types:$!&#123;types&#125;</div><div class="line"></div><div class="line">#foreach($t in $types)</div><div class="line">    this is type-&gt; index:$!&#123;foreach.index&#125;, type name :$t, count:$!&#123;foreach.count&#125;</div><div class="line">#end</div><div class="line"></div><div class="line"></div><div class="line">#foreach($key in $map.keySet())</div><div class="line">    key = $key, value = $map.get($key)</div><div class="line">#end</div><div class="line"></div><div class="line">#foreach($key in $map.entrySet())</div><div class="line">    key = $key.key, value = $key.value</div><div class="line">#end</div><div class="line"></div><div class="line">传递对象</div><div class="line">User : $!&#123;u.name&#125;,</div><div class="line">$!&#123;u.des&#125;,</div><div class="line">$!&#123;u.getDes()&#125;</div><div class="line"></div><div class="line">设置变量</div><div class="line">#set($title = &quot;home&quot;)</div><div class="line">title is $!&#123;title&#125;</div><div class="line"></div><div class="line">引入其他页面</div><div class="line">parse:#parse(&quot;head.html&quot;)</div><div class="line">include:#include(&quot;head.html&quot;)</div><div class="line">区别：parse会将变量进行解析，而include不会对变量进行解析，他们主要用在网页的头尾引入</div><div class="line"></div><div class="line"></div><div class="line">设置宏,就是定义一个函数，很多地方都可以使用</div><div class="line">#macro(render_type, $index, $type)</div><div class="line">    type rendering $index, $type</div><div class="line">#end</div><div class="line"></div><div class="line">使用宏</div><div class="line">#foreach($t in $types)</div><div class="line">    #render_type($foreach.index, $t)</div><div class="line">#end</div><div class="line"></div><div class="line">双引号解析，单引号不解析</div><div class="line">#set($hello = &quot;hello&quot;)</div><div class="line">#set($hw1 = &quot;$!&#123;hello&#125; world&quot;)</div><div class="line">#set($hw2 = &apos;$!&#123;hello&#125; world&apos;)</div><div class="line">$!&#123;hello&#125;</div><div class="line">$!&#123;hw1&#125;</div><div class="line">$!&#123;hw2&#125;</div></pre></td></tr></table></figure>
+<h3 id="response-和-request"><a href="#response-和-request" class="headerlink" title="response 和 request"></a>response 和 request</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">@RequestMapping(&quot;/req&quot;)</div><div class="line">@ResponseBody</div><div class="line">public String Request(HttpServletRequest request,</div><div class="line">                      HttpServletResponse response,</div><div class="line">                      HttpSession session,</div><div class="line">                      Model model,</div><div class="line">                      @CookieValue(&quot;JSESSIONID&quot;) String cookieId) &#123;</div><div class="line">    StringBuffer sb = new StringBuffer();</div><div class="line">    sb.append(&quot;COOKIEID=&quot;+cookieId);</div><div class="line">    sb.append(request.getMethod() + &quot;&lt;br&gt;&quot;);</div><div class="line">    sb.append(request.getPathInfo() + &quot;&lt;br&gt;&quot;);</div><div class="line">    sb.append(request.getQueryString() + &quot;&lt;br&gt;&quot;);</div><div class="line"></div><div class="line">    sb.append(&quot;&lt;br&gt;headers&lt;br&gt;&quot;);</div><div class="line">    Enumeration headerNames = request.getHeaderNames();</div><div class="line">    while (headerNames.hasMoreElements()) &#123;</div><div class="line">        String name = (String) headerNames.nextElement();</div><div class="line">        sb.append(name + &quot; : &quot; + request.getHeader(name) + &quot;&lt;br&gt;&quot;);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    response.addCookie(new Cookie(&quot;user&quot;, &quot;amy&quot;));</div><div class="line">    response.addHeader(&quot;tttt&quot;, &quot;sss&quot;);</div><div class="line"></div><div class="line"></div><div class="line">    sb.append(&quot;&lt;br&gt;cookie&lt;br&gt;&quot;);</div><div class="line">    Cookie[] cookies = request.getCookies();</div><div class="line">    for (Cookie cc : cookies</div><div class="line">            ) &#123;</div><div class="line">        sb.append(cc.getName() + &quot; : &quot; + cc.getValue() + &quot;&lt;br&gt;&quot;);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return sb.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="重定向和error"><a href="#重定向和error" class="headerlink" title="重定向和error"></a>重定向和error</h3><ul>
+<li><p>301 永久转移与302临时转移</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//302</div><div class="line">@RequestMapping(value = &#123;&quot;/redirect/&#123;code&#125;&quot;&#125;, method = &#123;RequestMethod.GET&#125;)</div><div class="line">public String redirect(@PathVariable(&quot;code&quot;) int code) &#123;</div><div class="line">    return &quot;redirect:/&quot;;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">//301</div><div class="line">@RequestMapping(value = &#123;&quot;/redirect/&#123;code&#125;&quot;&#125;,method = &#123;RequestMethod.GET&#125;)</div><div class="line">public RedirectView redirect(@PathVariable(&quot;code&quot;) int code)&#123;</div><div class="line">    RedirectView red = new RedirectView(&quot;/&quot;,true);</div><div class="line">    if(code == 301)&#123;</div><div class="line">        red.setStatusCode(HttpStatus.MOVED_PERMANENTLY);</div><div class="line">    &#125;</div><div class="line">    return red;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>异常处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//异常处理</div><div class="line">@RequestMapping(&quot;/admin&quot;)</div><div class="line">@ResponseBody</div><div class="line">public String admin(@RequestParam(&quot;key&quot;) String key) &#123;</div><div class="line">    if (key.equals(&quot;admin&quot;)) &#123;</div><div class="line">        return &quot;hello, admin!&quot;;</div><div class="line">    &#125; else &#123;</div><div class="line">        throw new IllegalArgumentException(&quot;参数错误&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@ExceptionHandler()</div><div class="line">@ResponseBody</div><div class="line">public String error(Exception e) &#123;</div><div class="line">    return &quot;error: &quot; + e.getMessage();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="IoC"><a href="#IoC" class="headerlink" title="IoC"></a>IoC</h3><p>在编程过程中，有很多对象及其依赖的对象，他们都需要初始化和相互调用，这样很多对象就会形成一张巨大的网，里面包含了各种调用关系。<br>传统模式中：通过main函数对每个对象进行初始化，赋值等操作。<br>而在IoC中，通过<code>Autowired</code>依赖注入的方式完成这个过程，也就是说对象主要在一个地方产生，在剩余的其他地方需要调用该对象时候，只需要通过注入方式声明该对象，即可完成对其初始化的过程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@Autowired</div><div class="line">ExampleService service;</div></pre></td></tr></table></figure></p>
+<p>同时有个类就是ExampleService</p>
+<p>类似于享元模式</p>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>面向切面编程，就是在不改变原有程序的基础上，在执行某个方法的之前或者之后完成一些功能<br>比如拦截器、记日志</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-11T01:24:36.000Z" itemprop="dateUpdated">2017年4月11日 9:24</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/02/17/问答-登录注册/" target="_blank" rel="external">http://duyao.github.io/2017/02/17/问答-登录注册/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wenda/">wenda</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/17/问答-登录注册/&title=《问答-登录注册》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/17/问答-登录注册/&title=《问答-登录注册》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/17/问答-登录注册/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《问答-登录注册》 — Du Yao's blog&url=http://duyao.github.io/2017/02/17/问答-登录注册/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/17/问答-登录注册/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/02/18/24-Swap-Nodes-in-Pairs/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">24. Swap Nodes in Pairs</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/16/112-Path-Sum/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">112. Path Sum</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="问答-登录注册" data-title="问答-登录注册" data-url="http://duyao.github.io/2017/02/17/问答-登录注册/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/17/问答-登录注册/&title=《问答-登录注册》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/17/问答-登录注册/&title=《问答-登录注册》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/17/问答-登录注册/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《问答-登录注册》 — Du Yao's blog&url=http://duyao.github.io/2017/02/17/问答-登录注册/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/17/问答-登录注册/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/02/17/问答-登录注册/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>14.2 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="子数组的最大和及系列问题子数组的最大累加和问题给定一个数组arr，返回子数组的最大累加和。例如，arr=[1,-2,3,5,-2,6,-1]，所有的子数组中，[3,5,-2,6]可以累加出最大的和12，所以返回12。 思路时间复杂度O(n)使用max记录当前和的最大值和sum记录当前的和  sum &amp;lt; 0 -&amp;gt; 舍弃前面的，sum = 当前值 sum &amp;gt;= 0 -&amp;gt; 累加每">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14.2">
+<meta property="og:url" content="http://duyao.github.io/2015/12/01/14.2/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="子数组的最大和及系列问题子数组的最大累加和问题给定一个数组arr，返回子数组的最大累加和。例如，arr=[1,-2,3,5,-2,6,-1]，所有的子数组中，[3,5,-2,6]可以累加出最大的和12，所以返回12。 思路时间复杂度O(n)使用max记录当前和的最大值和sum记录当前的和  sum &amp;lt; 0 -&amp;gt; 舍弃前面的，sum = 当前值 sum &amp;gt;= 0 -&amp;gt; 累加每">
+<meta property="og:updated_time" content="2015-12-02T07:31:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="14.2">
+<meta name="twitter:description" content="子数组的最大和及系列问题子数组的最大累加和问题给定一个数组arr，返回子数组的最大累加和。例如，arr=[1,-2,3,5,-2,6,-1]，所有的子数组中，[3,5,-2,6]可以累加出最大的和12，所以返回12。 思路时间复杂度O(n)使用max记录当前和的最大值和sum记录当前的和  sum &amp;lt; 0 -&amp;gt; 舍弃前面的，sum = 当前值 sum &amp;gt;= 0 -&amp;gt; 累加每">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">14.2</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">14.2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-12-01T12:42:32.000Z" itemprop="datePublished" class="page-time">
+  2015-12-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#子数组的最大和及系列问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">子数组的最大和及系列问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#子数组的最大累加和问题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">子数组的最大累加和问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#找到两个不相容子数组的最大和"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">找到两个不相容子数组的最大和</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-1"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码-1"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#子矩阵的最大累加和问题"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">子矩阵的最大累加和问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-2"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码-2"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-14.2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">14.2</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年12月01日 20:42" datetime="2015-12-01T12:42:32.000Z"  itemprop="datePublished">2015-12-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="子数组的最大和及系列问题"><a href="#子数组的最大和及系列问题" class="headerlink" title="子数组的最大和及系列问题"></a>子数组的最大和及系列问题</h1><h2 id="子数组的最大累加和问题"><a href="#子数组的最大累加和问题" class="headerlink" title="子数组的最大累加和问题"></a>子数组的最大累加和问题</h2><p>给定一个数组arr，返回子数组的最大累加和。<br>例如，arr=[1,-2,3,5,-2,6,-1]，所有的子数组中，[3,5,-2,6]可以累加出最大的和12，所以返回12。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>时间复杂度O(n)<br>使用max记录当前和的最大值和sum记录当前的和</p>
+<ul>
+<li>sum &lt; 0 -&gt; 舍弃前面的，sum = 当前值</li>
+<li>sum &gt;= 0 -&gt; 累加<br>每次更新完sum，要更新max</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public static int getMaxSum(int[] a) &#123;</div><div class="line">	//记录当前的和</div><div class="line">	int sum = 0;</div><div class="line">	//记录最大值</div><div class="line">	int maxNum = Integer.MIN_VALUE;</div><div class="line">	for (int i = 0; i &lt; a.length; i++) &#123;</div><div class="line">		//如果和小于0，说明加上正数或会变大，但是仍然起副作用</div><div class="line">		//因此直接丢掉，使得sum为当前值，注意不是0，因为可能所有数字都是负数</div><div class="line">		if (sum &lt; 0) &#123;</div><div class="line">			sum = a[i];</div><div class="line">		&#125; else &#123;</div><div class="line">			//和大于0，可以继续累加</div><div class="line">			sum += a[i];</div><div class="line">		&#125;</div><div class="line">		//每次算完和，要更新max，这样才能记录下最大值</div><div class="line">		maxNum = Math.max(maxNum, sum);</div><div class="line">	&#125;</div><div class="line">	return maxNum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="找到两个不相容子数组的最大和"><a href="#找到两个不相容子数组的最大和" class="headerlink" title="找到两个不相容子数组的最大和"></a>找到两个不相容子数组的最大和</h2><p>给定一个数组arr，其中有很多的子数组，找到两个不相容子数组使得相加的和最大，并返回和的最大值。<br>比如，数组[1,-1,0,-2,3,5,-2,8,7,-4]，两个不相容子数组分别为[3,5]和[8,7]时累加和最大，所以返回23。<br>再比如，数组[3,-1,0,-2,3,5,-2,8,7,-4]，两个不相容子数组分别为[3]和[3,5,-2,8,7]时累加和最大，所以返回24。</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>借鉴上面的思路，做一些变形<br>设置两个数组</p>
+<ul>
+<li>left[i]表示[0,i]上的子数组最大和</li>
+<li>right[i]表示[i,N-1]上子数组的最大和</li>
+</ul>
+<p>然后设置分割点k分别计算left[k]+right[k+1]最大值<br>该值表示[0,i]和[i+1,N-1]中最大值的和，既保持了不相交，也算出了最大值</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">public static int getUnconnetedSum(int[] a)&#123;</div><div class="line">	int[] left = new int[a.length];</div><div class="line">	int[] right = new int[a.length];</div><div class="line">	int sum = 0;</div><div class="line">	int maxNum = Integer.MIN_VALUE;</div><div class="line">	//用求子数组最大和方法初始化left</div><div class="line">	for (int i = 0; i &lt; a.length; i++) &#123;</div><div class="line">		if(sum &lt; 0)&#123;</div><div class="line">			sum = a[i];</div><div class="line">		&#125;else&#123;</div><div class="line">			sum += a[i];</div><div class="line">		&#125;</div><div class="line">		maxNum = Math.max(maxNum, sum);</div><div class="line">		left[i] = maxNum;</div><div class="line">	&#125;</div><div class="line">	sum = 0;</div><div class="line">	maxNum = Integer.MIN_VALUE;</div><div class="line">	//用求子数组最大和方法初始化right</div><div class="line">	for(int i = a.length-1; i &gt;= 0; i--)&#123;</div><div class="line">		if(sum &lt; 0)&#123;</div><div class="line">			sum = a[i];</div><div class="line">		&#125;else&#123;</div><div class="line">			sum += a[i];</div><div class="line">		&#125;</div><div class="line">		maxNum = Math.max(maxNum, sum);</div><div class="line">		right[i] = maxNum;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	int res = Integer.MIN_VALUE;</div><div class="line">	//以i为分界点，查找最大值</div><div class="line">	for (int i = 0; i &lt; a.length-1; i++) &#123;</div><div class="line">		res = Math.max(res, left[i]+right[i+1]);</div><div class="line">	&#125;</div><div class="line">	return res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="子矩阵的最大累加和问题"><a href="#子矩阵的最大累加和问题" class="headerlink" title="子矩阵的最大累加和问题"></a>子矩阵的最大累加和问题</h2><p>给定一个矩阵matrix，其中的值有正、有负、有0，返回子矩阵的最大累加和。 例如，矩阵matrix为：<br>-90  48 78<br> 64 -40 64<br>-81 -7  66<br>其中，最大累加和的子矩阵为：<br> 48 78<br>-40 64<br>-7  66<br>所以返回累加和209。</p>
+<p>再例如，matrix为：<br>-1 -1 -1<br>-1  2  2<br>-1 -1 -1<br>其中最大累加和的子矩阵为：<br>2  2<br>所以返回累加和 4。</p>
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><p>利用最大子数组求和的思想<br>先用tmp[i]求出在该行i列上所有数字的和，是一个列加的和，不停的用上一行列加tmp<br>有了tmp再求最大子数组和，就是求出选那些列能组成最大和<br>为了遍历所有的行，需要设置分割点，即先遍历0123…N,然后123…N,234..N<br>把所有可能都遍历到</p>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public static int getMaxtrixSum(int[][] a) &#123;	</div><div class="line">	int maxNum = Integer.MIN_VALUE;</div><div class="line">	//分割点i，遍历所有的行</div><div class="line">	for(int i = 0; i &lt; a.length; i++)&#123;</div><div class="line">		//存放该行以上所有的和，即tmp[i]表示i列在该行的所有值的和</div><div class="line">		int[] tmp = new int[a[0].length];</div><div class="line">		//可遍历第012，12，2行</div><div class="line">		for(int k = i; k &lt; a.length; k++)&#123;</div><div class="line">			//求最大子数组和的过程</div><div class="line">			int curSum = 0;</div><div class="line">			for(int j = 0; j &lt; a[0].length; j++)&#123;</div><div class="line">				//先更新tmp，然后求最大</div><div class="line">				tmp[j] += a[k][j];</div><div class="line">				if(curSum &lt; 0)&#123;</div><div class="line">					curSum = tmp[j];</div><div class="line">				&#125;else&#123;</div><div class="line">					curSum += tmp[j];</div><div class="line">				&#125;</div><div class="line">				maxNum = Math.max(curSum, maxNum);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return maxNum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-12-02T07:31:34.000Z" itemprop="dateUpdated">2015年12月2日 15:31</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/12/01/14.2/" target="_blank" rel="external">http://duyao.github.io/2015/12/01/14.2/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/12/01/14.2/&title=《14.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/12/01/14.2/&title=《14.2》 — Du Yao's blog&source=子数组的最大和及系列问题子数组的最大累加和问题给定一个数组arr，返回子数组的最大累加和。例如，arr=[1,-2,3,5,-2,6,-1]，所有的子数组..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/12/01/14.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《14.2》 — Du Yao's blog&url=http://duyao.github.io/2015/12/01/14.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/12/01/14.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/12/03/二分查找/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">二分查找</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/29/14.5/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">14.5</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="14.2" data-title="14.2" data-url="http://duyao.github.io/2015/12/01/14.2/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/12/01/14.2/&title=《14.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/12/01/14.2/&title=《14.2》 — Du Yao's blog&source=子数组的最大和及系列问题子数组的最大累加和问题给定一个数组arr，返回子数组的最大累加和。例如，arr=[1,-2,3,5,-2,6,-1]，所有的子数组..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/12/01/14.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《14.2》 — Du Yao's blog&url=http://duyao.github.io/2015/12/01/14.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/12/01/14.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/12/01/14.2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>14.5 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="子数组累加和系列问题题目给定一个无序数组arr，其中元素可正、可负、可0，再给定一个整数k，求arr所有的子数组中累加和为k的最长子数组长度。 思路如果暴力的算就是遍历所有子数组，求所有和为k的长度，求出最大，时间复杂度是o(n*n)还可以用sum表示所有以i结尾的数组的和，如果sum[i]-k=sum[j]，则说明(j,i]的区间上的和是k那么可以用hashMap记录下所有出现的和的第一次，然后">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14.5">
+<meta property="og:url" content="http://duyao.github.io/2015/11/29/14.5/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="子数组累加和系列问题题目给定一个无序数组arr，其中元素可正、可负、可0，再给定一个整数k，求arr所有的子数组中累加和为k的最长子数组长度。 思路如果暴力的算就是遍历所有子数组，求所有和为k的长度，求出最大，时间复杂度是o(n*n)还可以用sum表示所有以i结尾的数组的和，如果sum[i]-k=sum[j]，则说明(j,i]的区间上的和是k那么可以用hashMap记录下所有出现的和的第一次，然后">
+<meta property="og:updated_time" content="2015-12-08T12:32:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="14.5">
+<meta name="twitter:description" content="子数组累加和系列问题题目给定一个无序数组arr，其中元素可正、可负、可0，再给定一个整数k，求arr所有的子数组中累加和为k的最长子数组长度。 思路如果暴力的算就是遍历所有子数组，求所有和为k的长度，求出最大，时间复杂度是o(n*n)还可以用sum表示所有以i结尾的数组的和，如果sum[i]-k=sum[j]，则说明(j,i]的区间上的和是k那么可以用hashMap记录下所有出现的和的第一次，然后">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">14.5</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">14.5</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-29T13:48:20.000Z" itemprop="datePublished" class="page-time">
+  2015-11-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#子数组累加和系列问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">子数组累加和系列问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目-1"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">题目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-1"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码-1"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目-2"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">题目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-2"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码-2"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-14.5"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">14.5</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月29日 21:48" datetime="2015-11-29T13:48:20.000Z"  itemprop="datePublished">2015-11-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="子数组累加和系列问题"><a href="#子数组累加和系列问题" class="headerlink" title="子数组累加和系列问题"></a>子数组累加和系列问题</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个无序数组arr，其中元素可正、可负、可0，再给定一个整数k，求arr所有的子数组中累加和为k的最长子数组长度。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>如果暴力的算就是遍历所有子数组，求所有和为k的长度，求出最大，时间复杂度是o(n*n)<br>还可以用sum表示所有以i结尾的数组的和，如果sum[i]-k=sum[j]，则说明(j,i]的区间上的和是k<br>那么可以用hashMap记录下所有出现的和的第一次，然后每次进行比较则可以算出<br>时间复杂度是O(n)<br><a id="more"></a></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public static int getKLen(int[] arr, int k)&#123;</div><div class="line">	//key表示和的数值，value表示第一次出现该值的位置</div><div class="line">	//该map只记录第一次出现的情况</div><div class="line">	HashMap&lt;Integer, Integer&gt; mymap = new HashMap&lt;Integer, Integer&gt;();</div><div class="line">	//因为和0的记录是所有值都不取，不会被自动加入</div><div class="line">	//因此这里添加，表示从开头是选</div><div class="line">	mymap.put(0, -1);</div><div class="line">	int sum = 0;</div><div class="line">	int len = 0;</div><div class="line">	for (int i = 0; i &lt; arr.length; i++) &#123;</div><div class="line">		//以i结尾的和</div><div class="line">		sum += arr[i];</div><div class="line">		//只记录第一次出现的和，因为这样才能最长</div><div class="line">		if(!mymap.containsKey(sum))&#123;</div><div class="line">			mymap.put(sum, i);</div><div class="line">		&#125;</div><div class="line">		//如果有sum[j]+k=sum[i]，说明(j,i]的部分和是k</div><div class="line">		if(mymap.containsKey(sum - k))&#123;</div><div class="line">			int j = mymap.get(sum - k);</div><div class="line">			//以j结尾的和和以i结尾的和，期间的长度是i-j</div><div class="line">			len = Math.max(len, i - j);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return len;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>给定一个数组arr，该数组无序，但每个值均为正数，再给定一个正数k。<br>求arr的所有子数组中所有元素相加和为k的最长子数组长度。例如，arr=[1,2,1,1,1]，k=3。<br>累加和为3的最长子数组为[1,1,1]，所以结果返回3。<br>要求：时间复杂度O(N)，额外空间复杂度O(1)。</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>该题目遇上一题的区别就是正数<br>因此该题目可以用一个区间来找和是k的组合</p>
+<ul>
+<li>left区间的左端</li>
+<li>right区间的右端</li>
+<li>sum该区间的和</li>
+<li>len最大的长度</li>
+</ul>
+<p>开始left和right都指向0，一边计算sum一边更新len</p>
+<ul>
+<li>sum &gt; k right右移，继续增加区间的长度</li>
+<li>sum &lt; k left右移，减少区间元素，使得和减小</li>
+<li>sum == k left右移，等于之后要更新len，为了检测是否有更多和为k的子数组，要继续遍历</li>
+</ul>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">public static int getMaxKLen(int[] a,int k)&#123;</div><div class="line">	if(a.length &lt; 0 || k &lt;= 0 || a == null)&#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	int left = 0;</div><div class="line">	int right = 0;</div><div class="line">	//这里sum已经设置了，后面要先改区间，再算和</div><div class="line">	int sum = a[0];</div><div class="line">	int len = 0;</div><div class="line">	while(left &lt; a.length &amp;&amp; right &lt; a.length) &#123;</div><div class="line">		if(sum &lt; k)&#123;</div><div class="line">			//先改区间，再算和</div><div class="line">			right ++;</div><div class="line">			if (right == a.length) &#123;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">			sum += a[right];</div><div class="line">		&#125;else if(sum &gt; k)&#123;</div><div class="line">			//先改区间，再算和</div><div class="line">			left++;</div><div class="line">			sum -= a[left];</div><div class="line">		&#125;else&#123;</div><div class="line">			//sum== k</div><div class="line">			len = Math.max(len, right - left + 1);</div><div class="line">			left++;</div><div class="line">			sum -= a[left];</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	return len;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h2><p>给定一个无序数组arr，其中元素可正、可负、可0，给定一个整数 k。<br>求arr所有的子数组中累加和小于或等于k的最长子数组长度。<br>例如:arr=[3,-2,-4,0,6]，k=-2，相加和小于或等于-2的最长子数组为{3,-2,-4,0}，所以结果返回4</p>
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><p>回顾上面的题目，用一个数组记录当前位置所有和，然后一边遍历，一边算现在的和，<br>当遍历到i时，用x=当前和-k，找所有和中是否有x值，有就说明该位置到当前位置和是k<br>而本题目是所求的和小于等于k值，对于等式x=当前和-k,这里k&lt;=aa,因此x&gt;=和-aa,而遍历的过程是寻找数组中大于等于和-a[i]的值</p>
+<p>对于一个序列，求最长则需要找到第一个大于等于的值<br>因此辅助数组改为记录当前位置和的最大值，是一个递增序列<br>例如[-2,4,2,0,2,1]求第一个大于等于2的位置，那么就是4的位置<br>因此序列改为[-2,4,4,4,4],这样对于递增序列，可以用二分降到O(log(n))<br>整体的复杂度为O(n*log(n))</p>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">public static int maxLength(int[] arr, int k) &#123;</div><div class="line">	// 记录当前位置出现的最大和，是一个递增数组</div><div class="line">	int[] h = new int[arr.length + 1];</div><div class="line">	int sum = 0;</div><div class="line">	// 加入和是0的记录</div><div class="line">	h[0] = sum;</div><div class="line">	for (int i = 0; i != arr.length; i++) &#123;</div><div class="line">		sum += arr[i];</div><div class="line">		h[i + 1] = Math.max(sum, h[i]);</div><div class="line">	&#125;</div><div class="line">	sum = 0;</div><div class="line">	// 结果</div><div class="line">	int res = 0;</div><div class="line">	// 满足区间的左边界</div><div class="line">	int pre = 0;</div><div class="line">	// 长度，右边界-左边界+1</div><div class="line">	int len = 0;</div><div class="line">	for (int i = 0; i != arr.length; i++) &#123;</div><div class="line">		// 当前所有的和</div><div class="line">		sum += arr[i];</div><div class="line">		// k+x=sum</div><div class="line">		// 求小于等于k的区间，那么就要找到大于等于x即(sum-k)的值</div><div class="line">		// 即求出第一个大于x的位置</div><div class="line">		pre = getIndex(h, sum - k);</div><div class="line">		// 可能找不到</div><div class="line">		len = pre == -1 ? 0 : i - pre + 1;</div><div class="line">		res = Math.max(res, len);</div><div class="line">	&#125;</div><div class="line">	return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 第一个大于x的位置R</div><div class="line">public static int getIndex(int[] a, int x) &#123;</div><div class="line">	int left = 0;</div><div class="line">	int right = a.length;</div><div class="line">	int mid = 0;</div><div class="line">	// 有可能出现找不到的情况</div><div class="line">	int res = -1;</div><div class="line">	// 区间是[0,n)</div><div class="line">	// 分支中出现了l=mid 或者r=mid，循环条件要写成left &lt; right，否则写成left &lt;= right</div><div class="line">	// 避免出现left=right-1出现死循环</div><div class="line">	while (left &lt; right) &#123;</div><div class="line">		mid = (left + right) / 2;</div><div class="line">		// 第一个大于x的元素，没有等号</div><div class="line">		if (a[mid] &gt; x) &#123;</div><div class="line">			// 找不到的情况是x比任何数都大，因此如果存在都会进左区间</div><div class="line">			// 右区间找不到情况下是不进入的</div><div class="line">			// 用res来记录，如果找到不进入此，不改变值，返回-1</div><div class="line">			res = mid;</div><div class="line">			// 在区间[left,mid)找</div><div class="line">			right = mid;</div><div class="line">		&#125; else &#123;</div><div class="line">			// 在区间[mid+1,right)找</div><div class="line">			left = mid + 1;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	// 找不到</div><div class="line">	return res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-12-08T12:32:54.000Z" itemprop="dateUpdated">2015年12月8日 20:32</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/29/14.5/" target="_blank" rel="external">http://duyao.github.io/2015/11/29/14.5/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/29/14.5/&title=《14.5》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/29/14.5/&title=《14.5》 — Du Yao's blog&source=子数组累加和系列问题题目给定一个无序数组arr，其中元素可正、可负、可0，再给定一个整数k，求arr所有的子数组中累加和为k的最长子数组长度。
+思路如果暴..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/29/14.5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《14.5》 — Du Yao's blog&url=http://duyao.github.io/2015/11/29/14.5/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/29/14.5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/12/01/14.2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">14.2</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/29/14.1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">14.1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="14.5" data-title="14.5" data-url="http://duyao.github.io/2015/11/29/14.5/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/29/14.5/&title=《14.5》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/29/14.5/&title=《14.5》 — Du Yao's blog&source=子数组累加和系列问题题目给定一个无序数组arr，其中元素可正、可负、可0，再给定一个整数k，求arr所有的子数组中累加和为k的最长子数组长度。
+思路如果暴..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/29/14.5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《14.5》 — Du Yao's blog&url=http://duyao.github.io/2015/11/29/14.5/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/29/14.5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/29/14.5/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

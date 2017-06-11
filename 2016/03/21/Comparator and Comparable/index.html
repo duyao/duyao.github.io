@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Comparator and Comparable | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="比较在集合框架中有两种比较接口： Comparable 接口和 Comparator 接口。Comparable 是通用的接口，用户可以实现它来完成自己特定的比较，在java.lang下Comparator 可以看成一种算法的实现，在需要容器集合实现比较功能的时候，来指定这个比较器，这可以看成一种设计模式，将算法和数据分离，在java.util下。 前者应该比较固定，和一个具体类相绑定，而后者比较">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Comparator and Comparable">
+<meta property="og:url" content="http://duyao.github.io/2016/03/21/Comparator and Comparable/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="比较在集合框架中有两种比较接口： Comparable 接口和 Comparator 接口。Comparable 是通用的接口，用户可以实现它来完成自己特定的比较，在java.lang下Comparator 可以看成一种算法的实现，在需要容器集合实现比较功能的时候，来指定这个比较器，这可以看成一种设计模式，将算法和数据分离，在java.util下。 前者应该比较固定，和一个具体类相绑定，而后者比较">
+<meta property="og:updated_time" content="2017-05-04T02:59:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Comparator and Comparable">
+<meta name="twitter:description" content="比较在集合框架中有两种比较接口： Comparable 接口和 Comparator 接口。Comparable 是通用的接口，用户可以实现它来完成自己特定的比较，在java.lang下Comparator 可以看成一种算法的实现，在需要容器集合实现比较功能的时候，来指定这个比较器，这可以看成一种设计模式，将算法和数据分离，在java.util下。 前者应该比较固定，和一个具体类相绑定，而后者比较">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Comparator and Comparable</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Comparator and Comparable</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-21T04:55:47.000Z" itemprop="datePublished" class="page-time">
+  2016-03-21
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#比较"><span class="post-toc-number">1.</span> <span class="post-toc-text">比较</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Comparator"><span class="post-toc-number">2.</span> <span class="post-toc-text">Comparator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Comparatable"><span class="post-toc-number">3.</span> <span class="post-toc-text">Comparatable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子"><span class="post-toc-number">4.</span> <span class="post-toc-text">例子</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Comparator and Comparable"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Comparator and Comparable</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年03月21日 12:55" datetime="2016-03-21T04:55:47.000Z"  itemprop="datePublished">2016-03-21</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><p>在集合框架中有两种比较接口： Comparable 接口和 Comparator 接口。<br>Comparable 是通用的接口，用户可以实现它来完成自己特定的比较，在java.lang下<br>Comparator 可以看成一种算法的实现，在需要容器集合实现比较功能的时候，来指定这个比较器，这可以看成一种设计模式，将算法和数据分离，在java.util下。</p>
+<p>前者应该比较固定，和一个具体类相绑定，而后者比较灵活，它可以被用于各个需要比较功能的类使用。</p>
+<p>一个类实现了 Camparable 接口表明这个类的对象之间是可以相互比较的。如果用数学语言描述的话就是这个类的对象组成的集合中存在一个全序。这样，这个类对象组成的集合就可以使用 Sort 方法排序了。</p>
+<p>而 Comparator 的作用有两个，体现了<strong>策略模式</strong>，就是不改变对象自身，而用一个策略对象（strategy object）来改变它的行为：<br>1 、如果类的设计师没有考虑到 Compare 的问题而没有实现 Comparable 接口，可以通过 Comparator 来实现比较算法进行排序；<br>2 、为了使用不同的排序标准做准备，比如：升序、降序或其他什么序。</p>
+<h2 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a>Comparator</h2><p>我们如果需要控制某个类的次序，而该类本身不支持排序（即没有实现Comparable接口）；那么可以建立一个该类的比较器来排序，这个比较器只需要实现Comparator接口即可。</p>
+<p>通过实现Comparator类来新建一个比较器，然后通过该比较器来对类进行排序。Comparator 接口其实就是一种策略模式的实践</p>
+<p>若一个类要实现Comparator接口：它一定要实现<code>compareTo(T o1, T o2)</code>函数，但可以不实现 <code>equals(Object obj)</code> 函数</p>
+<h2 id="Comparatable"><a href="#Comparatable" class="headerlink" title="Comparatable"></a>Comparatable</h2><p>若一个类实现了Comparable接口，就意味着“该类支持排序”。  即然实现Comparable接口的类支持排序，假设现在存在“实现Comparable接口的类的对象的List列表(或数组)”，则该List列表(或数组)可以通过 Collections.sort（或 Arrays.sort）进行排序。</p>
+<p>此外，“实现Comparable接口的类的对象”可以用作“有序映射(如TreeMap)”中的键或“有序集合(TreeSet)”中的元素，而不需要指定比较器。</p>
+<p>假设我们通过 x.compareTo(y) 来“比较x和y的大小”。若返回“负数”，意味着“x比y小”；返回“零”，意味着“x等于y”；返回“正数”，意味着“x大于y”。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>排序方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BigDecimal,BigInteger,Byte,Double, Float,Integer,Long,Short</td>
+<td>按数字大小排序</td>
+</tr>
+<tr>
+<td>Character</td>
+<td>按 Unicode 值的数字大小排序</td>
+</tr>
+<tr>
+<td>String</td>
+<td>按字符串中字符 Unicode 值排序</td>
+</tr>
+</tbody>
+</table>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><ul>
+<li>Item.java</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">public class Item implements Comparable&lt;Item&gt;&#123;</div><div class="line"></div><div class="line">	private String description;</div><div class="line">	private int partNum;</div><div class="line"></div><div class="line">	public Item(String des, int num)&#123;</div><div class="line">		this.description = des;</div><div class="line">		this.partNum = num;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getDescription()&#123;</div><div class="line">		return this.description;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public int getPartNum()&#123;</div><div class="line">		return this.partNum;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public String toString() &#123;</div><div class="line">		return &quot;[&quot; + description + &quot;,&quot; + partNum + &quot;]&quot;;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">//	@Override</div><div class="line">//	public int hashCode() &#123;</div><div class="line">//		return Objects.hash(description, partNum);</div><div class="line">//	&#125;</div><div class="line"></div><div class="line"></div><div class="line">//	@Override</div><div class="line">//	public boolean equals(Object obj) &#123;</div><div class="line">//		if(this == obj) return true;</div><div class="line">//		if(obj == null) return false;</div><div class="line">//		if(this.getClass() != obj.getClass()) return false;</div><div class="line">//		</div><div class="line">//		Item i = (Item) obj;</div><div class="line">//		return Objects.equals(this.description, i.description) &amp;&amp; this.partNum == i.partNum;</div><div class="line">//	&#125;</div><div class="line"></div><div class="line"></div><div class="line">	@Override</div><div class="line">	public int compareTo(Item o) &#123;</div><div class="line">		return Integer.compare(partNum, o.partNum);</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Main</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">	SortedSet&lt;Item&gt; mySet = new TreeSet();</div><div class="line">	//Item中是按照partNum进行比较的</div><div class="line">	mySet.add(new Item(&quot;To&quot;, 9234));</div><div class="line">	mySet.add(new Item(&quot;Wi&quot;, 362));</div><div class="line">	mySet.add(new Item(&quot;Mo&quot;, 1912));</div><div class="line">	mySet.add(new Item(&quot;Mo&quot;, 12));</div><div class="line">	mySet.add(new Item(&quot;Mo&quot;, 342));</div><div class="line">	System.out.println(mySet);</div><div class="line"></div><div class="line">	//使用comparator，类Item可以没有实现comparable</div><div class="line">	//新建TreeSet通过传入比较器comparator来完成</div><div class="line">	SortedSet&lt;Item&gt; setByDes = new TreeSet&lt;Item&gt;(new Comparator&lt;Item&gt;() &#123;</div><div class="line"></div><div class="line">		@Override</div><div class="line">		public int compare(Item o1, Item o2) &#123;</div><div class="line">			//先按照des排序，对于相等的des则按照partNum排序</div><div class="line">			String aDes = o1.getDescription();</div><div class="line">			String bDes = o2.getDescription();</div><div class="line">			if(aDes.compareTo(bDes) &gt; 0)&#123;</div><div class="line">				return 1;</div><div class="line">			&#125;else if(aDes.compareTo(bDes) &lt; 0)&#123;</div><div class="line">				return -1;</div><div class="line">			&#125;else&#123;</div><div class="line">				//注意前面有符号-，表示逆序，从大到小的顺序</div><div class="line">				return -Integer.compare(o1.getPartNum(), o2.getPartNum());</div><div class="line">			&#125;</div><div class="line">			//按照des排序，对于des相同，则只显示最小的partNum</div><div class="line">//				return aDes.compareTo(bDes);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;);</div><div class="line"></div><div class="line">//		setByDes.addAll(mySet);</div><div class="line">	setByDes.add(new Item(&quot;To&quot;, 9234));</div><div class="line">	setByDes.add(new Item(&quot;Wi&quot;, 362));</div><div class="line">	setByDes.add(new Item(&quot;Mo&quot;, 1912));</div><div class="line">	setByDes.add(new Item(&quot;Mo&quot;, 12));</div><div class="line">	setByDes.add(new Item(&quot;Mo&quot;, 342));</div><div class="line">	System.out.println(setByDes);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="http://blog.csdn.net/mageshuai/article/details/3849143" target="_blank" rel="external">http://blog.csdn.net/mageshuai/article/details/3849143</a><br><a href="http://www.cnblogs.com/sunflower627/p/3158042.html" target="_blank" rel="external">http://www.cnblogs.com/sunflower627/p/3158042.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-04T02:59:14.000Z" itemprop="dateUpdated">2017年5月4日 10:59</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2016/03/21/Comparator and Comparable/" target="_blank" rel="external">http://duyao.github.io/2016/03/21/Comparator and Comparable/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/03/21/Comparator and Comparable/&title=《Comparator and Comparable》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/03/21/Comparator and Comparable/&title=《Comparator and Comparable》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/03/21/Comparator and Comparable/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Comparator and Comparable》 — Du Yao's blog&url=http://duyao.github.io/2016/03/21/Comparator and Comparable/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/03/21/Comparator and Comparable/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/24/字典树/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">字典树</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/19/红黑树/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">红黑树</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Comparator and Comparable" data-title="Comparator and Comparable" data-url="http://duyao.github.io/2016/03/21/Comparator and Comparable/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/03/21/Comparator and Comparable/&title=《Comparator and Comparable》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/03/21/Comparator and Comparable/&title=《Comparator and Comparable》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/03/21/Comparator and Comparable/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Comparator and Comparable》 — Du Yao's blog&url=http://duyao.github.io/2016/03/21/Comparator and Comparable/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/03/21/Comparator and Comparable/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2016/03/21/Comparator and Comparable/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>1.1 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="实现“之”字形打印矩阵输入一个矩阵，按照从之字形打印出每一个数字，例如，如果输入如下矩阵：1 2 3 45 6 7 89 10 11 1213 14 15 16则依次打印出数字1 5 2 3 6 9 13 10 7 4 8 11 14 15 12 16">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.1">
+<meta property="og:url" content="http://duyao.github.io/2015/10/25/1.1/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="实现“之”字形打印矩阵输入一个矩阵，按照从之字形打印出每一个数字，例如，如果输入如下矩阵：1 2 3 45 6 7 89 10 11 1213 14 15 16则依次打印出数字1 5 2 3 6 9 13 10 7 4 8 11 14 15 12 16">
+<meta property="og:updated_time" content="2015-10-27T12:15:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1.1">
+<meta name="twitter:description" content="实现“之”字形打印矩阵输入一个矩阵，按照从之字形打印出每一个数字，例如，如果输入如下矩阵：1 2 3 45 6 7 89 10 11 1213 14 15 16则依次打印出数字1 5 2 3 6 9 13 10 7 4 8 11 14 15 12 16">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">1.1</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">1.1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-25T07:52:49.000Z" itemprop="datePublished" class="page-time">
+  2015-10-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现“之”字形打印矩阵"><span class="post-toc-number">1.</span> <span class="post-toc-text">实现“之”字形打印矩阵</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#顺时针打印"><span class="post-toc-number">2.</span> <span class="post-toc-text">顺时针打印</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-1.1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">1.1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月25日 15:52" datetime="2015-10-25T07:52:49.000Z"  itemprop="datePublished">2015-10-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="实现“之”字形打印矩阵"><a href="#实现“之”字形打印矩阵" class="headerlink" title="实现“之”字形打印矩阵"></a>实现“之”字形打印矩阵</h2><p>输入一个矩阵，按照从之字形打印出每一个数字，例如，如果输入如下矩阵：<br>1 2 3 4<br>5 6 7 8<br>9 10 11 12<br>13 14 15 16<br>则依次打印出数字1 5 2 3 6 9 13 10 7 4 8 11 14 15 12 16</p>
+<a id="more"></a>
+<hr>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>可以将问题化简为按照斜线打印，然后每次打印方向遇上一次相反<br>先给出斜线的上下顶点，打印斜线，然后移动再打印</p>
+<hr>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="keyword">int</span> m,n;</div><div class="line"><span class="keyword">int</span> a[<span class="number">1010</span>][<span class="number">1010</span>];</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">zigzag</span><span class="params">(<span class="keyword">int</span> ux,<span class="keyword">int</span> uy,<span class="keyword">int</span> dx,<span class="keyword">int</span> dy,<span class="keyword">int</span> flag)</span></span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">if</span>(flag)&#123;</div><div class="line">		<span class="comment">//flag=1从下到上 </span></div><div class="line">		</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=dx,j=dy;i&gt;=ux,j&lt;=uy;i--,j++)&#123;</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i][j]);</div><div class="line">		&#125;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="comment">//flag=0从上向下</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=ux,j=uy;i&lt;=dx,j&gt;=dy;i++,j--)&#123;</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i][j]);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	freopen(<span class="string">"in.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;m,&amp;n)!=EOF)&#123;</div><div class="line">		</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</div><div class="line">			</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)&#123;</div><div class="line">				<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i][j]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">if</span>(m==<span class="number">1</span>)&#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">				<span class="built_in">printf</span>(<span class="string">"%d "</span>,a[<span class="number">0</span>][i]);</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</div><div class="line">				<span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i][<span class="number">0</span>]);</div><div class="line">			&#125;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="comment">//给出定点坐标和方向</span></div><div class="line">			<span class="keyword">int</span> flag=<span class="number">0</span>;</div><div class="line">			<span class="keyword">int</span> ux=<span class="number">0</span>,uy=<span class="number">0</span>,dx=<span class="number">0</span>,dy=<span class="number">0</span>;</div><div class="line">			<span class="comment">//指出上下定点的坐标 </span></div><div class="line">			<span class="keyword">while</span>(ux&lt;m&amp;&amp;dy&lt;n)&#123;</div><div class="line">				zigzag(ux,uy,dx,dy,flag);</div><div class="line">				<span class="comment">//flag是用来告诉方向的 </span></div><div class="line">				flag=!flag;</div><div class="line">				<span class="comment">//上点右移，uy+，下点下移，dx+</span></div><div class="line">				<span class="comment">//对于非正方形，要同时移动ux及dy </span></div><div class="line">				uy++;dx++;</div><div class="line">				<span class="keyword">if</span>(uy&gt;=n)&#123;</div><div class="line">					uy=n<span class="number">-1</span>;</div><div class="line">					ux++;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">if</span>(dx&gt;=m)&#123;</div><div class="line">					dx=m<span class="number">-1</span>;</div><div class="line">					dy++;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"> 	</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="顺时针打印"><a href="#顺时针打印" class="headerlink" title="顺时针打印"></a>顺时针打印</h2><ul>
+<li>题目描述：<br>输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下矩阵：<br>1 2 3 4<br>5 6 7 8<br>9 10 11 12<br>13 14 15 16<br>则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.</li>
+<li>输入：<br>输入可能包含多个测试样例，对于每个测试案例，<br>输入的第一行包括两个整数m和n(1&lt;=m,n&lt;=1000)：表示矩阵的维数为m行n列。<br>接下来的m行，每行包括n个整数，表示矩阵的元素，其中每个元素a的取值范围为(1&lt;=a&lt;=10000)。</li>
+<li>输出：<br>对应每个测试案例，输出一行，<br>按照从外向里以顺时针的顺序依次打印出每一个数字，每个数字后面都有一个空格。</li>
+<li>样例输入：<br>4 4<br>1 2 3 4<br>5 6 7 8<br>9 10 11 12<br>13 14 15 16</li>
+<li>样例输出：<br>1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10 </li>
+</ul>
+<p><a href="http://ac.jobdu.com/problem.php?pid=1391" title="http://ac.jobdu.com/problem.php?pid=1391" target="_blank" rel="external">顺时针打印矩阵</a></p>
+<hr>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>可以看做是按圈打印，先打印最外圈的数字，然后打印内圈，打印的顺序都是顺时针。<br>首先给出左上和右下的坐标，然后按照顺时针打印。<br>打印完一圈后，左上和右下往里移动。直到两者相遇。</p>
+<hr>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="keyword">int</span> m,n;</div><div class="line"><span class="keyword">int</span> a[<span class="number">1010</span>][<span class="number">1010</span>];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">     </div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;m,&amp;n)!=EOF)&#123;</div><div class="line">         </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</div><div class="line">             </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)&#123;</div><div class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i][j]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">         </div><div class="line">        <span class="comment">//只有一行</span></div><div class="line">        <span class="keyword">if</span> (m == <span class="number">1</span>)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[<span class="number">0</span>][i]);</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//只有一列</span></div><div class="line">        <span class="keyword">if</span>( n==<span class="number">1</span>)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i][<span class="number">0</span>]);</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> ux=<span class="number">0</span>,uy=<span class="number">0</span>,dx=m<span class="number">-1</span>,dy=n<span class="number">-1</span>;</div><div class="line">        <span class="keyword">while</span>(ux&lt;=dx &amp;&amp; uy&lt;=dy )&#123;</div><div class="line">             </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=uy;j&lt;dy;j++)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[ux][j]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = ux;i&lt;dx; i++)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i][dy] ) ;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=dy;j&gt;uy;j--)&#123;</div><div class="line">                 </div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[dx][j]);</div><div class="line">            &#125;</div><div class="line">             </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=dx;i&gt;ux;i--)&#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i][uy]);</div><div class="line">            &#125;</div><div class="line">             </div><div class="line">                 ux++,uy++,dx--,dy--;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-10-27T12:15:18.000Z" itemprop="dateUpdated">2015年10月27日 20:15</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/10/25/1.1/" target="_blank" rel="external">http://duyao.github.io/2015/10/25/1.1/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/25/1.1/&title=《1.1》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/25/1.1/&title=《1.1》 — Du Yao's blog&source=实现“之”字形打印矩阵输入一个矩阵，按照从之字形打印出每一个数字，例如，如果输入如下矩阵：1 2 3 45 6 7 89 10 11 1213 14 15..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/25/1.1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《1.1》 — Du Yao's blog&url=http://duyao.github.io/2015/10/25/1.1/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/25/1.1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/25/1.2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">1.2</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/24/Programmatic Transaction/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Programmatic Transaction</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="1.1" data-title="1.1" data-url="http://duyao.github.io/2015/10/25/1.1/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/25/1.1/&title=《1.1》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/25/1.1/&title=《1.1》 — Du Yao's blog&source=实现“之”字形打印矩阵输入一个矩阵，按照从之字形打印出每一个数字，例如，如果输入如下矩阵：1 2 3 45 6 7 89 10 11 1213 14 15..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/25/1.1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《1.1》 — Du Yao's blog&url=http://duyao.github.io/2015/10/25/1.1/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/25/1.1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/10/25/1.1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

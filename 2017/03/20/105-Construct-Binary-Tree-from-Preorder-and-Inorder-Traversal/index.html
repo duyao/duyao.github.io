@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>105. Construct Binary Tree from Preorder and Inorder Traversal | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode">
+    <meta name="description" content="根据先序中序得到树，这类问题都是用递归来解决的 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/#/description1234567891011121314151617181920212223242526272829public TreeNode buildTree(">
+<meta name="keywords" content="leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="105. Construct Binary Tree from Preorder and Inorder Traversal">
+<meta property="og:url" content="http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="根据先序中序得到树，这类问题都是用递归来解决的 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/#/description1234567891011121314151617181920212223242526272829public TreeNode buildTree(">
+<meta property="og:updated_time" content="2017-04-12T14:03:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="105. Construct Binary Tree from Preorder and Inorder Traversal">
+<meta name="twitter:description" content="根据先序中序得到树，这类问题都是用递归来解决的 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/#/description1234567891011121314151617181920212223242526272829public TreeNode buildTree(">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">105. Construct Binary Tree from Preorder and Inorder Traversal</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">105. Construct Binary Tree from Preorder and Inorder Traversal</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-20T09:41:38.000Z" itemprop="datePublished" class="page-time">
+  2017-03-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">105. Construct Binary Tree from Preorder and Inorder Traversal</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月20日 17:41" datetime="2017-03-20T09:41:38.000Z"  itemprop="datePublished">2017-03-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>根据先序中序得到树，这类问题都是用递归来解决的</p>
+<p><a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/#/description" target="_blank" rel="external">https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/#/description</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">buildTree</span><span class="params">(<span class="keyword">int</span>[] preorder, <span class="keyword">int</span>[] inorder)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(preorder == <span class="keyword">null</span> || preorder.length == <span class="number">0</span> || inorder == <span class="keyword">null</span> || inorder.length == <span class="number">0</span>)&#123;</div><div class="line">        <span class="keyword">return</span>  <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f(preorder, inorder, <span class="number">0</span>, <span class="number">0</span>, inorder.length);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">f</span><span class="params">(<span class="keyword">int</span>[] preorder, <span class="keyword">int</span>[] inorder, <span class="keyword">int</span> pre, <span class="keyword">int</span> inl, <span class="keyword">int</span> inr)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//这里所有的区间都是左闭右开</span></div><div class="line">    <span class="keyword">if</span> (pre &gt;= preorder.length || inl &gt;= inr) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> r = -<span class="number">1</span>;</div><div class="line">    <span class="comment">//寻找根在中序的位置</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = inl; i &lt; inr; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (inorder[i] == preorder[pre]) &#123;</div><div class="line">            r = i;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    TreeNode root = <span class="keyword">new</span> TreeNode(preorder[pre]);</div><div class="line">    <span class="comment">//左子树的根节点就是pre的后面一个</span></div><div class="line">    root.left = f(preorder, inorder, pre + <span class="number">1</span>, inl, r);</div><div class="line">    <span class="comment">//右子树的根节点就是pre+左子树的长度的后面一个</span></div><div class="line">    root.right = f(preorder, inorder, pre + (r - inl) + <span class="number">1</span>, r + <span class="number">1</span>, inr);</div><div class="line">    <span class="keyword">return</span> root;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/#/description" target="_blank" rel="external">https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/#/description</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">buildTree</span><span class="params">(<span class="keyword">int</span>[] inorder, <span class="keyword">int</span>[] postorder)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (postorder == <span class="keyword">null</span> || postorder.length == <span class="number">0</span> || inorder == <span class="keyword">null</span> || inorder.length == <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//初始，根的位置在最后</span></div><div class="line">    <span class="keyword">return</span> f(postorder, inorder, postorder.length-<span class="number">1</span>, <span class="number">0</span>, inorder.length);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">f</span><span class="params">(<span class="keyword">int</span>[] postorder, <span class="keyword">int</span>[] inorder, <span class="keyword">int</span> post, <span class="keyword">int</span> inl, <span class="keyword">int</span> inr)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//这里所有的区间都是左闭右开</span></div><div class="line">    <span class="keyword">if</span> (post &gt;= postorder.length || inl &gt;= inr) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> r = -<span class="number">1</span>;</div><div class="line">    <span class="comment">//寻找根在中序的位置</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = inl; i &lt; inr; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (inorder[i] == postorder[post]) &#123;</div><div class="line">            r = i;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    TreeNode root = <span class="keyword">new</span> TreeNode(postorder[post]);</div><div class="line">    <span class="comment">//左子树的根节点就是post减去右子树长度的前一个</span></div><div class="line">    root.left = f(postorder, inorder, post - (inr - r - <span class="number">1</span>) - <span class="number">1</span>, inl, r);</div><div class="line">    <span class="comment">//右子树的根节点就是pre的前一个</span></div><div class="line">    root.right = f(postorder, inorder, post - <span class="number">1</span>, r + <span class="number">1</span>, inr);</div><div class="line">    <span class="keyword">return</span> root;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-12T14:03:22.000Z" itemprop="dateUpdated">2017年4月12日 22:03</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/" target="_blank" rel="external">http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/&title=《105. Construct Binary Tree from Preorder and Inorder Traversal》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/&title=《105. Construct Binary Tree from Preorder and Inorder Traversal》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《105. Construct Binary Tree from Preorder and Inorder Traversal》 — Du Yao's blog&url=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/20/451-Sort-Characters-By-Frequency/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">451. Sort Characters By Frequency</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/20/web开发/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">web开发</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal" data-title="105. Construct Binary Tree from Preorder and Inorder Traversal" data-url="http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/&title=《105. Construct Binary Tree from Preorder and Inorder Traversal》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/&title=《105. Construct Binary Tree from Preorder and Inorder Traversal》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《105. Construct Binary Tree from Preorder and Inorder Traversal》 — Du Yao's blog&url=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

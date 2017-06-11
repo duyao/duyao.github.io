@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>8.2 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="题目换钱的方法数 给定数组arr，arr中所有的值都为正数且不重复。每个值代表一种面值的货币，每种面值的货币可以使用任意张，再给定一个整数aim代表要找的钱数，求换钱有多少种方法。 arr=[5,10,25,1]，aim=0。组成0元的方法有1种，就是所有面值的货币都不用。所以返回1。arr=[5,10,25,1]，aim=15。组成15元的方法有6种，分别为3张5元，1张10元+1张5元，1张1">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.2">
+<meta property="og:url" content="http://duyao.github.io/2015/11/16/8.2/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="题目换钱的方法数 给定数组arr，arr中所有的值都为正数且不重复。每个值代表一种面值的货币，每种面值的货币可以使用任意张，再给定一个整数aim代表要找的钱数，求换钱有多少种方法。 arr=[5,10,25,1]，aim=0。组成0元的方法有1种，就是所有面值的货币都不用。所以返回1。arr=[5,10,25,1]，aim=15。组成15元的方法有6种，分别为3张5元，1张10元+1张5元，1张1">
+<meta property="og:updated_time" content="2015-11-17T08:53:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8.2">
+<meta name="twitter:description" content="题目换钱的方法数 给定数组arr，arr中所有的值都为正数且不重复。每个值代表一种面值的货币，每种面值的货币可以使用任意张，再给定一个整数aim代表要找的钱数，求换钱有多少种方法。 arr=[5,10,25,1]，aim=0。组成0元的方法有1种，就是所有面值的货币都不用。所以返回1。arr=[5,10,25,1]，aim=15。组成15元的方法有6种，分别为3张5元，1张10元+1张5元，1张1">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">8.2</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">8.2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-16T11:14:30.000Z" itemprop="datePublished" class="page-time">
+  2015-11-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路-amp-代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">思路 & 代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#暴力的递归"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">暴力的递归</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#记忆搜索的方法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">记忆搜索的方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态规划方法"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">动态规划方法</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-8.2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">8.2</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月16日 19:14" datetime="2015-11-16T11:14:30.000Z"  itemprop="datePublished">2015-11-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>换钱的方法数</p>
+<p>给定数组arr，arr中所有的值都为正数且不重复。每个值代表一种面值的货币，每种面值的货币可以使用任意张，再给定一个整数aim代表要找的钱数，求换钱有多少种方法。</p>
+<p>arr=[5,10,25,1]，aim=0。<br>组成0元的方法有1种，就是所有面值的货币都不用。所以返回1。<br>arr=[5,10,25,1]，aim=15。<br>组成15元的方法有6种，分别为3张5元，1张10元+1张5元，1张10元+5张1元，10张1元+1张5元，2张5元+5张1元，15张1元。所以返回6。<br>arr=[3,5]，aim=2。<br>任何方法都无法组成2元。所以返回0。</p>
+<a id="more"></a>
+<h2 id="思路-amp-代码"><a href="#思路-amp-代码" class="headerlink" title="思路 &amp; 代码"></a>思路 &amp; 代码</h2><h3 id="暴力的递归"><a href="#暴力的递归" class="headerlink" title="暴力的递归"></a>暴力的递归</h3><p>如果arr=[5,10,25,1]， aim=1000，分析过程如下</p>
+<ul>
+<li>用0张5元的货币，让[10,25,1]去组成剩下的1000，最终方法数记为res1。</li>
+<li>用1张5元的货币，让[10,25,1]去组成剩下的995，最终方法数记为res2。</li>
+<li>用2张5元的货币，让[10,25,1]去组成剩下的990，最终方法数记为res3。</li>
+<li>…</li>
+<li>用200张5元的货币，让[10,25,1]去组成剩下的0，最终方法数记为res201。</li>
+</ul>
+<p>那么res1+res2+…+res201的值就是总共的方法数。<br>根据如上的分析过程定义递归函数<code>process1(arr,index,aim)</code>，<br>它的含义是如果用arr[index..N-1]这些面值的钱去组成aim的话，<br>返回总共的方法数。具体实现如下代码中的coins1方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public int coins1(int[] arr, int aim) &#123;</div><div class="line">	if (arr == null || arr.length == 0 || aim &lt; 0) &#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	return f1(arr, 0, aim);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 暴力递归，无优化</div><div class="line">public static int f1(int[] a, int index, int aim) &#123;</div><div class="line">	// 方法数</div><div class="line">	int res = 0;</div><div class="line">	if (index == a.length) &#123;</div><div class="line">		// index已经到了数组的边界，且目标钱数已经减为0，说明这个方法是有效的</div><div class="line">		if (aim == 0) &#123;</div><div class="line">			res = 1;</div><div class="line">		&#125;</div><div class="line">	&#125; else &#123;</div><div class="line">		for (int i = 0; a[index] * i &lt;= aim; i++) &#123;</div><div class="line">			// 注意后面是index+1</div><div class="line">			// 因此每次是先index增加，然后index的个数i增加，增加之后要将aim减少</div><div class="line">			res += f1(a, index + 1, aim - a[index] * i);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="记忆搜索的方法"><a href="#记忆搜索的方法" class="headerlink" title="记忆搜索的方法"></a>记忆搜索的方法</h3><p>接下来介绍基于暴力递归的初步优化的方法，也就是记忆搜索的方法。暴力递归之所以暴力是因为存在大量的重复计算。</p>
+<ul>
+<li>当已经使用0张5元+1张10元的情况下，后续应该求[25,1]组成剩下的990的方法总数。</li>
+<li>当已经使用2张5元+0张10元的情况下，后续还是求[25,1]组成剩下的990的方法总数。</li>
+</ul>
+<p>两个情况下都需要求<code>process1(arr,2,990)</code>。</p>
+<p>类似这样的重复计算在暴力递归的过程中大量发生，所以暴力递归方法的时间复杂度非常高并且<br>和arr中钱的面值有关，最差情况下为O(aim^N)。<br>记忆化搜索的优化方式。 <code>process1(arr,index,aim)</code>中arr是始终不变的，变化的只有index和aim，<br>所以可以用p(index,aim)表示一个递归过程。<br>重复计算之所以大量发生，是因为每一个递归过程的结果都没记下来，所以下次还要重复的去求。<br>所以可以事先准备好一个map，每计算完一个递归过程，都将结果记录到map中。</p>
+<p>当下次进入同样的递归过程之前，先在map中查询是否这个递归过程已经计算过，</p>
+<ul>
+<li>如果已经计算过把值拿出来直接用就可以了</li>
+<li>如果没计算过再进入递归过程。</li>
+</ul>
+<p>具体请参看如下代码中的coins2方法，<br>它和coins1方法的区别就是准备好全局变量map，记录已经计算过的递归过程的结果，防止下次重复计算。<br>因为本题的递归过程可由两个变量表示，所以map是一张二维表。<br>map[i][j]表示递归过程p(i,j)的返回值。</p>
+<ul>
+<li>map[i][j]==0表示递归过程p(i,j)从来没有计算过。</li>
+<li>map[i][j]==-1表示递归过程p(i,j)计算过但返回值是0。</li>
+<li>map[i][j]的值既不等于0也不等于-1，记为a，则表示递归过程p(i,j)的返回值为a。</li>
+</ul>
+<p>记忆化搜索方法的时间复杂度为什么也是O(N*(aim^2))<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">//使用map，减少重复计算</div><div class="line">public int coins2(int[] arr, int aim) &#123;</div><div class="line">	if (arr == null || arr.length == 0 || aim &lt; 0) &#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	//map是存储该方法是否计算过，值为-1表示计算过，且为用此方法返回值为0，map值为0，表示没有计算，</div><div class="line">	int[][] map = new int[arr.length + 1][aim + 1];</div><div class="line">	return f2(arr, 0, aim, map);</div><div class="line">&#125;</div><div class="line">public static int f2(int[] a, int index, int aim, int[][] map)&#123;</div><div class="line">	int res = 0;</div><div class="line">	if(index == a.length)&#123;</div><div class="line">		if(aim == 0)&#123;</div><div class="line">			return 1;</div><div class="line">		&#125;</div><div class="line">	&#125;else&#123;</div><div class="line">		</div><div class="line">		for (int i = 0; a[index] * i &lt;= aim; i++) &#123;</div><div class="line">			//因为下面要算这个，所以先看看map中是否存储</div><div class="line">			int tmp = map[index+1][aim - a[index] * i];</div><div class="line">			if(tmp != 0)&#123;</div><div class="line">				//tmp！=0表示计算过</div><div class="line">				if(tmp != -1)&#123;</div><div class="line">					//tmp=-1表示返回值为0，所以不用加，</div><div class="line">					//tmp！=-1有返回值，且不为0</div><div class="line">					res += tmp;</div><div class="line">				&#125;</div><div class="line">			&#125;else&#123;</div><div class="line">				//该值map中还没有算过，因此要计算一下</div><div class="line">				res += f2(a, index + 1, aim - a[index] * i,map);</div><div class="line">			&#125;</div><div class="line">			// 每次算完一个循环，更新map,更新的此过程的map，即map[index][aim]</div><div class="line">			map[index][aim] = res == 0 ? -1 : res;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="动态规划方法"><a href="#动态规划方法" class="headerlink" title="动态规划方法"></a>动态规划方法</h3><p>组成行数为N，列数为aim+1的矩阵dp，<br>dp[i][j]的含义是<strong>在使用arr[0..i]货币的情况下，组成钱数j有多少种方法</strong>。 </p>
+<p>dp[i][j]的值求法如下：<br>1，对于矩阵dp第一列的值dp[..][0]，表示组成钱数为0的方法数，很明显是1种，也就是不使用任何货币。所以dp第一列的值统一设置为1。<br>2，对于矩阵dp第一行的值dp[0][..]，表示只能使用arr[0]这一种货币的情况下，组成钱的方法数，<br>例如arr[0]==5时，能组成的钱数只有0， 5， 10， 15…。所以令dp[0][k<em>arr[0]]=1(0&lt;=k</em>arr[0]&lt;=aim， k为非负整数)。<br>3，除了第一行和第一列的其他位置，记为位置(i,j)。 dp[i][j]的值是以下几个值的累加。<br>0）完全不用arr[i]货币，只使用arr[0..i-1]货币时，方法数为dp[i-1][j]。<br>1）用1张arr[i]货币，剩下的钱用arr[0..i-1]货币组成时，方法数为dp[i-1][j-arr[i]]。<br>2）用2张arr[i]货币，剩下的钱用arr[0..i-1]货币组成时，方法数为dp[i-1][j-2*arr[i]]。<br>…</p>
+<p>k）用k张arr[i]货币，剩下的钱用arr[0..i-1]货币组成时，方法数为dp[i-1][j-k<em>arr[i]]。<br>j-k</em>arr[i]&gt;=0， k为非负整数。<br>4，最终dp[N-1][aim]的值就是最终结果。<br>具体过程请参看如下代码中的coins3方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">public static int coins3(int[] arr, int aim) &#123;</div><div class="line">	if (arr == null || arr.length == 0 || aim &lt; 0) &#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	//dp[i][j]表示使用arr[0..i]货币的情况下，组成钱数j有多少种方法</div><div class="line">	int[][] dp = new int[arr.length][aim + 1];</div><div class="line">	//初始化</div><div class="line">	for (int i = 0; i &lt; arr.length; i++) &#123;</div><div class="line">		//使用arr[0..i]货币的情况下，组成钱数0有1种</div><div class="line">		dp[i][0] = 1;</div><div class="line">	&#125;</div><div class="line">	for (int j = 1; arr[0] * j &lt;= aim; j++) &#123;</div><div class="line">		////使用arr[0]货币的情况下，只能组成arr[0]的倍数的钱数</div><div class="line">		dp[0][arr[0] * j] = 1;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	int num = 0;</div><div class="line">	//dp[i][j]使用dp[i-1][j]即不使用arr[i]的货币，组成j的方法数</div><div class="line">	//当使用arr[i]的货币的时候</div><div class="line">	//那么使用1张arr[i]，有dp[i-1][j-arr[i]]</div><div class="line">	//那么使用2张arr[i]，有dp[i-1][j-arr[i]*2]</div><div class="line">	//...因此当使用k张arr[i]的货币，方法数为dp[i-1][j-arr[i]*k]</div><div class="line">	for (int i = 1; i &lt; arr.length; i++) &#123;</div><div class="line">		for (int j = 1; j &lt;= aim; j++) &#123;</div><div class="line">			num = 0;</div><div class="line">			for (int k = 0; j - arr[i] * k &gt;= 0; k++) &#123;</div><div class="line">				num += dp[i - 1][j - arr[i] * k];</div><div class="line">			&#125;</div><div class="line">			//更新dp</div><div class="line">			dp[i][j] = num;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return dp[arr.length - 1][aim];</div><div class="line">&#125;</div><div class="line">``` </div><div class="line">在最差情况下对于位置(i,j)来说，求解dp[i][j]的计算过程需要枚举dp[i-1][0..j]上的所有值，</div><div class="line">dp一共有N*aim个位置，所以总体的时间复杂度为O(N*(aim^2))。</div><div class="line"></div><div class="line">解释之前记忆化搜索方法的时间复杂度为什么也是O(N*(aim^2))，</div><div class="line">因为在本质上记忆化搜索方法等价于动态规划方法。</div><div class="line">记忆化搜索的方法说白了就是不关心到达某一个递归过程的路径，只是单纯的对计算过的递归过程进行记录，避免重复的递归过程</div><div class="line">动态规划的方法则是规定好每一个递归过程的计算顺序，依次进行计算，后计算的过程严格依赖前者计算过的过程。</div><div class="line">两者都是空间换时间的方法，也都有枚举的过程，</div><div class="line">区别就在于动态规划规定计算顺序而记忆搜索不用规定。</div><div class="line">所以记忆化搜索方法的时间复杂度也是O(N*(aim^2))。</div><div class="line">两者各有优缺点，</div><div class="line">如果对暴力递归过程简单地优化成记忆搜索的方法，递归函数依然在使用，这在过程上的开销较大。</div><div class="line">动态规划方法严格规定了计算顺序，可以将递归计算变成顺序计算，这是动态规划方法很大的优势。</div><div class="line">其实记忆搜索的方法也有优势，本题就很好的体现了。</div><div class="line">例如arr=[20000,10000,1000]， aim=2000000000。</div><div class="line">如果是动态规划的计算方法，要严格计算3*2000000000个位置。</div><div class="line">对于记忆搜索来说，因为面值最小的钱为1000，所以百位为(1~9)或⼗位为(1~9)或各位为(1~9)的钱数是不可能出现的，当然也就不必要计算。</div><div class="line">通过本例可以知道，记忆化搜索是对必须要计算的递归过程才去计算并记录的。</div><div class="line"></div><div class="line">### 优化dp</div><div class="line"></div><div class="line">时间复杂度为O(N*aim)的动态规划方法。</div><div class="line">我们来看上一个动态规划方法中，求dp[i][j]值的时候的步骤3，这也是最关键的枚举过程：</div><div class="line">3，除了第一行和第一列的其他位置，记为位置(i,j)。 dp[i][j]的值是以下几个值的累加。</div><div class="line">0）完全不用arr[i]货币，只使用arr[0..i-1]货币时，方法数为dp[i-1][j]。</div><div class="line">1）用1张arr[i]货币，剩下的钱用arr[0..i-1]货币组成时，方法数为dp[i-1][j-arr[i]]。</div><div class="line">2）用2张arr[i]货币，剩下的钱用arr[0..i-1]货币组成时，方法数为dp[i-1][j-2*arr[i]]。</div><div class="line">...</div><div class="line">k）用k张arr[i]货币，剩下的钱用arr[0..i-1]货币组成时，方法数为dp[i-1][j-k*arr[i]]。</div><div class="line">j-k*arr[i]&gt;=0， k为非负整数。</div><div class="line">步骤3中，情况0）的方法数为dp[i-1][j]，</div><div class="line">情况1）一直到情况k）的方法数累加值其实就是dp[i][j-arr[i]]的值。</div><div class="line">![推导过程](http://7xilc8.com1.z0.glb.clouddn.com/7.2_dp.png &quot;推导过程&quot;)</div><div class="line">所以步骤3可以化简为dp[i][j]=dp[i-1][j]+dp[i][j-arr[i]]。</div><div class="line">一下省去了枚举的过程，时间复杂度也减为O(N*aim)，具体请参看如下代码中的coins4方法。</div></pre></td></tr></table></figure></p>
+<p>//优化dp<br>public static int coins4(int[] arr, int aim) {<br>    if (arr == null || arr.length == 0 || aim &lt; 0) {<br>        return 0;<br>    }<br>    // dp[i][j]表示使用arr[0..i]货币的情况下，组成钱数j有多少种方法<br>    int[][] dp = new int[arr.length][aim + 1];<br>    // 初始化<br>    for (int i = 0; i &lt; arr.length; i++) {<br>        // 使用arr[0..i]货币的情况下，组成钱数0有1种<br>        dp[i][0] = 1;<br>    }<br>    for (int j = 1; arr[0] <em> j &lt;= aim; j++) {<br>        // 使用arr[0]货币的情况下，只能组成arr[0]的倍数的钱数<br>        dp[0][arr[0] </em> j] = 1;<br>    }<br>    //计算其余的dp<br>    for (int i = 1; i &lt; arr.length; i++) {<br>        for (int j = 1; j &lt;= aim; j++) {<br>            //dp[i][j] = dp[i-1][j] + dp[i-1][j-arr[i]]<br>            //先要判断j-arr[i]是否越界<br>            dp[i][j] = dp[i-1][j];<br>            if(j-arr[i] &gt;= 0){<br>                dp[i][j] += dp[i-1][j-arr[i]];<br>            }<br>        }<br>    }<br>    return dp[arr.length - 1][aim];<br>}<br>```</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-17T08:53:02.000Z" itemprop="dateUpdated">2015年11月17日 16:53</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/16/8.2/" target="_blank" rel="external">http://duyao.github.io/2015/11/16/8.2/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/16/8.2/&title=《8.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/16/8.2/&title=《8.2》 — Du Yao's blog&source=题目换钱的方法数
+给定数组arr，arr中所有的值都为正数且不重复。每个值代表一种面值的货币，每种面值的货币可以使用任意张，再给定一个整数aim代表要找的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/16/8.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《8.2》 — Du Yao's blog&url=http://duyao.github.io/2015/11/16/8.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/16/8.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/17/9.1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">9.1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/16/8.1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">8.1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="8.2" data-title="8.2" data-url="http://duyao.github.io/2015/11/16/8.2/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/16/8.2/&title=《8.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/16/8.2/&title=《8.2》 — Du Yao's blog&source=题目换钱的方法数
+给定数组arr，arr中所有的值都为正数且不重复。每个值代表一种面值的货币，每种面值的货币可以使用任意张，再给定一个整数aim代表要找的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/16/8.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《8.2》 — Du Yao's blog&url=http://duyao.github.io/2015/11/16/8.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/16/8.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/16/8.2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

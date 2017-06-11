@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>java内存区域 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="jvm">
+    <meta name="description" content="简介在一台物理机中，内存可以分为物理内存和虚拟内存(Linux中swap的空间活跃度反应着物理内存)而对于内存的使用是由该机器的操作系统完成，因此有可以划分为内核空间和用户空间。在java中，需要向操作系统申请内存的主要有：java堆、线程、类和类加载器、NIO、JNI(native memory) java内存分配java虚拟机运行时数据区主要分为5个部分：方法区(常量池)、堆、虚拟机栈、本地方">
+<meta name="keywords" content="jvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java内存区域">
+<meta property="og:url" content="http://duyao.github.io/2017/02/22/java内存区域/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="简介在一台物理机中，内存可以分为物理内存和虚拟内存(Linux中swap的空间活跃度反应着物理内存)而对于内存的使用是由该机器的操作系统完成，因此有可以划分为内核空间和用户空间。在java中，需要向操作系统申请内存的主要有：java堆、线程、类和类加载器、NIO、JNI(native memory) java内存分配java虚拟机运行时数据区主要分为5个部分：方法区(常量池)、堆、虚拟机栈、本地方">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/objecthead.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/jubing.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/zhizhen.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/ms.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/copy.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/mc.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8.png">
+<meta property="og:updated_time" content="2017-04-21T08:01:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java内存区域">
+<meta name="twitter:description" content="简介在一台物理机中，内存可以分为物理内存和虚拟内存(Linux中swap的空间活跃度反应着物理内存)而对于内存的使用是由该机器的操作系统完成，因此有可以划分为内核空间和用户空间。在java中，需要向操作系统申请内存的主要有：java堆、线程、类和类加载器、NIO、JNI(native memory) java内存分配java虚拟机运行时数据区主要分为5个部分：方法区(常量池)、堆、虚拟机栈、本地方">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/objecthead.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">java内存区域</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">java内存区域</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-22T01:31:32.000Z" itemprop="datePublished" class="page-time">
+  2017-02-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#java内存分配"><span class="post-toc-number">2.</span> <span class="post-toc-text">java内存分配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java虚拟机运行时数据区"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">java虚拟机运行时数据区</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象的创建过程"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">对象的创建过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象实例化分析"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">对象实例化分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java调优参数"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">java调优参数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#垃圾回收"><span class="post-toc-number">3.</span> <span class="post-toc-text">垃圾回收</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象已死吗"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">对象已死吗</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引用计数法"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">引用计数法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可达性分析算法"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">可达性分析算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引用"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">引用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#finalize"><span class="post-toc-number">3.1.4.</span> <span class="post-toc-text">finalize()</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#垃圾收集算法"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">垃圾收集算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标记清除Mask-Sweep"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">标记清除Mask-Sweep</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复制算法Copying"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">复制算法Copying</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标记整理法Mask-Compact"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">标记整理法Mask-Compact</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分代收集算法"><span class="post-toc-number">3.2.4.</span> <span class="post-toc-text">分代收集算法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#垃圾收集器"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">垃圾收集器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对比"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">对比</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GC分类"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">GC分类</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内存分配"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">内存分配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对象优先分配在Eden新生代"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">对象优先分配在Eden新生代</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#大对象直接进入老年代"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">大对象直接进入老年代</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#长期存活的对象将进入老年代"><span class="post-toc-number">3.4.3.</span> <span class="post-toc-text">长期存活的对象将进入老年代</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#性能分析工具"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">性能分析工具</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一些问题"><span class="post-toc-number">4.</span> <span class="post-toc-text">一些问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内存溢出和内存泄漏"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">内存溢出和内存泄漏</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-java内存区域"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">java内存区域</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年02月22日 9:31" datetime="2017-02-22T01:31:32.000Z"  itemprop="datePublished">2017-02-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>在一台物理机中，内存可以分为物理内存和虚拟内存(Linux中swap的空间活跃度反应着物理内存)<br>而对于内存的使用是由该机器的操作系统完成，因此有可以划分为内核空间和用户空间。<br>在java中，需要向操作系统申请内存的主要有：java堆、线程、类和类加载器、NIO、JNI(native memory)</p>
+<h1 id="java内存分配"><a href="#java内存分配" class="headerlink" title="java内存分配"></a>java内存分配</h1><h2 id="java虚拟机运行时数据区"><a href="#java虚拟机运行时数据区" class="headerlink" title="java虚拟机运行时数据区"></a>java虚拟机运行时数据区</h2><p>主要分为5个部分：方法区(常量池)、堆、虚拟机栈、本地方法栈和程序计数器<br>隔离vpn，方法堆共享(vpn指的是v虚拟机栈virtual machine stack,p指的是program counter register程序计数器，n指的是本地方法栈native methid stack)</p>
+<ul>
+<li><p>程序计数器Program Counter Register<br>不共享，用来记录当前线程所执行的字节码行号，<strong>每个线程都有自己的程序计数器</strong></p>
+</li>
+<li><p>java虚拟机栈 Java Virtual Machine Stack<br>线程私有，与线程生命周期相同，<strong>存放基本类型和对象引用</strong><br>其内部存放java方法的内存模型，<strong>每一个线程的执行都会创建一个栈，而线程内部每个方法执行的时候都会创建一个栈帧stack frame</strong>，方法完成时就会将该栈帧移除。<br><strong>栈帧中有局部变量表、操作数栈</strong>、动态链接、方法返回地址和一些额外的附加信息。在<strong>编译</strong>程序代码时，栈帧中需要多大的局部变量表、多深的操作数栈都已经<strong>完全确定</strong>了，并且写入了方法表的Code属性之中。<br>因此，一个栈帧需要分配多少内存，不会受到程序运行期变量数据的影响，而仅仅取决于具体的虚拟机实现。<br>栈帧的入栈出栈过程对应着方法的执行与完成</p>
+</li>
+</ul>
+<ul>
+<li><p>本地方法栈 Native Method Stack<br>java虚拟机栈为java方法（字节码）服务，本地方法栈为虚拟机使用到的Native方法服务</p>
+</li>
+<li><p>Java堆 Heap<br>共享，存放着<strong>对象实例和数组</strong>，都是非静态属性，是垃圾回收的主要区域<br>所有的对象实例都会在堆上分配。这句话随着逃逸分析技术的成熟变得不是那么绝对了。<br>逃逸分析就是分析一个实例是否会被其他对象拥有甚至改变，如果没有，说明这个对象是私有的，那么为了减小gc压力，完全可以放在堆上分配。<br>java堆可以划分为新生代和老年代，新生代还可以划分为eden、from survivor、to survivor。<br>java堆是物理上不连续的内存空间，只要是逻辑上连续即可，就像磁盘空间。</p>
+</li>
+<li><p>方法区Method Area<br>共享，用于存放class的相关信息，<strong>存放“类”被加载后的信息，常量，静态变量</strong><br>其中包含<strong>运行时常量池</strong>，具有动态性，运行期间也可能有新的常量放入池中，比如String类的intern()方法和大量产生class文件的应用，比如CGLib字节码增强技术，Jsp文件的应用(Jsp第一次运行时需要便以为java类)、基于OSGI的应用</p>
+</li>
+<li><p>直接内存<br>javaNIO通过通道与缓冲区的方法分配使用</p>
+</li>
+</ul>
+<h2 id="对象的创建过程"><a href="#对象的创建过程" class="headerlink" title="对象的创建过程"></a>对象的创建过程</h2><p>1、 遇到new指令，先去常量池定位这个类的引用，如果没有加载过，就执行类的加载过程<br>2、 类加载检查完成后，为新生对象分配内存，这个大小是在加载过程中就可以确定的<br>3、 虚拟机对对象进行必要的设置，即gc分代年龄、锁、元数据等信息放在对象头中。<br>HotSpot虚拟机中，对象在内存中存储的布局可以分为三块区域：对象头（Header）、实例数据（Instance Data）和对齐填充（Padding）。  </p>
+<p>HotSpot虚拟机的对象头(Object Header)包括两部分信息：<br>第一部分用于存储对象自身的运行时数据， 如哈希码（HashCode）、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳等等，这部分数据的长度在32位和64位的虚拟机（暂 不考虑开启压缩指针的场景）中分别为32个和64个Bits，官方称它为“Mark Word”。<br>对象头的另外一部分是类型指针，即是对象指向它的类的元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。<br>并不是所有的虚拟机实现都必须在对象数据上保留类型指针，换句话说查找对象的元数据信息并不一定要经过对象本身。<br>另外，如果对象是一个Java数组，那在对象头中还必须有一块用于记录数组长度的数据，因为虚拟机可以通过普通Java对象的元数据信息确定Java对象的大小，但是从数组的元数据中无法确定数组的大小。<br><img src="http://7xilc8.com1.z0.glb.clouddn.com/objecthead.png" alt="堆中的对象头"></p>
+<p>实例数据：是对象真正存储的有效信息。包括原生类型（primitive type）和对象引用（reference）。<br>对齐填充：Java对象占用空间是8字节对齐的，即所有Java对象占用bytes数必须是8的倍数。</p>
+<p>从上面可以看出每个对象的对象头都存放着锁的信息，在堆中。<br>在运行期间java对象头里Mark Word里存储的数据会随着锁标志位的变化而变化。</p>
+<p>4、 执行init方法，按照程序意愿执行<br>-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8</p>
+<h2 id="对象实例化分析"><a href="#对象实例化分析" class="headerlink" title="对象实例化分析"></a>对象实例化分析</h2><p>对内存分配情况分析最常见的示例便是对象实例化:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object obj = new Object();</div></pre></td></tr></table></figure></p>
+<p>这段代码的执行会涉及java栈、Java堆、方法区三个最重要的内存区域。</p>
+<ul>
+<li>obj会作为引用类型（reference）的数据保存在Java栈的本地变量表中</li>
+<li>Java堆中保存该引用的实例化对象</li>
+<li>Java堆中还必须包含能查找到此对象类型数据的地址信息（如对象类型、父类、实现的接口、方法等）</li>
+<li>这些对象类型数据则保存在方法区中。</li>
+</ul>
+<p>可以看出，一个对象的建立，会在堆和栈都分配空间<br>在堆中分配的内存实际建立对象，而栈中分配的内存只是一个指向这个堆对象的指针。</p>
+<p>另外，由于reference类型在Java虚拟机规范里面只规定了一个指向对象的引用，并没有定义这个引用应该通过哪种方式去定位，以及访问到Java堆中的对象的具体位置，因此不同虚拟机实现的对象访问方式会有所不同，主流的访问方式有两种：使用句柄池和直接使用指针。</p>
+<p>通过句柄池访问的方式如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/jubing.png" alt="句柄池访问" title="">
+                </div>
+                <div class="image-caption">句柄池访问</div>
+            </figure></p>
+<p>通过直接指针访问的方式如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/zhizhen.png" alt="直接指针访问" title="">
+                </div>
+                <div class="image-caption">直接指针访问</div>
+            </figure></p>
+<h2 id="java调优参数"><a href="#java调优参数" class="headerlink" title="java调优参数"></a>java调优参数</h2><p>-Xmx:MaxHeapSize堆内存最大的大小<br>-Xms:InitialHeapSize堆内存初始大小<br>-Xss:设置每个线程的堆栈大小<br>-Xmn:新生代的大小<br>-SuriviorRatio:新生代中Eden与Surivior的比值<br>比如Eden：Survivor=<strong>3</strong>，Survivor区有两个，即将年轻代分为<strong>5</strong>份，每个Survivor区占一份<br>-XX:PretenureSizeThreshold：大于这个数值大小的对象直接在老年代分配<br>-XX:MaxPermSize:永久代的最大值</p>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><h2 id="对象已死吗"><a href="#对象已死吗" class="headerlink" title="对象已死吗"></a>对象已死吗</h2><p>在垃圾回收前，要判断对象是否已经死去</p>
+<h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>引用计数法很难解决相互循环引用的问题<br>比如obja = ojbb,objb =ojba他们互相引用，但是却再也没有其他对象引用他们</p>
+<h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3><p>该方法用了从GC Roots作为起点，向下搜索，这样走过的路径叫做引用链<br>当一个对象到达RCRoots没有引用链的时候，证明这个对象不可用<br>通常GCRoots有</p>
+<ul>
+<li>虚拟机栈中本地变量表</li>
+<li>方法区中常量引用对象</li>
+<li>方法区中静态类引用对象</li>
+<li>本地方法栈中引用对象</li>
+</ul>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
+<li>强引用<br>类似于<code>Object obj = new Object()</code>，只要强引用还在就不会被回收</li>
+<li>软引用<br>有用但是非必须，发生系统内存溢出之前，会列入垃圾回收</li>
+<li>弱引用<br>非必须对象，只能活到下一次回收前</li>
+<li>虚拟引用<br>无法通过虚拟引用获得一个对象<br>设置幽灵引用目的是对象回收时会得到系统通知</li>
+</ul>
+<h3 id="finalize"><a href="#finalize" class="headerlink" title="finalize()"></a>finalize()</h3><p>在可达性分析之后，一个对象不是被被宣判死刑，而是死缓<br>宣告一个对象死亡要经过至少两次标记<br>1、 可达性分析，发现没有与GCRoots链接，标记<br>2、 执行过finalize()方法后，标记<br>被第一次标记后，还可以在finalize方法中重新建立与其他对象的联系，这就可以逃逸了<br>值得注意的是<strong>finalize方法只能被执行一次</strong></p>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><h3 id="标记清除Mask-Sweep"><a href="#标记清除Mask-Sweep" class="headerlink" title="标记清除Mask-Sweep"></a>标记清除Mask-Sweep</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/ms.png" alt="标记清除Mask-Sweep" title="">
+                </div>
+                <div class="image-caption">标记清除Mask-Sweep</div>
+            </figure>
+<p>不足：效率低和产生大量不连续内存碎片</p>
+<h3 id="复制算法Copying"><a href="#复制算法Copying" class="headerlink" title="复制算法Copying"></a>复制算法Copying</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/copy.png" alt="复制算法Copying" title="">
+                </div>
+                <div class="image-caption">复制算法Copying</div>
+            </figure>
+<p>将内存分为两块，每次只使用其中的一块，这一块使用完了，就将存活的对象复制到另一块上面去<br>代价是将内存减半，同时如果对象存活率高，就要进行多次复制<br>现代的虚拟机用这种算法回收新生代<br>将一个内存分为较大的Eden和两个较小的Survovor区<br>每次使用Eden和其中一块Survior，回收时，将存活对象复制到另一个Survior区，最后清理Eden和用过的Survior<br>HotSpot默认的Eden和Survior比例为8:1</p>
+<h3 id="标记整理法Mask-Compact"><a href="#标记整理法Mask-Compact" class="headerlink" title="标记整理法Mask-Compact"></a>标记整理法Mask-Compact</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/mc.png" alt="标记整理法Mask-Compact" title="">
+                </div>
+                <div class="image-caption">标记整理法Mask-Compact</div>
+            </figure>
+<p>过程与标记清除一样，但是后续不是清理而是<strong>移动</strong>存活对象，然后清理掉端边界以外的对象</p>
+<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>把java堆分为新生代Young和老年代Old</p>
+<p>将新生代Young分为较大的Eden和两个较小的Survovor区，<strong>新创建的对象一定都在eden中</strong><br>每次使用Eden和其中一块Survior，当Eden空间不足触发minor GC，就会将存活对象复制到另一个Survior区，最后清理Eden和用过的Survior，保证始终都有一个Surivior区是空的<br>HotSpot默认的Eden和Survior比例为8:1</p>
+<p>老年代Old存放的是新生代的Survovor区满后触发minor GC仍然存活的对象。<br>当Eden区满后会将对象存放到Survivor区，如果Survivor区仍然存不下这些对象时，GC收集器会将这些对象放大Old区。<br>如果Old也满了就会出发Full GC，回收整个堆内存。</p>
+<p>方法区中被称为是永久区Perm<br>永久区主要存放的是Class的类对象。<br>如果一个类被频繁加载，很可能会导致Perm区满。<br>Perm的垃圾回收是有Full GC触发的。</p>
+<p><strong>新生代</strong>每次有大量对象死去，所以用<strong>复制法</strong><br><strong>老年代</strong>存活率高，用<strong>标记清除</strong>或者<strong>标记整理</strong></p>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8.png" alt="垃圾收集器" title="">
+                </div>
+                <div class="image-caption">垃圾收集器</div>
+            </figure>
+<p>连线表示可以配合使用</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">收集器</th>
+<th style="text-align:center">特点</th>
+<th style="text-align:center">场景</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Serial</td>
+<td style="text-align:center">单线程</td>
+<td style="text-align:center">新生代</td>
+<td>经常在用在Client模式下</td>
+</tr>
+<tr>
+<td style="text-align:center">ParNew</td>
+<td style="text-align:center">并行parallel</td>
+<td style="text-align:center">新生代</td>
+<td>多线程版的Serial，复制算法</td>
+</tr>
+<tr>
+<td style="text-align:center">Parellel Scavenge</td>
+<td style="text-align:center">并行parallel</td>
+<td style="text-align:center">新生代</td>
+<td>关注吞吐量，复制算法</td>
+</tr>
+<tr>
+<td style="text-align:center">Serial Old</td>
+<td style="text-align:center">单线程</td>
+<td style="text-align:center">老年代</td>
+<td>多线程版的Serial，标记整理</td>
+</tr>
+<tr>
+<td style="text-align:center">Parellel Old</td>
+<td style="text-align:center">并行parallel</td>
+<td style="text-align:center">老年代</td>
+<td>多线程版的Serial，标记整理</td>
+</tr>
+<tr>
+<td style="text-align:center">CMS</td>
+<td style="text-align:center">并发concurrent</td>
+<td style="text-align:center">老年代</td>
+<td>目标是获得最短回收停顿，标记清除MS</td>
+</tr>
+<tr>
+<td style="text-align:center">G1</td>
+<td style="text-align:center">p&amp;C</td>
+<td style="text-align:center">新生代&amp;老年代</td>
+<td>新一代收集器，将堆划分为独立区域</td>
+</tr>
+</tbody>
+</table>
+<p>并发concurrent的关键是你有处理多个任务的能力，<strong>不一定要同时</strong>。<br>并行parallel的关键是你有<strong>同时处理多个任务</strong>的能力。</p>
+<h3 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h3><ul>
+<li>Minor GC 新生代<br>当Eden区满时，触发Minor GC。因为大多数对象是朝生熄灭，所以Minor GC很频繁，而且速度很快</li>
+<li>Major GC / Full GC 老年代<br>发生在老年代的动作，出现Major GC，至少会伴随一次Minor GC，且速度比Minor GC慢10倍<br>（1）调用System.gc时，系统建议执行Full GC，但是不必然执行<br>（2）老年代空间不足<br>（3）方法区空间不足<br>（4）通过Minor GC后进入老年代的平均大小大于老年代的可用内存<br>（5）由Eden区、From Space区向To Space区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小</li>
+</ul>
+<h2 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h2><h3 id="对象优先分配在Eden新生代"><a href="#对象优先分配在Eden新生代" class="headerlink" title="对象优先分配在Eden新生代"></a>对象优先分配在Eden新生代</h3><h3 id="大对象直接进入老年代"><a href="#大对象直接进入老年代" class="headerlink" title="大对象直接进入老年代"></a>大对象直接进入老年代</h3><p>比如很长的字符串和数组</p>
+<h3 id="长期存活的对象将进入老年代"><a href="#长期存活的对象将进入老年代" class="headerlink" title="长期存活的对象将进入老年代"></a>长期存活的对象将进入老年代</h3><ul>
+<li>适用对象年龄计数器，每经过一次Minor GC年龄增加，到达一定的阈值(15)转为老年代</li>
+<li>动态设定年龄的阈值，相同年龄的占一半就动态改变</li>
+</ul>
+<h2 id="性能分析工具"><a href="#性能分析工具" class="headerlink" title="性能分析工具"></a>性能分析工具</h2><ul>
+<li>jps<br>显示所有虚拟机线程</li>
+<li>jstat<br>虚拟机各方面数据</li>
+<li>jinfo<br>虚拟机配置信息</li>
+<li>jmap<br>内存快照</li>
+<li><p>jstack<br>线程快照</p>
+</li>
+<li><p>jconsole 可视化工具</p>
+</li>
+<li>VisualVM插件需要下载</li>
+</ul>
+<p>调优经验<br><a href="https://www.ibm.com/developerworks/cn/java/j-lo-jvm-optimize-experience/index.html" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/j-lo-jvm-optimize-experience/index.html</a></p>
+<h1 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h1><h2 id="内存溢出和内存泄漏"><a href="#内存溢出和内存泄漏" class="headerlink" title="内存溢出和内存泄漏"></a>内存溢出和内存泄漏</h2><p>内存溢出 out of memory，是指程序在申请内存时，没有足够的内存空间供其使用，出现out of memory；比如申请了一个integer,但给它存了long才能存下的数，那就是内存溢出。<br>内存泄露 memory leak，是指程序在申请内存后，无法释放已申请的内存空间，一次内存泄露危害可以忽略，但内存泄露堆积后果很严重，无论多少内存,迟早会被占光。其实说白了就是该内存空间使用完毕之后未回收。<br>典型的内存泄漏比如我们自己用数组实现一个stack，当pop出去后<br><a href="http://www.importnew.com/12961.html" target="_blank" rel="external">http://www.importnew.com/12961.html</a><br><a href="https://www.ibm.com/support/knowledgecenter/en/SSEQTP_9.0.0/com.ibm.websphere.base.doc/ae/ctrb_memleakdetection.html" target="_blank" rel="external">https://www.ibm.com/support/knowledgecenter/en/SSEQTP_9.0.0/com.ibm.websphere.base.doc/ae/ctrb_memleakdetection.html</a><br>上面的代码实现了一个栈（先进后出（FILO））结构，乍看之下似乎没有什么明显的问题，它甚至可以通过你编写的各种单元测试。然而其中的pop方法却存在内存泄露的问题，当我们用pop方法弹出栈中的对象时，该对象不会被当作垃圾回收，即使使用栈的程序不再引用这些对象，因为栈内部维护着对这些对象的过期引用（obsolete reference）。在支持垃圾回收的语言中，内存泄露是很隐蔽的，这种内存泄露其实就是无意识的对象保持。如果一个对象引用被无意识的保留起来了，那么垃圾回收器不会处理这个对象，也不会处理该对象引用的其他对象，即使这样的对象只有少数几个，也可能会导致很多的对象被排除在垃圾回收之外，从而对性能造成重大影响，极端情况下会引发Disk Paging（物理内存与硬盘的虚拟内存交换数据），甚至造成OutOfMemoryError。<br><a href="http://blog.csdn.net/jackfrued/article/details/44921941" target="_blank" rel="external">http://blog.csdn.net/jackfrued/article/details/44921941</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-21T08:01:44.000Z" itemprop="dateUpdated">2017年4月21日 16:01</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/02/22/java内存区域/" target="_blank" rel="external">http://duyao.github.io/2017/02/22/java内存区域/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/">jvm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/22/java内存区域/&title=《java内存区域》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/22/java内存区域/&title=《java内存区域》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/22/java内存区域/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java内存区域》 — Du Yao's blog&url=http://duyao.github.io/2017/02/22/java内存区域/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/22/java内存区域/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/02/23/虚拟机执行/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">虚拟机执行</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/21/图及其相关/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">图及其相关</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="java内存区域" data-title="java内存区域" data-url="http://duyao.github.io/2017/02/22/java内存区域/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/22/java内存区域/&title=《java内存区域》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/22/java内存区域/&title=《java内存区域》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/22/java内存区域/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java内存区域》 — Du Yao's blog&url=http://duyao.github.io/2017/02/22/java内存区域/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/22/java内存区域/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/02/22/java内存区域/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

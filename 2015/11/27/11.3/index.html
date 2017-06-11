@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>11.3 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="二叉树的序列化和反序列化二叉树被记录成文件的过程，叫做二叉树的序列化，通过文件内容重建原来二叉树的过程叫做二叉树的反序列化。给定一棵二叉树的头节点head，并已知二叉树节点值的类型为32位整型。请设计一种二叉树序列化和反序列化的方案并用代码实现。 应用：判断两颗二叉树中是否有子树完全相同，先序列化为文件，然后kmp 思路将每个树的节点的值放在字符串中，用一个分隔符分开来，不然会引起歧义，然后将空节">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11.3">
+<meta property="og:url" content="http://duyao.github.io/2015/11/27/11.3/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="二叉树的序列化和反序列化二叉树被记录成文件的过程，叫做二叉树的序列化，通过文件内容重建原来二叉树的过程叫做二叉树的反序列化。给定一棵二叉树的头节点head，并已知二叉树节点值的类型为32位整型。请设计一种二叉树序列化和反序列化的方案并用代码实现。 应用：判断两颗二叉树中是否有子树完全相同，先序列化为文件，然后kmp 思路将每个树的节点的值放在字符串中，用一个分隔符分开来，不然会引起歧义，然后将空节">
+<meta property="og:updated_time" content="2015-11-27T12:59:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="11.3">
+<meta name="twitter:description" content="二叉树的序列化和反序列化二叉树被记录成文件的过程，叫做二叉树的序列化，通过文件内容重建原来二叉树的过程叫做二叉树的反序列化。给定一棵二叉树的头节点head，并已知二叉树节点值的类型为32位整型。请设计一种二叉树序列化和反序列化的方案并用代码实现。 应用：判断两颗二叉树中是否有子树完全相同，先序列化为文件，然后kmp 思路将每个树的节点的值放在字符串中，用一个分隔符分开来，不然会引起歧义，然后将空节">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">11.3</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">11.3</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-27T05:55:45.000Z" itemprop="datePublished" class="page-time">
+  2015-11-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树的序列化和反序列化"><span class="post-toc-number">1.</span> <span class="post-toc-text">二叉树的序列化和反序列化</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#思路"><span class="post-toc-number">2.</span> <span class="post-toc-text">思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#先序序列化及反序列化"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">先序序列化及反序列化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#层次序列化及反序列化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">层次序列化及反序列化</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-11.3"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">11.3</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月27日 13:55" datetime="2015-11-27T05:55:45.000Z"  itemprop="datePublished">2015-11-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="二叉树的序列化和反序列化"><a href="#二叉树的序列化和反序列化" class="headerlink" title="二叉树的序列化和反序列化"></a>二叉树的序列化和反序列化</h1><p>二叉树被记录成文件的过程，叫做二叉树的序列化，通过文件内容重建原来二叉树的过程叫做二叉树的反序列化。<br>给定一棵二叉树的头节点head，并已知二叉树节点值的类型为32位整型。<br>请设计一种二叉树序列化和反序列化的方案并用代码实现。</p>
+<p>应用：判断两颗二叉树中是否有子树完全相同，先序列化为文件，然后kmp</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>将每个树的节点的值放在字符串中，用一个分隔符分开来，不然会引起歧义，然后将空节点也用特殊符号代替<br>本题用<code>!</code>代表分隔符，用<code>#</code>表示空结点<br>思路就是先序遍历和层次遍历，注意处理过程稍有不同<br><a id="more"></a></p>
+<h2 id="先序序列化及反序列化"><a href="#先序序列化及反序列化" class="headerlink" title="先序序列化及反序列化"></a>先序序列化及反序列化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">// 先序序列化</div><div class="line">//类似于树的先序遍历</div><div class="line">public static String serialByPre(Node head) &#123;</div><div class="line">	if (head == null) &#123;</div><div class="line">		return &quot;#!&quot;;</div><div class="line">	&#125;</div><div class="line">	//处理根节点，然后左右节点</div><div class="line">	String res = head.value + &quot;!&quot;;</div><div class="line">	res += serialByPre(head.left);</div><div class="line">	res += serialByPre(head.right);</div><div class="line">	return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 先序反序列化</div><div class="line">public static Node reconByPreString(String preStr) &#123;</div><div class="line">	//分割字符串</div><div class="line">	String[] values = preStr.split(&quot;!&quot;);</div><div class="line">	//将字符添加到队列中</div><div class="line">	Queue&lt;String&gt; preQueue = new LinkedList&lt;String&gt;();</div><div class="line">	for (int i = 0; i &lt; values.length; i++) &#123;</div><div class="line">		preQueue.add(values[i]);</div><div class="line">	&#125;</div><div class="line">	//还原树</div><div class="line">	return reconPreOrder(preQueue);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//还原树的过程类似于树的先序遍历</div><div class="line">public static Node reconPreOrder(Queue&lt;String&gt; queue) &#123;</div><div class="line">	//得到队头结点</div><div class="line">	String string = queue.poll();</div><div class="line">	if(string.equals(&quot;#&quot;))&#123;</div><div class="line">		return null;</div><div class="line">	&#125;</div><div class="line">	//处理根节点</div><div class="line">	Node head = new Node(Integer.valueOf(string));</div><div class="line">	//处理左右节点</div><div class="line">	head.left = reconPreOrder(queue);</div><div class="line">	head.right = reconPreOrder(queue);</div><div class="line">	return head;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="层次序列化及反序列化"><a href="#层次序列化及反序列化" class="headerlink" title="层次序列化及反序列化"></a>层次序列化及反序列化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">// 层次序列化</div><div class="line">public static String serialByLevel(Node head) &#123;</div><div class="line">	if (head == null) &#123;</div><div class="line">		return &quot;#!&quot;;</div><div class="line">	&#125;</div><div class="line">	Queue&lt;Node&gt; queue = new LinkedList&lt;Node&gt;();</div><div class="line"></div><div class="line">	// 头结点入队处理，而不出队时处理</div><div class="line">	// 因为这里对于空节点也要处理</div><div class="line">	String res = Integer.valueOf(head.value) + &quot;!&quot;;</div><div class="line">	queue.add(head);</div><div class="line">	while (!queue.isEmpty()) &#123;</div><div class="line">		Node node = queue.poll();</div><div class="line">		// 入队时处理左右节点，因为有空节点</div><div class="line">		if (node.left != null) &#123;</div><div class="line">			res += Integer.valueOf(node.left.value) + &quot;!&quot;;</div><div class="line">			queue.add(node.left);</div><div class="line">		&#125; else &#123;</div><div class="line">			// 空结点也要处理</div><div class="line">			res += &quot;#!&quot;;</div><div class="line">		&#125;</div><div class="line">		if (node.right != null) &#123;</div><div class="line">			res += Integer.valueOf(node.right.value) + &quot;!&quot;;</div><div class="line">			queue.add(node.right);</div><div class="line">		&#125; else &#123;</div><div class="line">			res += &quot;#!&quot;;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static Node reconByLevelString(String levelStr) &#123;</div><div class="line">	</div><div class="line">	String[] strings = levelStr.split(&quot;!&quot;);</div><div class="line">	//与层次遍历相似</div><div class="line">	Queue&lt;Node&gt; queue = new LinkedList&lt;Node&gt;();</div><div class="line">	int index = 0;</div><div class="line">	//处理头结点并入队</div><div class="line">	Node head = generateNodeByString(strings[index++]);</div><div class="line">	//不空才入队</div><div class="line">	if(head != null)&#123;</div><div class="line">		queue.add(head);</div><div class="line">	&#125;</div><div class="line">	while(!queue.isEmpty())&#123;</div><div class="line">		//出队头</div><div class="line">		Node node = queue.poll();</div><div class="line">		//处理左结点，并入队</div><div class="line">		node.left = generateNodeByString(strings[index++]);</div><div class="line">		if(node.left != null)&#123;</div><div class="line">			queue.add(node.left);</div><div class="line">		&#125;</div><div class="line">		//处理右结点，并入队</div><div class="line">		node.right = generateNodeByString(strings[index++]);</div><div class="line">		if(node.right != null)&#123;</div><div class="line">			queue.add(node.right);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return head;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">// 根据value返回node</div><div class="line">public static Node generateNodeByString(String val) &#123;</div><div class="line">	if (val.equals(&quot;#&quot;)) &#123;</div><div class="line">		return null;</div><div class="line">	&#125;</div><div class="line">	return new Node(Integer.valueOf(val));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-27T12:59:54.000Z" itemprop="dateUpdated">2015年11月27日 20:59</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/27/11.3/" target="_blank" rel="external">http://duyao.github.io/2015/11/27/11.3/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/27/11.3/&title=《11.3》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/27/11.3/&title=《11.3》 — Du Yao's blog&source=二叉树的序列化和反序列化二叉树被记录成文件的过程，叫做二叉树的序列化，通过文件内容重建原来二叉树的过程叫做二叉树的反序列化。给定一棵二叉树的头节点head..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/27/11.3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《11.3》 — Du Yao's blog&url=http://duyao.github.io/2015/11/27/11.3/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/27/11.3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/27/12.2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">12.2</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/26/链表的相关问题/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">链表的相关问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="11.3" data-title="11.3" data-url="http://duyao.github.io/2015/11/27/11.3/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/27/11.3/&title=《11.3》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/27/11.3/&title=《11.3》 — Du Yao's blog&source=二叉树的序列化和反序列化二叉树被记录成文件的过程，叫做二叉树的序列化，通过文件内容重建原来二叉树的过程叫做二叉树的反序列化。给定一棵二叉树的头节点head..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/27/11.3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《11.3》 — Du Yao's blog&url=http://duyao.github.io/2015/11/27/11.3/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/27/11.3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/27/11.3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>设计模式原则和UML图 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计模式">
+    <meta name="description" content="SOLID设计原则SRP：单一指责，每个类，每个方法专注一件事，小方法构成大功能。但是拆分到何种程度？取决于业务，当某个业务变更时发现会同时修改几个方法，那么可以考虑合并。OCP： 对修改关闭，对扩展开放，尽量不修改原有功能，原有功能已经上线，修改有风险，所以设计时考虑可扩展性，能通过扩展实现新的需求。实现OCP的思路有：多态，不要硬编码LSP：里氏替换，对于有继承关系的类，使用子类替换父类。IS">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式原则和UML图">
+<meta property="og:url" content="http://duyao.github.io/2017/04/30/设计模式原则和UML图/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="SOLID设计原则SRP：单一指责，每个类，每个方法专注一件事，小方法构成大功能。但是拆分到何种程度？取决于业务，当某个业务变更时发现会同时修改几个方法，那么可以考虑合并。OCP： 对修改关闭，对扩展开放，尽量不修改原有功能，原有功能已经上线，修改有风险，所以设计时考虑可扩展性，能通过扩展实现新的需求。实现OCP的思路有：多态，不要硬编码LSP：里氏替换，对于有继承关系的类，使用子类替换父类。IS">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/uml_class_struct.jpg">
+<meta property="og:updated_time" content="2017-05-19T11:32:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式原则和UML图">
+<meta name="twitter:description" content="SOLID设计原则SRP：单一指责，每个类，每个方法专注一件事，小方法构成大功能。但是拆分到何种程度？取决于业务，当某个业务变更时发现会同时修改几个方法，那么可以考虑合并。OCP： 对修改关闭，对扩展开放，尽量不修改原有功能，原有功能已经上线，修改有风险，所以设计时考虑可扩展性，能通过扩展实现新的需求。实现OCP的思路有：多态，不要硬编码LSP：里氏替换，对于有继承关系的类，使用子类替换父类。IS">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/uml_class_struct.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">设计模式原则和UML图</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">设计模式原则和UML图</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-30T08:46:35.000Z" itemprop="datePublished" class="page-time">
+  2017-04-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SOLID设计原则"><span class="post-toc-number">1.</span> <span class="post-toc-text">SOLID设计原则</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#uml图"><span class="post-toc-number">2.</span> <span class="post-toc-text">uml图</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛化-generalization"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">泛化(generalization)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现（Realization）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">实现（Realization）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#依赖-Dependency"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">依赖(Dependency)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关联"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">关联</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关联关系-association"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">关联关系(association)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#聚合关系-Aggregation"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">聚合关系(Aggregation)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#组合关系-Composition"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">组合关系(Composition)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设计模式6个原则"><span class="post-toc-number">3.</span> <span class="post-toc-text">设计模式6个原则</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-设计模式原则和UML图"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">设计模式原则和UML图</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年04月30日 16:46" datetime="2017-04-30T08:46:35.000Z"  itemprop="datePublished">2017-04-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="SOLID设计原则"><a href="#SOLID设计原则" class="headerlink" title="SOLID设计原则"></a>SOLID设计原则</h1><p>SRP：单一指责，每个类，每个方法专注一件事，小方法构成大功能。但是拆分到何种程度？取决于业务，当某个业务变更时发现会同时修改几个方法，那么可以考虑合并。<br>OCP： 对修改关闭，对扩展开放，尽量不修改原有功能，原有功能已经上线，修改有风险，所以设计时考虑可扩展性，能通过扩展实现新的需求。实现OCP的思路有：多态，不要硬编码<br>LSP：里氏替换，对于有继承关系的类，使用子类替换父类。<br>ISP：接口隔离，一个大接口不如多个小接口，粒度小，灵活性好，使用小功能组装成大功能，使用一个小功能没有必要引入过多的其他功能。那么接口小到何种程度？也值得思考。<br>DIP：依赖抽象，接口，而不是依赖具体实现。Spring中体现的很明显。</p>
+<h1 id="uml图"><a href="#uml图" class="headerlink" title="uml图"></a>uml图</h1><p>类的关系有泛化(Generalization)、实现（Realization）、依赖(Dependency)和关联(Association)。<br>其中关联又分为一般关联关系和聚合关系(Aggregation)，组合关系(Composition)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">类的关系</div><div class="line">====泛华(继承)</div><div class="line">====实现(接口)</div><div class="line">====依赖(方法参数、返回值)</div><div class="line">====关联</div><div class="line">========关联关系(成员变量)</div><div class="line">========聚合关系(弱依赖)</div><div class="line">========组合关系(强依赖)</div></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/uml_class_struct.jpg" alt="UML类图" title="">
+                </div>
+                <div class="image-caption">UML类图</div>
+            </figure>
+<ul>
+<li>车的类图结构为&lt;<abstract>&gt;，表示车是一个抽象类；</abstract></li>
+<li>它有两个继承类：小汽车和自行车；它们之间的关系为实现关系，使用带空心箭头的虚线表示；</li>
+<li>小汽车为与SUV之间也是继承关系，它们之间的关系为泛化关系，使用带空心箭头的实线表示；</li>
+<li>小汽车与发动机之间是组合关系，使用带实心箭头的实线表示；</li>
+<li>学生与班级之间是聚合关系，使用带空心箭头的实线表示；</li>
+<li>学生与身份证之间为关联关系，使用一根实线表示；</li>
+<li>学生上学需要用到自行车，与自行车是一种依赖关系，使用带箭头的虚线表示；</li>
+</ul>
+<h2 id="泛化-generalization"><a href="#泛化-generalization" class="headerlink" title="泛化(generalization)"></a>泛化(generalization)</h2><p>表示is-a的关系，是对象之间耦合度最大的一种关系，子类继承父类的所有细节。直接使用语言中的继承表达。在类图中使用带三角箭头的实线表示，箭头从子类指向父类。</p>
+<h2 id="实现（Realization）"><a href="#实现（Realization）" class="headerlink" title="实现（Realization）"></a>实现（Realization）</h2><p>在类图中就是接口和实现的关系。这个没什么好讲的。在类图中使用带三角箭头的虚线表示，箭头从实现类指向接口。</p>
+<h2 id="依赖-Dependency"><a href="#依赖-Dependency" class="headerlink" title="依赖(Dependency)"></a>依赖(Dependency)</h2><p>对象之间最弱的一种关联方式，是临时性的关联。代码中一般指由局部变量、函数参数、返回值建立的对于其他对象的调用关系。一个类调用被依赖类中的某些方法而得以完成这个类的一些职责。在类图使用带箭头的虚线表示，箭头从使用类指向被依赖的类。<br>在最终代码中，依赖关系体现为<strong>类构造方法及类方法的传入参数</strong>，箭头的指向为调用关系；依赖关系除了临时知道对方外，还是“使用”对方的方法和属性；</p>
+<h2 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h2><h3 id="关联关系-association"><a href="#关联关系-association" class="headerlink" title="关联关系(association)"></a>关联关系(association)</h3><p>关联关系是用一条直线表示的；它描述不同类的对象之间的结构关系；它是一种静态关系，通常与运行状态无关，一般由常识等因素决定的；<br>它一般用来定义对象之间静态的、天然的结构； 所以，关联关系是一种“强关联”的关系；<br>比如，乘车人和车票之间就是一种关联关系；学生和学校就是一种关联关系；<br>关联关系默认不强调方向，表示对象间相互知道；<br>在最终代码中，<strong>关联对象通常是以成员变量的形式实现的</strong></p>
+<h2 id="聚合关系-Aggregation"><a href="#聚合关系-Aggregation" class="headerlink" title="聚合关系(Aggregation)"></a>聚合关系(Aggregation)</h2><p>表示has-a的关系，是一种不稳定的包含关系。较强于一般关联,有整体与局部的关系,并且没有了整体,局部也可单独存在。如公司和员工的关系，公司包含员工，但如果公司倒闭，员工依然可以换公司。在类图使用空心的菱形表示，菱形从局部指向整体。</p>
+<h2 id="组合关系-Composition"><a href="#组合关系-Composition" class="headerlink" title="组合关系(Composition)"></a>组合关系(Composition)</h2><p>表示contains-a的关系，是一种<strong>强烈</strong>的包含关系。组合类负责被组合类的生命周期。是一种更强的聚合关系。部分不能脱离整体存在。如公司和部门的关系，没有了公司，部门也不能存在了；调查问卷中问题和选项的关系；订单和订单选项的关系。在类图使用实心的菱形表示，菱形从局部指向整体。<br><a href="http://www.uml.org.cn/oobject/201104212.asp" target="_blank" rel="external">http://www.uml.org.cn/oobject/201104212.asp</a><br><a href="http://design-patterns.readthedocs.io/zh_CN/latest/read_uml.html" target="_blank" rel="external">http://design-patterns.readthedocs.io/zh_CN/latest/read_uml.html</a></p>
+<h1 id="设计模式6个原则"><a href="#设计模式6个原则" class="headerlink" title="设计模式6个原则"></a>设计模式6个原则</h1>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-19T11:32:32.000Z" itemprop="dateUpdated">2017年5月19日 19:32</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/04/30/设计模式原则和UML图/" target="_blank" rel="external">http://duyao.github.io/2017/04/30/设计模式原则和UML图/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/30/设计模式原则和UML图/&title=《设计模式原则和UML图》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/30/设计模式原则和UML图/&title=《设计模式原则和UML图》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/30/设计模式原则和UML图/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式原则和UML图》 — Du Yao's blog&url=http://duyao.github.io/2017/04/30/设计模式原则和UML图/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/30/设计模式原则和UML图/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/05/05/设计模式-观察者模式和责任链模式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">设计模式-观察者模式和责任链模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/25/数据库-范式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">数据库-范式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="设计模式原则和UML图" data-title="设计模式原则和UML图" data-url="http://duyao.github.io/2017/04/30/设计模式原则和UML图/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/30/设计模式原则和UML图/&title=《设计模式原则和UML图》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/30/设计模式原则和UML图/&title=《设计模式原则和UML图》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/30/设计模式原则和UML图/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式原则和UML图》 — Du Yao's blog&url=http://duyao.github.io/2017/04/30/设计模式原则和UML图/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/30/设计模式原则和UML图/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/04/30/设计模式原则和UML图/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

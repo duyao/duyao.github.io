@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>具体的集合 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="Collection接口">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="具体的集合">
+<meta property="og:url" content="http://duyao.github.io/2017/03/08/具体的集合/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="Collection接口">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/collection.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/map.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/%E9%93%BE%E8%A1%A8%E6%95%B0%E7%BB%84.jpg">
+<meta property="og:updated_time" content="2017-04-26T03:23:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="具体的集合">
+<meta name="twitter:description" content="Collection接口">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/collection.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">具体的集合</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">具体的集合</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-08T02:54:18.000Z" itemprop="datePublished" class="page-time">
+  2017-03-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#fast-fail"><span class="post-toc-number">1.</span> <span class="post-toc-text">fast-fail</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链表-LinkedList"><span class="post-toc-number">2.</span> <span class="post-toc-text">链表 LinkedList</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法的区分"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">方法的区分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ListIterator接口"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">ListIterator接口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#remove与next和previous"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">remove与next和previous</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#set与next和previous"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">set与next和previous</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#并发修改异常"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">并发修改异常</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#当前位置索引"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">当前位置索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组列表-ArrayList-Vector"><span class="post-toc-number">3.</span> <span class="post-toc-text">数组列表 ArrayList, Vector</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现要点"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">实现要点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#序列化与ArrayList"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">序列化与ArrayList</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ArrayList的生成"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">ArrayList的生成</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#映射表HashMap"><span class="post-toc-number">4.</span> <span class="post-toc-text">映射表HashMap</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Entry数组"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Entry数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#get方法"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">get方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#put方法"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">put方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多线程访问HashMap"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">多线程访问HashMap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Reference"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">Reference</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#散列集-HashSet"><span class="post-toc-number">5.</span> <span class="post-toc-text">散列集 HashSet</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查找"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">查找</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#装填因子和再散列"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">装填因子和再散列</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#不同步"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">不同步</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TreeMap-和-树集-TreeSet"><span class="post-toc-number">6.</span> <span class="post-toc-text">TreeMap 和 树集 TreeSet</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TreeSet-与-TreeMap"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">TreeSet 与 TreeMap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#比较"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">比较</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SortedSet"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">SortedSet</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NavigableSet"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">NavigableSet</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ArrayDeque-和-Stack"><span class="post-toc-number">7.</span> <span class="post-toc-text">ArrayDeque 和 Stack</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ArrayDeque"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">ArrayDeque</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Stack"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">Stack</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优先级队PriorityQueue"><span class="post-toc-number">8.</span> <span class="post-toc-text">优先级队PriorityQueue</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#例子"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">例子</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#WeakHashMap"><span class="post-toc-number">9.</span> <span class="post-toc-text">WeakHashMap</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LinkedHashMap-和-LinkedHashSet"><span class="post-toc-number">10.</span> <span class="post-toc-text">LinkedHashMap 和 LinkedHashSet</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结构"><span class="post-toc-number">10.1.</span> <span class="post-toc-text">结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#put"><span class="post-toc-number">10.2.</span> <span class="post-toc-text">put</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#get"><span class="post-toc-number">10.3.</span> <span class="post-toc-text">get</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#References"><span class="post-toc-number">10.4.</span> <span class="post-toc-text">References</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#EnumSet"><span class="post-toc-number">11.</span> <span class="post-toc-text">EnumSet</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BitSet"><span class="post-toc-number">12.</span> <span class="post-toc-text">BitSet</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法"><span class="post-toc-number">12.1.</span> <span class="post-toc-text">方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#例子-1"><span class="post-toc-number">12.2.</span> <span class="post-toc-text">例子</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Properties"><span class="post-toc-number">13.</span> <span class="post-toc-text">Properties</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-具体的集合"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">具体的集合</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月08日 10:54" datetime="2017-03-08T02:54:18.000Z"  itemprop="datePublished">2017-03-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/collection.png" alt="Collection接口" title="">
+                </div>
+                <div class="image-caption">Collection接口</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/map.png" alt="Map接口" title="">
+                </div>
+                <div class="image-caption">Map接口</div>
+            </figure>
+<h2 id="fast-fail"><a href="#fast-fail" class="headerlink" title="fast-fail"></a>fast-fail</h2><p>快速报错，是指当有其他线程对一个容器（如ArrayList，HashMap）进行了结构性修改，另外一个线程在使用iterator进行迭代，那么这个迭代线程会抛出并发修改的异常ConcurrentModificationException。<br>所谓结构性修改，是对原有容器的size造成影响的操作，如remove、add、clear操作等。<br>这一策略在源码中的实现是通过modCount域，modCount顾名思义就是修改次数</p>
+<h2 id="链表-LinkedList"><a href="#链表-LinkedList" class="headerlink" title="链表 LinkedList"></a>链表 LinkedList</h2><ul>
+<li>实现<code>List</code>和<code>Deque</code>接口<br>java中使用LinkedList来实现链表的功能，其本质是<strong>双向链表</strong>，本身是有序集合<br><a href="http://blog.csdn.net/zw0283/article/details/51132161" target="_blank" rel="external">http://blog.csdn.net/zw0283/article/details/51132161</a></li>
+</ul>
+<h3 id="方法的区分"><a href="#方法的区分" class="headerlink" title="方法的区分"></a>方法的区分</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">方法名(添加，删除，取头)</th>
+<th style="text-align:center">特殊情况下的动作</th>
+<th style="text-align:center">相关接口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">add, remove, element</td>
+<td style="text-align:center">抛异常</td>
+<td style="text-align:center">List</td>
+</tr>
+<tr>
+<td style="text-align:center">offer, poll, peek</td>
+<td style="text-align:center">返回空值</td>
+<td style="text-align:center">Queue</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ListIterator接口"><a href="#ListIterator接口" class="headerlink" title="ListIterator接口"></a>ListIterator接口</h3><p>添加元素是，使用LinkedList.add将对象添加到链表的尾部，如果需要在指定位置添加，则需要使用迭代器。<br>但是对于自然有序的结合添加才有意义，因此类库提供了ListIterator</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public interface ListIterator&lt;E&gt; extends Iterator&lt;E&gt; &#123;</div><div class="line">	//Iterator中的方法</div><div class="line">    boolean hasNext();</div><div class="line">    E next();</div><div class="line">	void remove();</div><div class="line"></div><div class="line">	//适用于自然有序的集合的方法</div><div class="line">    boolean hasPrevious();//反向遍历</div><div class="line">    E previous();//反向遍历</div><div class="line">    int nextIndex();</div><div class="line">    int previousIndex();</div><div class="line">    void set(E e);</div><div class="line">    void add(E e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果链表中有n个元素，则有<strong>n+1</strong>个位置可以添加元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line">	List&lt;String&gt; a = new LinkedList&lt;&gt;();</div><div class="line">	a.add(&quot;Amy&quot;);</div><div class="line">	a.add(&quot;Carl&quot;);</div><div class="line">	a.add(&quot;Ercia&quot;);</div><div class="line">	List&lt;String&gt; b = new LinkedList&lt;String&gt;();</div><div class="line">	b.add(&quot;Bob&quot;);</div><div class="line">	b.add(&quot;Doug&quot;);</div><div class="line">	b.add(&quot;Frances&quot;);</div><div class="line">	b.add(&quot;Gloia&quot;);</div><div class="line"></div><div class="line">	//Merge the word from b to a</div><div class="line">	//listIterator和iterator是指向两个元素之间的，而不是某一个元素</div><div class="line">	ListIterator&lt;String&gt; aIterator = a.listIterator();</div><div class="line">	//bIterator是Iterator，因此无add方法</div><div class="line">	Iterator&lt;String&gt; bIterator = b.iterator();</div><div class="line">	while(bIterator.hasNext())&#123;</div><div class="line">		if(aIterator.hasNext())&#123;</div><div class="line">			aIterator.next();</div><div class="line">		&#125;</div><div class="line">		//添加元素是在指针所指的中间添加元素</div><div class="line">		aIterator.add(bIterator.next());</div><div class="line">	&#125;</div><div class="line">	System.out.println(a);</div><div class="line">	bIterator = b.iterator();</div><div class="line">	while(bIterator.hasNext())&#123;</div><div class="line">		bIterator.next();</div><div class="line">		if(bIterator.hasNext())&#123;</div><div class="line">			bIterator.next();</div><div class="line">			//删除指针左边的元素</div><div class="line">			bIterator.remove();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	System.out.println(b);</div><div class="line">	//这里是List的方法，删除a中所有b的元素</div><div class="line">	a.removeAll(b);</div><div class="line">	System.out.println(a);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="remove与next和previous"><a href="#remove与next和previous" class="headerlink" title="remove与next和previous"></a>remove与next和previous</h3><p><code>E previous()</code>与next用法相似，也是返回刚刚经过的元素，但是方向是与next相反<br>因此调用next使用remove方法，删除左边元素<br>调用previous使用remove，删除<strong>右边元素</strong></p>
+<h3 id="set与next和previous"><a href="#set与next和previous" class="headerlink" title="set与next和previous"></a>set与next和previous</h3><p>set方法用一个新元素来取代调用next或previous返回的上一个元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ListIterator&lt;String&gt; iterator = c.listIterator();</div><div class="line">String oldValue = iterator.next();</div><div class="line">iterator.set(newValue);</div></pre></td></tr></table></figure></p>
+<h3 id="并发修改异常"><a href="#并发修改异常" class="headerlink" title="并发修改异常"></a>并发修改异常</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Collection&lt;String&gt; a = new LinkedList&lt;String&gt;();</div><div class="line">a.add(&quot;A&quot;);</div><div class="line">a.add(&quot;B&quot;);</div><div class="line">Iterator&lt;String&gt; it1 = a.iterator();</div><div class="line">Iterator&lt;String&gt; it2 = a.iterator();</div><div class="line">it1.next();</div><div class="line">it1.remove();</div><div class="line">it2.next();</div></pre></td></tr></table></figure>
+<p>由于并发修改，一个删除后，另一个访问，会抛出<code>ConcurrentModificationException</code>的错误<br>因为每个迭代器内部都会维护一个独立的计数值。在迭代器开始方法前，先检查自己的修改次数和集合的修改次数是否一致，如果不一致就会抛出<code>ConcurrentModificationException</code></p>
+<p>因此迭代器使用有个简单的原则:<br>每个集合可以有很多个迭代器，但是这些迭代器<strong>只能读</strong>。<br>而专门<strong>只有一个迭代器既能读又能写</strong>。</p>
+<h3 id="当前位置索引"><a href="#当前位置索引" class="headerlink" title="当前位置索引"></a>当前位置索引</h3><p>由于迭代器指向两个元素的中间位置，因此可以产生两个索引<br><code>int nextIndex()</code>返回下一次调用next返回的元素的整数索引<br><code>int previousIndex()</code>返回下一次调用previous返回的元素的整数索引<br><code>list.listIterator(n);</code>返回迭代器，其指向整数索引为n的<strong>前面</strong>的元素</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>内部为Node节点，包含了前驱、后继和值，故为双向链表</li>
+<li>有全局变量first和last</li>
+<li>get方法<br>由于链表支持随机查找，因此需要遍历，这里对遍历过程做了优化<br>判断查找的位置是在前一半还是后一半。前一半就从第一个开始遍历，后一半就从最后一个倒着找。</li>
+</ul>
+<h2 id="数组列表-ArrayList-Vector"><a href="#数组列表-ArrayList-Vector" class="headerlink" title="数组列表 ArrayList, Vector"></a>数组列表 ArrayList, Vector</h2><p>ArrayList和Vector实现了随机访问，其本质是动态再分配的对象数组<br>ArrayList是不安全<br>Vector是线程安全的</p>
+<p>Resizable-array implementation of the <code>List</code> interface.  Implements all optional list operations, and permits all elements, including <code>null</code>.  In addition to implementing the <code>List</code> interface, this class provides methods to manipulate the size of the array that is used internally to store the list.  (This class is roughly equivalent to <code>Vector</code>, except that it is unsynchronized.)</p>
+<h3 id="实现要点"><a href="#实现要点" class="headerlink" title="实现要点"></a>实现要点</h3><ul>
+<li>内部使用数组实现</li>
+<li>数组的开始大小为10</li>
+<li>添加过程<br>原内部数组中的对象数目加1，如果大于原内部数组长度，则以原长度的<strong>1.5</strong>倍新建一个对于原数组的拷贝(Arrays.copyOf)，并修改原数组，指向这个新建数组。原数组自动抛弃，size则自增1，向数组中添加对象。</li>
+<li>删除<br>根据给定索引值，判断合理性，之后取出对应这个索引位置的对象，之后将这个位置之后的所有对象向前移动一位即可</li>
+</ul>
+<p><a href="http://blog.csdn.net/zw0283/article/details/51122255" target="_blank" rel="external">http://blog.csdn.net/zw0283/article/details/51122255</a></p>
+<h3 id="序列化与ArrayList"><a href="#序列化与ArrayList" class="headerlink" title="序列化与ArrayList"></a>序列化与ArrayList</h3><p>ArrayList中的数据是<code>transient Object[] elementData;</code>定义的，由于transient所以是无法序列化的，但是实际上ArrayList还是可以序列化的<br>因为重写了<code>readObject</code>和<code>writeObject</code>，这么做的原因是为了防止一个包含大量空对象的数组被序列化<br><a href="http://www.hollischuang.com/archives/1140" target="_blank" rel="external">http://www.hollischuang.com/archives/1140</a></p>
+<h3 id="ArrayList的生成"><a href="#ArrayList的生成" class="headerlink" title="ArrayList的生成"></a>ArrayList的生成</h3><p>在java中比较建议用<code>List&lt;Object&gt; list = new ArrayList&lt;Object&gt;();</code>而不是用<code>ArrayList&lt;Object&gt; list = new ArrayList&lt;Object&gt;();</code><br>这样做的原因是解耦和封装<br>这是一种面向接口编程的思想，即以后做改变很容易，这样可以提高复用性<br>同时可以动态地使用，比如反射一个东西，只需要先设接口，new出的对象转化为该接口即可，而需要用if判断<br><a href="http://stackoverflow.com/questions/9852831/polymorphism-why-use-list-list-new-arraylist-instead-of-arraylist-list-n?noredirect=1&amp;lq=1" target="_blank" rel="external">http://stackoverflow.com/questions/9852831/polymorphism-why-use-list-list-new-arraylist-instead-of-arraylist-list-n?noredirect=1&amp;lq=1</a></p>
+<h2 id="映射表HashMap"><a href="#映射表HashMap" class="headerlink" title="映射表HashMap"></a>映射表HashMap</h2><p>用来存放键值对，都实现map接口<br>HashMap对键进行散列，而TreeMap用键的整体顺序对元素进行排序，构成搜索树。<br>如果要求一定的顺序，使用TreeMap，否则使用HashMap(同HashSet和TreeSet相同)<br>往映射表添加内容必须提供一个键，这个键值要唯一，否则会被覆盖<br><a href="http://www.importnew.com/20386.html" target="_blank" rel="external">http://www.importnew.com/20386.html</a><br><a href="http://blog.csdn.net/zw0283/article/details/51177547" target="_blank" rel="external">http://blog.csdn.net/zw0283/article/details/51177547</a></p>
+<h3 id="Entry数组"><a href="#Entry数组" class="headerlink" title="Entry数组"></a>Entry数组</h3><p>Entry是用于实现链表的一个节点、<br>里面有key，value用于存储自身节点数据， 哈希值，还有next用于下个节点的引用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">static class Entry&lt;K, V&gt; implements Map.Entry&lt;K, V&gt; &#123;</div><div class="line">	// Entry继承了Map接口中的静态子类Entry；Entry&lt;K,V&gt;是槽中的元素，</div><div class="line">	// 用作链表来解决散列冲突</div><div class="line">	final K key;// 键</div><div class="line">	V value;// 值</div><div class="line">	Entry&lt;K, V&gt; next;// 用来实现链表结构， 同一链表中的key的hash是相同的</div><div class="line">	int hash;</div><div class="line"></div><div class="line">	protected Entry(int hash, K key, V value, Entry&lt;K, V&gt; next) &#123;</div><div class="line">		this.hash = hash;</div><div class="line">		this.key = key;</div><div class="line">		this.value = value;</div><div class="line">		this.next = next;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>HashMap的成员<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class HashMap&lt;K,V&gt;&#123;</div><div class="line">	static final int DEFAULT_INITIAL_CAPACITY = 16 ; // 默认初始容量是16。 （ 必须是2的次方）</div><div class="line">	static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30 ; // 即2的30次方</div><div class="line">	static final float DEFAULT_LOAD_FACTOR = 0.75f; // 默认装载因子</div><div class="line">	Entry[] table; // Entry表</div><div class="line">	int size; // Entry[]实际存储的Entry个数</div><div class="line">	int threshold; // reash的阈值， =capacity * loadfactor</div><div class="line">	final float loadFactor;   //装填因子</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>负载因子<br>负载因子越大，填满的元素越多，空间利用率增加，hash冲突的机会增加，每个元素下挂载的链表会越来越长，同时会导致查找元素的效率变得低下。<br>负载因子越小，填满的元素越少，空间利用率降低，hash冲突减少，但是数组中的元素过于稀疏，导致数组中很多空间还没有用就开始扩容，不过好处是查找的元素的效率相对高一些。<br>所以，必然要在“查找效率”和“空间利用率”之中做一个折中，让它们处在一个相对的平衡状态。0.75就是这样的一个相对平衡的状态</p>
+</li>
+<li><p>为什么容量是2的倍数？<br>为了寻址的快速。 寻址是通过 <code>hash(key) &amp; (table.length-1)</code>实现的<br>若数组长度为2的N次方，则数组的长度必然为偶数，则偶数-1必然为奇数，在2进制的表示中，奇数的最后一位为1，所以，与奇数做“&amp;”操作，最后的结果可能为奇数，也可能为偶数。<br>其次，若数组长度不为偶数，则奇数-1为偶数，偶数在2进制中最后一位为0，那么与偶数做“&amp;”操作，最后的结果只可能是偶数，不可能为奇数，所以在奇数位置的空间不会存储到元素，所以会有二分之一的空间被浪费掉。<br>综上所述，数组长度取2的N次方，目的是为了能让元素均匀的分布在数组中，减小发生冲突的机会。</p>
+</li>
+</ul>
+<h3 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h3><ol>
+<li>对nullkey做单独处理， 其实就是放在table[0]中</li>
+<li>根据key的hash值， 决定entry在哪个桶</li>
+<li>对桶内的entry链表进行遍历， 当查找到时返回value</li>
+<li>找不到， 返回null<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public V get(Object key) &#123;</div><div class="line">	//对空值做处理</div><div class="line">    if (key == null)</div><div class="line">        return getForNullKey();</div><div class="line">    //非空情况</div><div class="line">    Entry&lt;K,V&gt; entry = getEntry(key);</div><div class="line"></div><div class="line">    return null == entry ? null : entry.getValue();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>空值处理<code>getForNullKey</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">private V getForNullKey() &#123;</div><div class="line">    if (size == 0) &#123;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line">    //对于空值table[0]中查找</div><div class="line">    for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) &#123;</div><div class="line">        if (e.key == null)</div><div class="line">            return e.value;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>正常的处理<code>getEntry</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">final Entry&lt;K,V&gt; getEntry(Object key) &#123;</div><div class="line">    if (size == 0) &#123;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //二次hash，得到hash值</div><div class="line">    int hash = (key == null) ? 0 : hash(key);</div><div class="line">    //计算出在哪个桶indexFor(hash, table.length)</div><div class="line">    //遍历桶内元素</div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</div><div class="line">         e != null;</div><div class="line">         e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp;</div><div class="line">            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">            return e;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h3><p>使用key计算得到hashCode，之后得到该元素在数组中的存放位置，然后将其放入链表的头部，放入的过程中要对容量进行判断。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">public V put(K key, V value) &#123;</div><div class="line">	//判断是否空</div><div class="line">    if (table == EMPTY_TABLE) &#123;</div><div class="line">        inflateTable(threshold);</div><div class="line">    &#125;</div><div class="line">    if (key == null)</div><div class="line">        return putForNullKey(value);</div><div class="line">    //二次hash得到hash值</div><div class="line">    int hash = hash(key);</div><div class="line">    //得到该hash的桶号码</div><div class="line">    int i = indexFor(hash, table.length);</div><div class="line"></div><div class="line">    //寻找过程，确保唯一</div><div class="line">    for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        //如果存在，要覆盖</div><div class="line">        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;</div><div class="line">            V oldValue = e.value;</div><div class="line">            e.value = value;</div><div class="line">            e.recordAccess(this);</div><div class="line">            return oldValue;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    modCount++;</div><div class="line">    //添加Entry</div><div class="line">    addEntry(hash, key, value, i);</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>put()方法中， 如果遇见的键值对是新的， 那么会调用addEntry()方法，<br>将这个键值对存储在hash值相同的<strong>槽位的头部</strong>（ 链表的头插入）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">void addEntry(int hash, K key, V value, int bucketIndex) &#123;</div><div class="line">    if ((size &gt;= threshold) &amp;&amp; (null != table[bucketIndex])) &#123;</div><div class="line">    	//容量扩大两倍</div><div class="line">        resize(2 * table.length);</div><div class="line">        //二次hash</div><div class="line">        hash = (null != key) ? hash(key) : 0;</div><div class="line">        //找到槽位</div><div class="line">        bucketIndex = indexFor(hash, table.length);</div><div class="line">    &#125;</div><div class="line">    //添加</div><div class="line">    createEntry(hash, key, value, bucketIndex);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void createEntry(int hash, K key, V value, int bucketIndex) &#123;</div><div class="line">    Entry&lt;K,V&gt; e = table[bucketIndex];</div><div class="line">    //头插</div><div class="line">    table[bucketIndex] = new Entry&lt;&gt;(hash, key, value, e);</div><div class="line">    size++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Map中有3个视图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Set&lt;K&gt; keySet();  //键集</div><div class="line">Collection&lt;V&gt; values(); //值集合</div><div class="line">Set&lt;Map.Entry&lt;K, V&gt;&gt; entrySet(); //键值集</div></pre></td></tr></table></figure></p>
+<h3 id="多线程访问HashMap"><a href="#多线程访问HashMap" class="headerlink" title="多线程访问HashMap"></a>多线程访问HashMap</h3><p>多线程访问HashMap，会出现错误，可能有两种<br>1）hashmap放数据，扩容会导致内部一致性发生变化，出现越界等问题<br>2）两个线程hashmap同时放数据，两个节点可能会相互指向，出现死循环<br><a href="http://coolshell.cn/articles/9606.html" target="_blank" rel="external">http://coolshell.cn/articles/9606.html</a></p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-hash/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/java/j-lo-hash/</a><br><a href="http://www.cnblogs.com/skywang12345/p/3310835.html#b1" target="_blank" rel="external">http://www.cnblogs.com/skywang12345/p/3310835.html#b1</a></p>
+<h2 id="散列集-HashSet"><a href="#散列集-HashSet" class="headerlink" title="散列集 HashSet"></a>散列集 HashSet</h2><p>java中使用<code>HashSet</code>表示散列集</p>
+<ul>
+<li>实现<code>Set</code>接口</li>
+<li>实际是<code>HashMap</code>的一个实例</li>
+<li>允许空值</li>
+<li>元素无重复的无序集合</li>
+<li>使用链表数组实现<br>每个列表被称为桶。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/%E9%93%BE%E8%A1%A8%E6%95%B0%E7%BB%84.jpg" alt="链表数组" title="">
+                </div>
+                <div class="image-caption">链表数组</div>
+            </figure>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>要想查找对象的位置，计算其散列码，然后与总桶数取余，得到就是保存这个对象的索引。<br>如果桶中没有其他元素，就可以直接插入；<br>如果桶满了，这种现象被称作散列冲突，此时需要与这个桶中所有的元素进行比较。</p>
+<h3 id="装填因子和再散列"><a href="#装填因子和再散列" class="headerlink" title="装填因子和再散列"></a>装填因子和再散列</h3><p>The HashMap instance has default initial capacity (16) and load factor (0.75).<br>如果需要更好的控制散列表的性能，需要制定一个初始的桶数，通常设置为元素个数的75%~150%。<br>当然并不是总能很好的估计桶数，如果散列表装的太慢，就需要再散列。<br>对散列表再散列，就需要一个桶数更多的表，将所有元素插入新表，将原表丢弃。<br>装填因子决定表是否需要再散列，如果表中元素占有率大于表的装填因子，表就会用<strong>双倍</strong>的桶数在散列。</p>
+<h3 id="不同步"><a href="#不同步" class="headerlink" title="不同步"></a>不同步</h3><p>本身不同步，可以下面的方法同步<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set s = Collections.synchronizedSet(new HashSet(...));</div></pre></td></tr></table></figure></p>
+<h2 id="TreeMap-和-树集-TreeSet"><a href="#TreeMap-和-树集-TreeSet" class="headerlink" title="TreeMap 和 树集 TreeSet"></a>TreeMap 和 树集 TreeSet</h2><p>树集和散列集相似，但是比散列集有所改进。<br>java用<code>TreeSet</code>表示树集</p>
+<ul>
+<li><p>树集是有序集合，实现了<code>SortedSet</code>接口<br>Class TreeSet implements NavigableSet<br>Interface NavigableSet extends SortedSet<br>Interface SortedSet extends Set</p>
+</li>
+<li><p>TreeSet中元素实现了<code>Comparable</code>接口<br>All elements inserted into a sorted set must implement the <code>Comparable</code> interface (or be accepted by the specified comparator)<br>对于基本数据类型，已经实现了<code>Comparable</code>，但是对于自定义类，必须实现<code>Comparable</code>,否则会报错<code>java.lang.ClassCastException</code></p>
+</li>
+<li><p>树集使用红黑树实现的</p>
+</li>
+<li>树集底层是调用<code>TreeMap</code>实现的</li>
+</ul>
+<h3 id="TreeSet-与-TreeMap"><a href="#TreeSet-与-TreeMap" class="headerlink" title="TreeSet 与 TreeMap"></a>TreeSet 与 TreeMap</h3><p>TreeSet源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">public class TreeSet&lt;E&gt; extends AbstractSet&lt;E&gt;</div><div class="line">    implements NavigableSet&lt;E&gt;, Cloneable, java.io.Serializable</div><div class="line"> &#123;</div><div class="line">    // 使用 NavigableMap 的 key 来保存 Set 集合的元素</div><div class="line">    private transient NavigableMap&lt;E,Object&gt; m;</div><div class="line"></div><div class="line">    // 使用一个 PRESENT 作为 Map 集合的所有 value。</div><div class="line">    private static final Object PRESENT = new Object();</div><div class="line"></div><div class="line">    // 包访问权限的构造器，以指定的 NavigableMap 对象创建 Set 集合</div><div class="line">    TreeSet(NavigableMap&lt;E,Object&gt; m)</div><div class="line">    &#123;</div><div class="line">        this.m = m;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public TreeSet()                                      // ①</div><div class="line">    &#123;</div><div class="line">        // 以自然排序方式创建一个新的 TreeMap，</div><div class="line">        // 根据该 TreeSet 创建一个 TreeSet，</div><div class="line">        // 使用该 TreeMap 的 key 来保存 Set 集合的元素</div><div class="line">        this(new TreeMap&lt;E,Object&gt;());</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public TreeSet(Comparator&lt;? super E&gt; comparator)     // ②</div><div class="line">    &#123;</div><div class="line">        // 以定制排序方式创建一个新的 TreeMap，</div><div class="line">        // 根据该 TreeSet 创建一个 TreeSet，</div><div class="line">        // 使用该 TreeMap 的 key 来保存 Set 集合的元素</div><div class="line">        this(new TreeMap&lt;E,Object&gt;(comparator));</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public TreeSet(Collection&lt;? extends E&gt; c)</div><div class="line">    &#123;</div><div class="line">        // 调用①号构造器创建一个 TreeSet，底层以 TreeMap 保存集合元素</div><div class="line">        this();</div><div class="line">        // 向 TreeSet 中添加 Collection 集合 c 里的所有元素</div><div class="line">        addAll(c);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public TreeSet(SortedSet&lt;E&gt; s)</div><div class="line">    &#123;</div><div class="line">        // 调用②号构造器创建一个 TreeSet，底层以 TreeMap 保存集合元素</div><div class="line">        this(s.comparator());</div><div class="line">        // 向 TreeSet 中添加 SortedSet 集合 s 里的所有元素</div><div class="line">        addAll(s);</div><div class="line">    &#125;</div><div class="line">    //TreeSet 的其他方法都只是直接调用 TreeMap 的方法来提供实现</div><div class="line">    ...</div><div class="line">    public boolean addAll(Collection&lt;? extends E&gt; c)</div><div class="line">    &#123;</div><div class="line">        if (m.size() == 0 &amp;&amp; c.size() &gt; 0 &amp;&amp;</div><div class="line">            c instanceof SortedSet &amp;&amp;</div><div class="line">            m instanceof TreeMap)</div><div class="line">        &#123;</div><div class="line">            // 把 c 集合强制转换为 SortedSet 集合</div><div class="line">            SortedSet&lt;? extends E&gt; set = (SortedSet&lt;? extends E&gt;) c;</div><div class="line">            // 把 m 集合强制转换为 TreeMap 集合</div><div class="line">            TreeMap&lt;E,Object&gt; map = (TreeMap&lt;E, Object&gt;) m;</div><div class="line">            Comparator&lt;? super E&gt; cc = (Comparator&lt;? super E&gt;) set.comparator();</div><div class="line">            Comparator&lt;? super E&gt; mc = map.comparator();</div><div class="line">            // 如果 cc 和 mc 两个 Comparator 相等</div><div class="line">            if (cc == mc || (cc != null &amp;&amp; cc.equals(mc)))</div><div class="line">            &#123;</div><div class="line">                // 把 Collection 中所有元素添加成 TreeMap 集合的 key</div><div class="line">                map.addAllForTreeSet(set, PRESENT);</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        // 直接调用父类的 addAll() 方法来实现</div><div class="line">        return super.addAll(c);</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p> 从上面代码可以看出，TreeSet 的 ① 号、② 号构造器的都是新建一个 TreeMap 作为实际存储 Set 元素的容器，而另外 2 个构造器则分别依赖于 ① 号和 ② 号构造器，由此可见，TreeSet 底层实际使用的存储容器就是 TreeMap。</p>
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p>如果TreeSet中不是基本数据类型，那么该类一定要实现comparable或者使用comparator比较器<br>具体请参照<a href="http://duyao.github.io/2016/03/21/Comparator%20and%20Comparable/">comparable与comparator</a></p>
+<h3 id="SortedSet"><a href="#SortedSet" class="headerlink" title="SortedSet"></a>SortedSet</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">public interface SortedSet&lt;E&gt; extends Set&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    Comparator&lt;? super E&gt; comparator();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns a view of the portion of this set whose elements range</div><div class="line">     * from &lt;tt&gt;fromElement&lt;/tt&gt;, inclusive, to &lt;tt&gt;toElement&lt;/tt&gt;,</div><div class="line">     * exclusive.  (If &lt;tt&gt;fromElement&lt;/tt&gt; and &lt;tt&gt;toElement&lt;/tt&gt; are</div><div class="line">     * equal, the returned set is empty.)</div><div class="line">     */</div><div class="line">    SortedSet&lt;E&gt; subSet(E fromElement, E toElement);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns a view of the portion of this set whose elements are</div><div class="line">     * strictly less than &lt;tt&gt;toElement&lt;/tt&gt;.</div><div class="line">     */</div><div class="line">    SortedSet&lt;E&gt; headSet(E toElement);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns a view of the portion of this set whose elements are</div><div class="line">     * greater than or equal to &lt;tt&gt;fromElement&lt;/tt&gt;.</div><div class="line">     */</div><div class="line">    SortedSet&lt;E&gt; tailSet(E fromElement);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns the first (lowest) element currently in this set.</div><div class="line">     */</div><div class="line">    E first();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns the last (highest) element currently in this set.</div><div class="line">     */</div><div class="line">    E last();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="NavigableSet"><a href="#NavigableSet" class="headerlink" title="NavigableSet"></a>NavigableSet</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">public interface NavigableSet&lt;E&gt; extends SortedSet&lt;E&gt; &#123;</div><div class="line"></div><div class="line">	//不包括等于</div><div class="line">    /**</div><div class="line">     * Returns the greatest element in this set strictly less than the</div><div class="line">     * given element, or &#123;@code null&#125; if there is no such element.</div><div class="line">     */</div><div class="line">    E lower(E e);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns the least element in this set strictly greater than the</div><div class="line">     * given element, or &#123;@code null&#125; if there is no such element.</div><div class="line">     */</div><div class="line">    E higher(E e);</div><div class="line"></div><div class="line"></div><div class="line">    //包括等于</div><div class="line">    /**</div><div class="line">     * Returns the greatest element in this set less than or equal to</div><div class="line">     * the given element, or &#123;@code null&#125; if there is no such element.</div><div class="line">     */</div><div class="line">    E floor(E e);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns the least element in this set greater than or equal to</div><div class="line">     * the given element, or &#123;@code null&#125; if there is no such element.</div><div class="line">     */</div><div class="line">    E ceiling(E e);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * Retrieves and removes the first (lowest) element,</div><div class="line">     * or returns &#123;@code null&#125; if this set is empty.</div><div class="line">     */</div><div class="line">    E pollFirst();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Retrieves and removes the last (highest) element,</div><div class="line">     * or returns &#123;@code null&#125; if this set is empty.</div><div class="line">     */</div><div class="line">    E pollLast();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns an iterator over the elements in this set, in ascending order.</div><div class="line">     */</div><div class="line">    Iterator&lt;E&gt; iterator();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns a reverse order view of the elements contained in this set.</div><div class="line">     */</div><div class="line">    NavigableSet&lt;E&gt; descendingSet();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns an iterator over the elements in this set, in descending order.</div><div class="line">     * Equivalent in effect to &#123;@code descendingSet().iterator()&#125;.</div><div class="line">     */</div><div class="line">    Iterator&lt;E&gt; descendingIterator();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns a view of the portion of this set whose elements range from</div><div class="line">     * &#123;@code fromElement&#125; to &#123;@code toElement&#125;.  If &#123;@code fromElement&#125; and</div><div class="line">     * &#123;@code toElement&#125; are equal, the returned set is empty unless &#123;@code</div><div class="line">     * fromInclusive&#125; and &#123;@code toInclusive&#125; are both true.</div><div class="line">     */</div><div class="line">    NavigableSet&lt;E&gt; subSet(E fromElement, boolean fromInclusive,</div><div class="line">                           E toElement,   boolean toInclusive);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns a view of the portion of this set whose elements are less than</div><div class="line">     * (or equal to, if &#123;@code inclusive&#125; is true) &#123;@code toElement&#125;.</div><div class="line">     */</div><div class="line">    NavigableSet&lt;E&gt; headSet(E toElement, boolean inclusive);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Returns a view of the portion of this set whose elements are greater</div><div class="line">     * than (or equal to, if &#123;@code inclusive&#125; is true) &#123;@code fromElement&#125;.</div><div class="line">     */</div><div class="line">    NavigableSet&lt;E&gt; tailSet(E fromElement, boolean inclusive);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="ArrayDeque-和-Stack"><a href="#ArrayDeque-和-Stack" class="headerlink" title="ArrayDeque 和 Stack"></a>ArrayDeque 和 Stack</h2><h3 id="ArrayDeque"><a href="#ArrayDeque" class="headerlink" title="ArrayDeque"></a>ArrayDeque</h3><p><code>@since   1.6</code></p>
+<ul>
+<li>变长数组，长度无限增长<br><strong>Resizable-array</strong> implementation of the <code>Deque</code> interface.<br>Array deques have <strong>no capacity</strong> restrictions; they grow as necessary to support<br>usage.  </li>
+<li>线程不安全<br>They are <strong>not thread-safe</strong>; in the absence of external<br>synchronization, they do not support concurrent access by multiple threads.</li>
+<li>非空<br><strong>Null elements are prohibited.</strong>  </li>
+</ul>
+<p>This class is likely to be faster than <code>Stack</code> when used as a stack,<br>and faster than <code>LinkedList</code> when used as a queue.</p>
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p>栈，先进后出<br><strong>线程安全</strong>，继承Vector</p>
+<h2 id="优先级队PriorityQueue"><a href="#优先级队PriorityQueue" class="headerlink" title="优先级队PriorityQueue"></a>优先级队PriorityQueue</h2><p>元素按照任意顺序插入，但是按照一定顺序排序检索。也就是说无论何时调用<code>remove</code>方法，都会删除最小的元素(The elements of the priority queue are ordered according to their natural ordering, or by a Comparator provided at queue construction time, depending on which constructor is used. )。</p>
+<p>在优先队列内部并不会对所有的元素进行排序<br>使用堆Heap的数据结构，只会保证最小或者最大的元素在第一个位置<br>The head of this queue is the least element with respect to the specified ordering.<br> If multiple elements are tied for least value, the head is one of those elements – ties are broken arbitrarily.</p>
+<p> The queue retrieval operations <code>poll</code>, <code>remove</code>, <code>peek</code>, and <code>element</code> access the element at the head of the queue.</p>
+<p> PriorityQueue is not thread safe, java provides <code>PriorityBlockingQueue</code> class that implements the <code>BlockingQueue</code> interface to use in java multi-threading environment.</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line">	Queue&lt;Integer&gt;  prq = new PriorityQueue();</div><div class="line">	Random r = new Random();</div><div class="line">	System.out.println(&quot;--------------add----------------&quot;);</div><div class="line">	for(int i = 0; i &lt; 5; i++)&#123;</div><div class="line">		int addNum = r.nextInt(100);</div><div class="line">		prq.add(addNum);</div><div class="line">		System.out.println(&quot;add num&quot; + addNum);</div><div class="line">		//通过打印的队列可以看出来，队列内部不一定有序，但是最小元素一定在队头</div><div class="line">		//添加的变化过程就是将新元素放在最后，然后调整堆</div><div class="line">		System.out.println(&quot;prq&quot; + prq);</div><div class="line">	&#125;</div><div class="line">	System.out.println(&quot;----------------remove-----------------------&quot;);</div><div class="line">	for(int i = 0; i &lt; 5; i++)&#123;</div><div class="line">		int x = prq.peek();</div><div class="line">		System.out.println(&quot;remove num&quot; + x);</div><div class="line">		prq.remove();</div><div class="line">		//通过打印的队列可以看出来，队列内部不一定有序，但是最小元素一定在队头</div><div class="line">		//删除的变化过程就是将最后一个元素，放在堆顶，然后在进行调整</div><div class="line">		System.out.println(&quot;prq&quot; + prq);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&gt;<br>————–add—————-<br>add num33<br>prq[33]<br>add num36<br>prq[33, 36]<br>add num45<br>prq[33, 36, 45]<br>add num38<br>prq[33, 36, 45, 38]<br>add num4<br>prq[4, 33, 45, 38, 36]<br>—————-remove———————–<br>remove num4<br>prq[33, 36, 45, 38]<br>remove num33<br>prq[36, 38, 45]<br>remove num36<br>prq[38, 45]<br>remove num38<br>prq[45]<br>remove num45<br>prq[]</p>
+<p>堆的建立过程参考<a href="http://algs4.cs.princeton.edu/24pq/Heap.java.html" target="_blank" rel="external">循环建立</a>和<a href="http://geeksquiz.com/heap-sort/" target="_blank" rel="external">递归建立</a></p>
+<h2 id="WeakHashMap"><a href="#WeakHashMap" class="headerlink" title="WeakHashMap"></a>WeakHashMap</h2><p>WeakHashMap 继承于AbstractMap，实现了Map接口。<br>和HashMap一样，WeakHashMap 也是一个散列表，它存储的内容也是键值对(key-value)映射，而且键和值都可以是null。</p>
+<p>不过WeakHashMap的键是“弱键”。在 WeakHashMap 中，当某个键不再正常使用时，会被从WeakHashMap中被自动移除。<br>更精确地说，对于一个给定的键，其映射的存在并不阻止垃圾回收器对该键的丢弃，这就使该键成为可终止的，被终止，然后被回收。某个键被终止时，它对应的键值对也就从映射中有效地移除了。</p>
+<p>这个“弱键”的原理呢？大致上就是，通过<code>WeakReference</code>和<code>ReferenceQueue</code>实现的。<br>WeakHashMap的key是“弱键”，即是<code>WeakReference</code>类型的；<code>ReferenceQueue</code>是一个队列，它会保存被GC回收的“弱键”。实现步骤是：<br>(01) 新建WeakHashMap，将“键值对”添加到WeakHashMap中。<br>实际上，WeakHashMap是通过数组table保存Entry(键值对)；每一个Entry实际上是一个单向链表，即Entry是键值对链表。<br>(02) 当某“弱键”不再被其它对象引用，并被GC回收时。在GC回收该“弱键”时，这个“弱键”也同时会被添加到ReferenceQueue(queue)队列中。<br>(03) 当下一次我们需要操作WeakHashMap时，会先同步table和queue。table中保存了全部的键值对，而queue中保存被GC回收的键值对；同步它们，就是删除table中被GC回收的键值对。<br>这就是“弱键”如何被自动从WeakHashMap中删除的步骤了。</p>
+<p>和HashMap一样，WeakHashMap是不同步的。可以使用 <code>Collections.synchronizedMap</code> 方法来构造同步的 WeakHashMap。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) throws Exception &#123;</div><div class="line">	String a = new String(&quot;a&quot;);</div><div class="line">	String b = new String(&quot;b&quot;);</div><div class="line">	Map weakmap = new WeakHashMap();</div><div class="line">	Map map = new HashMap();</div><div class="line">	map.put(a, &quot;aaa&quot;);</div><div class="line">	map.put(b, &quot;bbb&quot;);</div><div class="line">	weakmap.put(a, &quot;aaa&quot;);</div><div class="line">	weakmap.put(b, &quot;bbb&quot;);</div><div class="line">	map.remove(a);</div><div class="line">	a = null;</div><div class="line">	b = null;</div><div class="line">	System.gc();</div><div class="line">	Iterator i = map.entrySet().iterator();</div><div class="line">	while (i.hasNext()) &#123;</div><div class="line">		Map.Entry en = (Map.Entry) i.next();</div><div class="line">		System.out.println(&quot;map:&quot; + en.getKey() + &quot;:&quot; + en.getValue());</div><div class="line">	&#125;</div><div class="line">	Iterator j = weakmap.entrySet().iterator();</div><div class="line">	while (j.hasNext()) &#123;</div><div class="line">		Map.Entry en = (Map.Entry) j.next();</div><div class="line">		System.out.println(&quot;weakmap:&quot; + en.getKey() + &quot;:&quot; + en.getValue());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码声明了两个 Map 对象，一个是 HashMap，一个是 WeakHashMap，同时向两个 map 中放入 A、B 两个对象.<br>当 HashMap 删除 A，并且 A、B 都指向 Null 时，WeakHashMap 中的 A 将自动被回收掉。<br>出现这个状况的原因是，对于 A 对象而言，当 HashMap 删除并且将 A 指向 Null 后，除了 WeakHashMap 中还保存 A 外已经没有指向 A 的指针了，所以 WeakHashMap 会自动舍弃掉 a，<br>而对于 B 对象虽然指向了 null，但 HashMap 中还有指向 B 的指针，所以 WeakHashMap 将会保留 B 对象。</p>
+<p>WeakHashMap 主要通过 <code>expungeStaleEntries</code>这个函数来实现移除其内部不用的条目，从而达到自动释放内存的目的。<br>基本上只要对 WeakHashMap 的内容进行访问就会调用这个函数，从而达到清除其内部不再为外部引用的条目。<br>但是如果预先生成了 WeakHashMap，而在 GC 以前又不曾访问该 WeakHashMap, 那不是就不能释放内存了吗？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">List&lt;WeakHashMap&lt;byte[][], byte[][]&gt;&gt; maps = new ArrayList&lt;WeakHashMap&lt;byte[][], byte[][]&gt;&gt;();</div><div class="line">for (int i = 0; i &lt; 1000; i++) &#123;</div><div class="line">	WeakHashMap&lt;byte[][], byte[][]&gt; d = new WeakHashMap&lt;byte[][], byte[][]&gt;();</div><div class="line">	d.put(new byte[1000][1000], new byte[1000][1000]);</div><div class="line">	maps.add(d);</div><div class="line">	System.gc();</div><div class="line">	System.err.println(i);</div><div class="line">//	for (int j = 0; j &lt; i; j++) &#123;</div><div class="line">//		System.err.println(j + &quot; size&quot; + maps.get(j).size());</div><div class="line">//	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>果不其然，WeakHashMap 这个时候并没有自动帮我们释放不用的内存<br>总的来说，WeakHashMap并不是你什么也干它就能自动释放内部不用的对象的，而是在你<strong>访问它的内容的时候释放内部不用的对象</strong>。</p>
+<p>WeakHashMap 实现弱引用，是因为它的 Entry<k,v>是继承自 WeakReference<k>的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">private static class Entry&lt;K,V&gt; extends WeakReference&lt;K&gt;</div><div class="line">implements Map.Entry&lt;K,V&gt; Entry(K key, V value, ReferenceQueue&lt;K&gt; queue,int hash, Entry&lt;K,V&gt; next) &#123;</div><div class="line">	super(key, queue);</div><div class="line">	this.value = value;</div><div class="line">	this.hash = hash;</div><div class="line">	this.next = next;</div><div class="line">&#125;</div></pre></td></tr></table></figure></k></k,v></p>
+<p>请注意它构造父类的语句<code>super(key, queue);</code>，传入的是 Key，因此 Key 才是进行弱引用的，Value 是直接强引用关联在 this.value 之中。<br>在 System.gc() 时，Key 中的 Byte 数组进行了回收，而 Value 依然保持 (Value 被强关联到 Entry 上，Entry 又关联在 Map 中，Map 关联在 ArrayList 中)。</p>
+<p>For 循环中每次都 New 一个新的 WeakHashMap，在 Put 操作后，虽然 GC 将 WeakReference 的 Key 中的 Byte 数组回收了，并将事件通知到了 ReferenceQueue，但后续却没有相应的动作去触发 WeakHashMap 去处理 ReferenceQueue，所以 WeakReference 包装 Key 依然存在于 WeakHashMap 中，其对应的 value 也当然存在。</p>
+<p>那 value 是何时被清除的呢?<br>上面的注释代码中的 <code>maps.get(j).size()</code> 触发了 Value 的回收，那又如何触发的呢？<br>查看 WeakHashMap 源码可知,Size 方法调用了 <code>expungeStaleEntries</code> 方法，该方法对 JVM 要回收的的 Entry(Quene 中) 进行遍历，并将 Entry 的 Value 置空，回收了内存。<br>所以效果是<strong> Key 在 GC 的时候被清除，Value 在 Key 清除后访问 WeakHashMap 被清除</strong>。</p>
+<p>WeakHashMap 类是线程不同步的，可以使用 Collections.synchronizedMap 方法来构造同步的 WeakHashMap, 每个键对象间接地存储为一个弱引用的指示对象。<br>因此，不管是在映射内还是在映射之外，只有在垃圾回收器清除某个键的弱引用之后，该键才会自动移除。</p>
+<p>内容参考<a href="http://www.ibm.com/developerworks/cn/java/j-lo-set-operation/index.html" target="_blank" rel="external">WeakHashMap</a></p>
+<h2 id="LinkedHashMap-和-LinkedHashSet"><a href="#LinkedHashMap-和-LinkedHashSet" class="headerlink" title="LinkedHashMap 和 LinkedHashSet"></a>LinkedHashMap 和 LinkedHashSet</h2><p>HashSet是调用HashMap实现的，同理适用于LinkedHashSet，因此下面主要讲LInkedHashMap<br>LinkedHashMap是按照插入顺序和按访问顺序(构造时accessOrder设为true)的链表<br>其中按访问顺序可以构建 LRU (Least Recently Used)缓存<br>实现了记录顺序的LinkedHashMap,通过数组链表(HashMap)和循环双向链表(记录顺序)实现<br>在链表中有head指针，head.before 最新，head.after 最老</p>
+<p><a href="http://blog.csdn.net/zw0283/article/details/51258683" target="_blank" rel="external">http://blog.csdn.net/zw0283/article/details/51258683</a></p>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">public class LinkedHashMap&lt;K,V&gt; extends HashMap&lt;K,V&gt; implements Map&lt;K,V&gt;</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * The head of the doubly linked list.</div><div class="line">     */</div><div class="line">    private transient Entry&lt;K,V&gt; header;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * The iteration ordering method for this linked hash map: &lt;tt&gt;true&lt;/tt&gt;</div><div class="line">     * for access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order.</div><div class="line">     */</div><div class="line">    private final boolean accessOrder;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Constructs an empty insertion-ordered &lt;tt&gt;LinkedHashMap&lt;/tt&gt; instance</div><div class="line">     * with the specified initial capacity and load factor.</div><div class="line">     */</div><div class="line">    public LinkedHashMap(int initialCapacity, float loadFactor) &#123;</div><div class="line">        super(initialCapacity, loadFactor);</div><div class="line">        //初始化不记录访问顺序</div><div class="line">        accessOrder = false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * Constructs an empty &lt;tt&gt;LinkedHashMap&lt;/tt&gt; instance with the</div><div class="line">     * specified initial capacity, load factor and ordering mode.</div><div class="line">     */</div><div class="line">    public LinkedHashMap(int initialCapacity,</div><div class="line">                         float loadFactor,</div><div class="line">                         boolean accessOrder) &#123;</div><div class="line">        super(initialCapacity, loadFactor);</div><div class="line">        this.accessOrder = accessOrder;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Called by superclass constructors and pseudoconstructors (clone,</div><div class="line">     * readObject) before any entries are inserted into the map.  Initializes</div><div class="line">     * the chain.</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    void init() &#123;</div><div class="line">        header = new Entry&lt;&gt;(-1, null, null, null);</div><div class="line">        header.before = header.after = header;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">private static class Entry&lt;K,V&gt; extends HashMap.Entry&lt;K,V&gt; &#123;</div><div class="line">    //双向循环链表</div><div class="line">    // These fields comprise the doubly linked list used for iteration.</div><div class="line">    Entry&lt;K,V&gt; before, after;</div><div class="line"></div><div class="line">    Entry(int hash, K key, V value, HashMap.Entry&lt;K,V&gt; next) &#123;</div><div class="line">        super(hash, key, value, next);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Removes this entry from the linked list.</div><div class="line">     */</div><div class="line">    private void remove() &#123;</div><div class="line">        before.after = after;</div><div class="line">        after.before = before;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Inserts this entry before the specified existing entry in the list.</div><div class="line">     */</div><div class="line">    private void addBefore(Entry&lt;K,V&gt; existingEntry) &#123;</div><div class="line">        after  = existingEntry;</div><div class="line">        before = existingEntry.before;</div><div class="line">        before.after = this;</div><div class="line">        after.before = this;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //put方法会调用该方法</div><div class="line">    /**</div><div class="line">     * This method is invoked by the superclass whenever the value</div><div class="line">     * of a pre-existing entry is read by Map.get or modified by Map.set.</div><div class="line">     * If the enclosing Map is access-ordered, it moves the entry</div><div class="line">     * to the end of the list; otherwise, it does nothing.</div><div class="line">     */</div><div class="line">    void recordAccess(HashMap&lt;K,V&gt; m) &#123;</div><div class="line">        LinkedHashMap&lt;K,V&gt; lm = (LinkedHashMap&lt;K,V&gt;)m;</div><div class="line">        //按照访问顺序记录</div><div class="line">        if (lm.accessOrder) &#123;</div><div class="line">            lm.modCount++;</div><div class="line">            //删除该节点</div><div class="line">            remove();</div><div class="line">            //由于被访问过，变为最新节点，放在head前面</div><div class="line">            addBefore(lm.header);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    void recordRemoval(HashMap&lt;K,V&gt; m) &#123;</div><div class="line">        remove();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="put"><a href="#put" class="headerlink" title="put"></a>put</h3><p>LinkedHashMap 并未重写父类 HashMap 的 put 方法，而是重写了父类 HashMap 的 put 方法调用的子方法<code>void recordAccess(HashMap m)</code> ，<code>void addEntry(int hash, K key, V value, int bucketIndex)</code> 和<code>void createEntry(int hash, K key, V value, int bucketIndex)</code>，提供了自己特有的双向链接列表的实现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">public V put(K key, V value) &#123;</div><div class="line">    if (table == EMPTY_TABLE) &#123;</div><div class="line">        inflateTable(threshold);</div><div class="line">    &#125;</div><div class="line">    if (key == null)</div><div class="line">        return putForNullKey(value);</div><div class="line">    int hash = hash(key);</div><div class="line">    int i = indexFor(hash, table.length);</div><div class="line">    for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;</div><div class="line">            V oldValue = e.value;</div><div class="line">            e.value = value;</div><div class="line">            e.recordAccess(this);</div><div class="line">            return oldValue;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    modCount++;</div><div class="line">    //添加了删除队头的操作</div><div class="line">    addEntry(hash, key, value, i);</div><div class="line">    return null;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//#####################重写方法#####################</div><div class="line"></div><div class="line">void addEntry(int hash, K key, V value, int bucketIndex) &#123;</div><div class="line">    super.addEntry(hash, key, value, bucketIndex);</div><div class="line"></div><div class="line">    //最老的在队头</div><div class="line">    // Remove eldest entry if instructed</div><div class="line">    Entry&lt;K,V&gt; eldest = header.after;</div><div class="line">    if (removeEldestEntry(eldest)) &#123;</div><div class="line">        removeEntryForKey(eldest.key);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">void recordAccess(HashMap&lt;K,V&gt; m) &#123;</div><div class="line">    LinkedHashMap&lt;K,V&gt; lm = (LinkedHashMap&lt;K,V&gt;)m;</div><div class="line">    //按照访问顺序记录</div><div class="line">    if (lm.accessOrder) &#123;</div><div class="line">        lm.modCount++;</div><div class="line">        //删除该节点</div><div class="line">        remove();</div><div class="line">        //由于被访问过，变为最新节点，放在head前面</div><div class="line">        addBefore(lm.header);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//在一个节点前面添加节点</div><div class="line">private void addBefore(Entry&lt;K,V&gt; existingEntry) &#123;</div><div class="line">    after  = existingEntry;</div><div class="line">    before = existingEntry.before;</div><div class="line">    before.after = this;</div><div class="line">    after.before = this;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public V get(Object key) &#123;</div><div class="line">    Entry&lt;K,V&gt; e = (Entry&lt;K,V&gt;)getEntry(key);</div><div class="line">    if (e == null)</div><div class="line">        return null;</div><div class="line">    e.recordAccess(this);</div><div class="line">    return e.value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void recordAccess(HashMap&lt;K,V&gt; m) &#123;</div><div class="line">    LinkedHashMap&lt;K,V&gt; lm = (LinkedHashMap&lt;K,V&gt;)m;</div><div class="line">    //按照访问顺序记录</div><div class="line">    if (lm.accessOrder) &#123;</div><div class="line">        lm.modCount++;</div><div class="line">        //删除该节点</div><div class="line">        remove();</div><div class="line">        //由于被访问过，变为最新节点，放在head前面</div><div class="line">        addBefore(lm.header);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="http://wiki.jikexueyuan.com/project/java-collection/linkedhashmap.html" target="_blank" rel="external">http://wiki.jikexueyuan.com/project/java-collection/linkedhashmap.html</a><br><a href="http://wiki.jikexueyuan.com/project/java-collection/linkedhashmap-lrucache.html" target="_blank" rel="external">http://wiki.jikexueyuan.com/project/java-collection/linkedhashmap-lrucache.html</a><br><a href="http://zhouyunan2010.iteye.com/blog/1236220" target="_blank" rel="external">http://zhouyunan2010.iteye.com/blog/1236220</a></p>
+<h2 id="EnumSet"><a href="#EnumSet" class="headerlink" title="EnumSet"></a>EnumSet</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">private enum Color &#123;</div><div class="line">	RED(255, 0, 0), GREEN(0, 255, 0), BLUE(0, 0, 255);</div><div class="line">	private int r;</div><div class="line">	private int g;</div><div class="line">	private int b;</div><div class="line"></div><div class="line">	Color(int r, int g, int b) &#123;</div><div class="line">		this.r = r;</div><div class="line">		this.g = g;</div><div class="line">		this.b = b;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">public static void drawLine(Set&lt;Color&gt; colors) &#123;</div><div class="line">	System.out.println(&quot;Requested Colors to draw lines : &quot; + colors);</div><div class="line">	for (Color c : colors) &#123;</div><div class="line">		System.out.println(&quot;drawing line in color : &quot; + c);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">public static void main(String[] args) &#123;</div><div class="line">	// this will draw line in yellow color</div><div class="line">	EnumSet&lt;Color&gt; yellow = EnumSet.of(Color.RED, Color.GREEN);</div><div class="line">	drawLine(yellow);</div><div class="line">	// RED + GREEN + BLUE = WHITE</div><div class="line">	EnumSet&lt;Color&gt; white = EnumSet.of(Color.RED, Color.GREEN, Color.BLUE);</div><div class="line">	drawLine(white);</div><div class="line">	// RED + BLUE = PINK</div><div class="line">	EnumSet&lt;Color&gt; pink = EnumSet.of(Color.RED, Color.BLUE);</div><div class="line">	drawLine(pink);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="BitSet"><a href="#BitSet" class="headerlink" title="BitSet"></a>BitSet</h2><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li>void set(i) i位置置1</li>
+<li>boolean get(i) 返回i的布尔值</li>
+<li>void clear(i) 位置置0</li>
+<li>int lenght() 逻辑值</li>
+<li>int size() 长度</li>
+</ul>
+<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><ul>
+<li><p>素数筛法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//bitset 被置1说明是素数</div><div class="line">public static void count(BitSet set)&#123;</div><div class="line">	//length() -&gt; Returns the &quot;logical size&quot; of this BitSet</div><div class="line">	for(int i = 2; i &lt; set.size(); i++)&#123;</div><div class="line">		//初始化，全部置1</div><div class="line">		set.set(i);</div><div class="line">	&#125;</div><div class="line">	for(int i = 2; i &lt; Math.sqrt(set.size()) + 1; i++)&#123;</div><div class="line">		if(set.get(i))&#123;</div><div class="line">			for(int j = 2 * i; j &lt; set.length(); j += i)&#123;</div><div class="line">				//素数的倍数全部标记为非素数</div><div class="line">				set.clear(j);</div><div class="line"></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">	BitSet b = new BitSet(2000000);</div><div class="line">	count(b);</div><div class="line">	int count = 0;</div><div class="line">	for(int i = 2; i &lt; b.length(); i++)&#123;</div><div class="line">		if(b.get(i))&#123;</div><div class="line">			count ++;</div><div class="line">			if(i &lt; 100)&#123;</div><div class="line"></div><div class="line">				System.out.println(i);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	System.out.println(&quot;count&quot; + count);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>逻辑运算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">public static void main(String args[]) &#123;</div><div class="line">	BitSet bits1 = new BitSet(16);</div><div class="line">	BitSet bits2 = new BitSet(16);</div><div class="line"></div><div class="line">	// set some bits</div><div class="line">	for (int i = 0; i &lt; 16; i++) &#123;</div><div class="line">		//偶数都会被置1</div><div class="line">		if ((i % 2) == 0)</div><div class="line">			bits1.set(i);</div><div class="line">		//5的倍数都会被置1</div><div class="line">		if ((i % 5) != 0)</div><div class="line">			bits2.set(i);</div><div class="line">	&#125;</div><div class="line">	System.out.println(&quot;Initial pattern in bits1: &quot;);</div><div class="line">	System.out.println(bits1);</div><div class="line">	System.out.println(&quot;\nInitial pattern in bits2: &quot;);</div><div class="line">	System.out.println(bits2);</div><div class="line"></div><div class="line">	// AND bits</div><div class="line">	bits2.and(bits1);</div><div class="line">	System.out.println(&quot;\nbits2 AND bits1: &quot;);</div><div class="line">	System.out.println(bits2);</div><div class="line"></div><div class="line">	// OR bits</div><div class="line">	bits2.or(bits1);</div><div class="line">	System.out.println(&quot;\nbits2 OR bits1: &quot;);</div><div class="line">	System.out.println(bits2);</div><div class="line"></div><div class="line">	// XOR bits</div><div class="line">	bits2.xor(bits1);</div><div class="line">	System.out.println(&quot;\nbits2 XOR bits1: &quot;);</div><div class="line">	System.out.println(bits2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><p><a href="http://www.mkyong.com/java/java-properties-file-examples/" target="_blank" rel="external">Properties Tutorial</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-26T03:23:14.000Z" itemprop="dateUpdated">2017年4月26日 11:23</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/08/具体的集合/" target="_blank" rel="external">http://duyao.github.io/2017/03/08/具体的集合/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/08/具体的集合/&title=《具体的集合》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/08/具体的集合/&title=《具体的集合》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/08/具体的集合/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《具体的集合》 — Du Yao's blog&url=http://duyao.github.io/2017/03/08/具体的集合/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/08/具体的集合/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/10/二叉树及其相关/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">二叉树及其相关</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/06/138-Copy-List-with-Random-Pointer/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">138. Copy List with Random Pointer</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="具体的集合" data-title="具体的集合" data-url="http://duyao.github.io/2017/03/08/具体的集合/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/08/具体的集合/&title=《具体的集合》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/08/具体的集合/&title=《具体的集合》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/08/具体的集合/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《具体的集合》 — Du Yao's blog&url=http://duyao.github.io/2017/03/08/具体的集合/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/08/具体的集合/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/08/具体的集合/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

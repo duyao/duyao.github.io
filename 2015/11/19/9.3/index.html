@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>9.3 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="最小编辑代价给定两个字符串str1和str2，再给定三个整数ic、dc和rc分别代表插入、删除和替换一个字符的代价，返回将str1编辑成str2的最小代价。str1=“abc”，str2=“adc”，ic=5，dc=3，rc=2。从“abc”编辑成“adc”，把’b’替换成’d’是代价最小的。所以返回2。str1=“abc”，str2=“adc”，ic=5，dc=3，rc=100。从“abc”编辑">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.3">
+<meta property="og:url" content="http://duyao.github.io/2015/11/19/9.3/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="最小编辑代价给定两个字符串str1和str2，再给定三个整数ic、dc和rc分别代表插入、删除和替换一个字符的代价，返回将str1编辑成str2的最小代价。str1=“abc”，str2=“adc”，ic=5，dc=3，rc=2。从“abc”编辑成“adc”，把’b’替换成’d’是代价最小的。所以返回2。str1=“abc”，str2=“adc”，ic=5，dc=3，rc=100。从“abc”编辑">
+<meta property="og:updated_time" content="2015-12-08T12:36:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9.3">
+<meta name="twitter:description" content="最小编辑代价给定两个字符串str1和str2，再给定三个整数ic、dc和rc分别代表插入、删除和替换一个字符的代价，返回将str1编辑成str2的最小代价。str1=“abc”，str2=“adc”，ic=5，dc=3，rc=2。从“abc”编辑成“adc”，把’b’替换成’d’是代价最小的。所以返回2。str1=“abc”，str2=“adc”，ic=5，dc=3，rc=100。从“abc”编辑">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">9.3</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">9.3</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-19T09:13:25.000Z" itemprop="datePublished" class="page-time">
+  2015-11-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#最小编辑代价"><span class="post-toc-number">1.</span> <span class="post-toc-text">最小编辑代价</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-9.3"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">9.3</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月19日 17:13" datetime="2015-11-19T09:13:25.000Z"  itemprop="datePublished">2015-11-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="最小编辑代价"><a href="#最小编辑代价" class="headerlink" title="最小编辑代价"></a>最小编辑代价</h1><p>给定两个字符串str1和str2，再给定三个整数ic、dc和rc分别代表插入、删除和替换一个字符的代价，返回将str1编辑成str2的最小代价。<br>str1=“abc”，str2=“adc”，ic=5，dc=3，rc=2。<br>从“abc”编辑成“adc”，把’b’替换成’d’是代价最小的。所以返回2。<br>str1=“abc”，str2=“adc”，ic=5，dc=3，rc=100。<br>从“abc”编辑成“abd”，先删除’b’然后插入’d’是代价最小的。所以返回8。<br>str1=“abc”，str2=“abc”，ic=5，dc=3，rc=2。<br>不用编辑了，本来就是一样的字符串。所以返回0。</p>
+<a id="more"></a>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>该题目是3个字符串进行比较<br>dp[i][j]代表str1[0..i-1]编辑成str2[0..j-1]的最小代价<br>下面具体说明dp矩阵每个位置的值是如何计算的：<br>1， dp[0][0]=0，表示str1空的子串编辑成str2空的子串的代价为0。<br>2，矩阵dp第一列即dp[0..M-1][0]。 dp[i][0]表示str1[0..i-1]编辑成空串的最小代价，毫无疑问是把str1[0..i-1]所有字符删掉的代价，所以dp[i][0]=dc<em>i。<br>3，矩阵dp第一行即dp[0][0..N-1]。 dp[0][j]表示空串编辑成str2[0..j-1]最小代价，毫无疑问是在空串里插入str2[0..j-1]所有字符的代价，所以dp[0][j]=ic\</em>j。<br>4，其他位置按照从左到右再从上到下来计算， dp[i][j]的值只可能来自以下四种情况。<br>1） str1[0..i-1]可以先编辑成str1[0..i-2]，也就是删除字符str1[i-1]，然后再由str1[0..i-2]编辑成str2[0..j-1]， dp[i-1][j]表示str1[0..i-2]编辑成str2[0..j-1]的最小代价， 那么dp[i][j]可能等于dc+dp[i-1][j]。<br>2） str1[0..i-1]可以先编辑成str2[0..j-2]，然后str2[0..j-2]再插入字符str2[j-1]编辑成str2[0..j-1]， dp[i][j-1]表示str1[0..i-1]编辑成str2[0..j-2]的最小代价， 那么dp[i][j]可能等于dp[i][j-1]+ic。<br>3）如果str1[i-1]!=str2[j-1]。先把str1[0..i-1]中str1[0..i-2]的部分可以先变成str2[0..j-2]，然后把字符str1[i-1]替换成str2[j-1]，这样str1[0..i-1]就编辑成str2[0..j-1]了。<br>dp[i-1][j-1]表示str1[0..i-2]编辑成str2[0..i-2]的最小代价，那么dp[i][j]可能等于dp[i-1][j-1]+rc。<br>4）如果str1[i-1]==str2[j-1]。先把str1[0..i-1]中str1[0..i-2]的部分可以先变成str2[0..j-2]，因为此时字符str1[i-1]等于str2[j-1]，所以str1[0..i-1]已经编辑成str2[0..j-1]了。<br>dp[i-1][j-1]表示str1[0..i-2]编辑成str2[0..i-2]的最小代价，那么dp[i][j]可能等于<br>dp[i-1][j-1]。<br>5，以上四种可能的值中，选最小值作为dp[i][j]的值。 dp最右下角的值就是最终结果。<br>具体过程请参看如下代码中的minCost1方法。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public static int minCost(String str1, String str2, int ic, int dc, int rc) &#123;</div><div class="line">	if (str1 == null || str2 == null) &#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	char[] chs1 = str1.toCharArray();</div><div class="line">	char[] chs2 = str2.toCharArray();</div><div class="line">	//多设置一行一列的空值，方便计算</div><div class="line">	int row = chs1.length + 1;</div><div class="line">	int col = chs2.length + 1;</div><div class="line">	</div><div class="line">	//dp[0][0]是0，因为空变成空不需要代价</div><div class="line">	int[][] dp = new int[row][col];</div><div class="line">	for(int i = 1; i &lt; col; i++)&#123;</div><div class="line">		//把空改为str2的代价是添加</div><div class="line">		dp[0][i] = ic*i;</div><div class="line">	&#125;</div><div class="line">	for(int j = 1; j &lt; row; j++)&#123;</div><div class="line">		dp[j][0] = dc*j;</div><div class="line">	&#125;</div><div class="line">	for(int i = 1; i &lt; row; i++)&#123;</div><div class="line">		for(int j= 1; j &lt; col; j++)&#123;</div><div class="line">			//在3中取值找最小</div><div class="line">			//判断</div><div class="line">			if(chs1[i-1] == chs2[j-1])&#123;</div><div class="line">				//最后一个相同，不用代价</div><div class="line">				dp[i][j] = dp[i-1][j-1];</div><div class="line">			&#125;else&#123;</div><div class="line">				//不同就修改最后一个</div><div class="line">				dp[i][j] = dp[i-1][j-1]+rc;</div><div class="line">				&#125;</div><div class="line">			//先0,i-1变为0,j-2然后加上j-1</div><div class="line">			dp[i][j]=Math.min(dp[i][j], dp[i][j-1]+ic);</div><div class="line">			//先0,i-1删除i-1得到0,i-2变为0,j-1</div><div class="line">			dp[i][j]=Math.min(dp[i][j], dp[i-1][j]+dc);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return dp[row-1][col-1];</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-12-08T12:36:48.000Z" itemprop="dateUpdated">2015年12月8日 20:36</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/19/9.3/" target="_blank" rel="external">http://duyao.github.io/2015/11/19/9.3/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/19/9.3/&title=《9.3》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/19/9.3/&title=《9.3》 — Du Yao's blog&source=最小编辑代价给定两个字符串str1和str2，再给定三个整数ic、dc和rc分别代表插入、删除和替换一个字符的代价，返回将str1编辑成str2的最小代价..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/19/9.3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《9.3》 — Du Yao's blog&url=http://duyao.github.io/2015/11/19/9.3/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/19/9.3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/20/9.4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">9.4</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/19/9.2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">9.2</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="9.3" data-title="9.3" data-url="http://duyao.github.io/2015/11/19/9.3/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/19/9.3/&title=《9.3》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/19/9.3/&title=《9.3》 — Du Yao's blog&source=最小编辑代价给定两个字符串str1和str2，再给定三个整数ic、dc和rc分别代表插入、删除和替换一个字符的代价，返回将str1编辑成str2的最小代价..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/19/9.3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《9.3》 — Du Yao's blog&url=http://duyao.github.io/2015/11/19/9.3/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/19/9.3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/19/9.3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

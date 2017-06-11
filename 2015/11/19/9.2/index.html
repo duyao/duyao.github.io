@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>9.2 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="最长公共子序列问题给定两个字符串str1和str2，返回两个字符串的最长公共子序列。str1=“1A2C3D4B56”，str2=“B1D23CA45B6A”。“123456”或者“12C4B6”都是最长公共子序列，返回哪一个都行。">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.2">
+<meta property="og:url" content="http://duyao.github.io/2015/11/19/9.2/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="最长公共子序列问题给定两个字符串str1和str2，返回两个字符串的最长公共子序列。str1=“1A2C3D4B56”，str2=“B1D23CA45B6A”。“123456”或者“12C4B6”都是最长公共子序列，返回哪一个都行。">
+<meta property="og:updated_time" content="2015-11-19T09:12:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9.2">
+<meta name="twitter:description" content="最长公共子序列问题给定两个字符串str1和str2，返回两个字符串的最长公共子序列。str1=“1A2C3D4B56”，str2=“B1D23CA45B6A”。“123456”或者“12C4B6”都是最长公共子序列，返回哪一个都行。">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">9.2</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">9.2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-19T06:23:58.000Z" itemprop="datePublished" class="page-time">
+  2015-11-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#最长公共子序列问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">最长公共子序列问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-9.2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">9.2</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月19日 14:23" datetime="2015-11-19T06:23:58.000Z"  itemprop="datePublished">2015-11-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="最长公共子序列问题"><a href="#最长公共子序列问题" class="headerlink" title="最长公共子序列问题"></a>最长公共子序列问题</h1><p>给定两个字符串str1和str2，返回两个字符串的最长公共子序列。<br>str1=“1A2C3D4B56”，str2=“B1D23CA45B6A”。<br>“123456”或者“12C4B6”都是最长公共子序列，返回哪一个都行。</p>
+<a id="more"></a>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>dp[i][j]的含义是str1[0..i]与str2[0..j]的最长公共子序列的长度。<br>从左到右，再从上到下计算矩阵dp<br>先计算第一行和第一列，再计算中间</p>
+<ul>
+<li>str1[i] == str2[j]，dp[i][j] = dp[i-1][j-1]+1</li>
+<li>str1[i] != str2[j]，dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);</li>
+</ul>
+<p>算出dp后，要根据dp找到公共子序列<br>1，从矩阵的右下角开始，有三种移动方式，向上、向左、 向左上。假设移动的过程中， i表<br>示此时的⾏数， j表示此时的列数，同时⽤⼀个变量res来表示最长公共子序列。<br>2，如果dp[i][j]⼤于dp[i-1][j]和dp[i][j-1]，说明之前在计算dp[i][j]的时候，⼀定是选择了<br>决策dp[i-1][j-1]+1，可以确定str1[i]等于str2[j]，并且这个字符⼀定属于最长公共子序列，<br>把这个字符放进res， 然后向左上方移动。<br>3，如果dp[i][j]等于dp[i-1][j]，说明之前在计算dp[i][j]的时候， dp[i-1][j-1]+1这个决策不<br>是必须选择的决策，向上方移动即可。<br>4，如果dp[i][j]等于dp[i][j-1]，与步骤3同理，向左方移动。<br>5，如果dp[i][j]同时等于dp[i-1][j]和dp[i][j-1]，向上还是向下⽆所谓，选择其中⼀个即<br>可，反正不会错过必须选择的字符。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">public static int[][] getdp(char[] str1, char[] str2) &#123;</div><div class="line">	int[][] dp = new int[str1.length][str2.length];</div><div class="line">	//初始化第一行</div><div class="line">	for(int i = 0; i &lt; str1.length; i++)&#123;</div><div class="line">		if(str1[i]==str2[0])&#123;</div><div class="line">			dp[i][0] = 1;</div><div class="line">			for(int j = i+1; j &lt; str1.length; j++)&#123;</div><div class="line">				dp[j][0] = 1;</div><div class="line">			&#125;</div><div class="line">			break;</div><div class="line">		&#125;else&#123;</div><div class="line">			dp[i][0] = 0;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	//初始化第一列</div><div class="line">	for(int i = 1; i &lt; str2.length; i++)&#123;</div><div class="line">		if(str1[0]==str2[i])&#123;</div><div class="line">			dp[0][i] = 1;</div><div class="line">			for(int j = i+1; j &lt; str2.length; j++)&#123;</div><div class="line">				dp[0][j] = 1;</div><div class="line">			&#125;</div><div class="line">			break;</div><div class="line">		&#125;else&#123;</div><div class="line">			dp[0][i] = 0;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	for(int i = 1; i &lt; str1.length; i++)&#123;</div><div class="line">		for(int j = 1;j &lt; str2.length; j++)&#123;</div><div class="line">			dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);</div><div class="line">			if(str1[i] == str2[j])&#123;</div><div class="line">				dp[i][j] = dp[i-1][j-1]+1;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	return dp;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">public static char[] getAns(String str1, String str2)&#123;</div><div class="line">	</div><div class="line">	int m = str1.length()-1;</div><div class="line">	int n = str2.length()-1;</div><div class="line">	char[] char1 = str1.toCharArray();</div><div class="line">	char[] char2 = str2.toCharArray();</div><div class="line"></div><div class="line">	int[][] dp = getdp(char1, char2);</div><div class="line">	int len = dp[m][n];</div><div class="line">	char[] str = new char[len];</div><div class="line">	while(len &gt; 0)&#123;</div><div class="line">		</div><div class="line">		//m&gt;0 和n&gt;0放在最前面，因为有可能过界导致后面 dp[m][n] == dp[m][n-1]的判断不能进行</div><div class="line">		if(n&gt;0 &amp;&amp; dp[m][n] == dp[m][n-1])&#123;</div><div class="line">			n--;</div><div class="line">		&#125;else if(m&gt;0 &amp;&amp; dp[m][n] == dp[m-1][n])&#123;</div><div class="line">			m--;</div><div class="line">		&#125;else&#123;</div><div class="line">			//dp[m][n] == dp[m-1][n-1]+1应该是一个判断分支，但是不能写出该判断条件</div><div class="line">			//因为有可能到了第一行，m=0,无法计算m-1</div><div class="line">			str[--len] = char1[m];</div><div class="line">			m--;</div><div class="line">			n--;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">		</div><div class="line">	return str; </div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-19T09:12:42.000Z" itemprop="dateUpdated">2015年11月19日 17:12</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/19/9.2/" target="_blank" rel="external">http://duyao.github.io/2015/11/19/9.2/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/19/9.2/&title=《9.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/19/9.2/&title=《9.2》 — Du Yao's blog&source=最长公共子序列问题给定两个字符串str1和str2，返回两个字符串的最长公共子序列。str1=“1A2C3D4B56”，str2=“B1D23CA45B6..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/19/9.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《9.2》 — Du Yao's blog&url=http://duyao.github.io/2015/11/19/9.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/19/9.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/19/9.3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">9.3</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/18/jQuery实现Ajax应用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">jQuery实现Ajax应用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="9.2" data-title="9.2" data-url="http://duyao.github.io/2015/11/19/9.2/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/19/9.2/&title=《9.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/19/9.2/&title=《9.2》 — Du Yao's blog&source=最长公共子序列问题给定两个字符串str1和str2，返回两个字符串的最长公共子序列。str1=“1A2C3D4B56”，str2=“B1D23CA45B6..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/19/9.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《9.2》 — Du Yao's blog&url=http://duyao.github.io/2015/11/19/9.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/19/9.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/19/9.2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

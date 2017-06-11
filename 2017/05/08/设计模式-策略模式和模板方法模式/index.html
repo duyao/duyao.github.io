@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>设计模式-策略模式和模板方法模式 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计模式">
+    <meta name="description" content="策略模式策略模式就是要应对规则变化和新规则加入对程序带来的影响。比如实现一个fly方法有很多种方式，可以做火箭飞、可以带翅膀飞等，那么当添加新的方式的时候可有选择以下方案：1、继承：即将设计一个抽象类，里面有这个fly的抽象方法  父类提供该实现方法，简单易用，不具有灵活性，支持性差，因为子类需要重写该父类方法，有可能忘记重写 父类中实现一个抽象方法，每个类都要实现，不能复用代码  2、组合：将f">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式-策略模式和模板方法模式">
+<meta property="og:url" content="http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="策略模式策略模式就是要应对规则变化和新规则加入对程序带来的影响。比如实现一个fly方法有很多种方式，可以做火箭飞、可以带翅膀飞等，那么当添加新的方式的时候可有选择以下方案：1、继承：即将设计一个抽象类，里面有这个fly的抽象方法  父类提供该实现方法，简单易用，不具有灵活性，支持性差，因为子类需要重写该父类方法，有可能忘记重写 父类中实现一个抽象方法，每个类都要实现，不能复用代码  2、组合：将f">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/strategy.jpg">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/javasort.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/javaexecutor.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/template.jpg">
+<meta property="og:updated_time" content="2017-05-08T11:51:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式-策略模式和模板方法模式">
+<meta name="twitter:description" content="策略模式策略模式就是要应对规则变化和新规则加入对程序带来的影响。比如实现一个fly方法有很多种方式，可以做火箭飞、可以带翅膀飞等，那么当添加新的方式的时候可有选择以下方案：1、继承：即将设计一个抽象类，里面有这个fly的抽象方法  父类提供该实现方法，简单易用，不具有灵活性，支持性差，因为子类需要重写该父类方法，有可能忘记重写 父类中实现一个抽象方法，每个类都要实现，不能复用代码  2、组合：将f">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/strategy.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">设计模式-策略模式和模板方法模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">设计模式-策略模式和模板方法模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-08T09:10:19.000Z" itemprop="datePublished" class="page-time">
+  2017-05-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#策略模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">策略模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#点评"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">点评</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用场景"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">应用场景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sort方法"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">sort方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线程池的排队和拒绝策略"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">线程池的排队和拒绝策略</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#模板方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">模板方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#点评-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">点评</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用场景-1"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">应用场景</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-设计模式-策略模式和模板方法模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">设计模式-策略模式和模板方法模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年05月08日 17:10" datetime="2017-05-08T09:10:19.000Z"  itemprop="datePublished">2017-05-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><p>策略模式就是要应对规则变化和新规则加入对程序带来的影响。<br>比如实现一个fly方法有很多种方式，可以做火箭飞、可以带翅膀飞等，那么当添加新的方式的时候可有选择以下方案：<br>1、继承：<br>即将设计一个抽象类，里面有这个fly的抽象方法</p>
+<ul>
+<li>父类提供该实现方法，简单易用，不具有灵活性，支持性差，因为子类需要重写该父类方法，有可能忘记重写</li>
+<li>父类中实现一个抽象方法，每个类都要实现，不能复用代码</li>
+</ul>
+<p>2、组合：<br>将fly设计成为接口，使得父类持有该接口， 并由接口代理飞行</p>
+<ul>
+<li>多用组合少用继承</li>
+<li>has-a的概念</li>
+<li>足够灵活，复用代码</li>
+</ul>
+<p>可以得到结论：优先使用组合方式，将不变部分抽象为接口，面向接口而不是面向继承，从而达到多用组合少用继承的目的</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>1、分离变化得到接口<br>2、策略的实现类：实现一些不同的策略<br>3、客户端持有该策略的对象<br>4、在客户端正确的组合和这些策略<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/strategy.jpg" alt="策略模式" title="">
+                </div>
+                <div class="image-caption">策略模式</div>
+            </figure></p>
+<h2 id="点评"><a href="#点评" class="headerlink" title="点评"></a>点评</h2><p>优点：</p>
+<ul>
+<li>使用组合，架构灵活</li>
+<li>富有弹性，较好的应对变化</li>
+<li>代码复用性好（相对继承）</li>
+<li>消除大量的条件语句</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>客户端需要了解每个策略细节，因为每个客户端要选择自己适合的策略</li>
+<li>增加策略就要增加对象，这样就增加了对象的数目</li>
+</ul>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>什么情况适合策略模式：</p>
+<ul>
+<li>许多相关的类仅仅是行为差异</li>
+<li>运行时选取不同的算法变体</li>
+<li>通过条件语句在多个分支中选取一个</li>
+</ul>
+<p>在java中以下方法使用了策略模式：</p>
+<h3 id="sort方法"><a href="#sort方法" class="headerlink" title="sort方法"></a>sort方法</h3><ul>
+<li>Java.util.Collections#sort(List list, Comparator &lt; ? super T &gt; c)</li>
+<li>java.util.Arrays#sort(T[], Comparator &lt; ? super T &gt; c)</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/javasort.png" alt="sort方法" title="">
+                </div>
+                <div class="image-caption">sort方法</div>
+            </figure>
+<p>Context：是实际调用排序的代码，即Collections的类。可以看到，默认使用了TimSort进行排序，排序的算法与对象的compare具体实现无关。<br>Strategy：即具体的对象比较接口，Comparator。<br>ConcreteStrategy：具体的比较算法，通过Comparator实现。例如实现大小写敏感、大小写不敏感或任意规则的比对。</p>
+<h3 id="线程池的排队和拒绝策略"><a href="#线程池的排队和拒绝策略" class="headerlink" title="线程池的排队和拒绝策略"></a>线程池的排队和拒绝策略</h3><ul>
+<li>ThreadPoolExecutor中的ThreadFactory和RejectedExecutionHandler</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/javaexecutor.png" alt="线程池的排队和拒绝策略" title="">
+                </div>
+                <div class="image-caption">线程池的排队和拒绝策略</div>
+            </figure>
+<p>Context：ThreadPoolExecutor实际执行的方法execute()。按照用户设定的排队策略和拒绝任务的处理策略执行。<br>Strategy：这里排队策略和拒绝任务的处理策略提供了各自的接口，分别是BlockingQueue<e>和RejectedExecutionHandler。<br>ConcreteStrategy：具体的排队策略和拒绝任务的处理策略，JDK中都提供了默认的实现方法。可以实现接口自定义策略进行扩展。</e></p>
+<p><a href="http://www.importnew.com/12690.html" target="_blank" rel="external">http://www.importnew.com/12690.html</a><br><a href="http://www.importnew.com/12853.html" target="_blank" rel="external">http://www.importnew.com/12853.html</a><br><a href="http://www.cnblogs.com/zuoxiaolong/p/pattern8.html" target="_blank" rel="external">http://www.cnblogs.com/zuoxiaolong/p/pattern8.html</a></p>
+<h1 id="模板方法"><a href="#模板方法" class="headerlink" title="模板方法"></a>模板方法</h1><p>所谓模板方法模式就是在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤。<br>模板方法模式就是基于继承的代码复用技术的。在模板方法模式中，我们可以将相同部分的代码放在父类中，而将不同的代码放入不同的子类中。</p>
+<h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/template.jpg" alt="模板方法模式" title="">
+                </div>
+                <div class="image-caption">模板方法模式</div>
+            </figure>
+<p>抽象基类：定义了一个算法的步骤，这个方法一定是final的，因为所有的子类都是这么实现的，不允许子类改变，还有：定义了基本方法(每个子类都是这么实现的)和抽象方法(每个子类实现方式不同，abstract修饰无方法体)以及钩子函数(这个方法有个默认实现，同时也可以由子类实现，用于判断是否执行某些方法，protect修饰有方法体)<br>实现子类：重写抽象基类的protect方法，即抽象方法和钩子函数<br><a href="http://www.importnew.com/23467.html" target="_blank" rel="external">http://www.importnew.com/23467.html</a></p>
+<h2 id="点评-1"><a href="#点评-1" class="headerlink" title="点评"></a>点评</h2><p>缺点：继承单继承</p>
+<h2 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h2><p>类加载器classloader<br>在ClassLoader中定义的算法顺序是：<br>1，首先看是否有已经加载好的类。<br>2，如果父类加载器不为空，则首先从父类类加载器加载。<br>3，如果父类加载器为空，则尝试从启动加载器加载。<br>4，如果两者都失败，才尝试从findClass方法加载。<br>findClass这个方法，并不是必须实现的，所以JDK选择留给程序员们自己选择是否要覆盖</p>
+<p><a href="http://www.cnblogs.com/zuoxiaolong/p/pattern10.html" target="_blank" rel="external">http://www.cnblogs.com/zuoxiaolong/p/pattern10.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-08T11:51:24.000Z" itemprop="dateUpdated">2017年5月8日 19:51</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/05/08/设计模式-策略模式和模板方法模式/" target="_blank" rel="external">http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/&title=《设计模式-策略模式和模板方法模式》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/&title=《设计模式-策略模式和模板方法模式》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式-策略模式和模板方法模式》 — Du Yao's blog&url=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/05/12/Java注解/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Java注解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/05/设计模式-观察者模式和责任链模式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">设计模式-观察者模式和责任链模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="设计模式-策略模式和模板方法模式" data-title="设计模式-策略模式和模板方法模式" data-url="http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/&title=《设计模式-策略模式和模板方法模式》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/&title=《设计模式-策略模式和模板方法模式》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式-策略模式和模板方法模式》 — Du Yao's blog&url=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

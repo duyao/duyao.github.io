@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>二分查找 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,algorithm">
+    <meta name="description" content="查找数字x是否在有序数组中(无重复)key  左闭右闭区间 left&amp;lt;=right 无重复  123456789101112131415161718192021// 查找数字x是否在有序数组中,无重复public static int f1(int[] a, int x) &amp;#123;	int left = 0;	int right = a.length - 1;	int mid = 0;">
+<meta name="keywords" content="leetcode,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分查找">
+<meta property="og:url" content="http://duyao.github.io/2015/12/03/二分查找/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="查找数字x是否在有序数组中(无重复)key  左闭右闭区间 left&amp;lt;=right 无重复  123456789101112131415161718192021// 查找数字x是否在有序数组中,无重复public static int f1(int[] a, int x) &amp;#123;	int left = 0;	int right = a.length - 1;	int mid = 0;">
+<meta property="og:updated_time" content="2016-05-12T11:30:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二分查找">
+<meta name="twitter:description" content="查找数字x是否在有序数组中(无重复)key  左闭右闭区间 left&amp;lt;=right 无重复  123456789101112131415161718192021// 查找数字x是否在有序数组中,无重复public static int f1(int[] a, int x) &amp;#123;	int left = 0;	int right = a.length - 1;	int mid = 0;">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">二分查找</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">二分查找</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-12-03T13:26:21.000Z" itemprop="datePublished" class="page-time">
+  2015-12-03
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查找数字x是否在有序数组中-无重复"><span class="post-toc-number">1.</span> <span class="post-toc-text">查找数字x是否在有序数组中(无重复)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#序列的第一个x的位置L-有重复"><span class="post-toc-number">2.</span> <span class="post-toc-text">序列的第一个x的位置L(有重复)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#序列的第一个大于x的位置R-有重复"><span class="post-toc-number">3.</span> <span class="post-toc-text">序列的第一个大于x的位置R(有重复)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#练习"><span class="post-toc-number">4.</span> <span class="post-toc-text">练习</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-二分查找"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">二分查找</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年12月03日 21:26" datetime="2015-12-03T13:26:21.000Z"  itemprop="datePublished">2015-12-03</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="查找数字x是否在有序数组中-无重复"><a href="#查找数字x是否在有序数组中-无重复" class="headerlink" title="查找数字x是否在有序数组中(无重复)"></a>查找数字x是否在有序数组中(无重复)</h2><p>key</p>
+<ul>
+<li>左闭右闭区间</li>
+<li>left&lt;=right</li>
+<li>无重复</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// 查找数字x是否在有序数组中,无重复</div><div class="line">public static int f1(int[] a, int x) &#123;</div><div class="line">	int left = 0;</div><div class="line">	int right = a.length - 1;</div><div class="line">	int mid = 0;</div><div class="line">	// 区间是[0,n-1]</div><div class="line">	while (left &lt;= right) &#123;</div><div class="line">		mid = (left + right) / 2;</div><div class="line">		if (a[mid] == x) &#123;</div><div class="line">			return mid;</div><div class="line">		&#125; else if (a[mid] &gt; x) &#123;</div><div class="line">			// 在区间[left,mid-1]找</div><div class="line">			right = mid - 1;</div><div class="line">		&#125; else &#123;</div><div class="line">			// 在区间[mid+1,right]找</div><div class="line">			left = mid + 1;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	// 找不到</div><div class="line">	return -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="序列的第一个x的位置L-有重复"><a href="#序列的第一个x的位置L-有重复" class="headerlink" title="序列的第一个x的位置L(有重复)"></a>序列的第一个x的位置L(有重复)</h2><p><strong>对于出现左闭右开区间，应会出现r=mid或者l=mid，且循环条件是改为left&lt;right</strong><br>key</p>
+<ul>
+<li>有重复</li>
+<li>左闭右开区间</li>
+<li>left &lt; right</li>
+<li>出现r=mid或者l=mid</li>
+<li>返回left</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//序列的第一个x的位置</div><div class="line">public static int f2(int[] a, int x) &#123;</div><div class="line">	int left = 0;</div><div class="line">	int right = a.length;</div><div class="line">	int mid = 0;</div><div class="line">	// 区间是[0,n)</div><div class="line">	// 分支中出现了l=mid 或者r=mid，循环条件要写成left &lt; right，否则写成left &lt;= right</div><div class="line">	//避免出现left=right-1出现死循环</div><div class="line">	while (left &lt; right) &#123;</div><div class="line">		mid = (left + right) / 2;</div><div class="line">		if (a[mid] &gt;= x) &#123;</div><div class="line">			// 在区间[left,mid)找</div><div class="line">			//因为是左闭右开区间，所以right=mid</div><div class="line">			right = mid;</div><div class="line">		&#125; else &#123;</div><div class="line">			// 在区间[mid+1,right)找</div><div class="line">			left = mid + 1;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	//返回左</div><div class="line">	return left;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="序列的第一个大于x的位置R-有重复"><a href="#序列的第一个大于x的位置R-有重复" class="headerlink" title="序列的第一个大于x的位置R(有重复)"></a>序列的第一个大于x的位置R(有重复)</h2><p>key</p>
+<ul>
+<li>有重复</li>
+<li>左闭右开区间</li>
+<li>left &lt; right</li>
+<li>出现r=mid或者l=mid</li>
+<li>返回left</li>
+<li>a[mid] &gt; x无等号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//第一个大于x的位置R</div><div class="line">public static int f3(int[] a, int x) &#123;</div><div class="line">	int left = 0;</div><div class="line">	int right = a.length;</div><div class="line">	int mid = 0;</div><div class="line">	// 区间是[0,n)</div><div class="line">	// 分支中出现了l=mid 或者r=mid，循环条件要写成left &lt; right，否则写成left &lt;= right</div><div class="line">	//避免出现left=right-1出现死循环</div><div class="line">	while (left &lt; right) &#123;</div><div class="line">		mid = (left + right) / 2;</div><div class="line">		//第一个大于x的元素，没有等号</div><div class="line">		if (a[mid] &gt; x) &#123;</div><div class="line">			// 在区间[left,mid)找</div><div class="line">			right = mid;</div><div class="line">		&#125; else &#123;</div><div class="line">			// 在区间[mid+1,right)找</div><div class="line">			left = mid + 1;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	// 找不到</div><div class="line">	return left;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p><a href="https://leetcode.com/problems/search-for-a-range/" target="_blank" rel="external">34. Search for a Range</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-05-12T11:30:54.000Z" itemprop="dateUpdated">2016年5月12日 19:30</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/12/03/二分查找/" target="_blank" rel="external">http://duyao.github.io/2015/12/03/二分查找/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/12/03/二分查找/&title=《二分查找》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/12/03/二分查找/&title=《二分查找》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/12/03/二分查找/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《二分查找》 — Du Yao's blog&url=http://duyao.github.io/2015/12/03/二分查找/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/12/03/二分查找/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/12/05/15.1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">15.1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/12/01/14.2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">14.2</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="二分查找" data-title="二分查找" data-url="http://duyao.github.io/2015/12/03/二分查找/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/12/03/二分查找/&title=《二分查找》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/12/03/二分查找/&title=《二分查找》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/12/03/二分查找/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《二分查找》 — Du Yao's blog&url=http://duyao.github.io/2015/12/03/二分查找/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/12/03/二分查找/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/12/03/二分查找/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

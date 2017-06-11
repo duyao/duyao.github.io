@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>101. Symmetric Tree | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,algorithm">
+    <meta name="description" content="101. Symmetric Tree 递归式recursively1234567891011121314151617181920212223242526public static boolean isSymmetric(TreeNode left, TreeNode right) &amp;#123;	if(left == null &amp;amp;&amp;amp; right == null)&amp;#123;		//">
+<meta name="keywords" content="leetcode,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="101. Symmetric Tree">
+<meta property="og:url" content="http://duyao.github.io/2016/02/04/101-Symmetric-Tree/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="101. Symmetric Tree 递归式recursively1234567891011121314151617181920212223242526public static boolean isSymmetric(TreeNode left, TreeNode right) &amp;#123;	if(left == null &amp;amp;&amp;amp; right == null)&amp;#123;		//">
+<meta property="og:updated_time" content="2016-02-04T03:53:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="101. Symmetric Tree">
+<meta name="twitter:description" content="101. Symmetric Tree 递归式recursively1234567891011121314151617181920212223242526public static boolean isSymmetric(TreeNode left, TreeNode right) &amp;#123;	if(left == null &amp;amp;&amp;amp; right == null)&amp;#123;		//">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">101. Symmetric Tree</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">101. Symmetric Tree</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-02-04T03:15:44.000Z" itemprop="datePublished" class="page-time">
+  2016-02-04
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#递归式recursively"><span class="post-toc-number">1.</span> <span class="post-toc-text">递归式recursively</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#循环式iteratively"><span class="post-toc-number">2.</span> <span class="post-toc-text">循环式iteratively</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称"><span class="post-toc-number">3.</span> <span class="post-toc-text">层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-101-Symmetric-Tree"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">101. Symmetric Tree</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年02月04日 11:15" datetime="2016-02-04T03:15:44.000Z"  itemprop="datePublished">2016-02-04</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="https://leetcode.com/problems/symmetric-tree/" target="_blank" rel="external">101. Symmetric Tree</a></p>
+<h3 id="递归式recursively"><a href="#递归式recursively" class="headerlink" title="递归式recursively"></a>递归式recursively</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public static boolean isSymmetric(TreeNode left, TreeNode right) &#123;</div><div class="line">	if(left == null &amp;&amp; right == null)&#123;</div><div class="line">		//不需要判断子树，一定对称</div><div class="line">		return true;</div><div class="line">	&#125;else if(left != null &amp;&amp; right != null )&#123;</div><div class="line">		if(left.val != right.val)&#123;</div><div class="line">			//一定不对称，不要需要判断子树</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">	&#125;else&#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	//左子树的右和右子树的左对比，这里左右子树都存在</div><div class="line">	return isSymmetric(right.right, left.left) &amp; isSymmetric(right.left, left.right);</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static boolean isSymmetric(TreeNode root) &#123;</div><div class="line">	if(root == null)&#123;</div><div class="line">		return true;</div><div class="line">	&#125;else&#123;</div><div class="line">		//判断左右子树是否对称</div><div class="line">		return isSymmetric(root.left, root.right);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="循环式iteratively"><a href="#循环式iteratively" class="headerlink" title="循环式iteratively"></a>循环式iteratively</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">public static boolean isSymmetric(TreeNode left, TreeNode right) &#123;</div><div class="line">	//左右队列分别进行判断</div><div class="line">	LinkedList&lt;TreeNode&gt; rlist = new LinkedList&lt;TreeNode&gt;();</div><div class="line">	LinkedList&lt;TreeNode&gt; llist = new LinkedList&lt;TreeNode&gt;();</div><div class="line">	rlist.offer(right);</div><div class="line">	llist.offer(left);</div><div class="line">	TreeNode lNode, rNode;</div><div class="line">	while (!rlist.isEmpty() &amp;&amp; !llist.isEmpty()) &#123;</div><div class="line">		lNode = llist.poll();</div><div class="line">		rNode = rlist.poll();</div><div class="line">		if(lNode == null &amp;&amp; rNode == null)&#123;</div><div class="line">			continue;</div><div class="line">		&#125;else if(lNode != null &amp;&amp; rNode != null)&#123;</div><div class="line">			if(lNode.val != rNode.val)&#123;</div><div class="line">				return false;</div><div class="line">			&#125;else&#123;</div><div class="line">				//注意进入队列的顺序和位置</div><div class="line">				llist.offer(lNode.left);</div><div class="line">				rlist.offer(rNode.right);</div><div class="line">				</div><div class="line">				llist.offer(lNode.right);</div><div class="line">				rlist.offer(rNode.left);</div><div class="line">			&#125;</div><div class="line">		&#125;else&#123;</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	return true;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">public static boolean isSymmetric(TreeNode root) &#123;</div><div class="line">	//使用两个队列进行遍历</div><div class="line">	if(root == null)&#123;</div><div class="line">		return true;</div><div class="line">	&#125;else&#123;</div><div class="line">		return isSymmetric(root.left,root.right);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称"><a href="#层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称" class="headerlink" title="层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称"></a>层次遍历树，包括空节点（处理为最大值的节点），判断字符串是否对称</h3><blockquote>
+<p>wrong answer</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line">// 层次遍历</div><div class="line">public static boolean travel(TreeNode root,int tall) &#123;</div><div class="line">	String s = &quot;&quot;;</div><div class="line">	int height = 0;</div><div class="line"></div><div class="line">	if (root != null) &#123;</div><div class="line">		LinkedList&lt;TreeNode&gt; list = new LinkedList&lt;TreeNode&gt;();</div><div class="line">		list.add(root);</div><div class="line">		TreeNode cur = new TreeNode(0);</div><div class="line">		TreeNode last = root;</div><div class="line">		while (!list.isEmpty() &amp;&amp; height != tall) &#123;</div><div class="line">			cur = list.poll();</div><div class="line">			</div><div class="line">			if (cur.val == Integer.MAX_VALUE) &#123;</div><div class="line">				</div><div class="line">					s += &quot;*&quot;;</div><div class="line">				</div><div class="line">			&#125; else &#123;</div><div class="line">				s += cur.val;</div><div class="line">				//空节点会是层数出错，因此要变化</div><div class="line">				//空节点设置为值最大的节点</div><div class="line">				if(cur.left == null)&#123;</div><div class="line">					list.offer(new TreeNode(Integer.MAX_VALUE));</div><div class="line">				&#125;else&#123;</div><div class="line">					list.offer(cur.left);</div><div class="line"></div><div class="line">				&#125;</div><div class="line">				if(cur.right == null)&#123;</div><div class="line">					list.offer(new TreeNode(Integer.MAX_VALUE));</div><div class="line">				&#125;else&#123;</div><div class="line">					list.offer(cur.right);</div><div class="line"></div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			if(cur == last)&#123;</div><div class="line">				last = list.getLast();</div><div class="line">				height++;</div><div class="line">				System.out.println(s+f(s));</div><div class="line">				if(!f(s))&#123;</div><div class="line">					return false;</div><div class="line">				&#125;</div><div class="line">				s = &quot;&quot;;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			</div><div class="line">			</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">//		System.out.println(&quot;height = &quot;+height);</div><div class="line">	return true;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static boolean f(String s) &#123;</div><div class="line">	int i = 0;</div><div class="line">	int j = s.length() - 1;</div><div class="line">	// 0,1 2,3 4 5 6,</div><div class="line"></div><div class="line">	while (i &lt; j) &#123;</div><div class="line">		if (s.charAt(i) != s.charAt(j)) &#123;</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">		i++;</div><div class="line">		j--;</div><div class="line">	&#125;</div><div class="line">	return true;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static boolean isSymmetric(TreeNode root) &#123;</div><div class="line">	if(root == null)&#123;</div><div class="line">		return true;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	return travel(root,getTall(root));</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static int getTall(TreeNode root)&#123;</div><div class="line">	if(root == null)&#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	return Math.max(getTall(root.left), getTall(root.right)) + 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-02-04T03:53:48.000Z" itemprop="dateUpdated">2016年2月4日 11:53</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2016/02/04/101-Symmetric-Tree/" target="_blank" rel="external">http://duyao.github.io/2016/02/04/101-Symmetric-Tree/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/&title=《101. Symmetric Tree》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/&title=《101. Symmetric Tree》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《101. Symmetric Tree》 — Du Yao's blog&url=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/02/12/62-Unique-Paths/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">62. Unique Paths</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/02/02/70-Climbing-Stairs/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">70. Climbing Stairs</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="101-Symmetric-Tree" data-title="101. Symmetric Tree" data-url="http://duyao.github.io/2016/02/04/101-Symmetric-Tree/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/&title=《101. Symmetric Tree》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/&title=《101. Symmetric Tree》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《101. Symmetric Tree》 — Du Yao's blog&url=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2016/02/04/101-Symmetric-Tree/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

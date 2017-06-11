@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>zookeeper基础 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="zookeeper">
+    <meta name="description" content="zk介绍 Zookeeper是Apache Hadoop的一个子项目，本质是一个分布式小文件系统，主要解决分布式系统应用中遇到的数据管理问题（一致性问题）：统一命名服务，状态同步服务，集群管理，分布式应用配置项的管理。  基本命令   命令 作用     stat path [watch] f   set path data [version] stat   ls path [watch] sta">
+<meta name="keywords" content="zookeeper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zookeeper基础">
+<meta property="og:url" content="http://duyao.github.io/2017/05/28/zookeeper基础/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="zk介绍 Zookeeper是Apache Hadoop的一个子项目，本质是一个分布式小文件系统，主要解决分布式系统应用中遇到的数据管理问题（一致性问题）：统一命名服务，状态同步服务，集群管理，分布式应用配置项的管理。  基本命令   命令 作用     stat path [watch] f   set path data [version] stat   ls path [watch] sta">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/zk.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/watcheraction.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/watcherchanged.png">
+<meta property="og:updated_time" content="2017-05-30T08:52:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zookeeper基础">
+<meta name="twitter:description" content="zk介绍 Zookeeper是Apache Hadoop的一个子项目，本质是一个分布式小文件系统，主要解决分布式系统应用中遇到的数据管理问题（一致性问题）：统一命名服务，状态同步服务，集群管理，分布式应用配置项的管理。  基本命令   命令 作用     stat path [watch] f   set path data [version] stat   ls path [watch] sta">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/zk.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">zookeeper基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">zookeeper基础</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-28T08:40:02.000Z" itemprop="datePublished" class="page-time">
+  2017-05-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#zk介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">zk介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本命令"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">基本命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据模型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">数据模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#节点类型"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">节点类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#节点信息"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">节点信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#watcher"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">watcher</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#watcher监听器"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">watcher监听器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注意点"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">注意点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注册过程"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">注册过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ServerCnxn类及cnxn对象"><span class="post-toc-number">1.5.3.1.</span> <span class="post-toc-text">ServerCnxn类及cnxn对象</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#watchManager"><span class="post-toc-number">1.5.3.2.</span> <span class="post-toc-text">watchManager</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ACL"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">ACL</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Scheme类型"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">Scheme类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#world"><span class="post-toc-number">1.6.1.1.</span> <span class="post-toc-text">world</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#auth"><span class="post-toc-number">1.6.1.2.</span> <span class="post-toc-text">auth</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#digest"><span class="post-toc-number">1.6.1.3.</span> <span class="post-toc-text">digest</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#IP"><span class="post-toc-number">1.6.1.4.</span> <span class="post-toc-text">IP</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#super"><span class="post-toc-number">1.6.1.5.</span> <span class="post-toc-text">super</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#zk用途"><span class="post-toc-number">2.</span> <span class="post-toc-text">zk用途</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#zk原理"><span class="post-toc-number">3.</span> <span class="post-toc-text">zk原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ZAB协议"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">ZAB协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#服务器角色"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">服务器角色</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ZAB协议三阶段"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">ZAB协议三阶段</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通信"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">通信</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#会话管理"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">会话管理</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#客户端"><span class="post-toc-number">4.</span> <span class="post-toc-text">客户端</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-zookeeper基础"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">zookeeper基础</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年05月28日 16:40" datetime="2017-05-28T08:40:02.000Z"  itemprop="datePublished">2017-05-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="zk介绍"><a href="#zk介绍" class="headerlink" title="zk介绍"></a>zk介绍</h1><blockquote>
+<p>Zookeeper是Apache Hadoop的一个子项目，本质是一个分布式小文件系统，主要解决分布式系统应用中遇到的数据管理问题（一致性问题）：统一命名服务，状态同步服务，集群管理，分布式应用配置项的管理。</p>
+</blockquote>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">stat path [watch]</td>
+<td style="text-align:center">f</td>
+</tr>
+<tr>
+<td style="text-align:center">set path data [version]</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">ls path [watch]</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">delquota [-n/-b] path</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">ls2 path [watch]</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">setAcl path acl</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">setquota -n/-b val path</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">history</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">redo cmdno</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">printwatches on/off</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">delete path [version]</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">sync path</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">listquota path</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">rmr path</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">get path [watch]</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">create [-s] [-e] path data acl</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">addauth scheme auth</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">quit</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">getAcl path</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">close</td>
+<td style="text-align:center">stat</td>
+</tr>
+<tr>
+<td style="text-align:center">connect host:port</td>
+<td style="text-align:center">stat</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/zk.png" alt="zk中的数据结构" title="">
+                </div>
+                <div class="image-caption">zk中的数据结构</div>
+            </figure>
+<ol>
+<li>每个子目录项（比如图中的NameService）都被称为znode。<br>znode可以有子节点目录，并且每个znode都可以保存数据，但注意<code>EPHEMERAL</code>类型的目录节点不能有子节点目录。</li>
+<li>znode是有版本的，每个znode中存储的数据可以有多个版本，也就是同一访问路径可以存储多份数据。</li>
+<li>对于临时的znode，一旦创建这个znode的客户端与服务器失去联系，这个znode也将自动删除，Zookeeper的客户端和服务器通信采用长链接方式，每个客户端和服务器通过心跳来保持连接。</li>
+<li>znode可以被监控，包括这个节点中存储的数据的修改，子节点目录的变化等，一旦变化可以通知监听的客户端，这个是Zookeeper的重要特性。</li>
+</ol>
+<h2 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h2><p>Zookeeper节点在创建后其类型不能被修改，有四种类型的节点:</p>
+<ul>
+<li><code>PERSISTENT</code><br>所谓持久节点，是指在节点创建后，就一直存在，直到有删除操作来主动清除这个节点——不会因为创建该节点的客户端会话失效而消失。</li>
+<li><code>PERSISTENT_SEQUENTIAL</code><br>这类节点的基本特性和上面的节点类型是一致的。额外的特性是，在ZK中，每个父节点会为他的第一级子节点维护一份时序，会记录每个子节点创建的先后顺序。基于这个特性，在创建子节点的时候，可以设置这个属性，那么在创建节点过程中，ZK会自动为给定节点名加上一个数字后缀，作为新的节点名。这个数字后缀的上限是整型的最大值。</li>
+<li><code>EPHEMERAL</code><br>和持久节点不同的是，临时节点的生命周期和客户端会话绑定。也就是说，如果客户端会话失效，那么这个节点就会自动被清除掉。注意，这里提到的是会话失效，而非连接断开。另外，在临时节点下面不能创建子节点。</li>
+<li><code>EPHEMERAL_SEQUENTIAL</code><br>ZK会自动为给定节点名的临时节点加上一个数字后缀，作为新的节点名。同持久顺序节点。</li>
+</ul>
+<h2 id="节点信息"><a href="#节点信息" class="headerlink" title="节点信息"></a>节点信息</h2><p>zookeeper目录中的每一个节点对应着一个znode，每个znode维护着一个属性结构，它包含数据的版本号、时间戳、等信息，同时每个Znode由3部分组成:<br>① stat：此为状态信息, 描述该Znode的版本, 权限等信息<br>② data：与该Znode关联的数据<br>③ children：该Znode下的子节点</p>
+<p>Zookeeper就是通过这些属性来实现它特定的功能。每当znode的数据改变时，相应的版本号会增加，每当客户端查询、更新和删除数据时，也必须提供要被操作的znode版本号，如果所提供的数据版本号与实际的不匹配，那么将会操作失败。<br>节点属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 2] get /test</div><div class="line">123</div><div class="line">cZxid = 0x6</div><div class="line">ctime = Sun May 28 15:24:48 CST 2017</div><div class="line">mZxid = 0x6</div><div class="line">mtime = Sun May 28 15:24:48 CST 2017</div><div class="line">pZxid = 0x6</div><div class="line">cversion = 0</div><div class="line">dataVersion = 0</div><div class="line">aclVersion = 0</div><div class="line">ephemeralOwner = 0x0</div><div class="line">dataLength = 3</div><div class="line">numChildren = 0</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">cZxid</td>
+<td style="text-align:center">节点被创建的zxid值</td>
+</tr>
+<tr>
+<td style="text-align:center">ctime</td>
+<td style="text-align:center">节点创建的时间</td>
+</tr>
+<tr>
+<td style="text-align:center">mZxid</td>
+<td style="text-align:center">节点被修改时zxid值</td>
+</tr>
+<tr>
+<td style="text-align:center">mtime</td>
+<td style="text-align:center">节点最后一次的修改时间</td>
+</tr>
+<tr>
+<td style="text-align:center">pZxid</td>
+<td style="text-align:center">最后一次更改该节点孩子的事务id</td>
+</tr>
+<tr>
+<td style="text-align:center">cvesion</td>
+<td style="text-align:center">节点所拥有的子节点被修改的版本号</td>
+</tr>
+<tr>
+<td style="text-align:center">dataVersion</td>
+<td style="text-align:center">数据版本</td>
+</tr>
+<tr>
+<td style="text-align:center">aclVersion</td>
+<td style="text-align:center">访问控制版本</td>
+</tr>
+<tr>
+<td style="text-align:center">ephemeralOwner</td>
+<td style="text-align:center">如果节点为临时节点，那么它的值为这个节点拥有者的session ID；负责它的值为0</td>
+</tr>
+<tr>
+<td style="text-align:center">dataLength</td>
+<td style="text-align:center">节点数据的长度</td>
+</tr>
+<tr>
+<td style="text-align:center">numChildren</td>
+<td style="text-align:center">节点拥有子节点的个数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="watcher"><a href="#watcher" class="headerlink" title="watcher"></a>watcher</h2><h3 id="watcher监听器"><a href="#watcher监听器" class="headerlink" title="watcher监听器"></a>watcher监听器</h3><p>ZooKeeper中所有的读操作<code>getData()</code>,<code>getChildren()</code>和 <code>exists()</code>可以选择设置一个watcher。<br>还有在创建客户端对象实例时也可以设置watcher，<code>ZooKeeper(String connectString, int sessionTimeout, Watcher watcher)</code><br>ZooKeeper有两个监听器列表：数据监听和子节点监听:<code>getData()</code>和<code>exists()</code>设置数据监听器; <code>getChildren()</code>设置子节点监听器。<br>只能二选一，根据返回数据的类型来设置监听器。<code>getData()</code>和<code>exists()</code>返回节点的数据信息，然而<code>getChildren()</code>返回一个子节点列表。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/watcheraction.png" alt="设置监视器的操作及对应的触发器" title="">
+                </div>
+                <div class="image-caption">设置监视器的操作及对应的触发器</div>
+            </figure><br>因此，setData()会触发数据监听器。一个成功的 create()会触发一个数据监听器。一个delete()会触发数据监听器和子节点监听器。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/watcherchanged.png" alt="wathcer的触发及改变" title="">
+                </div>
+                <div class="image-caption">wathcer的触发及改变</div>
+            </figure></p>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><p>1.<strong>Watches通知是一次性的</strong>，必须重复注册.<br>2.同一个ZK客户端，反复对同一个ZK节点（znode）注册相同的watcher，是无效的，<strong>最终只会有一个生效</strong>。<br>3.发生<code>CONNECTIONLOSS</code>之后，只要在<code>session_timeout</code>之内再次连接上（即不发生<code>SESSIONEXPIRED</code>），那么这个连接注册的watches依然在。<br>4.客户端会话失效之后，所有这个会话中创建的Watcher都会被移除。<br>5.节点数据的版本变化会触发<code>NodeDataChanged</code>，注意，这里特意说明了是版本变化。存在这样的情况，<strong>只要成功执行了setData()方法，无论内容是否和之前一致，都会触发NodeDataChanged事件</strong>。<br>6.对某个节点注册了watcher，但是<strong>节点被删除了，那么注册在这个节点上的watcher都会被移除</strong>。</p>
+<h3 id="注册过程"><a href="#注册过程" class="headerlink" title="注册过程"></a>注册过程</h3><p>总体来说.可以概括为以下几个过程:<br>（1）客户端注册Watcher<br>（2）服务端处理Watcher<br>（3）客户端回调Watcher<br>首先需要了解一下zookeeper中的watchedevent结构，其包括三个基本属性：通知状态（keepstate）、事件类型（eventType）和节点路径（path）。<br>zookeeper使用watchedevent对象来封装服务端事件并传递给watcher，而实际传递的是watcherevent，其结构和watchedevent一样，<br><code>WatcherEvent</code> 实体实现了序列化接口，因此可以用于网络传输。数据结构如下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Class WatcherEvent&#123;</div><div class="line">  type:int</div><div class="line">  state:int</div><div class="line">  path:String</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从这里可以看出，<strong>watcher事件只是一个简单的事件说明，并不包含事件的数据变更内容</strong>，这样能保证网络传输的高效性。<br>这里也体现出观察者模式中推拉结合，发生的变化被推送到观察者，此时观察者只知道发生了变化，只有靠拉才能知道到底发生了什么变化。</p>
+<p><a href="http://blog.csdn.net/lionaiying/article/details/53915878" target="_blank" rel="external">http://blog.csdn.net/lionaiying/article/details/53915878</a></p>
+<p><code>process()</code> 是 Watch 接口中的回调方法。当 ZooKeeper 向客户端发送一个 Watcher 时间通知时，客户端就会对相应的 process 方法进行回调，从而实现对事件的处理。 like this：syncNodes（）方法。<br><code>abstract public  void process ( WatchedEvent event )</code></p>
+<p><a href="http://www.cnblogs.com/rocky24/p/4859206.html" target="_blank" rel="external">http://www.cnblogs.com/rocky24/p/4859206.html</a><br><a href="https://www.ibm.com/developerworks/cn/opensource/os-cn-apache-zookeeper-watcher/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/opensource/os-cn-apache-zookeeper-watcher/</a></p>
+<h4 id="ServerCnxn类及cnxn对象"><a href="#ServerCnxn类及cnxn对象" class="headerlink" title="ServerCnxn类及cnxn对象"></a>ServerCnxn类及cnxn对象</h4><ul>
+<li>Zk客户端与服务器之间的tcp连接</li>
+<li>实现了watcher接口<br>总结：既包含了连接信息又包了watcher信息<h4 id="watchManager"><a href="#watchManager" class="headerlink" title="watchManager"></a>watchManager</h4></li>
+<li>Zk服务器端Watcher的管理者</li>
+<li>从两个维度维护watcher<br>• watchTable:从数据节点的粒度来维护<br>• watch2Paths从watcher的粒度来维护</li>
+<li>负责watcher事件的触发<h2 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h2><code>Scheme:id:permission</code><br>比如<code>world:anyone:crdwa</code></li>
+<li>Scheme:验证过程中使用的检验策略</li>
+<li>Id:权限被赋予的对象，比如ip或者某个用户</li>
+<li>Permission:权限，Ї面的crdwa，表示五个权限组合<br>通过<code>setAcl</code>命令置节点的权限,<code>getAcl</code>可以查看节点的Acl信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 8] setAcl /test world:anyone:ca</div><div class="line">cZxid = 0x6</div><div class="line">ctime = Sun May 28 15:24:48 CST 2017</div><div class="line">mZxid = 0x6</div><div class="line">mtime = Sun May 28 15:24:48 CST 2017</div><div class="line">pZxid = 0xa</div><div class="line">cversion = 1</div><div class="line">dataVersion = 0</div><div class="line">aclVersion = 1</div><div class="line">ephemeralOwner = 0x0</div><div class="line">dataLength = 3</div><div class="line">numChildren = 1</div><div class="line">[zk: localhost:2181(CONNECTED) 9] getAcl /test</div><div class="line">&apos;world,&apos;anyone</div><div class="line">: ca</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>节点的acl不具有继承关系</strong></p>
+<h3 id="Scheme类型"><a href="#Scheme类型" class="headerlink" title="Scheme类型"></a>Scheme类型</h3><h4 id="world"><a href="#world" class="headerlink" title="world"></a>world</h4><p>Id的固定值为anyone，表示任何用户<br><code>world:anyone:crdwa</code>表示任何用户都Ӏ有crdwa权限</p>
+<h4 id="auth"><a href="#auth" class="headerlink" title="auth"></a>auth</h4><p><code>auth:username:password:crdwa</code><br>表示给<strong>认证通过的所有用户</strong>设置acl权限，同时可以添加多个用户<br>通过addauth命令进行认证用户的添加<code>addauth digest &lt;username&gt;:&lt;password&gt;</code><br>Auth策略的本质就是digest<br>如果通过addauth创建多组用户和密码，当使用setAcl修改权限时，所有的用户和密码的权限都会跟着修改<br>通过addauth新创建的用户和密码组需要重新调用setAcl才会加入到权限组中去</p>
+<h4 id="digest"><a href="#digest" class="headerlink" title="digest"></a>digest</h4><p><code>Scheme:id:permission</code>，比如 <code>digest:username:password:crdwa</code><br>指定某个用户及它的密码可以访问<br>这里的<code>username:password</code>必须<strong>经过SHA-1和BASE64编码</strong>，即<code>BASE64(SHA1(username:password))</code><br>通过addauth命令进行认证用户的添加<code>addauth digest &lt;username&gt;:&lt;password&gt;</code></p>
+<h4 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h4><p><code>Scheme:id:permission</code> ，比如 <code>ip:127.0.0.1:crdwa</code><br>指定某个ip地址可以访问</p>
+<h4 id="super"><a href="#super" class="headerlink" title="super"></a>super</h4><p>供运维人员维护节点使用<br>有权限操作任何节点<br>启动时，在命令参数中配置</p>
+<ul>
+<li><code>-Dzookeeper.DigestAuthenticationProvider.superDigest=admin:015uTByzA4zSglcmseJsxTo7n3c=</code></li>
+<li>打开zkCli.cmd，在java命令后添加以上配置<br>用户名和密码也需要通过sha1和base64编码<br><a href="https://holynull.gitbooks.io/zookeeper/content/cao_zuo_operations.html" target="_blank" rel="external">https://holynull.gitbooks.io/zookeeper/content/cao_zuo_operations.html</a><h1 id="zk用途"><a href="#zk用途" class="headerlink" title="zk用途"></a>zk用途</h1><h1 id="zk原理"><a href="#zk原理" class="headerlink" title="zk原理"></a>zk原理</h1>Zookeeper集群的特点</li>
+<li>是一种对等集群，所有节点的数据都一样</li>
+<li>集群节点之间靠心跳感知彼此的存在</li>
+<li>所有写操作都在主节点，其他节点只能读，虽然可以接收写请求，但是内部会把写操作转给主节点</li>
+<li>通过选举机制选出主节点，从而保障了主节点的高可用</li>
+<li>至少少3个节点，必须是奇数个节点(与选举算法相关)</li>
+<li>当一半以上的节点数据写入ۨ成功，则返回写入ۨ成功，是最终一致性的策略</li>
+</ul>
+<h2 id="ZAB协议"><a href="#ZAB协议" class="headerlink" title="ZAB协议"></a>ZAB协议</h2><p>ZooKeeper Atomic Broadcast即ZooKeeper原子消息广播协议，简称ZAB</p>
+<ul>
+<li>选举过程需要依赖ZAB协议</li>
+<li>数据写入过程也需要ZAB协议</li>
+<li>ZAB的核心是定义了那些会改变zk服务器数据状态的请求的处理方式</li>
+</ul>
+<p>所有事物请求必须由一个全局唯一的服务器来协调处理，该服务器被称Leader服务器，而剩余的其它服务器则称为Follower服务器。<br>Leader服务器负责将一个客户端事物请求转换成那个一个事物Proposa，并将该Proposal分发给集群中所有的Follower服务器。<br>之后Leader服务器需要等待所有Follower服务器的反馈，一旦超过半数的Follower服务器进行了正确的反馈后，那么Leader就会再次向所有的Follower服务器分发Commit消息，要求其将前一个Proposal进行提交。</p>
+<h3 id="服务器角色"><a href="#服务器角色" class="headerlink" title="服务器角色"></a>服务器角色</h3><p>Leader</p>
+<ul>
+<li>事物请求的唯一调度和处理者，保证集群事物处理的顺序性</li>
+<li>集群内部各服务器的调度者<br>Follower</li>
+<li>处理客户端非事物请求，转发事物请求给Leader服务器</li>
+<li>参与事物请求Proposal的投票</li>
+<li>参与Leader选举投票<br>Observer</li>
+<li>处理客户端非事物请求，转发事物请求给Leader服务器</li>
+<li>不参与任何形式的投票，包括选举和事物投票超过半数确认</li>
+<li>此角色在通常是为了提高读性能</li>
+</ul>
+<p>服务器状态<br>LOOKING</p>
+<ul>
+<li>寻找Leader状态</li>
+<li>当服务器处于此状态时，表示当前没有Leader，需要进入选举流程<br>FOLLOWING</li>
+<li>跟随者状态，表明当前服务器角色是Follower<br>OBSERVING</li>
+<li>观察者状态，表明当前服务器角色ОObserver<br>LEADING</li>
+<li>领导者状态，表明当前服务器角色ОLeader<h3 id="ZAB协议三阶段"><a href="#ZAB协议三阶段" class="headerlink" title="ZAB协议三阶段"></a>ZAB协议三阶段</h3></li>
+<li>发现Discovery，即选举Leader过程</li>
+<li>同步Synchronization，选举出新的Leader后，Follwer或者Observer从Leader同步最新的数据</li>
+<li>广播，同步完成后，就可以接收客户端新的事物请求，并进行消息广播，实现数据在集群节点的副本存储<h3 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h3>基于TCP协议</li>
+<li>О了避免୍复创建两个节点之间的tcp连接，zk按照myid数值方向来建立连接，即小数的节点发起大的<br>节点连接，比如idО1的向idО2的发起tcp连接<br> 多端口</li>
+<li>配置中第一个端口是通信和数据同࠵端口，默认是2888</li>
+<li>第и个端口是投票端口，默认是3888</li>
+</ul>
+<p>只支持FastLeaderElection的tcp协议版本的选举算法</p>
+<h2 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h2><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>Curator介绍</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-30T08:52:56.000Z" itemprop="dateUpdated">2017年5月30日 16:52</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/05/28/zookeeper基础/" target="_blank" rel="external">http://duyao.github.io/2017/05/28/zookeeper基础/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zookeeper/">zookeeper</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/05/28/zookeeper基础/&title=《zookeeper基础》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/05/28/zookeeper基础/&title=《zookeeper基础》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/05/28/zookeeper基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《zookeeper基础》 — Du Yao's blog&url=http://duyao.github.io/2017/05/28/zookeeper基础/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/05/28/zookeeper基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/24/多线程面试题目/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">多线程面试题目</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="zookeeper基础" data-title="zookeeper基础" data-url="http://duyao.github.io/2017/05/28/zookeeper基础/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/05/28/zookeeper基础/&title=《zookeeper基础》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/05/28/zookeeper基础/&title=《zookeeper基础》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/05/28/zookeeper基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《zookeeper基础》 — Du Yao's blog&url=http://duyao.github.io/2017/05/28/zookeeper基础/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/05/28/zookeeper基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/05/28/zookeeper基础/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

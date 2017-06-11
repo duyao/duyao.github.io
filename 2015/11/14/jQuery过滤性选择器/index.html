@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>jQuery过滤性选择器 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="jQuery">
+    <meta name="description" content="jQuery过滤性选择器书写时以:号开头,通常用于查找集合元素中的某一位置的单个元素">
+<meta name="keywords" content="jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery过滤性选择器">
+<meta property="og:url" content="http://duyao.github.io/2015/11/14/jQuery过滤性选择器/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="jQuery过滤性选择器书写时以:号开头,通常用于查找集合元素中的某一位置的单个元素">
+<meta property="og:updated_time" content="2015-11-16T01:18:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery过滤性选择器">
+<meta name="twitter:description" content="jQuery过滤性选择器书写时以:号开头,通常用于查找集合元素中的某一位置的单个元素">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">jQuery过滤性选择器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">jQuery过滤性选择器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-14T02:40:51.000Z" itemprop="datePublished" class="page-time">
+  2015-11-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#jQuery过滤性选择器"><span class="post-toc-number">1.</span> <span class="post-toc-text">jQuery过滤性选择器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#first过滤选择器"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">:first过滤选择器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#eq-index-过滤性选择器"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">:eq(index)过滤性选择器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#contains-text-过滤选择器"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">:contains(text)过滤选择器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#has-selector-过滤选择器"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">:has(selector)过滤选择器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hidden过滤选择器"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">:hidden过滤选择器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#visible过滤选择器"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">:visible过滤选择器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#attribute-value-属性选择器"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">[attribute=value]属性选择器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#attribute-value-属性选择器-1"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">[attribute*=value]属性选择器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#first-child子元素过滤选择器"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">:first-child子元素过滤选择器</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-jQuery过滤性选择器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">jQuery过滤性选择器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月14日 10:40" datetime="2015-11-14T02:40:51.000Z"  itemprop="datePublished">2015-11-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="jQuery过滤性选择器"><a href="#jQuery过滤性选择器" class="headerlink" title="jQuery过滤性选择器"></a>jQuery过滤性选择器</h1><p>书写时以<code>:</code>号开头,通常用于查找集合元素中的某一位置的单个元素<br><a id="more"></a></p>
+<h2 id="first过滤选择器"><a href="#first过滤选择器" class="headerlink" title=":first过滤选择器"></a>:first过滤选择器</h2><p><code>:first</code>获得相同标签的第1个元素<br><code>:last</code>获得相同标签的第1个元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;:first过滤选择器&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;div&gt;改变最后一行&quot;苹果&quot;背景颜色：&lt;/div&gt;</div><div class="line">        &lt;ol&gt;</div><div class="line">            &lt;li&gt;葡萄&lt;/li&gt;</div><div class="line">            &lt;li&gt;香蕉&lt;/li&gt;</div><div class="line">            &lt;li&gt;橘子&lt;/li&gt;</div><div class="line">            &lt;li&gt;西瓜&lt;/li&gt;</div><div class="line">            &lt;li&gt;苹果&lt;/li&gt;</div><div class="line">        &lt;/ol&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">        //最后一个li变色</div><div class="line">            $(&quot;li:last&quot;).css(&quot;background-color&quot;, &quot;red&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="eq-index-过滤性选择器"><a href="#eq-index-过滤性选择器" class="headerlink" title=":eq(index)过滤性选择器"></a>:eq(index)过滤性选择器</h2><p><code>:eq(index)</code>可以选择任意的标签元素<br><code>index</code>是索引号，从0开始</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">    &lt;title&gt;:eq(index)过滤选择器&lt;/title&gt;</div><div class="line">    &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;div&gt;改变中间行&quot;葡萄&quot;背景颜色：&lt;/div&gt;</div><div class="line">        &lt;ol&gt;</div><div class="line">        &lt;li&gt;橘子&lt;/li&gt;</div><div class="line">        &lt;li&gt;香蕉&lt;/li&gt;</div><div class="line">        &lt;li&gt;葡萄&lt;/li&gt;</div><div class="line">        &lt;li&gt;苹果&lt;/li&gt;</div><div class="line">        &lt;li&gt;西瓜&lt;/li&gt;</div><div class="line">        &lt;/ol&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;li:eq(2)&quot;).css(&quot;background-color&quot;, &quot;#60F&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="contains-text-过滤选择器"><a href="#contains-text-过滤选择器" class="headerlink" title=":contains(text)过滤选择器"></a>:contains(text)过滤选择器</h2><p><code>:contains(text)</code>按照文本内容查找元素，包含指定字符串<code>text</code>的的全部内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;:contains(text)过滤选择器&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;div&gt;改变包含&quot;jQuery&quot;字符内容的背景色：&lt;/div&gt;</div><div class="line">        &lt;ol&gt;</div><div class="line">            &lt;li&gt;强大的&quot;jQuery&quot;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&quot;javascript&quot;也很实用&lt;/li&gt;</div><div class="line">            &lt;li&gt;&quot;jQuery&quot;前端必学&lt;/li&gt;</div><div class="line">            &lt;li&gt;&quot;java&quot;是一种开发语言&lt;/li&gt;</div><div class="line">            &lt;li&gt;前端利器——&quot;jQuery&quot;语言&lt;/li&gt;</div><div class="line">        &lt;/ol&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">            $(&quot;li:contains(&apos;jQuery&apos;)&quot;).css(&quot;background&quot;, &quot;green&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>注意</strong><code>$(&quot;li:contains(&#39;jQuery&#39;)&quot;)</code>中<code>&#39;jQuery&#39;</code>带单引号，是因为jQuery是不是变量，不能用双引号</p>
+<h2 id="has-selector-过滤选择器"><a href="#has-selector-过滤选择器" class="headerlink" title=":has(selector)过滤选择器"></a>:has(selector)过滤选择器</h2><p><code>:has(selector)</code>通过元素名称来选择元素,不是文本！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;:has(selector)过滤选择器&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;div&gt;改变包含&quot;label&quot;元素的背景色：&lt;/div&gt;</div><div class="line">        &lt;ol&gt;</div><div class="line">            &lt;li&gt;&lt;p&gt;我是P先生&lt;/p&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;label&gt;L妹纸就是我&lt;/label&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;p&gt;我也是P先生&lt;/p&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;label&gt;我也是L妹纸哦&lt;/label&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;p&gt;P先生就是我哦&lt;/p&gt;&lt;/li&gt;</div><div class="line">        &lt;/ol&gt;</div><div class="line">        </div><div class="line">         &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;li:has(&apos;label&apos;)&quot;).css(&quot;background-color&quot;, &quot;blue&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="hidden过滤选择器"><a href="#hidden过滤选择器" class="headerlink" title=":hidden过滤选择器"></a>:hidden过滤选择器</h2><p><code>:hidden</code>过滤选择器的功能是获取全部不可见的元素，这些不可见的元素中包括type属性值为hidden的元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;:hidden过滤选择器&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;显示隐藏元素的内容&lt;/h3&gt;</div><div class="line">        &lt;input id=&quot;hidstr&quot; type=&quot;hidden&quot; value=&quot;我已隐藏起来&quot;/&gt;</div><div class="line">        &lt;div&gt;&lt;/div&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">        var $strHTML = $(&quot;input:hidden&quot;).val();</div><div class="line">        $(&quot;div&quot;).html($strHTML);</div><div class="line">    &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="visible过滤选择器"><a href="#visible过滤选择器" class="headerlink" title=":visible过滤选择器"></a>:visible过滤选择器</h2><p>与<code>:hidden</code>过滤选择器相反，<code>:visible</code>过滤选择器获取的是全部可见的元素，也就是说，只要不将元素的display属性值设置为“none”，那么，都可以通过该选择器获取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;:visible过滤选择器&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;修改可见“水果”的背景色&lt;/h3&gt;</div><div class="line">        &lt;ul&gt;</div><div class="line">            &lt;li style=&quot;display:none&quot;&gt;橘子&lt;/li&gt;</div><div class="line">            &lt;li style=&quot;display:block&quot;&gt;香蕉&lt;/li&gt;</div><div class="line">            &lt;li style=&quot;display:&quot;&gt;葡萄&lt;/li&gt;</div><div class="line">            &lt;li&gt;苹果&lt;/li&gt;</div><div class="line">            &lt;li style=&quot;display:none&quot;&gt;西瓜&lt;/li&gt;</div><div class="line">        &lt;/ul&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;li:visible&quot;).css(&quot;background-color&quot;,&quot;blue&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="attribute-value-属性选择器"><a href="#attribute-value-属性选择器" class="headerlink" title="[attribute=value]属性选择器"></a>[attribute=value]属性选择器</h2><p><code>[attribute=value]</code>属性选择器的功能是获取与属性名和属性值完全相同的全部元素，<br>其中[]是专用于属性选择器的括号符，参数attribute表示属性名称，value参数表示属性值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;[attribute=value]属性选择器&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;    </div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;改变&quot;title&quot;属性值为&quot;蔬菜&quot;的背景色&lt;/h3&gt;</div><div class="line">        &lt;ul&gt;</div><div class="line">            &lt;li title=&quot;蔬菜&quot;&gt;茄子&lt;/li&gt;</div><div class="line">            &lt;li title=&quot;水果&quot;&gt;香蕉&lt;/li&gt;</div><div class="line">            &lt;li title=&quot;蔬菜&quot;&gt;芹菜&lt;/li&gt;</div><div class="line">            &lt;li title=&quot;水果&quot;&gt;苹果&lt;/li&gt;</div><div class="line">            &lt;li title=&quot;水果&quot;&gt;西瓜&lt;/li&gt;</div><div class="line">        &lt;/ul&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;li[title=&apos;蔬菜&apos;]&quot;).css(&quot;background-color&quot;, &quot;green&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="attribute-value-属性选择器-1"><a href="#attribute-value-属性选择器-1" class="headerlink" title="[attribute*=value]属性选择器"></a>[attribute*=value]属性选择器</h2><p><code>[attribute*=value]</code>可以获取属性值中包含指定内容的全部元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;[attribute*=value]属性选择器&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; role=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;改变&quot;title&quot;属性值包含&quot;果&quot;的背景色&lt;/h3&gt;</div><div class="line">        &lt;ul&gt;</div><div class="line">            &lt;li title=&quot;蔬菜&quot;&gt;茄子&lt;/li&gt;</div><div class="line">            &lt;li title=&quot;水果&quot;&gt;香蕉&lt;/li&gt;</div><div class="line">            &lt;li title=&quot;蔬菜&quot;&gt;芹菜&lt;/li&gt;</div><div class="line">            &lt;li title=&quot;人参果&quot;&gt;小西红柿&lt;/li&gt;</div><div class="line">            &lt;li title=&quot;水果&quot;&gt;西瓜&lt;/li&gt;</div><div class="line">        &lt;/ul&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;li[title*=&apos;果&apos;]&quot;).css(&quot;background-color&quot;, &quot;green&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="first-child子元素过滤选择器"><a href="#first-child子元素过滤选择器" class="headerlink" title=":first-child子元素过滤选择器"></a>:first-child子元素过滤选择器</h2><p><code>:first</code>过滤选择器可以获取指定父元素中的首个子元素，但该选择器返回的只有一个元素，并不是一个集合，<br>而使用<code>:first-child</code>子元素过滤选择器则可以获取每个父元素中返回的首个子元素，它是一个集合，常用多个集合数据的选择处理。<br><strong>注意</strong><code>:</code>与<code>first-child</code>无空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;:first-child子元素过滤选择器&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;改变每个&quot;蔬菜水果&quot;中第一行的背景色&lt;/h3&gt;</div><div class="line">        &lt;ol&gt;</div><div class="line">            &lt;li&gt;芹菜&lt;/li&gt;</div><div class="line">            &lt;li&gt;茄子&lt;/li&gt;</div><div class="line">            &lt;li&gt;萝卜&lt;/li&gt;</div><div class="line">            &lt;li&gt;大白菜&lt;/li&gt;</div><div class="line">            &lt;li&gt;西红柿&lt;/li&gt;</div><div class="line">        &lt;/ol&gt;</div><div class="line">        &lt;ol&gt;</div><div class="line">            &lt;li&gt;橘子&lt;/li&gt;</div><div class="line">            &lt;li&gt;香蕉&lt;/li&gt;</div><div class="line">            &lt;li&gt;葡萄&lt;/li&gt;</div><div class="line">            &lt;li&gt;苹果&lt;/li&gt;</div><div class="line">            &lt;li&gt;西瓜&lt;/li&gt;</div><div class="line">        &lt;/ol&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">        //li中的第一个</div><div class="line">            $(&quot;li:first-child&quot;).css(&quot;background-color&quot;, &quot;green&quot;);</div><div class="line">            //li中最后一个</div><div class="line">            $(&quot;li:last-child&quot;).css(&quot;background-color&quot;, &quot;green&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-16T01:18:28.000Z" itemprop="dateUpdated">2015年11月16日 9:18</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/14/jQuery过滤性选择器/" target="_blank" rel="external">http://duyao.github.io/2015/11/14/jQuery过滤性选择器/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/&title=《jQuery过滤性选择器》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/&title=《jQuery过滤性选择器》 — Du Yao's blog&source=jQuery过滤性选择器书写时以:号开头,通常用于查找集合元素中的某一位置的单个元素" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《jQuery过滤性选择器》 — Du Yao's blog&url=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/14/jQuery练习/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">jQuery练习</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/13/jQuery基础选择器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">jQuery基础选择器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="jQuery过滤性选择器" data-title="jQuery过滤性选择器" data-url="http://duyao.github.io/2015/11/14/jQuery过滤性选择器/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/&title=《jQuery过滤性选择器》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/&title=《jQuery过滤性选择器》 — Du Yao's blog&source=jQuery过滤性选择器书写时以:号开头,通常用于查找集合元素中的某一位置的单个元素" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《jQuery过滤性选择器》 — Du Yao's blog&url=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/14/jQuery过滤性选择器/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

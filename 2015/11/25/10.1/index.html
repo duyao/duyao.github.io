@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>10.1 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="表达式得到期望结果的组成种数给定一个只由0(假)、1(真)、&amp;amp;(逻辑与)、|(逻辑或)和^(异或)五种字符组成的字符串express，再给定一个布尔值desired。返回express能有多少种组合方式，可以达到desired的结果。express=“1^0|0|1”，desired=false。只有1^((0|0)|1)和1^(0|(0|1))的组合可以得到false。返回2。expre">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10.1">
+<meta property="og:url" content="http://duyao.github.io/2015/11/25/10.1/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="表达式得到期望结果的组成种数给定一个只由0(假)、1(真)、&amp;amp;(逻辑与)、|(逻辑或)和^(异或)五种字符组成的字符串express，再给定一个布尔值desired。返回express能有多少种组合方式，可以达到desired的结果。express=“1^0|0|1”，desired=false。只有1^((0|0)|1)和1^(0|(0|1))的组合可以得到false。返回2。expre">
+<meta property="og:updated_time" content="2015-11-27T12:59:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10.1">
+<meta name="twitter:description" content="表达式得到期望结果的组成种数给定一个只由0(假)、1(真)、&amp;amp;(逻辑与)、|(逻辑或)和^(异或)五种字符组成的字符串express，再给定一个布尔值desired。返回express能有多少种组合方式，可以达到desired的结果。express=“1^0|0|1”，desired=false。只有1^((0|0)|1)和1^(0|(0|1))的组合可以得到false。返回2。expre">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">10.1</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">10.1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-25T02:21:32.000Z" itemprop="datePublished" class="page-time">
+  2015-11-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#表达式得到期望结果的组成种数"><span class="post-toc-number">1.</span> <span class="post-toc-text">表达式得到期望结果的组成种数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#思路-amp-代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">思路 & 代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#暴力递归"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">暴力递归</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化递归"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">优化递归</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-10.1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">10.1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月25日 10:21" datetime="2015-11-25T02:21:32.000Z"  itemprop="datePublished">2015-11-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="表达式得到期望结果的组成种数"><a href="#表达式得到期望结果的组成种数" class="headerlink" title="表达式得到期望结果的组成种数"></a>表达式得到期望结果的组成种数</h1><p>给定一个只由0(假)、1(真)、&amp;(逻辑与)、|(逻辑或)和^(异或)五种字符组成的字符串express，再给定一个布尔值desired。返回express能有多少种组合方式，可以达到desired的结果。<br>express=“1^0|0|1”，desired=false。<br>只有1^((0|0)|1)和1^(0|(0|1))的组合可以得到false。返回2。<br>express=“1”，desired=false。<br>没有组合可以得到false。返回0。<br><a id="more"></a></p>
+<h1 id="思路-amp-代码"><a href="#思路-amp-代码" class="headerlink" title="思路 &amp; 代码"></a>思路 &amp; 代码</h1><h2 id="暴力递归"><a href="#暴力递归" class="headerlink" title="暴力递归"></a>暴力递归</h2><p>先对表达式必须进行判断，必须满足一下几点</p>
+<ul>
+<li>长度必须为偶数</li>
+<li>奇数位上是0或者1</li>
+<li>偶数位上是^|&amp;</li>
+</ul>
+<p>然后对于每一个运算符作为分界点，分别计算左右两边的方法数使得满足disired，然后相乘得到方法数，再把所有方法数相加即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">//判断字符串是否合法</div><div class="line">public static boolean isValid(char[] exp) &#123;</div><div class="line">	//长度为偶数</div><div class="line">	if ((exp.length &amp; 1) == 0) &#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	//奇数位是0或1</div><div class="line">	for (int i = 0; i &lt; exp.length; i = i + 2) &#123;</div><div class="line">		if ((exp[i] != &apos;1&apos;) &amp;&amp; (exp[i] != &apos;0&apos;)) &#123;</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	//偶数为是&amp;,|,^</div><div class="line">	for (int i = 1; i &lt; exp.length; i = i + 2) &#123;</div><div class="line">		if ((exp[i] != &apos;&amp;&apos;) &amp;&amp; (exp[i] != &apos;|&apos;) &amp;&amp; (exp[i] != &apos;^&apos;)) &#123;</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return true;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static int num1(String express, boolean desired) &#123;</div><div class="line">	if (express == null || express.equals(&quot;&quot;)) &#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	char[] exp = express.toCharArray();</div><div class="line">	if (!isValid(exp)) &#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	return p(exp, desired, 0, exp.length - 1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//判断l到r上的表达式有多少种满足desired的方法</div><div class="line">public static int p(char[] exp, boolean desired, int l, int r) &#123;</div><div class="line">	if (l == r) &#123;</div><div class="line">		if (exp[l] == &apos;1&apos;) &#123;</div><div class="line">			return desired ? 1 : 0;</div><div class="line">		&#125; else &#123;</div><div class="line">			return desired ? 0 : 1;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	int res = 0;</div><div class="line">	if (desired) &#123;</div><div class="line">		//以位运算符分割表达式，分别计算表达的值</div><div class="line">		//总的可能数为左边可能数乘以右边可能数</div><div class="line">		for (int i = l + 1; i &lt; r; i += 2) &#123;</div><div class="line">			//以该运算符为分界点</div><div class="line">			switch (exp[i]) &#123;</div><div class="line">			case &apos;&amp;&apos;:</div><div class="line">				//desired为1，运算符是&amp;,左右必须都是true</div><div class="line">				res += p(exp, true, l, i - 1) * p(exp, true, i + 1, r);</div><div class="line">				break;</div><div class="line">			case &apos;|&apos;:</div><div class="line">				//desired为1，运算符是|,左1右0,左0右1，左1右1</div><div class="line">				res += p(exp, true, l, i - 1) * p(exp, false, i + 1, r);</div><div class="line">				res += p(exp, false, l, i - 1) * p(exp, true, i + 1, r);</div><div class="line">				res += p(exp, true, l, i - 1) * p(exp, true, i + 1, r);</div><div class="line">				break;</div><div class="line">			case &apos;^&apos;:</div><div class="line">				//desired为1，运算符是^,左1右0,左0右1</div><div class="line">				res += p(exp, true, l, i - 1) * p(exp, false, i + 1, r);</div><div class="line">				res += p(exp, false, l, i - 1) * p(exp, true, i + 1, r);</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125; else &#123;</div><div class="line">		for (int i = l + 1; i &lt; r; i += 2) &#123;</div><div class="line">			switch (exp[i]) &#123;</div><div class="line">			case &apos;&amp;&apos;:</div><div class="line">				res += p(exp, false, l, i - 1) * p(exp, true, i + 1, r);</div><div class="line">				res += p(exp, true, l, i - 1) * p(exp, false, i + 1, r);</div><div class="line">				res += p(exp, false, l, i - 1) * p(exp, false, i + 1, r);</div><div class="line">				break;</div><div class="line">			case &apos;|&apos;:</div><div class="line">				res += p(exp, false, l, i - 1) * p(exp, false, i + 1, r);</div><div class="line">				break;</div><div class="line">			case &apos;^&apos;:</div><div class="line">				res += p(exp, true, l, i - 1) * p(exp, true, i + 1, r);</div><div class="line">				res += p(exp, false, l, i - 1) * p(exp, false, i + 1, r);</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="优化递归"><a href="#优化递归" class="headerlink" title="优化递归"></a>优化递归</h2><p>使用数组记录算过的值<br>由于<code>p(char[] exp, boolean desired, int l, int r)</code>递归中有3个变量，应该使用三维表进行记录<br>但是使用2张二维表就可以，因为<code>boolean desired</code>只有真假两种取值<br>仍然是以位运算符号作为分割，计算所有的方法数，并记录</p>
+<ul>
+<li>t[i][j]表示第i到j([i,j])的exp中结果为true的结果数</li>
+<li>f[i][j]表示第i到j([i,j])的exp中结果为false的结果数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">//优化递归，记录所计算的值</div><div class="line">//p(char[] exp, boolean desired, int l, int r)递归中有3个变量，但是使用2张二维表就可以</div><div class="line">//一个表记录结果是true，另一个记录结果是false</div><div class="line">public static int num2(String express, boolean desired) &#123;</div><div class="line">	if (express == null || express.equals(&quot;&quot;)) &#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	char[] exp = express.toCharArray();</div><div class="line">	if (!isValid(exp)) &#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	//t[i][j]表示第i到j的exp中结果为true的结果数</div><div class="line">	int[][] t = new int[exp.length][exp.length];</div><div class="line">	//f[i][j]表示第i到j的exp中结果为false的结果数</div><div class="line">	int[][] f = new int[exp.length][exp.length];</div><div class="line">	t[0][0] = exp[0] == &apos;0&apos; ? 0 : 1;</div><div class="line">	f[0][0] = exp[0] == &apos;1&apos; ? 0 : 1;</div><div class="line">	//以i为尾，j为头，算t[i][j]与f[i][j]</div><div class="line">	//依次向两边扩散，计算</div><div class="line">	for (int i = 2; i &lt; exp.length; i += 2) &#123;</div><div class="line">		//t[i][i]表示第i个位置为true的结果数</div><div class="line">		//因此只要看是t[i][i]的值，值1返回1，值0返回0</div><div class="line">		t[i][i] = exp[i] == &apos;0&apos; ? 0 : 1;</div><div class="line">		f[i][i] = exp[i] == &apos;1&apos; ? 0 : 1;</div><div class="line">		for (int j = i - 2; j &gt;= 0; j -= 2) &#123;</div><div class="line">			//以k+1为分界，判断前面和后后的组成数目</div><div class="line">			for (int k = j; k &lt; i; k += 2) &#123;</div><div class="line">				</div><div class="line">				if (exp[k + 1] == &apos;&amp;&apos;) &#123;</div><div class="line">					//k+1是&amp;，结果是true的可能是前1后1</div><div class="line">					t[j][i] += t[j][k] * t[k + 2][i];</div><div class="line">					//k+1是&amp;，结果是false的可能是前1后0，前0后1，前0后0</div><div class="line">					//这里做了合并，先算前1后0和前0后0的结果，再加上前0后1</div><div class="line">					f[j][i] += (f[j][k] + t[j][k]) * f[k + 2][i] + f[j][k] * t[k + 2][i];</div><div class="line">				&#125; else if (exp[k + 1] == &apos;|&apos;) &#123;</div><div class="line">					t[j][i] += (f[j][k] + t[j][k]) * t[k + 2][i] + t[j][k] * f[k + 2][i];</div><div class="line">					f[j][i] += f[j][k] * f[k + 2][i];</div><div class="line">				&#125; else &#123;</div><div class="line">					t[j][i] += f[j][k] * t[k + 2][i] + t[j][k] * f[k + 2][i];</div><div class="line">					f[j][i] += f[j][k] * f[k + 2][i] + t[j][k] * t[k + 2][i];</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return desired ? t[0][t.length - 1] : f[0][f.length - 1];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-27T12:59:06.000Z" itemprop="dateUpdated">2015年11月27日 20:59</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/25/10.1/" target="_blank" rel="external">http://duyao.github.io/2015/11/25/10.1/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/25/10.1/&title=《10.1》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/25/10.1/&title=《10.1》 — Du Yao's blog&source=表达式得到期望结果的组成种数给定一个只由0(假)、1(真)、&amp;(逻辑与)、|(逻辑或)和^(异或)五种字符组成的字符串express，再给定一个布..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/25/10.1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《10.1》 — Du Yao's blog&url=http://duyao.github.io/2015/11/25/10.1/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/25/10.1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/25/10.2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">10.2</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/20/9.4/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">9.4</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="10.1" data-title="10.1" data-url="http://duyao.github.io/2015/11/25/10.1/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/25/10.1/&title=《10.1》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/25/10.1/&title=《10.1》 — Du Yao's blog&source=表达式得到期望结果的组成种数给定一个只由0(假)、1(真)、&amp;(逻辑与)、|(逻辑或)和^(异或)五种字符组成的字符串express，再给定一个布..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/25/10.1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《10.1》 — Du Yao's blog&url=http://duyao.github.io/2015/11/25/10.1/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/25/10.1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/25/10.1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

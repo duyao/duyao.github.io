@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>图及其相关 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="术语 完全图任何 两个顶点都有边  数量关系n表示顶点数量，e表示边的数量，无向图中的e为[0, n(n-1)/2]有向图中的e为[0, n(n-1)/2]图中所有的顶点度数之和(出度+入度)为2*e  简单路径、简单回路一条路径中，除了起点和终点外，若其余顶点各不相同，则称改路径为简单路径；由简单路径构成的回路成为简单回路    连通图、强连通图无向图中，如果任意两个顶点都可以互相到达，则称为连">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图及其相关">
+<meta property="og:url" content="http://duyao.github.io/2017/02/21/图及其相关/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="术语 完全图任何 两个顶点都有边  数量关系n表示顶点数量，e表示边的数量，无向图中的e为[0, n(n-1)/2]有向图中的e为[0, n(n-1)/2]图中所有的顶点度数之和(出度+入度)为2*e  简单路径、简单回路一条路径中，除了起点和终点外，若其余顶点各不相同，则称改路径为简单路径；由简单路径构成的回路成为简单回路    连通图、强连通图无向图中，如果任意两个顶点都可以互相到达，则称为连">
+<meta property="og:updated_time" content="2017-05-04T02:59:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图及其相关">
+<meta name="twitter:description" content="术语 完全图任何 两个顶点都有边  数量关系n表示顶点数量，e表示边的数量，无向图中的e为[0, n(n-1)/2]有向图中的e为[0, n(n-1)/2]图中所有的顶点度数之和(出度+入度)为2*e  简单路径、简单回路一条路径中，除了起点和终点外，若其余顶点各不相同，则称改路径为简单路径；由简单路径构成的回路成为简单回路    连通图、强连通图无向图中，如果任意两个顶点都可以互相到达，则称为连">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">图及其相关</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">图及其相关</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-21T12:22:23.000Z" itemprop="datePublished" class="page-time">
+  2017-02-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#术语"><span class="post-toc-number">1.</span> <span class="post-toc-text">术语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#图的表示"><span class="post-toc-number">2.</span> <span class="post-toc-text">图的表示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#图的遍历"><span class="post-toc-number">3.</span> <span class="post-toc-text">图的遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最短路径"><span class="post-toc-number">4.</span> <span class="post-toc-text">最短路径</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最小生成树MST"><span class="post-toc-number">5.</span> <span class="post-toc-text">最小生成树MST</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓扑序列"><span class="post-toc-number">6.</span> <span class="post-toc-text">拓扑序列</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-图及其相关"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">图及其相关</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年02月21日 20:22" datetime="2017-02-21T12:22:23.000Z"  itemprop="datePublished">2017-02-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul>
+<li><p>完全图<br><strong>任何</strong> 两个顶点都有边</p>
+</li>
+<li><p>数量关系<br>n表示顶点数量，e表示边的数量，<br>无向图中的e为[0, n<em>(n-1)/2]<br>有向图中的e为[0, n</em>(n-1)/2]<br>图中所有的顶点度数之和(出度+入度)为2*e</p>
+</li>
+<li><p>简单路径、简单回路<br>一条路径中，除了起点和终点外，若其余顶点各不相同，则称改路径为简单路径；由简单路径构成的回路成为简单回路</p>
+</li>
+</ul>
+<ul>
+<li><p>连通图、强连通图<br><strong>无向图</strong>中，如果任意两个顶点都可以互相到达，则称为连通，图中的任意两点都连通为<strong>连通图</strong>，其极大连通子图成为连通分量<br><strong>有向图</strong>中，如果任意两个顶点都有路径，则称为强连通，图中任意两个点都强连通则为<strong>强连通图</strong>，其极大连通子图成为强连通分量</p>
+</li>
+<li><p>生成树<br>一个含有n个顶点的的连通图的生成树是一个极小连通子图，它含有图中的全部顶点，，但有且只有足以构成一棵树的n-1条边<br>生成树上添加1条边必定构成一个环<br>有n-1条边的不一定是生成树<br>一个图的生成树不唯一</p>
+</li>
+<li><p>AOV网：结点表示活动的网；</p>
+</li>
+<li>AOE网：边表示活动的持续时间的网；</li>
+</ul>
+<h2 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h2><ul>
+<li>邻接矩阵<br>无向图一定是对称的，有向图不一定对称<br>int [][]二维数组</li>
+<li>邻接表</li>
+</ul>
+<p><code>List&lt;List&lt;Node&gt;&gt;</code></p>
+<h2 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h2><ul>
+<li><p>DFS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">DFS(u)&#123;//访问顶点u</div><div class="line">  vis[u] = true;</div><div class="line">  for(u能到达的所有顶点v)&#123;</div><div class="line">    if(vis[v] == false)&#123;</div><div class="line">      DFS[v];</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">DFSTrave(G)&#123;//遍历图G</div><div class="line">  for(G的所有顶点u)&#123;</div><div class="line">    if(vis[u] == false)&#123;</div><div class="line">      DFS(u);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>BFS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">BFS(u)&#123;</div><div class="line">  while(q 不为空)&#123;//q为队列,LinkedList</div><div class="line">    u = q.remove();//取出头结点</div><div class="line">    for(u出发可以到达的所有顶点v)&#123;</div><div class="line">      if(inq(v) == false)&#123;//没有入过队列</div><div class="line">        q.add(v);//v入队</div><div class="line">        inq[v] = true;//已经入队列</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">BFSTrave(G)&#123;</div><div class="line">  for(G的所有顶点u)&#123;</div><div class="line">    if(inq[u] == false)&#123;</div><div class="line">      Queue&lt;&gt; q = new LinkedList&lt;&gt;();//产生队列</div><div class="line">      BFS(u);//访问</div><div class="line">      inq[u] = true;//标记进队</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h2><ul>
+<li>单源最短路径Dij<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//d为源点到每个点的最短距离记录，s为起点</div><div class="line">//pre为最短路径的记录顺序,pre[v] = u表示v的前驱结点是u</div><div class="line">Dij(G, d[], s,pre[])&#123;</div><div class="line">  初始化;</div><div class="line">  for(循环n次)&#123;</div><div class="line">    u= 使得d[u]最小且没有被访问的节点;//这里可以用priorityQueue等</div><div class="line">    标记u访问过;</div><div class="line">    for(u 能到达的所有点v)&#123;</div><div class="line">      if(v未访问 &amp;&amp; 以u为中介点使得s到v的距离更短)&#123;</div><div class="line">        优化d[v];</div><div class="line">        pre[v] = u;//记录最短路径</div><div class="line">      &#125;</div><div class="line">      /*</div><div class="line">      else(距离相等)&#123;</div><div class="line">        其他标尺</div><div class="line">      &#125;</div><div class="line">      */</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Dij+DFS：很可能在求最短路径的时候不止有一条，因此最短路径得到顺序pre后，还可以用dfs得到权值最小的路径</p>
+<ul>
+<li>全源最短路径Floyd<br>3层遍历,枚举节点k<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">for(int k = 0; k &lt; n; k++)&#123;</div><div class="line">  for(int i = 0; i &lt; n; i++)&#123;</div><div class="line">    for(int j = 0; j &lt; n; j++)&#123;</div><div class="line">      if(d[i][k] + d[k][j] &lt; d[i][j])&#123;</div><div class="line">        d[i][j] = d[i][k] + d[k][j];</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="最小生成树MST"><a href="#最小生成树MST" class="headerlink" title="最小生成树MST"></a>最小生成树MST</h2><ul>
+<li><p>性质<br>1.只在无向图中有<br>2.最小生成树是树，边数  = 点数 - 1,且一定无环<br>3.最小生成树不一定唯一，但是其边权之和一定唯一</p>
+</li>
+<li><p>Prim<br>算法思想和Dij相似，但是Prim是一个集合的最小距离，而Dij到一个点的最小距离</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//d为源点到每个点的最短距离记录，s为起点</div><div class="line">//pre为最短路径的记录顺序,pre[v] = u表示v的前驱结点是u</div><div class="line">int Prim(G, d[], s)&#123;</div><div class="line">  int ans = 0;//初始化</div><div class="line">  for(循环n次)&#123;</div><div class="line">    u= 使得d[u]最小且没有被访问的节点;//这里可以用priorityQueue等</div><div class="line">    标记u访问过;</div><div class="line">    ans += d[u];</div><div class="line">    for(u 能到达的所有点v)&#123;</div><div class="line">      if(v未访问 &amp;&amp; 以u为中介点使得已选中的集合到v的距离更短)&#123;</div><div class="line">        优化d[v];</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  return ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Kruskal<br>对边排序，然后选择最小的，合并到一起<br>使用了并查集和排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line">public class Kruskal &#123;</div><div class="line">    //点数</div><div class="line">    int numv = 100;</div><div class="line"></div><div class="line">    ArrayList&lt;Edge&gt; edges = new ArrayList&lt;&gt;();</div><div class="line">    int father[] = new int[numv];</div><div class="line">    //并查集</div><div class="line">    public int findfather(int x)&#123;</div><div class="line">        int a = x;</div><div class="line">        while(x != father[x])&#123;</div><div class="line">            x = father[x];</div><div class="line">        &#125;</div><div class="line">        //路径压缩,放置树太高，影响查找效率</div><div class="line">        while(a != father[a])&#123;</div><div class="line">            int z = a;</div><div class="line">            a = father[a];</div><div class="line">            father[z] = a;</div><div class="line">        &#125;</div><div class="line">        return x;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int Kru(int v, int e)&#123;</div><div class="line"></div><div class="line">        //最小生成树的权值</div><div class="line">        int ans = 0;</div><div class="line">        //生成树的边数</div><div class="line">        int vis = 0;</div><div class="line">        //初始化并查集</div><div class="line">        for (int i = 0; i &lt; v; i++) &#123;</div><div class="line">            father[i] = i;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //对边的权值进行排序</div><div class="line">        Collections.sort(edges);</div><div class="line"></div><div class="line">        for(int i = 0; i &lt; e; i++)&#123;</div><div class="line"></div><div class="line">            int uu = edges.get(i).u;</div><div class="line">            int vv = edges.get(i).v;</div><div class="line"></div><div class="line">            //查看vv和uu是不是在同一个集合中</div><div class="line">            int fau = findfather(uu);</div><div class="line">            int fav = findfather(vv);</div><div class="line">            if(fau != fav)&#123;</div><div class="line">                //加入到集合中去</div><div class="line">                father[fau] = fav;</div><div class="line">                //生成树权值增加</div><div class="line">                ans += edges.get(i).cost;</div><div class="line">                //生成树边数增加</div><div class="line">                vis++;</div><div class="line">                //生成树的边数为n-1，结束生成树查找</div><div class="line">                if(vis == v - 1)&#123;</div><div class="line">                    break;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if(vis == v - 1)&#123;</div><div class="line">            //返回生成树权值</div><div class="line">            return ans;</div><div class="line">        &#125;else&#123;</div><div class="line">            //不能生成生成树</div><div class="line">            return -1;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line">class Edge implements Comparable&lt;Edge&gt;&#123;</div><div class="line">    int u,v;</div><div class="line">    int cost;</div><div class="line"></div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int compareTo(Edge o) &#123;</div><div class="line">        return Integer.compare(o.cost, this.cost);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="拓扑序列"><a href="#拓扑序列" class="headerlink" title="拓扑序列"></a>拓扑序列</h2><p>判断一个图是不是有向无环图<br>准备所有顶点的入度数组<br>1、定义一个队列，把所有入度为0的点加入队列中<br>2、取出队首，对其所有相邻的边进行操作：将该边到达的点的入度减1，如果该点的入度为0，则加入到队列，删除这条边<br>3、重复执行2直到队列为空，判断<strong>遍历过的点的数目是不是等于该图的节点数</strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-04T02:59:18.000Z" itemprop="dateUpdated">2017年5月4日 10:59</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/02/21/图及其相关/" target="_blank" rel="external">http://duyao.github.io/2017/02/21/图及其相关/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/21/图及其相关/&title=《图及其相关》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/21/图及其相关/&title=《图及其相关》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/21/图及其相关/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《图及其相关》 — Du Yao's blog&url=http://duyao.github.io/2017/02/21/图及其相关/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/21/图及其相关/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/02/22/java内存区域/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">java内存区域</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/20/java知识点记录/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">java知识点记录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="图及其相关" data-title="图及其相关" data-url="http://duyao.github.io/2017/02/21/图及其相关/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/21/图及其相关/&title=《图及其相关》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/21/图及其相关/&title=《图及其相关》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/21/图及其相关/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《图及其相关》 — Du Yao's blog&url=http://duyao.github.io/2017/02/21/图及其相关/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/21/图及其相关/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/02/21/图及其相关/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

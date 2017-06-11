@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>8.1 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="题目给定整数N，返回斐波那契数列的第N项。123456789public int f1(int n) &amp;#123;	if (n &amp;lt; 1) &amp;#123;	return 0;	&amp;#125;	if (n == 1 || n == 2) &amp;#123;	return 1;	&amp;#125;	return f1(n - 1) + f1(n - 2);&amp;#125; 上面的时间复杂度是O(2^N)要求：时间复杂">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.1">
+<meta property="og:url" content="http://duyao.github.io/2015/11/16/8.1/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="题目给定整数N，返回斐波那契数列的第N项。123456789public int f1(int n) &amp;#123;	if (n &amp;lt; 1) &amp;#123;	return 0;	&amp;#125;	if (n == 1 || n == 2) &amp;#123;	return 1;	&amp;#125;	return f1(n - 1) + f1(n - 2);&amp;#125; 上面的时间复杂度是O(2^N)要求：时间复杂">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;a&space;&&space;b\\&space;c&space;&&space;d&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(4),f(3))=(f(3),f(2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(3),f(2))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}=(1,1)*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(c(n),c(n-1),c(n-2))=(c(n-1),c(n-1),c(n-3))*\begin{bmatrix}&space;a&space;&&space;b&&space;c\\&space;d&&space;e&&space;f\\&space;g&space;&h&space;&&space;i&space;\end{bmatrix}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?(c(n),c(n-1),c(n-2))=(3,2,1)*\begin{bmatrix}&space;1&space;&&space;1&0\\&space;0&&space;0&1\\&space;1&space;&0&space;&0&space;\end{bmatrix}^{n-3}">
+<meta property="og:updated_time" content="2015-11-17T05:03:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8.1">
+<meta name="twitter:description" content="题目给定整数N，返回斐波那契数列的第N项。123456789public int f1(int n) &amp;#123;	if (n &amp;lt; 1) &amp;#123;	return 0;	&amp;#125;	if (n == 1 || n == 2) &amp;#123;	return 1;	&amp;#125;	return f1(n - 1) + f1(n - 2);&amp;#125; 上面的时间复杂度是O(2^N)要求：时间复杂">
+<meta name="twitter:image" content="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;a&space;&&space;b\\&space;c&space;&&space;d&space;\end{bmatrix}">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">8.1</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">8.1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-16T09:35:50.000Z" itemprop="datePublished" class="page-time">
+  2015-11-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路"><span class="post-toc-number">2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">3.</span> <span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目-1"><span class="post-toc-number">4.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路-1"><span class="post-toc-number">5.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码-1"><span class="post-toc-number">6.</span> <span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结论"><span class="post-toc-number">7.</span> <span class="post-toc-text">结论</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-8.1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">8.1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月16日 17:35" datetime="2015-11-16T09:35:50.000Z"  itemprop="datePublished">2015-11-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定整数N，返回斐波那契数列的第N项。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public int f1(int n) &#123;</div><div class="line">	if (n &lt; 1) &#123;</div><div class="line">	return 0;</div><div class="line">	&#125;</div><div class="line">	if (n == 1 || n == 2) &#123;</div><div class="line">	return 1;</div><div class="line">	&#125;</div><div class="line">	return f1(n - 1) + f1(n - 2);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面的时间复杂度是O(2^N)<br>要求：时间复杂度O(logN)的解法<br><a id="more"></a></p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>由递推公式<code>f(n),f(n-1))=(f(n-1),f(n-2)</code>可以化作<br><a href="https://www.codecogs.com/eqnedit.php?latex=(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;a&space;&&space;b\\&space;c&space;&&space;d&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;a&space;&&space;b\\&space;c&space;&&space;d&space;\end{bmatrix}" title="(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix} a & b\\ c & d \end{bmatrix}"></a><br>当含有f(n-3)时，行列式是3阶的<br>可以代入求出行列式<br><a href="https://www.codecogs.com/eqnedit.php?latex=(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" title="(f(n),f(n-1))=(f(n-1),f(n-2))*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}"></a><br>于是有<br><a href="https://www.codecogs.com/eqnedit.php?latex=(f(4),f(3))=(f(3),f(2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(4),f(3))=(f(3),f(2))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" title="(f(4),f(3))=(f(3),f(2))*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}"></a></p>
+<p><a href="https://www.codecogs.com/eqnedit.php?latex=(f(3),f(2))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(3),f(2))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}" title="(f(3),f(2))=(f(2),f(1))*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}"></a><br>…<br>依次带入得到<br><a href="https://www.codecogs.com/eqnedit.php?latex=(f(n),f(n-1))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}=(1,1)*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(f(n),f(n-1))=(f(2),f(1))*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}=(1,1)*\begin{bmatrix}&space;1&space;&&space;1\\&space;1&space;&&space;0&space;\end{bmatrix}^{n-2}" title="(f(n),f(n-1))=(f(2),f(1))*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}^{n-2}=(1,1)*\begin{bmatrix} 1 & 1\\ 1 & 0 \end{bmatrix}^{n-2}"></a><br>因此该题目的关键是求行列式的幂运算<br>集合的幂运算和普通数字的目运算相同，都可以是用二分法<br>假设有整数是10，如何最快的求解10的75次方。</p>
+<ol>
+<li>75的2进制形式为1001011。</li>
+<li>10的75次方=(10^64) <em> (10^8) </em> (10^2) * (10^1)。在这个过程中，我们先求出10^1，然<br>后根据10^1求出10^2，再根据10^2求出10^4， …，最后根据10^32求出10^64次方，即75的<br>⼆进制形式总共有多少位，我们就使用了几次次乘法。</li>
+<li>在步骤2的过程中，把应该累乘的值乘起来即可。 10^64、 10^8、 10^2、 10^1应该累<br>乘起来，因为64、 8、 2、 1对应到75的2进制中，相应的位上是1。而10^32、 10^16、 10^4<br>不应该累乘，因为32、 16、 4对应到75的2进制中，相应的位上是0。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//整数的幂运算</div><div class="line">public  static int power(int x, int n)</div><div class="line">&#123;</div><div class="line">	if (n == 0)</div><div class="line">		return 1;</div><div class="line">	int result = 1;</div><div class="line">	while (n != 0)</div><div class="line">	&#123;</div><div class="line">		//n%2 != 0</div><div class="line">		if ((n &amp; 1) != 0)</div><div class="line">			result *= x;</div><div class="line">		x *= x;</div><div class="line">		//n/=2</div><div class="line">		n &gt;&gt;= 1;</div><div class="line">	&#125;</div><div class="line">	return result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">// 计算矩阵的幂运算</div><div class="line">public static int[][] matrixPower(int[][] m, int p) &#123;</div><div class="line">	int[][] res = new int[m.length][m[0].length];</div><div class="line">	// 初始化结果矩阵为单位阵，即对角线是1，其余位置是0，相当于整数中的1</div><div class="line">	//相当于设置res=1</div><div class="line">	for (int i = 0; i &lt; m.length; i++) &#123;</div><div class="line">		res[i][i] = 1;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	int[][] tmp = m;</div><div class="line">	while (p != 0) &#123;</div><div class="line">		if (p % 2 != 0) &#123;</div><div class="line">			res = muliMatrix(res, tmp);</div><div class="line">		&#125;</div><div class="line">		tmp = muliMatrix(tmp, tmp);</div><div class="line">		p /= 2;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	return res;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">// 矩阵相乘的运算</div><div class="line">public static int[][] muliMatrix(int[][] m1, int[][] m2) &#123;</div><div class="line">	int[][] res = new int[m1.length][m2[0].length];</div><div class="line"></div><div class="line">	for (int i = 0; i &lt; m1.length; i++) &#123;</div><div class="line">		for (int j = 0; j &lt; m2[0].length; j++) &#123;</div><div class="line">			for (int k = 0; k &lt; m2.length; k++) &#123;</div><div class="line">				res[i][j] += m1[i][k] * m2[k][j];</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static int f(int n) &#123;</div><div class="line">	if(n &lt; 1)&#123;</div><div class="line">		return 0;</div><div class="line">	&#125;else if(n == 1 || n == 2)&#123;</div><div class="line">		return 1;</div><div class="line">	&#125;else&#123;</div><div class="line">		</div><div class="line">		int[][] a = &#123;&#123;1, 1&#125;, &#123;1, 0&#125;&#125;;</div><div class="line">		int[][] res = matrixPower(a, n-2);</div><div class="line">		return res[0][0] + res[1][0];</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>假设农场中成熟的母牛每年只会生1头小母牛，并且永远不会死。第一年农场有1只成熟的母牛，从第二年开始，母牛将开始生小母牛。每只小母牛3年之后成熟又可以开始生小母牛。给定整数N，求出N年后牛的数量。</p>
+<p>N=6。第1年1头成熟母牛记为a。第2年a生了新的小母牛记为b，总牛数为2。第3年a生了新的小母牛记为c，总牛数为3。第4年a生了新的小母牛记为d，总牛数为4。第5年b成熟了，a和b分别生了新的小母牛，总牛数为6。第6年c也成熟了，a、b和c分别生了新的小母牛，总牛数为9。返回9。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>递推公式为<code>C(n)=C(n-1)+C(n-3)，C(1)=1， C(2)=2， C(3)=3， C(4)=4， C(5)=6</code><br>因此可以化为3阶<br><a href="https://www.codecogs.com/eqnedit.php?latex=(c(n),c(n-1),c(n-2))=(c(n-1),c(n-1),c(n-3))*\begin{bmatrix}&space;a&space;&&space;b&&space;c\\&space;d&&space;e&&space;f\\&space;g&space;&h&space;&&space;i&space;\end{bmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(c(n),c(n-1),c(n-2))=(c(n-1),c(n-1),c(n-3))*\begin{bmatrix}&space;a&space;&&space;b&&space;c\\&space;d&&space;e&&space;f\\&space;g&space;&h&space;&&space;i&space;\end{bmatrix}" title="(c(n),c(n-1),c(n-2))=(c(n-1),c(n-1),c(n-3))*\begin{bmatrix} a & b& c\\ d& e& f\\ g &h & i \end{bmatrix}"></a><br>带入求解的到<br><a href="https://www.codecogs.com/eqnedit.php?latex=(c(n),c(n-1),c(n-2))=(3,2,1)*\begin{bmatrix}&space;1&space;&&space;1&0\\&space;0&&space;0&1\\&space;1&space;&0&space;&0&space;\end{bmatrix}^{n-3}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(c(n),c(n-1),c(n-2))=(3,2,1)*\begin{bmatrix}&space;1&space;&&space;1&0\\&space;0&&space;0&1\\&space;1&space;&0&space;&0&space;\end{bmatrix}^{n-3}" title="(c(n),c(n-1),c(n-2))=(3,2,1)*\begin{bmatrix} 1 & 1&0\\ 0& 0&1\\ 1 &0 &0 \end{bmatrix}^{n-3}"></a></p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public int c(int n) &#123;</div><div class="line">	if (n &lt; 1) &#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	if (n == 1 || n == 2 || n == 3) &#123;</div><div class="line">		return n;</div><div class="line">	&#125;</div><div class="line">	int[][] base = &#123; &#123; 1, 1, 0 &#125;, &#123; 0, 0, 1 &#125;, &#123; 1, 0, 0 &#125; &#125;;</div><div class="line">	int[][] res = matrixPower(base, n - 3);</div><div class="line">	return 3 * res[0][0] + 2 * res[1][0] + res[2][0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><strong>如果递归式严格符合F(n)=a<em>F(n-1)+b</em>F(n-2)+…+k<em>F(n-i)，那么它就是i阶的递推式，必<br>然有与i</em>i的状态矩阵有关的矩阵乘法的表达。一律可以用加速矩阵乘法的动态规划将时间复<br>杂度降为O(logN)。</strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-17T05:03:56.000Z" itemprop="dateUpdated">2015年11月17日 13:03</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/16/8.1/" target="_blank" rel="external">http://duyao.github.io/2015/11/16/8.1/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/16/8.1/&title=《8.1》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/16/8.1/&title=《8.1》 — Du Yao's blog&source=题目给定整数N，返回斐波那契数列的第N项。123456789public int f1(int n) &#123;	if (n &lt; 1) &#123..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/16/8.1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《8.1》 — Du Yao's blog&url=http://duyao.github.io/2015/11/16/8.1/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/16/8.1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/16/8.2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">8.2</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/15/jQuery事件与应用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">jQuery事件与应用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="8.1" data-title="8.1" data-url="http://duyao.github.io/2015/11/16/8.1/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/16/8.1/&title=《8.1》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/16/8.1/&title=《8.1》 — Du Yao's blog&source=题目给定整数N，返回斐波那契数列的第N项。123456789public int f1(int n) &#123;	if (n &lt; 1) &#123..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/16/8.1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《8.1》 — Du Yao's blog&url=http://duyao.github.io/2015/11/16/8.1/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/16/8.1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/16/8.1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

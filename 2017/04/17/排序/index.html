@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>排序 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="各种排序算法                                                                                             排序算法比较              快速排序快排123456789101112131415161718192021222324252627282930public void quicksort(in">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序">
+<meta property="og:url" content="http://duyao.github.io/2017/04/17/排序/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="各种排序算法                                                                                             排序算法比较              快速排序快排123456789101112131415161718192021222324252627282930public void quicksort(in">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/sort.png">
+<meta property="og:updated_time" content="2017-04-23T06:21:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序">
+<meta name="twitter:description" content="各种排序算法                                                                                             排序算法比较              快速排序快排123456789101112131415161718192021222324252627282930public void quicksort(in">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/sort.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">排序</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">排序</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-17T06:57:47.000Z" itemprop="datePublished" class="page-time">
+  2017-04-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#各种排序算法"><span class="post-toc-number">1.</span> <span class="post-toc-text">各种排序算法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#快速排序"><span class="post-toc-number">2.</span> <span class="post-toc-text">快速排序</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快排"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">快排</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#双轴快排"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">双轴快排</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bfprt"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">bfprt</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#堆排序"><span class="post-toc-number">3.</span> <span class="post-toc-text">堆排序</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#归并排序"><span class="post-toc-number">4.</span> <span class="post-toc-text">归并排序</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基数排序"><span class="post-toc-number">5.</span> <span class="post-toc-text">基数排序</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#其它排序"><span class="post-toc-number">6.</span> <span class="post-toc-text">其它排序</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-排序"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">排序</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年04月17日 14:57" datetime="2017-04-17T06:57:47.000Z"  itemprop="datePublished">2017-04-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="各种排序算法"><a href="#各种排序算法" class="headerlink" title="各种排序算法"></a>各种排序算法</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/sort.png" alt="排序算法比较" title="">
+                </div>
+                <div class="image-caption">排序算法比较</div>
+            </figure>
+<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</div><div class="line">     <span class="keyword">if</span> (low &lt; high) &#123;<span class="comment">//这里要判断</span></div><div class="line">         <span class="comment">//先找出pivot</span></div><div class="line">         <span class="keyword">int</span> pivot = partition(arr, low, high);</div><div class="line">         <span class="comment">//分别排序</span></div><div class="line">         quicksort(arr, low, pivot);</div><div class="line">         quicksort(arr, pivot + <span class="number">1</span>, high);</div><div class="line"></div><div class="line">     &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</div><div class="line">     <span class="comment">//每次都要和flag进行比较</span></div><div class="line">     <span class="keyword">int</span> flag = arr[low];</div><div class="line">     <span class="keyword">while</span> (low &lt; high) &#123;</div><div class="line">         <span class="keyword">while</span> (low &lt; high &amp;&amp; arr[high] &gt;= flag) &#123;</div><div class="line">             high--;</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         <span class="comment">//交换low和high的位置</span></div><div class="line">         swap(arr, low, high);</div><div class="line"></div><div class="line">         <span class="keyword">while</span> (low &lt; high &amp;&amp; arr[low] &lt;= flag) &#123;</div><div class="line">             low++;</div><div class="line">         &#125;</div><div class="line">         swap(arr, low, high);</div><div class="line">     &#125;</div><div class="line">     <span class="comment">//返回的是下标</span></div><div class="line">     <span class="keyword">return</span> low;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="双轴快排"><a href="#双轴快排" class="headerlink" title="双轴快排"></a>双轴快排</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Partitioning:</div><div class="line"></div><div class="line"> left part           center part                   right part</div><div class="line">+--------------------------------------------------------------+</div><div class="line">|  &lt; pivot1  |  pivot1 &lt;= &amp;&amp; &lt;= pivot2  |    ?    |  &gt; pivot2  |</div><div class="line">+--------------------------------------------------------------+</div><div class="line">             ^                          ^       ^</div><div class="line">             |                          |       |</div><div class="line">            less                        k     great</div><div class="line"></div><div class="line">Invariants:</div><div class="line"></div><div class="line">            all in (left, less)   &lt; pivot1</div><div class="line">  pivot1 &lt;= all in [less, k)     &lt;= pivot2</div><div class="line">            all in (great, right) &gt; pivot2</div><div class="line"></div><div class="line">Pointer k is the first index of ?-part.</div></pre></td></tr></table></figure>
+<p>一般的快速排序采用一个枢轴来把一个数组划分成两半，然后递归之。<br>大量经验数据表面，采用两个枢轴来划分成3份的算法更高效，这就是DualPivotQuicksort。<br>动画：<a href="https://learnforeverlearn.com/yaro_web/" target="_blank" rel="external">https://learnforeverlearn.com/yaro_web/</a><br><a href="http://www.tuicool.com/articles/BfY7Nz" target="_blank" rel="external">http://www.tuicool.com/articles/BfY7Nz</a></p>
+<h2 id="bfprt"><a href="#bfprt" class="headerlink" title="bfprt"></a>bfprt</h2><p>Median of medians<br>时间复杂度O(N)<br>其精髓是选择pivot，不是任意的选,<br>而是选择中位数中的中位数-Median of medians<br>步骤：<br>5个数分一组，分为n/5一组<br>组内插入排序，选择所有的上中位数，单独组成一个数组arrm[]<br>求所有中位数的中位数，即arrm[]的中位数，使用递归调用，求出次中位数pivot<br>然后快排使用pivot来划分区域，看k是否是中间区域<br><a href="http://blog.duyaokeep.cn/2015/11/05/5.2/" target="_blank" rel="external">http://blog.duyaokeep.cn/2015/11/05/5.2/</a></p>
+<h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">heapsort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</div><div class="line">    <span class="comment">//初次建堆</span></div><div class="line">    <span class="comment">//这里是以0开头的数组，因此最后一个非子节点是arr.length / 2 - 1，如果序号是1就是arr.length / 2</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = arr.length / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</div><div class="line">        heapy(arr, i, arr.length);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//每次堆排都把最大的放在0的位置，然后把排好的放在最后</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</div><div class="line">        swap(arr, <span class="number">0</span>, i);</div><div class="line">        heapy(arr, <span class="number">0</span>, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">heapy</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> parent, <span class="keyword">int</span> len)</span> </span>&#123;</div><div class="line">     <span class="comment">//每次都和这个值比较，即使parent变化</span></div><div class="line">     <span class="keyword">int</span> tmp = arr[parent];</div><div class="line">     <span class="keyword">int</span> child = parent * <span class="number">2</span> + <span class="number">1</span>;</div><div class="line">     <span class="keyword">while</span> (child &lt; len) &#123;</div><div class="line">         <span class="keyword">if</span> (child + <span class="number">1</span> &lt; len &amp;&amp; arr[child] &lt; arr[child + <span class="number">1</span>]) &#123;</div><div class="line">             child++;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">if</span> (tmp &gt; arr[child]) &#123;</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         &#125;</div><div class="line">         arr[parent] = arr[child];</div><div class="line">         parent = child;</div><div class="line">         child = parent * <span class="number">2</span> + <span class="number">1</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="comment">//因为上面已经将父节点下移，所以tmp相当于与给子节点赋值了</span></div><div class="line">     arr[parent] = tmp;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>初次建立堆的过程是O(n)，heapy的过程是O(logn)<br>堆排总的时间复杂度是O(nlogn)因为一共n个数字每个数字都要堆化heapyO(logn)</p>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</div><div class="line">    <span class="comment">//仍然要加条件</span></div><div class="line">    <span class="keyword">if</span> (low &lt; high) &#123;</div><div class="line">        <span class="keyword">int</span> mid = low + (high - low) / <span class="number">2</span>;</div><div class="line">        mergesort(arr, low, mid);</div><div class="line">        mergesort(arr, mid + <span class="number">1</span>, high);</div><div class="line">        mergeArray(arr, low, mid, high);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">mergeArray</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> low, <span class="keyword">int</span> mid, <span class="keyword">int</span> high)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span>[] tmp = <span class="keyword">new</span> <span class="keyword">int</span>[high - low + <span class="number">1</span>];</div><div class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> i = low, j = mid + <span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= high) &#123;</div><div class="line">        <span class="keyword">if</span> (arr[i] &lt; arr[j]) &#123;</div><div class="line">            tmp[cnt++] = arr[i];</div><div class="line">            i++;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            tmp[cnt++] = arr[j];</div><div class="line">            j++;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span> (i &lt;= mid) &#123;</div><div class="line">        tmp[cnt++] = arr[i++];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span> (j &lt;= high) &#123;</div><div class="line">        tmp[cnt++] = arr[j++];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (cnt = <span class="number">0</span>; cnt + low &lt;= high; cnt++) &#123;</div><div class="line">        arr[cnt + low] = tmp[cnt];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h1><p>又称为桶排序，将数字按照位数拆分为若干个关键字，每次对一位进行排序<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">radixSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</div><div class="line"></div><div class="line">      <span class="keyword">int</span> max = array[<span class="number">0</span>];</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;  <span class="comment">//找到数组中的最大值</span></div><div class="line">          <span class="keyword">if</span> (array[i] &gt; max) &#123;</div><div class="line">              max = array[i];</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">int</span> keysNum = <span class="number">0</span>;  <span class="comment">//关键字的个数，我们使用个位、十位、百位...当做关键字，所以关键字的个数就是最大值的位数</span></div><div class="line">      <span class="keyword">while</span> (max &gt; <span class="number">0</span>) &#123;</div><div class="line">          max /= <span class="number">10</span>;</div><div class="line">          keysNum++;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      List&lt;ArrayList&lt;Integer&gt;&gt; buckets = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;  <span class="comment">//每位可能的数字为0~9，所以设置10个桶</span></div><div class="line">          buckets.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;());  <span class="comment">//桶由ArrayList&lt;Integer&gt;构成</span></div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; keysNum; i++) &#123;  <span class="comment">//由最次关键字开始，依次按照关键字进行分配</span></div><div class="line"></div><div class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; array.length; j++) &#123;  <span class="comment">//扫描所有数组元素，将元素分配到对应的桶中</span></div><div class="line">              <span class="comment">//取出该元素对应第i+1位上的数字，比如258，现在要取出十位上的数字，258%100=58,58/10=5</span></div><div class="line">              <span class="keyword">int</span> key = array[j] % (<span class="keyword">int</span>) Math.pow(<span class="number">10</span>, i + <span class="number">1</span>) / (<span class="keyword">int</span>) Math.pow(<span class="number">10</span>, i);</div><div class="line">              buckets.get(key).add(array[j]);  <span class="comment">//将该元素放入关键字为key的桶中</span></div><div class="line">          &#125;</div><div class="line"></div><div class="line">          <span class="comment">//分配完之后，将桶中的元素依次复制回数组</span></div><div class="line">          <span class="keyword">int</span> counter = <span class="number">0</span>;  <span class="comment">//元素计数器</span></div><div class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</div><div class="line">              ArrayList&lt;Integer&gt; bucket = buckets.get(j);  <span class="comment">//关键字为j的桶</span></div><div class="line">              <span class="keyword">while</span> (bucket.size() &gt; <span class="number">0</span>) &#123;</div><div class="line">                  array[counter++] = bucket.remove(<span class="number">0</span>);  <span class="comment">//将桶中的第一个元素复制到数组，并移除</span></div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<h1 id="其它排序"><a href="#其它排序" class="headerlink" title="其它排序"></a>其它排序</h1><p>冒泡排序<a href="http://blog.csdn.net/u012152619/article/details/47305859" target="_blank" rel="external">http://blog.csdn.net/u012152619/article/details/47305859</a><br>选择排序<a href="http://blog.csdn.net/u012152619/article/details/47306053" target="_blank" rel="external">http://blog.csdn.net/u012152619/article/details/47306053</a><br>插入排序<a href="http://blog.csdn.net/u012152619/article/details/47306209" target="_blank" rel="external">http://blog.csdn.net/u012152619/article/details/47306209</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-23T06:21:14.000Z" itemprop="dateUpdated">2017年4月23日 14:21</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/04/17/排序/" target="_blank" rel="external">http://duyao.github.io/2017/04/17/排序/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/17/排序/&title=《排序》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/17/排序/&title=《排序》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/17/排序/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序》 — Du Yao's blog&url=http://duyao.github.io/2017/04/17/排序/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/17/排序/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/18/nio/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">nio</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/12/剑指offer/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">剑指offer</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="排序" data-title="排序" data-url="http://duyao.github.io/2017/04/17/排序/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/17/排序/&title=《排序》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/17/排序/&title=《排序》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/17/排序/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序》 — Du Yao's blog&url=http://duyao.github.io/2017/04/17/排序/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/17/排序/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/04/17/排序/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

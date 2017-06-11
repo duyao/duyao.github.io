@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>问答-异步队列 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="wenda">
+    <meta name="description" content="异步队列主要完成了异步的事件，比如a关注b，那么系统会给b发一份站内信，则发站内信的事件就可以作为异步的，也就是说a关注b后就返回结果，而发站内信会不会立刻完成的。这个生产者消费者模型非常相似，就是说a生产事件，b这边只有在a生产事件后才会去取，而不是一直的等着a的生产。再比如发系统通知就是异步事件，每个用户不会只等着系统通知，而是做其他事情，留下一个线程监视着系统的通知。异步事件还可以完成更高级">
+<meta name="keywords" content="wenda">
+<meta property="og:type" content="article">
+<meta property="og:title" content="问答-异步队列">
+<meta property="og:url" content="http://duyao.github.io/2017/02/27/问答-异步队列/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="异步队列主要完成了异步的事件，比如a关注b，那么系统会给b发一份站内信，则发站内信的事件就可以作为异步的，也就是说a关注b后就返回结果，而发站内信会不会立刻完成的。这个生产者消费者模型非常相似，就是说a生产事件，b这边只有在a生产事件后才会去取，而不是一直的等着a的生产。再比如发系统通知就是异步事件，每个用户不会只等着系统通知，而是做其他事情，留下一个线程监视着系统的通知。异步事件还可以完成更高级">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/producer.png">
+<meta property="og:updated_time" content="2017-04-16T09:06:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="问答-异步队列">
+<meta name="twitter:description" content="异步队列主要完成了异步的事件，比如a关注b，那么系统会给b发一份站内信，则发站内信的事件就可以作为异步的，也就是说a关注b后就返回结果，而发站内信会不会立刻完成的。这个生产者消费者模型非常相似，就是说a生产事件，b这边只有在a生产事件后才会去取，而不是一直的等着a的生产。再比如发系统通知就是异步事件，每个用户不会只等着系统通知，而是做其他事情，留下一个线程监视着系统的通知。异步事件还可以完成更高级">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/producer.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">问答-异步队列</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">问答-异步队列</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-27T06:44:22.000Z" itemprop="datePublished" class="page-time">
+  2017-02-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#消息队列"><span class="post-toc-number">1.</span> <span class="post-toc-text">消息队列</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原理"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#生产消费者模型"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">生产消费者模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#redis消息列队"><span class="post-toc-number">2.</span> <span class="post-toc-text">redis消息列队</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#优先级"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">优先级</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可靠性"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">可靠性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缺点"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">缺点</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#java中的消息队列"><span class="post-toc-number"></span> <span class="post-toc-text">java中的消息队列</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BlockingQueue"><span class="post-toc-number">1.</span> <span class="post-toc-text">BlockingQueue</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Disruptor"><span class="post-toc-number">2.</span> <span class="post-toc-text">Disruptor</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-问答-异步队列"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">问答-异步队列</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年02月27日 14:44" datetime="2017-02-27T06:44:22.000Z"  itemprop="datePublished">2017-02-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>异步队列主要完成了异步的事件，比如a关注b，那么系统会给b发一份站内信，则发站内信的事件就可以作为异步的，也就是说a关注b后就返回结果，而发站内信会不会立刻完成的。<br>这个生产者消费者模型非常相似，就是说a生产事件，b这边只有在a生产事件后才会去取，而不是一直的等着a的生产。<br>再比如发系统通知就是异步事件，每个用户不会只等着系统通知，而是做其他事情，留下一个线程监视着系统的通知。<br>异步事件还可以完成更高级的功能，比如优先级，就拿打印来说，一个用户不停地提交打印任务后，那么其他用户一直得不到打印机会，因此可以设置一个用户再次提交任务，优先级就回降低，对队列实现排序(priority queue)就可以完成带有优先级的打印了。<br>这里异步队列使用redis实现存储，同时我们也可以使用juc中blocking queue实现。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/21649950" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/21649950</a></p>
+<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>消息队列是可以实现时间的异步功能，可以是</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h4 id="生产消费者模型"><a href="#生产消费者模型" class="headerlink" title="生产消费者模型"></a>生产消费者模型</h4><p>在并发编程中使用生产者和消费者模式能够解决绝大多数并发问题。该模式通过平衡生产线程和消费线程的工作能力来提高程序的整体处理数据的速度。</p>
+<p><a href="http://www.infoq.com/cn/articles/producers-and-consumers-mode/" target="_blank" rel="external">http://www.infoq.com/cn/articles/producers-and-consumers-mode/</a></p>
+<p>订阅发布者也类似于生产消费者，也是有放有拿的问题<br>区别在于订阅发布者是中订阅者也能会使发布者，两者的关系不是很绝对。</p>
+<p>那么到底什么是观察者模式(订阅发布者)呢. 先看看生活中的观察者模式。<br>好莱坞有句名言. “不要给我打电话， 我会给你打电话”. 这句话就解释了一个观察者模式的来龙去脉。 其中“我”是发布者， “你”是订阅者。</p>
+<p>再举个例子，我来公司面试的时候，完事之后每个面试官都会对我说：“请留下你的联系方式， 有消息我们会通知你”。 在这里“我”是订阅者， 面试官是发布者。所以我不用每天或者每小时都去询问面试结果， 通讯的主动权掌握在了面试官手上。而我只需要提供一个联系方式。<br><a href="http://www.cnblogs.com/lori/p/5413369.html" target="_blank" rel="external">http://www.cnblogs.com/lori/p/5413369.html</a></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/producer.png" alt="生产者消费者" title="">
+                </div>
+                <div class="image-caption">生产者消费者</div>
+            </figure>
+<p>上图中抽象了生产者和消费者</p>
+<p>因为消息队列中存放的事件，因此需要记录事件的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class EventModel &#123;</div><div class="line">    //事件类型代码</div><div class="line">    private EventType type;</div><div class="line">    //发出事件的id</div><div class="line">    private int actorId;</div><div class="line">    //这个事件的实体，比如是评论还是问题</div><div class="line">    private int entityType;</div><div class="line">    private int entityId;</div><div class="line">    //事件实体的拥有者，比如拥有这条评论的人</div><div class="line">    private int entityOwnerId;</div><div class="line"></div><div class="line">    //事件的其他存储信息，比如可以存放优先级、时间等</div><div class="line">    private Map&lt;String, String&gt; exts = new HashMap&lt;String, String&gt;();</div><div class="line"></div><div class="line">    //set、get方法</div><div class="line">    public EventModel setType(EventType type) &#123;</div><div class="line">       this.type = type;</div><div class="line">       return this;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   public EventModel setActorId(int actorId) &#123;</div><div class="line">       this.actorId = actorId;</div><div class="line">       return this;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   public int getActorId() &#123;    return actorId;   &#125;</div><div class="line"></div><div class="line">   //...</div><div class="line"></div><div class="line"></div><div class="line">    //set、get方法全部是返回的是事件本身，这样就可以进行链式调用</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        EventModel model = new EventModel();</div><div class="line">        model.setActorId(12).setEntityId(45).setEntityType(23);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>不同的类都可能是消费者，因此要设计成一个处理接口，然后不同的消费类都实现这个接口，然后调用消费者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public interface EventHandler &#123;</div><div class="line">    //具体的业务处理</div><div class="line">    void doHandle(EventModel model);</div><div class="line"></div><div class="line">    //支持的处理对象，比如对于私信来说有可能是邮件处理也可能是站内信处理，所以设置为list</div><div class="line">    List&lt;EventType&gt; getSupportEventTypes();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>不同的事件处理类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">public class LikeHandler implements EventHandler &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void doHandle(EventModel model) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public List&lt;EventType&gt; getSupportEventTypes() &#123;</div><div class="line">        return Arrays.asList(EventType.LIKE);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Component</div><div class="line">public class FollowHandler implements EventHandler &#123;</div><div class="line">    @Override</div><div class="line">    public void doHandle(EventModel model) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public List&lt;EventType&gt; getSupportEventTypes() &#123;</div><div class="line">        return Arrays.asList(EventType.FOLLOW);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="redis消息列队"><a href="#redis消息列队" class="headerlink" title="redis消息列队"></a>redis消息列队</h2><p>对于生产者和消费者使用redis构造队列</p>
+<p>redis可以构造队列和栈等</p>
+<p><code>L</code>开头的是从队头或者说是左边进行操作，<code>R</code>表示从队尾或者右边进行操作<br>如果想构造队列，那么取和放的操作就要在不同的方向，如果想构造栈，方向就要相同</p>
+<p><code>B</code>开头是带有阻塞功能的，后面的参数可以设置超时时间，如果超时其他客户端就回来操作<br>超时参数设为 0 表示阻塞时间可以无限期延长(block indefinitely)<br><code>BLPOP key1 [key2 ] timeout</code><br>取出并获取列表中的第一个元素，或阻塞，直到有可用<br><code>BRPOP key1 [key2 ] timeout</code><br>取出并获取列表中的最后一个元素，或阻塞，直到有可用</p>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><p>使用<code>lpush</code>实现生产者放队列的功能,因为redis存放对象需要持久化，因此使用json来持久化对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@Service</div><div class="line">public class EventProducer &#123;</div><div class="line">    @Autowired</div><div class="line">    JedisAdapter jedisAdapter;</div><div class="line"></div><div class="line">    public boolean fireEvent(EventModel eventModel) &#123;</div><div class="line">        try &#123;</div><div class="line">            //持久化对象</div><div class="line">            String json = JSONObject.toJSONString(eventModel);</div><div class="line">            String key = RedisKeyUtil.getEventQueueKey();</div><div class="line">            //放入队列</div><div class="line">            jedisAdapter.lpush(key, json);</div><div class="line">            return true;</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>消费者是开启一个线程，然后使用<code>brpop</code>从队列中取事件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">@Service</div><div class="line">public class EventConsumer implements InitializingBean, ApplicationContextAware &#123;</div><div class="line">    private static final Logger logger = LoggerFactory.getLogger(EventConsumer.class);</div><div class="line">    //存放着消费者所有能处理的handler</div><div class="line">    private Map&lt;EventType, List&lt;EventHandler&gt;&gt; config = new HashMap&lt;EventType, List&lt;EventHandler&gt;&gt;();</div><div class="line">    //获得初始化的上下文</div><div class="line">    private ApplicationContext applicationContext;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    JedisAdapter jedisAdapter;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void afterPropertiesSet() throws Exception &#123;</div><div class="line">        //启动项目的时候用applicationContext获得所有实现EventHandler的类</div><div class="line">        Map&lt;String, EventHandler&gt; beans = applicationContext.getBeansOfType(EventHandler.class);</div><div class="line">        if (beans != null) &#123;</div><div class="line">            //初始化能处理的handler - config对象</div><div class="line">            for (Map.Entry&lt;String, EventHandler&gt; entry : beans.entrySet()) &#123;</div><div class="line">                List&lt;EventType&gt; eventTypes = entry.getValue().getSupportEventTypes();</div><div class="line"></div><div class="line">                for (EventType type : eventTypes) &#123;</div><div class="line">                    if (!config.containsKey(type)) &#123;</div><div class="line">                        config.put(type, new ArrayList&lt;EventHandler&gt;());</div><div class="line">                    &#125;</div><div class="line">                    config.get(type).add(entry.getValue());</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //开启一个线程不同的读取队列中的事件</div><div class="line">        Thread thread = new Thread(new Runnable() &#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                while(true) &#123;</div><div class="line">                    String key = RedisKeyUtil.getEventQueueKey();</div><div class="line"></div><div class="line">                    //从队伍里面取出被持久化的事件，timeout为0时</div><div class="line">                    List&lt;String&gt; events = jedisAdapter.brpop(0, key);</div><div class="line"></div><div class="line">                    for (String message : events) &#123;</div><div class="line">                        //跳过自己的key</div><div class="line">                        if (message.equals(key)) &#123;</div><div class="line">                            continue;</div><div class="line">                        &#125;</div><div class="line"></div><div class="line">                        //还原事件</div><div class="line">                        EventModel eventModel = JSON.parseObject(message, EventModel.class);</div><div class="line">                        if (!config.containsKey(eventModel.getType())) &#123;</div><div class="line">                            logger.error(&quot;不能识别的事件&quot;);</div><div class="line">                            continue;</div><div class="line">                        &#125;</div><div class="line"></div><div class="line">                        //执行事件</div><div class="line">                        for (EventHandler handler : config.get(eventModel.getType())) &#123;</div><div class="line">                            handler.doHandle(eventModel);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        thread.start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;</div><div class="line">        this.applicationContext = applicationContext;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>上面的队列只是一个普通的队列，还可以设置带有优先级的队列<br>有两种方案<br>设置两个队列，一个等级高，一个等级低,一个高优先级一个低优先级的队列。<br>高优先级任务放到高队列中，低的放在低优先队列中。redis可以要求队列消费者从哪个队列里面先读。<br>顺序就是命令的顺序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BRPOP queue.task.1 queue.task.2 0</div></pre></td></tr></table></figure></p>
+<p>假设有个这样的需求，优先级不是简单的高中低或者0-10这些固定的级别。而是类似0-99999这么多级别上面的方案就不合适了。<br>虽然redis有sorted set这样的可以排序的数据类型，看是很可惜它没有阻塞版的接口。于是我们还是只能使用list类型通过其他方式来完成目的。</p>
+<p>有个简单的做法我们可以只设置一个队列，并保证它是按照优先级排序号的。然后通过二分查找法查找一个任务合适的位置，并通过 lset 命令插入到相应的位置。<br>例如队列里面包含着写优先级的任务[1, 3, 6, 8, 9, 14]，当有个优先级为7的任务过来，我们通过自己的二分算法一个个从队列里面取数据出来反和目标数据比对，计算出相应的位置然后插入到指定地点即可。<br>因为二分查找是比较快的，并且redis本身也都在内存中，理论上速度是可以保证的。但是如果说数据量确实很大的话我们也可以通过一些方式来调优。<br>例如数据量十万的队列，它们的优先级也是随机0-十万的区间。我们可以设置10个或者100个不同的队列，0-一万的优先级任务投放到1号队列，一万-二万的任务投放到2号队列。这样将一个队列按不同等级拆分后它单个队列的数据就减少许多，这样二分查找匹配的效率也会高一点。但是数据所占的资源基本是不变的，十万数据该占多少内存还是多少。只是系统里面多了一些队列而已。</p>
+<h3 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h3><p>一般来讲，设计消息队列的整体思路是先build一个整体的数据流,例如producer发送给broker,broker发送给consumer,consumer回复消费确认，broker删除/备份消息等。<br>利用RPC将数据流串起来。然后考虑RPC的高可用性，尽量做到无状态，方便水平扩展。<br>之后考虑如何承载消息堆积，然后在合适的时机投递消息，而处理堆积的最佳方式，就是存储，存储的选型需要综合考虑性能/可靠性和开发维护成本等诸多因素。<br>为了实现广播功能，我们必须要维护消费关系，可以利用zk/config server等保存消费关系。<br>在完成了上述几个功能后，消息队列基本就实现了。然后我们可以考虑一些高级特性，如可靠投递，事务特性，性能优化等。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>1)redis崩溃的时候队列功能失效<br>2)如果入队端一直在塞数据，而出队端没有消费数据，或者是入队的频率大而多，出队端的消费频率慢会导致内存暴涨<br>4)假如有多个消费者同时监听一个队列，其中一个出队了一个元素，另一个则获取不到该元素<br>5)Redis的队列应用场景是一对多或者一对一的关系，即有多个入队端，但是只有一个消费端(出队)</p>
+<h1 id="java中的消息队列"><a href="#java中的消息队列" class="headerlink" title="java中的消息队列"></a>java中的消息队列</h1><h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><p>在java中可以使用BlockingQueue来实现消息队列，但是效率不是非常高，因为其内部不是无锁方式。</p>
+<h2 id="Disruptor"><a href="#Disruptor" class="headerlink" title="Disruptor"></a>Disruptor</h2><p>Disruptor可以实现高性能生产者和消费者模式<br>Diruptor 页面：<a href="https://github.com/LMAX-Exchange/disruptor" target="_blank" rel="external">https://github.com/LMAX-Exchange/disruptor</a><br>待完成<br><a href="https://zhuanlan.zhihu.com/p/21355046" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/21355046</a><br><a href="https://www.bittiger.io/classpage/QHkP5QobvhNWGZv9f" target="_blank" rel="external">https://www.bittiger.io/classpage/QHkP5QobvhNWGZv9f</a><br><a href="http://coolshell.cn/articles/9169.html" target="_blank" rel="external">http://coolshell.cn/articles/9169.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-16T09:06:56.000Z" itemprop="dateUpdated">2017年4月16日 17:06</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/02/27/问答-异步队列/" target="_blank" rel="external">http://duyao.github.io/2017/02/27/问答-异步队列/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wenda/">wenda</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/27/问答-异步队列/&title=《问答-异步队列》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/27/问答-异步队列/&title=《问答-异步队列》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/27/问答-异步队列/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《问答-异步队列》 — Du Yao's blog&url=http://duyao.github.io/2017/02/27/问答-异步队列/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/27/问答-异步队列/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/02/27/问答-redis互动踩赞/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">问答-redis互动踩赞</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/27/问答-敏感词过滤/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">问答-敏感词过滤</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="问答-异步队列" data-title="问答-异步队列" data-url="http://duyao.github.io/2017/02/27/问答-异步队列/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/27/问答-异步队列/&title=《问答-异步队列》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/27/问答-异步队列/&title=《问答-异步队列》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/27/问答-异步队列/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《问答-异步队列》 — Du Yao's blog&url=http://duyao.github.io/2017/02/27/问答-异步队列/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/27/问答-异步队列/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/02/27/问答-异步队列/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

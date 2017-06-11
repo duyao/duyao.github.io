@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>5.1 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="KMP algorithm - A string matching algorithm 题目给定两个字符串str和match，长度分别为N和M。实现一个算法，如果字符串str中含有字串match，则返回match在str中的开始位置，不含有则返回-1。 str=“acbc”，match=“bc”。返回2。str=“acbc”，match=“bcc”。返回-1。 如果match的长度大于str长度(">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.1">
+<meta property="og:url" content="http://duyao.github.io/2015/11/05/5.1/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="KMP algorithm - A string matching algorithm 题目给定两个字符串str和match，长度分别为N和M。实现一个算法，如果字符串str中含有字串match，则返回match在str中的开始位置，不含有则返回-1。 str=“acbc”，match=“bc”。返回2。str=“acbc”，match=“bcc”。返回-1。 如果match的长度大于str长度(">
+<meta property="og:updated_time" content="2015-11-06T04:55:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5.1">
+<meta name="twitter:description" content="KMP algorithm - A string matching algorithm 题目给定两个字符串str和match，长度分别为N和M。实现一个算法，如果字符串str中含有字串match，则返回match在str中的开始位置，不含有则返回-1。 str=“acbc”，match=“bc”。返回2。str=“acbc”，match=“bcc”。返回-1。 如果match的长度大于str长度(">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">5.1</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">5.1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-05T05:55:51.000Z" itemprop="datePublished" class="page-time">
+  2015-11-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#KMP-algorithm-A-string-matching-algorithm"><span class="post-toc-number">1.</span> <span class="post-toc-text">KMP algorithm - A string matching algorithm</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">代码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-5.1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">5.1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月05日 13:55" datetime="2015-11-05T05:55:51.000Z"  itemprop="datePublished">2015-11-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="KMP-algorithm-A-string-matching-algorithm"><a href="#KMP-algorithm-A-string-matching-algorithm" class="headerlink" title="KMP algorithm - A string matching algorithm"></a>KMP algorithm - A string matching algorithm</h1><hr>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定两个字符串str和match，长度分别为N和M。实现一个算法，如果字符串str中含有字串match，则返回match在str中的开始位置，不含有则返回-1。</p>
+<p>str=“acbc”，match=“bc”。返回2。<br>str=“acbc”，match=“bcc”。返回-1。</p>
+<p>如果match的长度大于str长度(M&gt;N)，str必然不会含有match，可直接返回-1。但如果N&gt;=M，要求算法复杂度O(N)。<br><a id="more"></a></p>
+<hr>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>kmp算法的核心是next数组,长度是要查找的字符串长度，表示的是：</p>
+<blockquote>
+<p>next[i]: The length of the <strong>longest</strong> proper prefix in the (sub)pattern that matches a proper suffix in the same (sub)pattern.</p>
+</blockquote>
+<p>next[i]是当前位置i以前的字符串</p>
+<blockquote>
+<p><strong>proper prefixes</strong> : All the characters in a string, with one or more cut off the end. “S”, “Sn”, “Sna”, and “Snap” are all the proper prefixes of “Snape”.<br><strong>proper suffixes</strong> : All the characters in a string, with one or more cut off the beginning. “agrid”, “grid”, “rid”, “id”, and “d” are all proper suffixes of “Hagrid”.</p>
+</blockquote>
+<p>proper prefixes和proper suffixes都不包含自己本身</p>
+<ul>
+<li>如何计算next,O(m)<br>cn跳的位置 pos要计算的每个位置<ul>
+<li>next[0] = -1</li>
+<li>next[1] = 0</li>
+<li>str[pos-1] == str[cn]-&gt; next[pos] = cn;</li>
+<li>str[pos-1] != str[cn] &amp;&amp; cn!=0 -&gt; cn = next[cn]</li>
+<li>str[pos-1] != str[cn] &amp;&amp; cn == 0 -&gt; next[pos] = 0</li>
+</ul>
+</li>
+</ul>
+<p>如何利用 next</p>
+<blockquote>
+<p>If a partial match of length partial_match_length is found and <strong>next[partial_match_length] &gt; 1</strong>,<br>we may skip ahead <strong>partial_match_length - next[partial_match_length - 1]</strong> characters.</p>
+</blockquote>
+<p>More:<br><a href="http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/" title="http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/" target="_blank" rel="external">KMP algoritm</a><br><a href="http://whocouldthat.be/visualizing-string-matching/" title="http://whocouldthat.be/visualizing-string-matching/" target="_blank" rel="external">KMP animation</a></p>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">KMP</span><span class="params">(String string, String match)</span></span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">char</span>[] cstring = string.toCharArray();</div><div class="line">	<span class="keyword">char</span>[] cmatch = match.toCharArray();</div><div class="line">	<span class="comment">//生成next</span></div><div class="line">	<span class="keyword">int</span> [] next = initNext(cmatch);</div><div class="line">	</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(i&lt;string.length() &amp;&amp; j&lt;match.length())&#123;</div><div class="line">		<span class="keyword">if</span>(cstring[i] == cmatch[j])&#123;</div><div class="line">			i++;</div><div class="line">			j++;</div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(next[j] == -<span class="number">1</span>)&#123;</div><div class="line">			i++;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="comment">//下次从next[j]位置比较，就是跳过了j-next[j]个位置，此时i不变的</span></div><div class="line">			j = next[j];</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">if</span>(j == cmatch.length)&#123;</div><div class="line">		<span class="comment">//j遍历完整的match串,说明完全匹配</span></div><div class="line">		<span class="keyword">return</span> i-j;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="comment">//没有遍历完整，无匹配</span></div><div class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] initNext(<span class="keyword">char</span>[] cmatch)&#123;</div><div class="line">	<span class="keyword">if</span>(cmatch.length == <span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;-<span class="number">1</span>&#125;;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//next与match等长</span></div><div class="line">	<span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[cmatch.length];</div><div class="line">	next[<span class="number">0</span>] = -<span class="number">1</span>;</div><div class="line">	next[<span class="number">1</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> pos = <span class="number">2</span>, cn = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(pos &lt; next.length)&#123;</div><div class="line">		<span class="comment">//next记录的是当前位置以前的状况，即不包括当前位置</span></div><div class="line">		<span class="keyword">if</span>(cmatch[pos-<span class="number">1</span>] == cmatch[cn])&#123;</div><div class="line">			next[pos++] = ++cn;</div><div class="line">		&#125;<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span>(cn != <span class="number">0</span>)&#123;</div><div class="line">				<span class="comment">//pos没有自增，因为还要继续，直到cn=0为止</span></div><div class="line">				cn = next[cn];</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				next[pos++] = <span class="number">0</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> next;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-06T04:55:14.000Z" itemprop="dateUpdated">2015年11月6日 12:55</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/05/5.1/" target="_blank" rel="external">http://duyao.github.io/2015/11/05/5.1/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/05/5.1/&title=《5.1》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/05/5.1/&title=《5.1》 — Du Yao's blog&source=KMP algorithm - A string matching algorithm
+题目给定两个字符串str和match，长度分别为N和M。实现一个算..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/05/5.1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《5.1》 — Du Yao's blog&url=http://duyao.github.io/2015/11/05/5.1/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/05/5.1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/05/5.2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">5.2</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/04/4.1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">4.1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="5.1" data-title="5.1" data-url="http://duyao.github.io/2015/11/05/5.1/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/05/5.1/&title=《5.1》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/05/5.1/&title=《5.1》 — Du Yao's blog&source=KMP algorithm - A string matching algorithm
+题目给定两个字符串str和match，长度分别为N和M。实现一个算..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/05/5.1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《5.1》 — Du Yao's blog&url=http://duyao.github.io/2015/11/05/5.1/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/05/5.1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/05/5.1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

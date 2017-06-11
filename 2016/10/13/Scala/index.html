@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Scala | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="重要概念 纯函数(pure function)无副作用的函数 函数的纯粹性(purity) 无副作用(side effect)无状态mutation的变化12345678int x;public int f1(int y)&amp;#123;	return x+y;&amp;#125;public int f2(int y)&amp;#123;	x = x+y;	return x+y;&amp;#125;   这里f1是无副作用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala">
+<meta property="og:url" content="http://duyao.github.io/2016/10/13/Scala/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="重要概念 纯函数(pure function)无副作用的函数 函数的纯粹性(purity) 无副作用(side effect)无状态mutation的变化12345678int x;public int f1(int y)&amp;#123;	return x+y;&amp;#125;public int f2(int y)&amp;#123;	x = x+y;	return x+y;&amp;#125;   这里f1是无副作用">
+<meta property="og:updated_time" content="2016-10-13T14:06:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala">
+<meta name="twitter:description" content="重要概念 纯函数(pure function)无副作用的函数 函数的纯粹性(purity) 无副作用(side effect)无状态mutation的变化12345678int x;public int f1(int y)&amp;#123;	return x+y;&amp;#125;public int f2(int y)&amp;#123;	x = x+y;	return x+y;&amp;#125;   这里f1是无副作用">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Scala</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Scala</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-10-13T01:57:50.000Z" itemprop="datePublished" class="page-time">
+  2016-10-13
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重要概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">重要概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">2.</span> <span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语法"><span class="post-toc-number">3.</span> <span class="post-toc-text">语法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#求值策略"><span class="post-toc-number">4.</span> <span class="post-toc-text">求值策略</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高阶函数"><span class="post-toc-number">5.</span> <span class="post-toc-text">高阶函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#匿名函数"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">匿名函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#柯里化-curried-functoin"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">柯里化 curried functoin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#递归函数recuritive-function"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">递归函数recuritive function</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#例子"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">例子</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Scala"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Scala</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年10月13日 9:57" datetime="2016-10-13T01:57:50.000Z"  itemprop="datePublished">2016-10-13</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="重要概念"><a href="#重要概念" class="headerlink" title="重要概念"></a>重要概念</h2><ul>
+<li>纯函数(pure function)<br>无副作用的函数</li>
+<li>函数的纯粹性(purity)</li>
+<li>无副作用(side effect)<br>无状态mutation的变化<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">int x;</div><div class="line">public int f1(int y)&#123;</div><div class="line">	return x+y;</div><div class="line">&#125;</div><div class="line">public int f2(int y)&#123;</div><div class="line">	x = x+y;</div><div class="line">	return x+y;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里f1是无副作用，因为没有改变x的值，而f2具有副作用，改变了x的值</p>
+<ul>
+<li>引用透明性(referential transparency)<br>相同的输入，总是得到相同的输出<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">StringBuffer x = &quot;hello&quot;;</div><div class="line">StringBuffer y = x.append(&quot;world&quot;);</div><div class="line">StringBuffer z = x.append(&quot;world&quot;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里<code>append</code>函数不具有引用透明性，因为y和z的输出并不相同</p>
+<ul>
+<li>不变形(immutability)<br>为了获得引用透明性，任何值都不会引起不变化</li>
+<li>函数是一等公民first-class function</li>
+<li>高阶函数high order function</li>
+<li>闭包closure</li>
+<li>表达式求值策略-严格求值和非严格求值<br>一切都是表达式<br>call by value VS call by name</li>
+<li>惰性求值lazy evaluation</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li>val 常量</li>
+<li>var 变量</li>
+<li>lazy val 懒加载常量</li>
+<li><p>字符串插值<br>使用<code>s+${}</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">val s : String = &quot;hello&quot;;</div><div class="line">s&quot;$&#123;s&#125; world&quot;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">def functionName (param : ParamType)[: ReturnType]   = &#123;</div><div class="line">	//function body</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">例子</div><div class="line">def hello1(name:  String) = &#123;</div><div class="line">	s&quot;hell0 $&#123;name&#125;&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>if表达式<br><code>if(logical_exp) valA else valB</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">val a = 1;       a: Int = 1</div><div class="line">if (a == 1) a     res4: AnyVal = 1  </div><div class="line">if (a != 1) &quot;not one&quot;     res5: Any = ()  </div><div class="line">if (a != 1) &quot;not one&quot; else 1       res6: Any = 1</div></pre></td></tr></table></figure>
+</li>
+<li><p>for comprehension</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">val l = List(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</div><div class="line"></div><div class="line">for &#123;</div><div class="line">	s &lt;- l  //generator</div><div class="line">	if (s.length &lt; 3) //filter</div><div class="line">&#125; println(s)</div><div class="line"></div><div class="line">val result_for = for &#123;</div><div class="line">	s &lt;- l</div><div class="line">	sup = s.toUpperCase();  //variable binding</div><div class="line">	if (sup != &quot;&quot;)</div><div class="line">&#125; yield (sup) //generate new collection</div></pre></td></tr></table></figure>
+</li>
+<li><p>try, catch, finally</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">	Integer.parseInt(&quot;dog&quot;)</div><div class="line">&#125; catch &#123;</div><div class="line">	case _ =&gt; 0; //_是通配符，=&gt;赋值</div><div class="line">&#125; finally &#123;</div><div class="line">	println(&quot;always be printed&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>match</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">exp match&#123;</div><div class="line">	case p1 =&gt; val1</div><div class="line">	case p2 =&gt; val2</div><div class="line">	...</div><div class="line">	case _ =&gt; valn</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">val code = 4</div><div class="line">code match &#123;</div><div class="line">	case 1 =&gt; &quot;one&quot;</div><div class="line">	case 2 =&gt; &quot;two&quot;</div><div class="line">	case _ =&gt; &quot;others&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="求值策略"><a href="#求值策略" class="headerlink" title="求值策略"></a>求值策略</h2><p><code>call by value</code> 一般都是=使用，调用就计算<br><code>call by name</code>  调用不计算，只有等到执行才会计算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">def bar(x : Int, y : =&gt; Int) = 1</div><div class="line">def loop():Int = loop</div><div class="line">bar(1,loop)   //res2: Int = 1</div><div class="line">bar(loop,1)   //死循环</div></pre></td></tr></table></figure>
+<h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><p>用函数作为形参或返回值的函数成为高阶函数</p>
+<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><p>匿名函数anonymous function就是函数常量，也成为函数文字量function literal<br>在scala中匿名函数的定义格式为<code>(形参列表) =&gt; {函数体}</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">def operate(f:(Int,Int) =&gt; Int) =&#123;</div><div class="line">	f(4,4)</div><div class="line">&#125;    //&gt; operate: (f: (Int, Int) =&gt; Int)Int</div><div class="line">def tr(x:Int,y:Int)=x+y  //tr: (x: Int, y: Int)Int</div><div class="line">operate(tr)   //res0: Int = 8</div><div class="line"></div><div class="line">def greeting() =(name:String) =&gt; &#123;&quot;hello&quot;+&quot; &quot;+name&#125;</div><div class="line">greeting() (&quot;123&quot;)</div></pre></td></tr></table></figure></p>
+<h3 id="柯里化-curried-functoin"><a href="#柯里化-curried-functoin" class="headerlink" title="柯里化 curried functoin"></a>柯里化 curried functoin</h3><p>把具有多个参数的函数转化为一条函数链，每个节点上是单一参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">def curriedAdd(a:Int)(b:Int)=a+b  //curriedAdd: (a: Int)(b: Int)Int</div><div class="line">curriedAdd(2)(2)  //res1: Int = 4</div><div class="line">val addOne = curriedAdd(1)_  //addOne: Int =&gt; Int = &lt;function1&gt;</div><div class="line">addOne(2)  //res2: Int = 3</div></pre></td></tr></table></figure></p>
+<p>上面的例子可以看出来，柯里化可以复用函数</p>
+<h3 id="递归函数recuritive-function"><a href="#递归函数recuritive-function" class="headerlink" title="递归函数recuritive function"></a>递归函数recuritive function</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">def f(n: Int): Int =</div><div class="line">	if (n &lt; 0) 1</div><div class="line">	else n * f(n - 1)</div><div class="line"></div><div class="line">f(5)</div><div class="line"></div><div class="line">@annotation.tailrec</div><div class="line">def f(n: Int, m: Int): Int =</div><div class="line">	if (n &lt;= 0) m</div><div class="line">	else f(n - 1, m*n)</div><div class="line"></div><div class="line">f(5,1)</div></pre></td></tr></table></figure>
+<p>上面的m是计算的最新结果</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>$$\sum_{i=a}^b f(x)=0$$<br>求a到b的区间和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">def sum(f: Int =&gt; Int)(a: Int)(b: Int): Int = &#123;</div><div class="line">  def loop(n: Int, acc: Int): Int = &#123;</div><div class="line">    if (n &gt; b) &#123;</div><div class="line">      println(s&quot;n=$&#123;n&#125;, acc=$&#123;acc&#125;&quot;)</div><div class="line">      acc</div><div class="line">    &#125; else &#123;</div><div class="line">      println(s&quot;n=$&#123;n&#125;, acc=$&#123;acc&#125;&quot;)</div><div class="line">      loop(n + 1, acc + f(n))</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  loop(a,0)</div><div class="line">&#125;</div><div class="line">sum(x=&gt;x)(1)(5)</div><div class="line">sum(x=&gt;x*x)(1)(5)</div></pre></td></tr></table></figure>
+<p>打印结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">n=1, acc=0</div><div class="line">n=2, acc=1</div><div class="line">n=3, acc=3</div><div class="line">n=4, acc=6</div><div class="line">n=5, acc=10</div><div class="line">n=6, acc=15</div><div class="line">res0: Int = 15</div><div class="line">n=1, acc=0</div><div class="line">n=2, acc=1</div><div class="line">n=3, acc=5</div><div class="line">n=4, acc=14</div><div class="line">n=5, acc=30</div><div class="line">n=6, acc=55</div><div class="line">res1: Int = 55</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-10-13T14:06:02.000Z" itemprop="dateUpdated">2016年10月13日 22:06</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2016/10/13/Scala/" target="_blank" rel="external">http://duyao.github.io/2016/10/13/Scala/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/10/13/Scala/&title=《Scala》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/10/13/Scala/&title=《Scala》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/10/13/Scala/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Scala》 — Du Yao's blog&url=http://duyao.github.io/2016/10/13/Scala/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/10/13/Scala/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/12/19/gitpage-配置/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">gitpage 配置</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/07/16/148-Sort-List/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">148. Sort List</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Scala" data-title="Scala" data-url="http://duyao.github.io/2016/10/13/Scala/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/10/13/Scala/&title=《Scala》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/10/13/Scala/&title=《Scala》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/10/13/Scala/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Scala》 — Du Yao's blog&url=http://duyao.github.io/2016/10/13/Scala/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/10/13/Scala/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2016/10/13/Scala/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>设计模式-单例模式和工厂模式 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计模式">
+    <meta name="description" content="单例模式构造方法私有，不允许外部直接创建对象 饿汉模式创建私有静态类的实例：因为构造私有，静态的话使用类就能得到，这个就能从通过方法获得实例12345678910public class Singleton &amp;#123;      //私有且静态    private static Singleton instance = new Singleton();      //构造方法私有    pri">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式-单例模式和工厂模式">
+<meta property="og:url" content="http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="单例模式构造方法私有，不允许外部直接创建对象 饿汉模式创建私有静态类的实例：因为构造私有，静态的话使用类就能得到，这个就能从通过方法获得实例12345678910public class Singleton &amp;#123;      //私有且静态    private static Singleton instance = new Singleton();      //构造方法私有    pri">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:updated_time" content="2017-05-08T08:53:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式-单例模式和工厂模式">
+<meta name="twitter:description" content="单例模式构造方法私有，不允许外部直接创建对象 饿汉模式创建私有静态类的实例：因为构造私有，静态的话使用类就能得到，这个就能从通过方法获得实例12345678910public class Singleton &amp;#123;      //私有且静态    private static Singleton instance = new Singleton();      //构造方法私有    pri">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">设计模式-单例模式和工厂模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">设计模式-单例模式和工厂模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-05T08:37:16.000Z" itemprop="datePublished" class="page-time">
+  2017-04-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#单例模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">单例模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#饿汉模式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">饿汉模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#懒汉模式"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">懒汉模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内部类"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">内部类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#枚举"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">枚举</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#破坏单例"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">破坏单例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#反射"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">反射</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#序列化"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">序列化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类加载"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">类加载</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#工厂模式"><span class="post-toc-number">2.</span> <span class="post-toc-text">工厂模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概念"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#意图"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">意图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用场景"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">使用场景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常见应用"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">常见应用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对比"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">对比</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-设计模式-单例模式和工厂模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">设计模式-单例模式和工厂模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年04月05日 16:37" datetime="2017-04-05T08:37:16.000Z"  itemprop="datePublished">2017-04-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>构造方法私有，不允许外部直接创建对象</p>
+<h2 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h2><p>创建私有静态类的实例：因为构造私有，静态的话使用类就能得到，这个就能从通过方法获得实例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">    <span class="comment">//私有且静态</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </div><div class="line">    <span class="comment">//构造方法私有</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </div><div class="line">    <span class="comment">//获取实例的方法，静态</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">      <span class="keyword">return</span> instance;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因为实例被设置为静态，类在加载时就被创建，不管用户是不是要调用</p>
+<h2 id="懒汉模式"><a href="#懒汉模式" class="headerlink" title="懒汉模式"></a>懒汉模式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">    <span class="comment">//声明</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </div><div class="line">    <span class="comment">//获得实例</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">      <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </div><div class="line">          instance = <span class="keyword">new</span> Singleton();  </div><div class="line">      &#125;  </div><div class="line">      <span class="keyword">return</span> instance;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种方式具备很好的 lazy loading，能够在多线程中很好的工作，但是，效率很低，99% 情况下不需要同步。<br>优点：第一次调用才初始化，避免内存浪费。<br>缺点：必须加锁 synchronized 才能保证单例，但加锁会影响效率。<br>getInstance() 的性能对应用程序不是很关键（该方法使用不太频繁）。</p>
+<p>为了提高性能，需要使用双重锁检查DCL，即 double-checked locking<br>使用volatile关键字是防止DCL失效<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;  </div><div class="line">      <span class="comment">//对于大部分情况，单例已经设好</span></div><div class="line">    <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </div><div class="line">        <span class="keyword">synchronized</span> (Singleton.class) &#123;  </div><div class="line">          <span class="comment">//线程安全</span></div><div class="line">          <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </div><div class="line">              singleton = <span class="keyword">new</span> Singleton();  </div><div class="line">          &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> singleton;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;  </div><div class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">      <span class="keyword">return</span> SingletonHolder.INSTANCE;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种方式能达到双检锁方式一样的功效，但实现更简单。<br>对静态域使用延迟初始化，应使用这种方式而不是双检锁方式。这种方式只适用于静态域的情况，双检锁方式可在实例域需要延迟初始化时使用。</p>
+<p>这种方式同样利用了 classloder 机制来保证初始化 instance 时只有一个线程，它跟饿汉不同的是：<br>饿汉方式只要 Singleton 类被装载了，那么 instance 就会被实例化（没有达到 lazy loading 效果），<br>而这种方式是 Singleton 类被装载了，instance 不一定被初始化。<br>因为 SingletonHolder 类没有被主动使用，<strong>只有显示通过调用 getInstance 方法时，才会显示装载 SingletonHolder 类</strong>，从而实例化 instance。</p>
+<p>想象一下，如果实例化 instance 很消耗资源，所以想让它延迟加载，另外一方面，又不希望在 Singleton 类加载时就实例化，因为不能确保 Singleton 类还可能在其他的地方被主动使用从而被加载，那么这个时候实例化 instance 显然是不合适的。这个时候，这种方式相比饿汉方式就显得很合理。</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Singleton &#123;  </div><div class="line">    INSTANCE;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whateverMethod</span><span class="params">()</span> </span>&#123;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Singleton a = Mo.INSTANCE;</div><div class="line">        Singleton b = Mo.INSTANCE;</div><div class="line">        System.out.println(a==b);<span class="comment">//true</span></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种实现方式还没有被广泛采用，但这是实现单例模式的最佳方法。它更简洁，自动支持序列化机制，绝对防止多次实例化。<br>这种方式是 Effective Java 作者 Josh Bloch 提倡的方式，它不仅能避免多线程同步问题，而且还自动支持序列化机制，防止反序列化重新创建新的对象，绝对防止多次实例化。不过，由于 JDK1.5 之后才加入 enum 特性，用这种方式写不免让人感觉生疏，在实际工作中，也很少用。<br>不能通过 reflection attack 来调用私有构造方法。</p>
+<p><a href="http://www.runoob.com/design-pattern/singleton-pattern.html" target="_blank" rel="external">http://www.runoob.com/design-pattern/singleton-pattern.html</a></p>
+<h2 id="破坏单例"><a href="#破坏单例" class="headerlink" title="破坏单例"></a>破坏单例</h2><h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//启动JVM的安全检察,在进行反射校验的时候，判断一下是否是“singleton”，如果是，就禁止反射</span></div><div class="line">System.setSecurityManager(<span class="keyword">new</span> SecurityManager()&#123;</div><div class="line">   <span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkPermission</span><span class="params">(Permission perm)</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (perm <span class="keyword">instanceof</span> ReflectPermission &amp;&amp; <span class="string">"suppressAccessChecks"</span>.equals(perm.getName())) &#123;</div><div class="line">            <span class="keyword">for</span> (StackTraceElement elem : Thread.currentThread().getStackTrace()) &#123;</div><div class="line">                 <span class="keyword">if</span> (elem.getClassName().endsWith(<span class="string">"Singleton"</span>)) &#123;</div><div class="line">                     <span class="keyword">throw</span> <span class="keyword">new</span> SecurityException();</div><div class="line">                 &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">   &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><a href="http://iamzhongyong.iteye.com/blog/2053010" target="_blank" rel="external">http://iamzhongyong.iteye.com/blog/2053010</a></p>
+<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>序列化单例后再反序列化回来会破坏单例，可以重写<code>readResolve</code>方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> INSTANCE;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">readResolve</span><span class="params">()</span> <span class="keyword">throws</span> ObjectStreamException </span>&#123;</div><div class="line">        <span class="keyword">return</span> INSTANCE; <span class="comment">//ensure singleton is returned upon deserialization.</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h3><p>两个不同的类加载器，加载单例会产生两个不一样的单例<br><a href="http://javarevisited.blogspot.com/2011/03/10-interview-questions-on-singleton.html" target="_blank" rel="external">http://javarevisited.blogspot.com/2011/03/10-interview-questions-on-singleton.html</a><br><a href="http://stackoverflow.com/questions/11654876/cracking-singleton-with-other-ways" target="_blank" rel="external">http://stackoverflow.com/questions/11654876/cracking-singleton-with-other-ways</a></p>
+<h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>使用工厂方法代替<code>new</code>操作</li>
+<li>工厂模式包括<code>工厂方法模式</code>和<code>抽象工厂模式</code></li>
+<li><code>抽象工厂模式</code>是<code>工厂方法模式</code>的扩展</li>
+</ul>
+<h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><ul>
+<li>定义一个接口老创建对象，但是让子类来决定哪些类需要被实例化</li>
+<li>工厂发放把实例化的工作推迟到子类中去实现</li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>有一组类似的对象需要创建</li>
+<li>在编码时不能预见需要创建哪种类的实例(超市里买苹果，不知道买蛇果，阿克苏还是冰糖心)</li>
+<li>系统需要考虑扩展性</li>
+</ul>
+<h2 id="常见应用"><a href="#常见应用" class="headerlink" title="常见应用"></a>常见应用</h2><ul>
+<li><p>jdbc<br>执行sql的java api，可以为多种数据库提供统一访问</p>
+</li>
+<li><p>spring Bean Factory<br>Bean Factory 是spring中IoC的基本容器，是一个产生bean给客户端的工厂</p>
+</li>
+</ul>
+<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png" alt="工厂模式工厂模式" title="">
+                </div>
+                <div class="image-caption">工厂模式工厂模式</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png" alt="抽象工厂模式" title="">
+                </div>
+                <div class="image-caption">抽象工厂模式</div>
+            </figure>
+<ul>
+<li>工厂模式是一种极段的抽象工厂模式，而抽象工厂模式是工厂模式的推广</li>
+<li>工厂模式用来创建一个产品的等级结构，而抽象工厂模式用来创建多个产品的等级结构</li>
+<li>工厂模式只有一个抽象产品类，而抽象工厂模式有多个抽象产品类</li>
+</ul>
+<p>抽象工程关键在于产品之间的抽象关系，所以至少要两个产品；工厂方法在于生成产品，不关注产品间的关系，所以可以只生成一个产品。<br>抽象工厂中客户端把产品的抽象关系理清楚，在最终使用的时候，一般使用客户端（和其接口），产品之间的关系是被封装固定的；而工厂方法是在最终使用的时候，使用产品本身（和其接口）。<br>抽象工厂的工厂是类；工厂方法的工厂是方法。</p>
+<p>工厂方法模式： 一个抽象产品类，可以派生出多个具体产品类。 一个抽象工厂类，可以派生出多个具体工厂类。 每个具体工厂类只能创建一个具体产品类的实例。<br>抽象工厂模式： 多个抽象产品类，每个抽象产品类可以派生出多个具体产品类。 一个抽象工厂类，可以派生出多个具体工厂类。 每个具体工厂类可以创建多个具体产品类的实例。<br>区别： 工厂方法模式只有一个抽象产品类，而抽象工厂模式有多个。 工厂方法模式的具体工厂类只能创建一个具体产品类的实例，而抽象工厂模式可以创建多个</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-08T08:53:26.000Z" itemprop="dateUpdated">2017年5月8日 16:53</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/04/05/设计模式-单例模式和工厂模式/" target="_blank" rel="external">http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/&title=《设计模式-单例模式和工厂模式》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/&title=《设计模式-单例模式和工厂模式》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式-单例模式和工厂模式》 — Du Yao's blog&url=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/10/操作系统/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">操作系统</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/01/内部类/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">内部类</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="设计模式-单例模式和工厂模式" data-title="设计模式-单例模式和工厂模式" data-url="http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/&title=《设计模式-单例模式和工厂模式》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/&title=《设计模式-单例模式和工厂模式》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式-单例模式和工厂模式》 — Du Yao's blog&url=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

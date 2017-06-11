@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>13.5 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="设计可以变更的缓存结构设计一种缓存结构，该结构在构造时确定大小，假设大小为 K  功能：  set(key,value)：将记录(key,value)插入该结构。 get(key)：返回key对应的value值。   要求:  set和get方法的时间复杂度为O(1)。 某个key的set或get操作一旦发生，认为这个 key 的记录成了最经常使用的。  当缓存的大小超过K时，移除最不经常使用的记">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13.5">
+<meta property="og:url" content="http://duyao.github.io/2015/11/29/13.5/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="设计可以变更的缓存结构设计一种缓存结构，该结构在构造时确定大小，假设大小为 K  功能：  set(key,value)：将记录(key,value)插入该结构。 get(key)：返回key对应的value值。   要求:  set和get方法的时间复杂度为O(1)。 某个key的set或get操作一旦发生，认为这个 key 的记录成了最经常使用的。  当缓存的大小超过K时，移除最不经常使用的记">
+<meta property="og:updated_time" content="2015-11-29T12:32:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="13.5">
+<meta name="twitter:description" content="设计可以变更的缓存结构设计一种缓存结构，该结构在构造时确定大小，假设大小为 K  功能：  set(key,value)：将记录(key,value)插入该结构。 get(key)：返回key对应的value值。   要求:  set和get方法的时间复杂度为O(1)。 某个key的set或get操作一旦发生，认为这个 key 的记录成了最经常使用的。  当缓存的大小超过K时，移除最不经常使用的记">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">13.5</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">13.5</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-29T00:14:45.000Z" itemprop="datePublished" class="page-time">
+  2015-11-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设计可以变更的缓存结构"><span class="post-toc-number">1.</span> <span class="post-toc-text">设计可以变更的缓存结构</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#思路"><span class="post-toc-number">2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#代码"><span class="post-toc-number">3.</span> <span class="post-toc-text">代码</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-13.5"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">13.5</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月29日 8:14" datetime="2015-11-29T00:14:45.000Z"  itemprop="datePublished">2015-11-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="设计可以变更的缓存结构"><a href="#设计可以变更的缓存结构" class="headerlink" title="设计可以变更的缓存结构"></a>设计可以变更的缓存结构</h1><p>设计一种缓存结构，该结构在构造时确定大小，假设大小为 K</p>
+<ul>
+<li><p>功能：</p>
+<ul>
+<li>set(key,value)：将记录(key,value)插入该结构。</li>
+<li>get(key)：返回key对应的value值。</li>
+</ul>
+</li>
+<li><p>要求:</p>
+<ul>
+<li>set和get方法的时间复杂度为O(1)。</li>
+<li>某个key的set或get操作一旦发生，认为这个 key 的记录成了最经常使用的。 </li>
+<li>当缓存的大小超过K时，移除最不经常使用的记录，即set或get最久远的。</li>
+</ul>
+</li>
+<li><p>举例<br>假设缓存结构的实例是cache，大小为3，并依次发生如下行为:<br>1，cache.set(“A”,1)。最经常使用的记录为(“A”,1)。<br>2，cache.set(“B”,2)。最经常使用的记录为(“B”,2)，(“A”,1)变为最不经常的。<br>3，cache.set(“C”,3)。最经常使用的记录为(“C”,2)，(“A”,1)还是最不经常的。<br>4，cache.get(“A”)。最经常使用的记录为(“A”,1)，(“B”,2)变为最不经常的。<br>5，cache.set(“D”,4)。大小超过了 3，所以移除此时最不经常使用的记录(“B”,2)，加入记录(“D”,4)，并且为最经常使用的记录，然后(“C”,2)变为最不经常使用的记录。</p>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>LRU是最近最少使用页面置换算法(Least Recently Used),也就是首先淘汰最长时间未被使用的页面!<br>LFU是最近最不常用页面置换算法(Least Frequently Used),也就是淘汰一定时期内被访问次数最少的页!<br>比如,第二种方法的时期T为10分钟,如果每分钟进行一次调页,主存块为3,若所需页面走向为2 1 2 1 2 3 4<br>注意,当调页面4时会发生缺页中断</p>
+<ul>
+<li>按LRU算法,应换页面1(1页面最久未被使用) </li>
+<li>按LFU算法应换页面3(十分钟内,页面3只使用了一次)</li>
+</ul>
+<p>区别</p>
+<ul>
+<li>LRU关键是看页面最后一次被使用到发生调度的时间长短</li>
+<li>LFU关键是看一定时间段内页面被使用的频率</li>
+</ul>
+<p>本题是LRU，使用hashMap和双端队列完成</p>
+<ul>
+<li><p>双端队列的功能</p>
+<ul>
+<li>队列头旧尾新，加入新节点从尾部加入</li>
+<li>把其中任何一个节点移动到尾部，且不影响其他的联系</li>
+<li>可以扔掉第一个，即最旧的，第二个就成为头结点</li>
+</ul>
+</li>
+<li><p>hashMap是完成node与key的相互映射，加速查找</p>
+</li>
+</ul>
+<p>cache的实现</p>
+<ul>
+<li><p>set方法<br>当有节点进来，进行添加或者修改，然后看窗口值是否达到门限，<br>如果没有就添加，冰放入队头，如果达到，就删除队头，放入新节点<br>最后把该节点移动到队尾</p>
+</li>
+<li><p>get方法<br>从map中得到节点，放入队尾</p>
+</li>
+</ul>
+<a id="more"></a>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div></pre></td><td class="code"><pre><div class="line">// 队列中的结点</div><div class="line">public static class Node&lt;V&gt; &#123;</div><div class="line">	//双向队列中的节点要有前后指针</div><div class="line">	private Node&lt;V&gt; prior;</div><div class="line">	private Node&lt;V&gt; next;</div><div class="line">	private V value;</div><div class="line"></div><div class="line">	public Node(V value) &#123;</div><div class="line">		this.value = value;</div><div class="line">		this.next = null;</div><div class="line">		this.prior = null;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 双端队列</div><div class="line">public static class NodeDoubleLinkedList&lt;V&gt; &#123;</div><div class="line">	//头是最不经常使用的</div><div class="line">	private Node&lt;V&gt; head;</div><div class="line">	//尾是最经常使用的</div><div class="line">	private Node&lt;V&gt; tail;</div><div class="line"></div><div class="line">	public NodeDoubleLinkedList() &#123;</div><div class="line">		head = null;</div><div class="line">		tail = null;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//新节点添加到尾部</div><div class="line">	public void addToTail(Node&lt;V&gt; newNode) &#123;</div><div class="line">		if (newNode == null) &#123;</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		//队列没有节点</div><div class="line">		if (head == null) &#123;</div><div class="line">			head = newNode;</div><div class="line">			tail = newNode;</div><div class="line">			head.next = null;</div><div class="line">			head.prior = null;</div><div class="line">			tail.prior = null;</div><div class="line">			tail.next = null;</div><div class="line">		&#125; else &#123;</div><div class="line">			//有节点</div><div class="line">			newNode.prior = tail;</div><div class="line">			tail.next = newNode;</div><div class="line">			tail = newNode;</div><div class="line">			tail.next = null;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//当窗口不够，就需要将头节点去掉</div><div class="line">	public Node&lt;V&gt; removeHead() &#123;</div><div class="line">		//没有头结点</div><div class="line">		if(head == null)&#123;</div><div class="line">			return null;</div><div class="line">		&#125;</div><div class="line">		//获取到头结点</div><div class="line">		Node&lt;V&gt; res = head;</div><div class="line">		//只有一个节点</div><div class="line">		if (head == tail) &#123;</div><div class="line">			head = null;</div><div class="line">			tail = null;</div><div class="line">		&#125; else &#123;</div><div class="line">			head.next.prior = null;</div><div class="line">			head = head.next;</div><div class="line">		&#125;</div><div class="line">		//返回的节点要清理干净，只有值，指针全部清空</div><div class="line">		res.next = null;</div><div class="line">		res.prior = null;</div><div class="line">		return res;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//对于刚刚进行操作的节点要移动到队尾</div><div class="line">	public void moveToTail(Node&lt;V&gt; curNode) &#123;</div><div class="line">		//移动头结点</div><div class="line">		if (head == curNode) &#123;</div><div class="line">			curNode = this.removeHead();</div><div class="line">			addToTail(curNode);</div><div class="line">		&#125;else if(curNode != tail)&#123;</div><div class="line">			//如果本身在队尾不用操作</div><div class="line">			if (head != tail) &#123;</div><div class="line">				// 删除节点</div><div class="line">				curNode.prior.next = curNode.next;</div><div class="line">				curNode.next.prior = curNode.prior;</div><div class="line">				// 移到尾部</div><div class="line">				addToTail(curNode);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">public static class MyCache&lt;K, V&gt; &#123;</div><div class="line">	//2个hashMap对应key和value，加速查找</div><div class="line">	private HashMap&lt;K, Node&lt;V&gt;&gt; keyNodeMap;</div><div class="line">	private HashMap&lt;Node&lt;V&gt;, K&gt; nodeKeyMap;</div><div class="line">	//双向队列</div><div class="line">	private NodeDoubleLinkedList&lt;V&gt; nDLList;</div><div class="line">	//窗口大小</div><div class="line">	private int windowSize;</div><div class="line">	//初始化窗口大小</div><div class="line">	public MyCache(int capacity) &#123;</div><div class="line">		this.windowSize = capacity;</div><div class="line">		this.keyNodeMap = new HashMap&lt;K, Node&lt;V&gt;&gt;();</div><div class="line">		this.nodeKeyMap = new HashMap&lt;Node&lt;V&gt;, K&gt;();</div><div class="line">		this.nDLList = new NodeDoubleLinkedList&lt;V&gt;();</div><div class="line">	&#125;</div><div class="line">	//根据key得到value</div><div class="line">	public V get(K k) &#123;</div><div class="line">		if (keyNodeMap.containsKey(k)) &#123;</div><div class="line">			Node&lt;V&gt; cur = keyNodeMap.get(k);</div><div class="line">			//最新操作的节点移到队头</div><div class="line">			nDLList.moveToTail(cur);</div><div class="line">			return cur.value;</div><div class="line">		&#125; else &#123;</div><div class="line">			return null;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void set(K k,V value)&#123;</div><div class="line">		if(keyNodeMap.containsKey(k))&#123;</div><div class="line">			//更新节点</div><div class="line">			Node&lt;V&gt; cur = keyNodeMap.get(k);</div><div class="line">			cur.value = value;</div><div class="line">			//操作过的节点移到队头</div><div class="line">			nDLList.moveToTail(cur);</div><div class="line">		&#125;else&#123;</div><div class="line">			//如果此时窗口达到最大值，则把最久没有用的即头结点去掉</div><div class="line">			if(keyNodeMap.size() == windowSize)&#123;</div><div class="line">				removeMostUnusedCache();</div><div class="line">			&#125;</div><div class="line">			//新增节点</div><div class="line">			Node&lt;V&gt; newNode= new Node&lt;V&gt;(value);</div><div class="line">			keyNodeMap.put(k, newNode);</div><div class="line">			nodeKeyMap.put(newNode, k);</div><div class="line">			//移到队尾</div><div class="line">			nDLList.addToTail(newNode);</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void removeMostUnusedCache() &#123;</div><div class="line">		//删除头结点</div><div class="line">		Node&lt;V&gt; rNode = nDLList.removeHead();</div><div class="line">		K rKey = nodeKeyMap.get(rNode);</div><div class="line">		//hashMap中删除相关内容</div><div class="line">		nodeKeyMap.remove(rNode);</div><div class="line">		keyNodeMap.remove(rKey);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-29T12:32:30.000Z" itemprop="dateUpdated">2015年11月29日 20:32</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/29/13.5/" target="_blank" rel="external">http://duyao.github.io/2015/11/29/13.5/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/29/13.5/&title=《13.5》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/29/13.5/&title=《13.5》 — Du Yao's blog&source=设计可以变更的缓存结构设计一种缓存结构，该结构在构造时确定大小，假设大小为 K
+
+功能：
+
+set(key,value)：将记录(key,value)插入..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/29/13.5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《13.5》 — Du Yao's blog&url=http://duyao.github.io/2015/11/29/13.5/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/29/13.5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/29/11.4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">11.4</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/29/13.4/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">13.4</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="13.5" data-title="13.5" data-url="http://duyao.github.io/2015/11/29/13.5/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/29/13.5/&title=《13.5》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/29/13.5/&title=《13.5》 — Du Yao's blog&source=设计可以变更的缓存结构设计一种缓存结构，该结构在构造时确定大小，假设大小为 K
+
+功能：
+
+set(key,value)：将记录(key,value)插入..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/29/13.5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《13.5》 — Du Yao's blog&url=http://duyao.github.io/2015/11/29/13.5/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/29/13.5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/29/13.5/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

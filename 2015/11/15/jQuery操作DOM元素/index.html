@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>jQuery操作DOM元素 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="jQuery">
+    <meta name="description" content="jQuery操作DOM元素">
+<meta name="keywords" content="jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery操作DOM元素">
+<meta property="og:url" content="http://duyao.github.io/2015/11/15/jQuery操作DOM元素/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="jQuery操作DOM元素">
+<meta property="og:updated_time" content="2015-11-15T07:54:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery操作DOM元素">
+<meta name="twitter:description" content="jQuery操作DOM元素">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">jQuery操作DOM元素</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">jQuery操作DOM元素</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-15T02:02:26.000Z" itemprop="datePublished" class="page-time">
+  2015-11-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#jQuery操作DOM元素"><span class="post-toc-number">1.</span> <span class="post-toc-text">jQuery操作DOM元素</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用attr-方法控制元素的属性"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">使用attr()方法控制元素的属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作元素的内容"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">操作元素的内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作元素的样式"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">操作元素的样式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#移除属性和样式"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">移除属性和样式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用append-方法向元素内追加内容"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">使用append()方法向元素内追加内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用appendTo-方法向被选元素内插入内容"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">使用appendTo()方法向被选元素内插入内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用before-和after-在元素前后插入内容"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">使用before()和after()在元素前后插入内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用clone-方法复制元素"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">使用clone()方法复制元素</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#替换内容"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">替换内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用wrap-和wrapInner-方法包裹元素和内容"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">使用wrap()和wrapInner()方法包裹元素和内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用each-方法遍历元素"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">使用each()方法遍历元素</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用remove-和empty-方法删除元素"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">使用remove()和empty()方法删除元素</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-jQuery操作DOM元素"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">jQuery操作DOM元素</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月15日 10:02" datetime="2015-11-15T02:02:26.000Z"  itemprop="datePublished">2015-11-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="jQuery操作DOM元素"><a href="#jQuery操作DOM元素" class="headerlink" title="jQuery操作DOM元素"></a>jQuery操作DOM元素</h1><a id="more"></a>
+<h2 id="使用attr-方法控制元素的属性"><a href="#使用attr-方法控制元素的属性" class="headerlink" title="使用attr()方法控制元素的属性"></a>使用attr()方法控制元素的属性</h2><p><code>attr()</code>方法的作用是设置或者返回元素的属性</p>
+<ul>
+<li><code>attr(属性名)</code>格式是获取元素属性名的值</li>
+<li><code>attr(属性名，属性值)</code>格式则是设置元素属性名的值。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;操作元素属性&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;attr()方法设置元素属性&lt;/h3&gt;</div><div class="line">        &lt;a href=&quot;http://127.0.0.1&quot; id=&quot;a1&quot;&gt;点我就变&lt;/a&gt;</div><div class="line">        &lt;div&gt;我改变后的地址是：&lt;span id=&quot;tip&quot;&gt;&lt;/span&gt;&lt;/div&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;#a1&quot;).attr(&quot;href&quot; , &quot;www.imooc.com&quot;);</div><div class="line">            var $url = $(&quot;#a1&quot;).attr(&quot;href&quot;);</div><div class="line">            $(&quot;#tip&quot;).html($url);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="操作元素的内容"><a href="#操作元素的内容" class="headerlink" title="操作元素的内容"></a>操作元素的内容</h2><p>使用<code>html()</code>和<code>text()</code>方法操作元素的内容，当两个方法的参数为空时，表示获取该元素的内容，<br>而如果方法中包含参数，则表示将参数值设置为元素内容。</p>
+<ul>
+<li><code>html()</code>获取的html代码，如果该内容是斜体加粗等格式，都会获取到</li>
+<li><code>text()</code>获取文本内容，不会获取到内容的格式等<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;操作元素内容&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;html()和text()方法设置元素内容&lt;/h3&gt;</div><div class="line">        &lt;div id=&quot;html&quot;&gt;&lt;/div&gt;</div><div class="line">        &lt;div id=&quot;text&quot;&gt;&lt;/div&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            var $content = &quot;&lt;b&gt;唉，我又变胖了！&lt;/b&gt;&quot;;</div><div class="line">            $(&quot;#html&quot;).html($content);</div><div class="line">            $(&quot;#text&quot;).text($content);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="操作元素的样式"><a href="#操作元素的样式" class="headerlink" title="操作元素的样式"></a>操作元素的样式</h2><p>通过<code>addClass()</code>和<code>css()</code>方法可以方便地操作元素中的样式</p>
+<ul>
+<li><code>addClass()</code>括号中的参数为增加元素的样式名称，增加多个样式名称时，要用空格隔开</li>
+<li><code>css()</code>直接将样式的属性内容写在括号中。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;操作元素样式&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;css()方法设置元素样式&lt;/h3&gt;</div><div class="line">        &lt;div id=&quot;content&quot;&gt;我穿了一件红色外衣&lt;/div&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;#content&quot;).css(&#123;&quot;background-color&quot;:&quot;red&quot;,&quot;color&quot;:&quot;white&quot;&#125;);</div><div class="line">        &lt;/script&gt;</div><div class="line">        &lt;style type=&quot;text/css&quot;&gt;</div><div class="line">           div</div><div class="line">            &#123;</div><div class="line">                padding: 8px;</div><div class="line">                width: 180px;</div><div class="line">            &#125;</div><div class="line">            .back&#123;</div><div class="line">                background-color:blue;</div><div class="line">            &#125;</div><div class="line">            .word&#123;</div><div class="line">                color:white;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &lt;/style&gt;</div><div class="line">        &lt;h3&gt;addClass()方法设置元素样式&lt;/h3&gt;</div><div class="line">        &lt;div id=&quot;cont&quot;&gt;我穿一件蓝色外衣&lt;/div&gt;</div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">        //名字与css中相同</div><div class="line">            $(&quot;#cont&quot;).addClass(&quot;back word&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">        </div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="移除属性和样式"><a href="#移除属性和样式" class="headerlink" title="移除属性和样式"></a>移除属性和样式</h2><p>使用<code>removeAttr(name)</code>和<code>removeClass(class)</code>分别可以实现移除元素的属性和样式的功能，</p>
+<ul>
+<li><code>removeAttr(name)</code>方法中参数表示移除属性名</li>
+<li><code>removeClass(class)</code>方法中参数则表示移除的样式名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;移除元素样式&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;removeClass()方法移除元素样式&lt;/h3&gt;</div><div class="line">        &lt;div id=&quot;content&quot; class=&quot;blue white&quot;&gt;我脱下了一件蓝色外衣&lt;/div&gt;</div><div class="line">        &lt;style type=&quot;text/css&quot;&gt;</div><div class="line">			div</div><div class="line">			&#123;</div><div class="line">			    padding: 8px;</div><div class="line">			    width: 180px;</div><div class="line">			&#125;</div><div class="line">			.blue</div><div class="line">			&#123;</div><div class="line">			    background-color: Blue;</div><div class="line">			&#125;</div><div class="line">			.white</div><div class="line">			&#123;</div><div class="line">			    color: White;</div><div class="line">			&#125;</div><div class="line">		&lt;/style&gt;</div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;#content&quot;).removeClass(&quot;blue white&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="使用append-方法向元素内追加内容"><a href="#使用append-方法向元素内追加内容" class="headerlink" title="使用append()方法向元素内追加内容"></a>使用append()方法向元素内追加内容</h2><p><code>append(content)</code>方法的功能是向指定的元素中追加内容，<br>被追加的content参数，可以是字符、HTML元素标记，还可以是一个返回字符串内容的函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;append()方法追加内容&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;append()方法追加内容&lt;/h3&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            function rethtml() &#123;</div><div class="line">                var $html = &quot;&lt;div id=&apos;test&apos; title=&apos;hi&apos;&gt;我是调用函数创建的&lt;/div&gt;&quot;</div><div class="line">                return $html;</div><div class="line">            &#125;</div><div class="line">            var $myhtml = &quot;&lt;div id=&apos;test&apos; title=&apos;hi&apos;&gt;我是调用函数创建的&lt;/div&gt;&quot;</div><div class="line">            $(&quot;body&quot;).append(rethtml());</div><div class="line">            $(&quot;body&quot;).append($myhtml);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="使用appendTo-方法向被选元素内插入内容"><a href="#使用appendTo-方法向被选元素内插入内容" class="headerlink" title="使用appendTo()方法向被选元素内插入内容"></a>使用appendTo()方法向被选元素内插入内容</h2><p><code>appendTo()</code>方法也可以向指定的元素内插入内容，它的使用格式是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(content).appendTo(selector)</div></pre></td></tr></table></figure></p>
+<p>参数content表示需要插入的内容，参数selector表示被选的元素，即把content内容插入selector元素内，默认是在尾部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;appendTo()方法插入内容&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;appendTo()方法插入内容&lt;/h3&gt;</div><div class="line">        &lt;div&gt;</div><div class="line">            &lt;span class=&quot;green&quot;&gt;小乌龟&lt;/span&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">        &lt;span class=&apos;red&apos;&gt;小青蛙&lt;/span&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            var $html = &quot;&lt;span class=&apos;red&apos;&gt;小青蛙&lt;/span&gt;&quot;;</div><div class="line">            //content是$html,第一个$是调用格式</div><div class="line">            $($html).appendTo(&quot;div&quot;);</div><div class="line">            //将class加入到div中</div><div class="line">            $(&quot;.red&quot;).appendTo(&quot;div&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="使用before-和after-在元素前后插入内容"><a href="#使用before-和after-在元素前后插入内容" class="headerlink" title="使用before()和after()在元素前后插入内容"></a>使用before()和after()在元素前后插入内容</h2><p>使用<code>before()</code>和<code>after()</code>方法可以在元素的前后插入内容，<br>它们分别表示在整个元素的前面和后面插入指定的元素或内容，调用格式分别为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(selector).before(content)和$(selector).after(content)</div></pre></td></tr></table></figure></p>
+<p>其中参数content表示插入的内容，该内容可以是元素或HTML字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;在元素前后插入内容&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;after()方法在元素之后插入内容&lt;/h3&gt;</div><div class="line">        &lt;span class=&quot;green&quot;&gt;我们交个朋友吧！&lt;/span&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            var $html = &quot;&lt;span class=&apos;red&apos;&gt;兄弟。&lt;/span&gt;&quot;</div><div class="line">            $(&quot;.green&quot;).after($html);</div><div class="line">            $(&quot;.green&quot;).before($html);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="使用clone-方法复制元素"><a href="#使用clone-方法复制元素" class="headerlink" title="使用clone()方法复制元素"></a>使用clone()方法复制元素</h2><p>调用<code>clone()</code>方法可以生成一个被选元素的副本，<br>即复制了一个被选元素，包含它的节点、文本和属性，它的调用格式为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(selector).clone()</div></pre></td></tr></table></figure></p>
+<p>其中参数selector可以是一个元素或HTML内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;使用clone()方法复制元素&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;使用clone()方法复制元素&lt;/h3&gt;</div><div class="line">        &lt;span class=&quot;red&quot; title=&quot;hi&quot;&gt;我是美猴王&lt;/span&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;body&quot;).append($(&quot;.red&quot;).clone());</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="替换内容"><a href="#替换内容" class="headerlink" title="替换内容"></a>替换内容</h2><p><code>replaceWith()</code>和<code>replaceAll()</code>方法都可以用于替换元素或元素中的内容，但它们调用时，内容和被替换元素所在的位置不同，分别为如下所示：</p>
+<ul>
+<li><code>$(selector).replaceWith(content)</code></li>
+<li><code>$(content).replaceAll(selector)</code><br>参数selector为被替换的元素，content为替换的内容。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;使用替换元素和内容&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;使用replaceAll()方法替换元素内容&lt;/h3&gt;</div><div class="line">        &lt;span class=&quot;green&quot; title=&quot;hi&quot;&gt;我是屌丝&lt;/span&gt;</div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            var $html = &quot;&lt;span class=&apos;red&apos; title=&apos;hi&apos;&gt;我是土豪&lt;/span&gt;&quot;;</div><div class="line">            $($html).replaceAll(&quot;.green&quot;);</div><div class="line">            $(&quot;.green&quot;).replaceWith($html);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="使用wrap-和wrapInner-方法包裹元素和内容"><a href="#使用wrap-和wrapInner-方法包裹元素和内容" class="headerlink" title="使用wrap()和wrapInner()方法包裹元素和内容"></a>使用wrap()和wrapInner()方法包裹元素和内容</h2><p><code>wrap()</code>和<code>wrapInner()</code>方法都可以进行元素的包裹</p>
+<ul>
+<li><code>wrap()</code>用于包裹元素本身</li>
+<li><code>wrapInner()</code>用于包裹元素中的内容<br>调用格式分别为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$(selector).wrap(wrapper)</div><div class="line">$(selector).wrapInner(wrapper)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>参数selector为被包裹的元素，wrapper参数为包裹元素的格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;包裹元素和内容&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;   </div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;使用wrapInner()方法包裹元素&lt;/h3&gt;</div><div class="line">        &lt;span class=&quot;red&quot; title=&apos;hi&apos;&gt;我的身体有点歪&lt;/span&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;.red&quot;).wrapInner(&quot;&lt;i&gt;&lt;/i&gt;&quot;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="使用each-方法遍历元素"><a href="#使用each-方法遍历元素" class="headerlink" title="使用each()方法遍历元素"></a>使用each()方法遍历元素</h2><p>使用each()方法可以遍历指定的元素集合，在遍历时，通过回调函数返回遍历元素的序列号，它的调用格式为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(selector).each(function(index))</div></pre></td></tr></table></figure></p>
+<p>参数function为遍历时的回调函数，index为遍历元素的序列号，它从0开始。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;使用each()方法遍历元素&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h3&gt;使用each()方法遍历元素&lt;/h3&gt;</div><div class="line">        &lt;span class=&quot;green&quot;&gt;香蕉&lt;/span&gt;</div><div class="line">        &lt;span class=&quot;green&quot;&gt;桃子&lt;/span&gt;</div><div class="line">        &lt;span class=&quot;green&quot;&gt;葡萄&lt;/span&gt;</div><div class="line">        &lt;span class=&quot;green&quot;&gt;荔枝&lt;/span&gt;</div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            $(&quot;span&quot;).each(function (index) &#123;</div><div class="line">                if (index == 1) &#123;</div><div class="line">                    $(this).attr(&quot;class&quot;, &quot;red&quot;);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="使用remove-和empty-方法删除元素"><a href="#使用remove-和empty-方法删除元素" class="headerlink" title="使用remove()和empty()方法删除元素"></a>使用remove()和empty()方法删除元素</h2><ul>
+<li><code>empty()</code> will remove all the contents of the selection.</li>
+<li><code>remove()</code> will remove the selection and its contents.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;删除元素&lt;/title&gt;</div><div class="line">        &lt;script src=&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;    </div><div class="line">        &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    </div><div class="line">    &lt;body&gt;</div><div class="line">        </div><div class="line">        &lt;h3&gt;使用empty()方法删除元素&lt;/h3&gt;</div><div class="line">        &lt;span class=&quot;green&quot;&gt;香蕉&lt;/span&gt;</div><div class="line">        &lt;span class=&quot;green&quot;&gt;桃子&lt;/span&gt;</div><div class="line">        &lt;span class=&quot;red&quot;&gt;葡萄&lt;/span&gt;</div><div class="line">        &lt;span class=&quot;green&quot;&gt;葡萄&lt;/span&gt;</div><div class="line">        &lt;span class=&quot;red&quot;&gt;荔枝&lt;/span&gt;</div><div class="line">        &lt;span class=&quot;green&quot;&gt;荔枝&lt;/span&gt;</div><div class="line">        </div><div class="line">        </div><div class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">            //删除.red所在的元素,包括span</div><div class="line">            $(&quot;.red&quot;).remove();</div><div class="line">            //只是删除了内容，span还在</div><div class="line">            $(&quot;.green&quot;).empty();</div><div class="line">        &lt;/script&gt;</div><div class="line">        </div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>style.css</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">span</div><div class="line">&#123;</div><div class="line">    color: White;</div><div class="line">    padding: 8px;</div><div class="line">    margin: 5px;</div><div class="line">    float: left;</div><div class="line">&#125;</div><div class="line">.green</div><div class="line">&#123;</div><div class="line">    background-color: Green;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-15T07:54:58.000Z" itemprop="dateUpdated">2015年11月15日 15:54</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/15/jQuery操作DOM元素/" target="_blank" rel="external">http://duyao.github.io/2015/11/15/jQuery操作DOM元素/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/&title=《jQuery操作DOM元素》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/&title=《jQuery操作DOM元素》 — Du Yao's blog&source=jQuery操作DOM元素" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《jQuery操作DOM元素》 — Du Yao's blog&url=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/15/jQuery事件与应用/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">jQuery事件与应用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/14/jQuery表单选择器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">jQuery表单选择器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="jQuery操作DOM元素" data-title="jQuery操作DOM元素" data-url="http://duyao.github.io/2015/11/15/jQuery操作DOM元素/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/&title=《jQuery操作DOM元素》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/&title=《jQuery操作DOM元素》 — Du Yao's blog&source=jQuery操作DOM元素" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《jQuery操作DOM元素》 — Du Yao's blog&url=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/15/jQuery操作DOM元素/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

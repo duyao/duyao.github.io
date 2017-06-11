@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="undefined">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Du Yao&#39;s blog">
+<meta property="og:url" content="http://duyao.github.io/page/17/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Du Yao&#39;s blog">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Du Yao&#39;s blog</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Du Yao&#39;s blog</h1>
+        <h5 class="subtitle">
+            
+                Make progress step by step
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+<div class="container body-wrap">
+
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-Details-in-AOP"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月19日 22:46" datetime="2015-10-19T14:46:51.000Z"  itemprop="datePublished">2015-10-19</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/19/Details-in-AOP/">Details in AOP</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        execution expression of pointcutSpring AOP users are likely to use the execution pointcut designator the most often. The format of an execution expression is:
+execution(modifiers-pattern? ret-type-pattern declaring-type-pattern? name-pattern(param-pattern)
+            throws-pattern?)All parts except the returning type pattern (ret-type-pattern in the snippet above), name pattern, and parameters pattern are optional. The returning type pattern determines what the return type of the method must be in order for a join point to be matched. Most frequently you will use * as the returning type pattern, which matches any return type. A fully-qualified type name will match only when the method returns the given type. The name pattern matches the method name. 
+You can use the * wildcard as all or part of a name pattern. 
+The parameters pattern is slightly more complex:
+
+() matches a method that takes no parameters
+(..) matches any number of parameters (zero or more)
+(*) matches a method taking one parameter of any type, 
+(*,String) matches a method taking two parameters, the first can be of any type, the second must be a String. 
+
+    
+
+        <a href="/2015/10/19/Details-in-AOP/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-words-in-study"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月18日 22:22" datetime="2015-10-18T14:22:04.000Z"  itemprop="datePublished">2015-10-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/words/">words</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/18/words-in-study/">words in study</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+
+
+word
+explaination
+attibute
+
+
+
+
+syntax
+语法
+n.
+
+
+synonym
+近义词
+n.
+
+
+eliminate
+排除
+v.
+
+
+wildcard
+通配符
+n.
+
+
+boilerplate
+文本，示范
+n.
+
+
+concurrency
+并发
+n.
+
+
+comprise
+包括
+v.
+
+
+constrain
+约束
+v.
+
+
+nested
+嵌套的
+adj.
+
+...
+    
+
+        <a href="/2015/10/18/words-in-study/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/words/">words</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-AOP-Instruction"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月18日 21:34" datetime="2015-10-18T13:34:45.000Z"  itemprop="datePublished">2015-10-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/18/AOP-Instruction/">AOP_Instruction</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        cross-cutting concernsSystem services such as logging, transaction management, and security often find their way into components whose core responsibilities is something else.These system services ...
+    
+
+        <a href="/2015/10/18/AOP-Instruction/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-maven依赖"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月16日 11:01" datetime="2015-10-16T03:01:57.000Z"  itemprop="datePublished">2015-10-16</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/16/maven依赖/">maven依赖</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        pom.xml12345678910111213141516&lt;dependencies&gt;    &lt;dependency&gt;      &lt;groupId&gt;junit&lt;/groupId&gt;      &lt;artifactId&gt;junit&lt;/artifactId&gt;      &lt;version&gt;3.8.1&lt;/version&gt;      &lt;scope&gt;test&lt;/scope&gt;    &lt;/dependency&gt;        &lt;dependency&gt;      &lt;groupId&gt;com.imooc.hi&lt;/groupId&gt;      &lt;artifactId&gt;hi&lt;/artifactId&gt;      &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;    &lt;/dependency&gt;    &lt;/dependencies&gt;
+来源于dependency scpoe
+依赖范围即scope标签内容There are 6 scopes available:
+    
+
+        <a href="/2015/10/16/maven依赖/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-jsp原理"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月16日 9:48" datetime="2015-10-16T01:48:39.000Z"  itemprop="datePublished">2015-10-16</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/16/jsp原理/">jsp原理</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        jsp(java server page):   
+* 运行在服务器端
+* 基础是servlet，因此也是动态网页
+* 是一种综合技术=html+css+javasricp+java片段+jsp标签
+* jsp无需配置，修改后无需重新发布
+* 访问方法：http://ip:8080/web应用名/jsp路径(路径从webRoot开始)
+原理web服务器是如何调用并执行jsp页面的例如文件为myjsp.java第一次访问jsp文件，服务器会将文件翻译为servlet文件myjsp_jsp.java并编译为.class文件，在文件tomcat根目录的..\work\Catalina中可以找到，即D:\Program Files\apche\apache-tomcat-6.0.43\work\Catalina\localhost\web应用名\org\apache\jsp，然后加载到服务器内存中去，如果是第二次访问，就会直接访问内存中的实例，因此jsp也是单例的，因此第一访问jsp网站速度比较慢，以后访问速度比较快。如果某个jsp被修改了，就相当于第一次访问jsp。(web服务器有一张表记录每个jsp是否是第一次访问)注意：jsp出错后会报出翻译后servlet中的位置在该xxx_jsp.java文件中，有几分主要函数如下，其实就是servlet中的需要实现的函数init,destory,service
+    
+
+        <a href="/2015/10/16/jsp原理/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsp/">jsp</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mybatis 接口式编程"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月15日 23:32" datetime="2015-10-15T15:32:10.000Z"  itemprop="datePublished">2015-10-15</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/15/Mybatis 接口式编程/">Mybatis 接口式编程</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        ##引言首先分析MessageDao中获取sqlSession的过程12345//Command是namespace//queryCommandList是一种select方法的id//command是传入的Command类型的参数//list是该方法返回值list = sqlSession.selectList("Command.queryCommandList",command);
+由于以上信息都在Command.xml文件中，且都是手动填入，可能会出错。因此引入接口式编程，即把该方法写成接口形式，这样调用时会校验，减少出错。
+    
+
+        <a href="/2015/10/15/Mybatis 接口式编程/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mybatis/">Mybatis</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mybatis 常见问题"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月15日 20:34" datetime="2015-10-15T12:34:22.000Z"  itemprop="datePublished">2015-10-15</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/15/Mybatis 常见问题/">Mybatis 常见问题</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Mybatis 常见问题resultMap与resultType两者都是用来实现数据库与java代码的映射。
+resultMap必须写指明映射关系，且要select等语句要用其id
+reslutType无需指明关系，映射方式是看语句的列名与java代码列名相同，且忽略大小写,内容是java的文件名123&lt;select id="queryMessageList" parameterType="com.imooc.bean.Message" resultType="com.imooc.bean.Message"&gt;  select ID,COMMAND,DESCRIPTION,CONTENT from MESSAGE&lt;/select&gt;
+    
+
+        <a href="/2015/10/15/Mybatis 常见问题/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mybatis/">Mybatis</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mybatis 标签"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月14日 20:49" datetime="2015-10-14T12:49:25.000Z"  itemprop="datePublished">2015-10-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/14/Mybatis 标签/">Mybatis 标签</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Mybatis 标签where 标签用于处理select语句and等问题12345678&lt;select id="version" parameterType="long" resultType="int"&gt;	SELECT column1, column2, columnN FROM table_name;	&lt;where&gt;	  	&lt;if test="condition"&gt;	  		 column1=#&#123;value1&#125;	  	&lt;/if&gt;  	&lt;/where&gt;  &lt;/select&gt;
+set标签用于处理update逗号，逗号等问题，与where类似12345678&lt;update id="update" parameterType="UserAlias"&gt;    UPDATE table_name    &lt;set&gt;        &lt;if test="condition"&gt;	        column1 = #&#123;value1&#125;, column2 = #&#123;value2&#125;	  	&lt;/if&gt;    &lt;/set&gt;&lt;/update&gt;
+##sql标签sql标签与select等标签同级，相当于常量定义12345&lt;sql id="select_content"&gt;column1, column2, columnN&lt;/sql&gt;&lt;select id="version" parameterType="long" resultType="int"&gt;	SELECT &lt;include refid="select_content"&gt;&lt;/include&gt; FROM table_name;&lt;/select&gt;
+    
+
+        <a href="/2015/10/14/Mybatis 标签/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mybatis/">Mybatis</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mybatis简介"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月10日 9:45" datetime="2015-10-10T01:45:41.000Z"  itemprop="datePublished">2015-10-10</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/10/Mybatis简介/">Mybatis简介</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Mybatis主要是使用配置文件来完成操作
+config.xml这里可以配置数据库的基本信息
+SqlSession
+作用
+向sql语句传入参数
+执行sql语句
+获取sql语句的结果
+事物的控制
+
+
+如何获得SqlSession
+通过配置文件获取数据库相关信息
+通过信息构建SqlSessonFactory
+通过SqlSessionFactory打开数据库会话
+
+
+
+    
+
+        <a href="/2015/10/10/Mybatis简介/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mybatis/">Mybatis</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-git使用"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月01日 14:54" datetime="2015-10-01T06:54:34.000Z"  itemprop="datePublished">2015-10-01</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/01/git使用/">git 笔记</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        安装及初始设置12$ git config --global user.name "Amy"$ git config --global user.email "duyao_dy@163.com"
+设置邮箱及姓名
+创建仓库及添加文件
+切换到代码所在的目录下面
+创建仓库
+1git init
+
+添加文件到仓库3.1 git add *添加所有文件  git add test.txt添加单个文件3....
+    
+
+        <a href="/2015/10/01/git使用/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+    </ul>
+
+    
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/page/16/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span>
+    </div>
+</nav>
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/page/17/&title=Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/page/17/&title=Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/page/17/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Du Yao's blog&url=http://duyao.github.io/page/17/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/page/17/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/page/17/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

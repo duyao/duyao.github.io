@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Isolation | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="database">
+    <meta name="description" content="IsolationIntroductionIsolation is typically defined at database level as a property that defines how/when the changes made by one operation become visible to other. Isolation is one of the ACID (Atomi">
+<meta name="keywords" content="database">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Isolation">
+<meta property="og:url" content="http://duyao.github.io/2015/10/24/Isolation/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="IsolationIntroductionIsolation is typically defined at database level as a property that defines how/when the changes made by one operation become visible to other. Isolation is one of the ACID (Atomi">
+<meta property="og:updated_time" content="2015-10-24T11:14:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Isolation">
+<meta name="twitter:description" content="IsolationIntroductionIsolation is typically defined at database level as a property that defines how/when the changes made by one operation become visible to other. Isolation is one of the ACID (Atomi">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Isolation</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Isolation</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-24T01:38:22.000Z" itemprop="datePublished" class="page-time">
+  2015-10-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Isolation"><span class="post-toc-number">1.</span> <span class="post-toc-text">Isolation</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Introduction"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Introduction</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Isolation-level"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Isolation level</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Read-phenomena"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Read phenomena</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Summary"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Summary</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Isolation"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Isolation</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月24日 9:38" datetime="2015-10-24T01:38:22.000Z"  itemprop="datePublished">2015-10-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Isolation"><a href="#Isolation" class="headerlink" title="Isolation"></a>Isolation</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Isolation is typically defined at database level as a property that defines how/when the changes made by one operation become visible to other.</p>
+<p>Isolation is one of the ACID (Atomicity, Consistency, Isolation, Durability) properties.</p>
+<ul>
+<li><p><strong>Atomicity</strong>: A transaction should be treated as a single unit of operation which means either the entire sequence of operations is successful or unsuccessful.</p>
+</li>
+<li><p><strong>Consistency</strong>: This represents the consistency of the referential integrity of the database, unique primary keys in tables etc.</p>
+</li>
+<li><p><strong>Isolation</strong>: There may be many transactions processing with the same data set at the same time, each transaction should be isolated from others to prevent data corruption.</p>
+</li>
+<li><p><strong>Durability</strong>: Once a transaction has completed, the results of this transaction have to be made permanent and cannot be erased from the database due to system failure.</p>
+</li>
+</ul>
+<p>Two-phase locking is the most common transaction concurrency control method in DBMSs, used to provide both serializability and recoverability for correctness.</p>
+<a id="more"></a>
+<h2 id="Isolation-level"><a href="#Isolation-level" class="headerlink" title="Isolation level"></a>Isolation level</h2><p>The programmer must carefully analyze database access code to ensure that any relaxation of isolation does not cause software bugs that are difficult to find. Conversely, if higher isolation levels are used, the possibility of deadlock is increased, which also requires careful analysis and programming techniques to avoid.</p>
+<ul>
+<li><p><strong>Serializable</strong></p>
+<p>This is the highest isolation level.</p>
+<ul>
+<li>[x] read locks</li>
+<li>[x] write locks </li>
+<li>[x] range-locks </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Repeatable reads</strong></p>
+<ul>
+<li>[x] read locks</li>
+<li>[x] write locks</li>
+<li>[ ] range-locks</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Read committed</strong></p>
+<ul>
+<li>[ ] read locks</li>
+<li>[X] write locks</li>
+<li>[ ] range-locks</li>
+</ul>
+</li>
+</ul>
+<p>  Putting it in simpler words, read committed is an isolation level that guarantees that any data read is committed at the moment it is read. It simply restricts the reader from seeing any intermediate, uncommitted, ‘dirty’ read. It makes no promise whatsoever that if the transaction reissues the read, it will find the same data; data is free to change after it is read.</p>
+<ul>
+<li><p><strong>Read uncommitted</strong></p>
+<p>This is the lowest isolation level.</p>
+<ul>
+<li>[ ] read locks</li>
+<li>[ ] write locks</li>
+<li>[ ] range-locks</li>
+</ul>
+</li>
+</ul>
+<h2 id="Read-phenomena"><a href="#Read-phenomena" class="headerlink" title="Read phenomena"></a>Read phenomena</h2><ul>
+<li><p><strong>Dirty reads</strong><br>earlier updates will always appear in a result set before later updates.</p>
+</li>
+<li><p><strong>Non-repeatable reads</strong></p>
+</li>
+</ul>
+<p>In this example, Transaction 2 commits successfully, which means that its changes to the row with id 1 should become visible. However, Transaction 1 has already seen a different value for age in that row. </p>
+<p>At the <code>SERIALIZABLE</code> and <code>REPEATABLE READ</code> isolation levels, the DBMS must return the <strong>old</strong> value for the second SELECT. </p>
+<p>At <code>READ COMMITTED</code> and <code>READ UNCOMMITTED</code>, the DBMS may return the <strong>updated</strong> value; this is a non-repeatable read.</p>
+<ul>
+<li><strong>Phantom reads</strong><br>This can occur when <em>range locks</em> are not acquired on performing a SELECT … WHERE operation.</li>
+</ul>
+<p>Note that Transaction 1 executed the same query twice. </p>
+<p>If the highest level of isolation were maintained, the same set of rows should be returned both times, and indeed that is what is mandated to occur in a database operating at the SQL <code>SERIALIZABLE</code> isolation level. </p>
+<p>However, at the lesser isolation levels, a different set of rows may be returned the second time.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Isolation level</th>
+<th style="text-align:center">Dirty reads</th>
+<th style="text-align:center">Non-repeatable reads</th>
+<th style="text-align:center">Phantoms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Read Uncommitted</td>
+<td style="text-align:center">may occur</td>
+<td style="text-align:center">may occur</td>
+<td style="text-align:center">may occur</td>
+</tr>
+<tr>
+<td style="text-align:center">Read committed</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">may occur</td>
+<td style="text-align:center">may occur</td>
+</tr>
+<tr>
+<td style="text-align:center">Repeatable Read</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">may occur</td>
+</tr>
+<tr>
+<td style="text-align:center">Serializable</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<p>In lock-based concurrency control, isolation level determines the duration that locks are held.</p>
+<ul>
+<li><p>“C” - Denotes that locks are held until the transaction commits.</p>
+</li>
+<li><p>“S” - Denotes that the locks are held only during the currently executing statement. Note that if locks are released after a statement, the underlying data could be changed by another transaction before the current transaction commits, thus creating a violation.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Isolation level</th>
+<th style="text-align:center">Write Operation</th>
+<th style="text-align:center">Read Operation</th>
+<th style="text-align:center">Range Operation (…where…)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Read Uncommitted</td>
+<td style="text-align:center">S</td>
+<td style="text-align:center">S</td>
+<td style="text-align:center">S</td>
+</tr>
+<tr>
+<td style="text-align:center">Read Committed</td>
+<td style="text-align:center">C</td>
+<td style="text-align:center">S</td>
+<td style="text-align:center">S</td>
+</tr>
+<tr>
+<td style="text-align:center">Repeatable Read</td>
+<td style="text-align:center">C</td>
+<td style="text-align:center">C</td>
+<td style="text-align:center">S</td>
+</tr>
+<tr>
+<td style="text-align:center">Serializable</td>
+<td style="text-align:center">C</td>
+<td style="text-align:center">C</td>
+<td style="text-align:center">C</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-10-24T11:14:36.000Z" itemprop="dateUpdated">2015年10月24日 19:14</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/10/24/Isolation/" target="_blank" rel="external">http://duyao.github.io/2015/10/24/Isolation/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/24/Isolation/&title=《Isolation》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/24/Isolation/&title=《Isolation》 — Du Yao's blog&source=IsolationIntroductionIsolation is typically defined at database level as a pr..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/24/Isolation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Isolation》 — Du Yao's blog&url=http://duyao.github.io/2015/10/24/Isolation/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/24/Isolation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/24/Declaration Transaction/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Declarative Transaction</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/23/git-md-snippet/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">git_md_snippet</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Isolation" data-title="Isolation" data-url="http://duyao.github.io/2015/10/24/Isolation/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/24/Isolation/&title=《Isolation》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/24/Isolation/&title=《Isolation》 — Du Yao's blog&source=IsolationIntroductionIsolation is typically defined at database level as a pr..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/24/Isolation/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Isolation》 — Du Yao's blog&url=http://duyao.github.io/2015/10/24/Isolation/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/24/Isolation/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/10/24/Isolation/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

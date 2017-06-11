@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>二叉树及其相关 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="本文用来整理二叉树的各种知识点 二叉树性质 性质1 一棵非空二叉树的第i层上最多有2i-1个结点(i≥1)。 性质2 若规定空树的深度为0，则深度为k的二叉树最多有2k-1个结点(k≥0)。 性质3 具有n个结点的完全二叉树的深度k为log2n+1。 性质4 对于一棵非空二叉树，如果度为0的结点数目为n0，度为2的结点数目为n2，则有n0= n2+1。 性质5 对于具有n个结点的完全二叉树，如果">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树及其相关">
+<meta property="og:url" content="http://duyao.github.io/2017/03/10/二叉树及其相关/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="本文用来整理二叉树的各种知识点 二叉树性质 性质1 一棵非空二叉树的第i层上最多有2i-1个结点(i≥1)。 性质2 若规定空树的深度为0，则深度为k的二叉树最多有2k-1个结点(k≥0)。 性质3 具有n个结点的完全二叉树的深度k为log2n+1。 性质4 对于一棵非空二叉树，如果度为0的结点数目为n0，度为2的结点数目为n2，则有n0= n2+1。 性质5 对于具有n个结点的完全二叉树，如果">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/alltree.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/hafuman.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/b.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/bloomfilter.png">
+<meta property="og:updated_time" content="2017-04-03T11:40:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉树及其相关">
+<meta name="twitter:description" content="本文用来整理二叉树的各种知识点 二叉树性质 性质1 一棵非空二叉树的第i层上最多有2i-1个结点(i≥1)。 性质2 若规定空树的深度为0，则深度为k的二叉树最多有2k-1个结点(k≥0)。 性质3 具有n个结点的完全二叉树的深度k为log2n+1。 性质4 对于一棵非空二叉树，如果度为0的结点数目为n0，度为2的结点数目为n2，则有n0= n2+1。 性质5 对于具有n个结点的完全二叉树，如果">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/alltree.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">二叉树及其相关</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">二叉树及其相关</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-10T11:33:39.000Z" itemprop="datePublished" class="page-time">
+  2017-03-10
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树性质"><span class="post-toc-number">1.</span> <span class="post-toc-text">二叉树性质</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#满二叉树-Full-Binary-Tree"><span class="post-toc-number">2.</span> <span class="post-toc-text">满二叉树(Full Binary Tree)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#完全二叉树-Complete-Binary-Tree"><span class="post-toc-number">3.</span> <span class="post-toc-text">完全二叉树(Complete Binary Tree)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#哈弗曼树"><span class="post-toc-number">4.</span> <span class="post-toc-text">哈弗曼树</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉查找树-Binary-Search-Tree"><span class="post-toc-number">5.</span> <span class="post-toc-text">二叉查找树(Binary Search Tree)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AVL树"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">AVL树</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#红黑树Red-Black-Tree"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">红黑树Red-Black Tree</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Treap"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">Treap</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#伸展树-Splay-Tree"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">伸展树(Splay Tree)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多向平衡查找树：B-树和B-树"><span class="post-toc-number">6.</span> <span class="post-toc-text">多向平衡查找树：B-树和B+树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查找过程"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">查找过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#字典树"><span class="post-toc-number">7.</span> <span class="post-toc-text">字典树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#布隆过滤器"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">布隆过滤器</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后缀树"><span class="post-toc-number">8.</span> <span class="post-toc-text">后缀树</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#堆"><span class="post-toc-number">9.</span> <span class="post-toc-text">堆</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#jvm-堆栈"><span class="post-toc-number">10.</span> <span class="post-toc-text">jvm 堆栈</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#kmp"><span class="post-toc-number">11.</span> <span class="post-toc-text">kmp</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#倒排索引"><span class="post-toc-number">12.</span> <span class="post-toc-text">倒排索引</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-二叉树及其相关"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">二叉树及其相关</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月10日 19:33" datetime="2017-03-10T11:33:39.000Z"  itemprop="datePublished">2017-03-10</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p> 本文用来整理二叉树的各种知识点</p>
+<h1 id="二叉树性质"><a href="#二叉树性质" class="headerlink" title="二叉树性质"></a>二叉树性质</h1><ul>
+<li>性质1 一棵非空二叉树的第i层上最多有2i-1个结点(i≥1)。</li>
+<li>性质2 若规定空树的深度为0，则深度为k的二叉树最多有2k-1个结点(k≥0)。</li>
+<li>性质3 具有n个结点的完全二叉树的深度k为log2n+1。</li>
+<li>性质4 对于一棵非空二叉树，如果度为0的结点数目为n0，度为2的结点数目为n2，则有n0= n2+1。</li>
+<li><p>性质5 对于具有n个结点的完全二叉树，如果按照从上到下和从左到右的顺序对所有结点从1开始编号，则对于序号为i的结点，有：<br>（1）如果i&gt;1，则序号为i的结点的双亲结点的序号为i/2(“/”表示整除)；如果i=1，则该结点是根结点，无双亲结点。<br>（2）如果2i≤n，则该结点的左孩子结点的序号为2i；若2i&gt;n，则该结点无左孩子。<br>（3）如果2i+1≤n，则该结点的右孩子结点的序号为2i+1；若2i+1&gt;n，则该结点无右孩子。</p>
+</li>
+<li><p>性质6 给定N个节点，能构成h(N)种不同的二叉树。<br>h(N)为卡特兰数的第N项。h(n)=C(n,2*n)/(n+1)</p>
+</li>
+</ul>
+<h1 id="满二叉树-Full-Binary-Tree"><a href="#满二叉树-Full-Binary-Tree" class="headerlink" title="满二叉树(Full Binary Tree)"></a>满二叉树(Full Binary Tree)</h1><p>如果一棵二叉树<strong>只有度为0的结点和度为2的结点</strong>，并且度为0的结点在同一层上，则这棵二叉树为满二叉树。</p>
+<p><strong>深度为k的满二叉树的结点个数为2^k-1</strong></p>
+<h1 id="完全二叉树-Complete-Binary-Tree"><a href="#完全二叉树-Complete-Binary-Tree" class="headerlink" title="完全二叉树(Complete Binary Tree)"></a>完全二叉树(Complete Binary Tree)</h1><p>深度为k，有n个结点的二叉树当且仅当其每一个结点都与深度为k，有n个结点的满二叉树中编号从1到n的结点一一对应时，称为完全二叉树。</p>
+<p>完全二叉树的特点是叶子结点只可能出现在层次最大的两层上，并且某个结点的左分支下子孙的最大层次与右分支下子孙的最大层次相等或大1。</p>
+<p>完全二叉树是由满二叉树引出来的，因此满二叉树一定是完全二叉树，完全二叉树不一定是满二叉树。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/alltree.png" alt="各种二叉树" title="">
+                </div>
+                <div class="image-caption">各种二叉树</div>
+            </figure></p>
+<h1 id="哈弗曼树"><a href="#哈弗曼树" class="headerlink" title="哈弗曼树"></a>哈弗曼树</h1><p>哈弗曼树可以设计出<strong>总长度最短的二进制前缀编码</strong><br>其构造方法是不断的构造新节点，取出<strong>权值最小的节点</strong>作为树的两个节点，并将新节点的权值设为两个节点的权值之和<br><code>WPL = 求和 ( 叶节点的权值 * 该叶节点到根节点的距离 )</code><br>WPL为带权路径长度，也是<strong>最终编码得到二进制编码的长度</strong><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/hafuman.png" alt="哈弗曼树" title="">
+                </div>
+                <div class="image-caption">哈弗曼树</div>
+            </figure></p>
+<h1 id="二叉查找树-Binary-Search-Tree"><a href="#二叉查找树-Binary-Search-Tree" class="headerlink" title="二叉查找树(Binary Search Tree)"></a>二叉查找树(Binary Search Tree)</h1><p>二叉查找树,也称二叉搜索树、有序二叉树（英语：ordered binary tree），排序二叉树（英语：sorted binary tree）.</p>
+<p>是指一棵空树或者具有下列性质的二叉树</p>
+<ul>
+<li>任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>任意节点的左、右子树也分别为二叉查找树；</li>
+<li>没有键值相等的节点。</li>
+</ul>
+<p>删除时要注意，如果删除的节点有左右子树，那么用左子树的最右节点(推荐)或者右子树的最左节点取代该删除节点</p>
+<p>二叉查找树的时间复杂度不是严格的log(N)，在最坏的情况下会出现“链表”的形式，复杂度退化到O(N)<br>因此有了AVL树(利用平衡因子), RB Tree红黑树(利用颜色), Treap(树和堆的结合)等来优化BST的最坏情况</p>
+<p>References:<br><a href="https://en.wikipedia.org/wiki/Binary_search_tree" target="_blank" rel="external">Binary_search_tree</a></p>
+<h2 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h2><p>在AVL树中任何节点的两个子树的高度最大差别为一<br>查找、插入和删除在平均和最坏情况下都是O(log n)<br>增加和删除可能需要通过一次或多次树旋转来重新平衡这个树</p>
+<p>节点的平衡因子是它的左子树的高度减去它的右子树的高度（有时相反）。带有平衡因子1、0或 -1的节点被认为是平衡的。带有平衡因子 -2或2的节点被认为是不平衡的，并需要重新平衡这个树。平衡因子可以直接存储在每个节点中，或从可能存储在节点中的子树高度计算出来</p>
+<p>References:<br><a href="https://en.wikipedia.org/wiki/AVL_tree" target="_blank" rel="external">AVL_tree</a></p>
+<h2 id="红黑树Red-Black-Tree"><a href="#红黑树Red-Black-Tree" class="headerlink" title="红黑树Red-Black Tree"></a>红黑树Red-Black Tree</h2><p>在O(log n)时间内做查找，插入和删除，这里的n是树中元素的数目。</p>
+<p>红黑树是每个节点都带有颜色属性的<strong>二叉查找树</strong>，颜色为红色或黑色。<br>在二叉查找树强制一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求：</p>
+<ul>
+<li>节点是红色或黑色。</li>
+<li>根是黑色。</li>
+<li>所有叶子都是黑色（叶子是NIL节点）。</li>
+<li>每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</li>
+<li>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
+</ul>
+<p><strong>红黑树的算法时间复杂度和AVL相同，但统计性能比AVL树更高.</strong></p>
+<p>详细内容请看<a href="http://duyao.github.io/2016/03/19/%E7%BA%A2%E9%BB%91%E6%A0%91/">红黑树</a></p>
+<h2 id="Treap"><a href="#Treap" class="headerlink" title="Treap"></a>Treap</h2><p>树和堆的合体，在树中维护一个”优先级”，”优先级”采用随机数的方法，但是”优先级”必须满足根堆的性质<br>插入原理与AVL相似</p>
+<p>References:<br><a href="http://www.cnblogs.com/huangxincheng/archive/2012/07/30/2614484.html" target="_blank" rel="external">树堆</a><br><a href="https://en.wikipedia.org/wiki/Treap" target="_blank" rel="external">Treap</a></p>
+<h2 id="伸展树-Splay-Tree"><a href="#伸展树-Splay-Tree" class="headerlink" title="伸展树(Splay Tree)"></a>伸展树(Splay Tree)</h2><p>能在O(log n)内完成插入、查找和删除操作。</p>
+<p>在伸展树上的一般操作都基于伸展操作：假设想要对一个二叉查找树执行一系列的查找操作，为了使整个查找时间更小，被查频率高的那些条目就应当经常处于靠近树根的位置。<br>于是想到设计一个简单方法， 在每次查找之后对树进行重构，把被查找的条目搬移到离树根近一些的地方。伸展树应运而生。<br>伸展树是一种自调整形式的二叉查找树，它会沿着从某个节点到树根之间的路径，通过一系列的旋转把这个节点搬移到树根去。</p>
+<p>它的优势在于不需要记录用于平衡树的冗余信息。<br>伸展树最显著的缺点是它有可能会变成一条链。这种情况可能发生在以非降顺序访问n个元素之后。然而均摊的最坏情况是对数级的——O(log n)</p>
+<p>References:<br><a href="http://www.cnblogs.com/huangxincheng/archive/2012/08/04/2623455.html" target="_blank" rel="external">伸展树</a><br><a href="https://en.wikipedia.org/wiki/Splay_tree" target="_blank" rel="external">Splay_tree</a></p>
+<h1 id="多向平衡查找树：B-树和B-树"><a href="#多向平衡查找树：B-树和B-树" class="headerlink" title="多向平衡查找树：B-树和B+树"></a>多向平衡查找树：B-树和B+树</h1><p>B-树<br>1.定义任意非叶子结点最多只有M个儿子；且M&gt;2；<br>2.根结点的儿子数为[2, M]；<br>3.除根结点以外的非叶子结点的儿子数为[M/2, M]；<br>4.每个结点存放至少M/2-1（取上整）和至多M-1个关键字；（至少2个关键字）<br>5.非叶子结点的关键字个数=指向儿子的指针个数-1；<br>6.非叶子结点的关键字：K[1], K[2], …, K[M-1]；且K[i] &lt; K[i+1]；<br>7.非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；<br>8.所有叶子结点位于同一层；<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/b.png" alt="b树和b+树" title="">
+                </div>
+                <div class="image-caption">b树和b+树</div>
+            </figure><br>B+树<br>B+树是B-树的变体，也是一种多路搜索树：<br>1.其定义基本与B-树同，除了：<br>2.非叶子结点的子树指针与关键字个数相同；<br>3.非叶子结点的子树指针P[i]，指向关键字值属于[K[i], K[i+1])的子树（B-树是开区间）；<br>5.为所有叶子结点增加一个链指针；<br>6.所有关键字都在叶子结点出现；</p>
+<p>B+树是B树的变形，它把所有的附属数据都放在叶子结点中，只将关键字和子女指针保存于内结点，内结点完全是索引的功能</p>
+<h2 id="查找过程"><a href="#查找过程" class="headerlink" title="查找过程"></a>查找过程</h2><p>假如每个盘块可以正好存放一个B树的结点（正好存放2个文件名）。那么一个BTNODE结点就代表一个盘块，而子树指针就是存放另外一个盘块的地址。<br>下面，咱们来模拟下查找文件29的过程：</p>
+<ol>
+<li>根据根结点指针找到文件目录的根磁盘块1，将其中的信息导入内存。【磁盘IO操作1次】   </li>
+<li>此时内存中有两个文件名17、35和三个存储其他磁盘页面地址的数据。根据算法我们发现：17&lt;29&lt;35，因此我们找到指针p2。</li>
+<li>根据p2指针，我们定位到磁盘块3，并将其中的信息导入内存。【磁盘IO操作 2次】   </li>
+<li>此时内存中有两个文件名26，30和三个存储其他磁盘页面地址的数据。根据算法我们发现：26&lt;29&lt;30，因此我们找到指针p2。</li>
+<li>根据p2指针，我们定位到磁盘块8，并将其中的信息导入内存。【磁盘IO操作 3次】   </li>
+<li>此时内存中有两个文件名28，29。根据算法我们查找到文件名29，并定位了该文件内存的磁盘地址。分析上面的过程，发现需要3 3次磁盘IO操作和次磁盘IO操作和3次内存查找 次内存查找操作。关于内存中的文件名查找，由于是一个有序表结构，可以利用折半查找提高效率。至于IO操作是影响整个B树查找效率的决定因素。</li>
+</ol>
+<p>B+树还有一个最大的好处，方便扫库，B树必须用中序遍历的方法按序扫库，而B+树直接从叶子结点挨个扫一遍就完了，B+树支持range-query非常方便，而B树不支持。这是数据库选用B+树的最主要原因。<br>由于存储介质的特性，磁盘本身存取就比主存慢很多，再加上机械运动耗费，磁盘的存取速度往往是主存的几百分之一，因此为了提高效率，要尽量减少磁盘I/O。<br>为了达到这个目的，磁盘往往不是严格按需读取，而是每次都会预读，即使只需要一个字节，磁盘也会从这个位置开始，顺序向后读取一定长度的数据放入内存。<br>这样做的理论依据是计算机科学中著名的局部性原理：当一个数据被用到时，其附近的数据也通常会马上被使用。程序运行期间所需要的数据通常比较集中。</p>
+<p><a href="http://www.ruanyifeng.com/blog/2014/07/database_implementation.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2014/07/database_implementation.html</a><br><a href="http://blog.csdn.net/l_griselda/article/details/8266014" target="_blank" rel="external">http://blog.csdn.net/l_griselda/article/details/8266014</a></p>
+<h1 id="字典树"><a href="#字典树" class="headerlink" title="字典树"></a>字典树</h1><p>通常用于查找字符串，比如在搜索框中搜索会自动提示，或者lucene<br>常用操作有 <a href="http://www.geeksforgeeks.org/trie-insert-and-search/" target="_blank" rel="external">插入和查找</a>, <a href="http://www.geeksforgeeks.org/trie-delete/" target="_blank" rel="external">删除</a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>习题 <a href="https://leetcode.com/problems/implement-trie-prefix-tree/" target="_blank" rel="external">208. Implement Trie (Prefix Tree)</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line">public static class TrieNode &#123;</div><div class="line">	char val;</div><div class="line">	TrieNode[] children;</div><div class="line">	boolean leaf;</div><div class="line"></div><div class="line">	// Initialize your data structure here.</div><div class="line">	public TrieNode() &#123;</div><div class="line">		this.children = new TrieNode[26];</div><div class="line">		leaf = false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public TrieNode(char c) &#123;</div><div class="line">		this.val = c;</div><div class="line">		children = new TrieNode[26];</div><div class="line">		leaf = false;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">public static class Trie &#123;</div><div class="line">	private TrieNode root;</div><div class="line"></div><div class="line">	public Trie() &#123;</div><div class="line">		root = new TrieNode();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	// Inserts a word into the trie.</div><div class="line">	public void insert(String word) &#123;</div><div class="line">		TrieNode cur = root;</div><div class="line">		for (int i = 0; i &lt; word.length(); i++) &#123;</div><div class="line">			int index = word.charAt(i) - &apos;a&apos;;</div><div class="line">			TrieNode tmp = cur.children[index];</div><div class="line">			if (tmp == null) &#123;</div><div class="line">				tmp = new TrieNode(word.charAt(i));</div><div class="line">				cur.children[index] = tmp;</div><div class="line">			&#125;</div><div class="line">			if (i == word.length() - 1) &#123;</div><div class="line">				tmp.leaf = true;</div><div class="line">			&#125;</div><div class="line">			cur = tmp;</div><div class="line"></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	// Returns if the word is in the trie.</div><div class="line">	public boolean search(String word) &#123;</div><div class="line">		TrieNode cur = root;</div><div class="line">		for (int i = 0; i &lt; word.length(); i++) &#123;</div><div class="line">			int index = word.charAt(i) - &apos;a&apos;;</div><div class="line">			TrieNode tmp = cur.children[index];</div><div class="line">			if (tmp != null) &#123;</div><div class="line">				if (i == word.length() - 1 &amp;&amp; tmp.leaf) &#123;</div><div class="line">					return true;</div><div class="line">				&#125;</div><div class="line">				cur = tmp;</div><div class="line">			&#125; else &#123;</div><div class="line">				// 无此节点</div><div class="line">				return false;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	// Returns if there is any word in the trie</div><div class="line">	// that starts with the given prefix.</div><div class="line">	public boolean startsWith(String prefix) &#123;</div><div class="line">		TrieNode cur = root;</div><div class="line">		for (int i = 0; i &lt; prefix.length(); i++) &#123;</div><div class="line">			int index = prefix.charAt(i) - &apos;a&apos;;</div><div class="line">			TrieNode tmp = cur.children[index];</div><div class="line">			if (tmp != null) &#123;</div><div class="line">				cur = tmp;</div><div class="line">			&#125; else &#123;</div><div class="line">				// 无此节点</div><div class="line">				return false;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line">		//prefix是该字符串也可以</div><div class="line">		return true;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Your Trie object will be instantiated and called as such:</div><div class="line">// Trie trie = new Trie();</div><div class="line">// trie.insert(&quot;somestring&quot;);</div><div class="line">// trie.search(&quot;key&quot;);</div></pre></td></tr></table></figure>
+<h2 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h2><p>字典树是一种空间换时间的数据结构，子节点存储着每一个可能的值，所以可能节点个数非常多<br>而布隆过滤器是一个大数据场景下的替换字典树的数据结构<br>其原理是当一个元素被加入集合时，通过K个散列函数将这个元素映射成一个位数组中的K个点，把它们置为1。<br>检索时，我们只要看看这些点是不是都是1就（大约）知道集合中有没有它了：<strong>如果这些点有任何一个0，则被检元素一定不在</strong>；<strong>如果都是1，则被检元素很可能在</strong>。</p>
+<p>相比于其它的数据结构，布隆过滤器在空间和时间方面都有巨大的优势。布隆过滤器存储空间和插入/查询时间都是常数（O(k)）。<br>另外，散列函数相互之间没有关系，方便由硬件并行实现。布隆过滤器不需要存储元素本身，在某些对保密要求非常严格的场合有优势。<br>但是布隆过滤器的缺点和优点一样明显。误算率是其中之一。随着存入的元素数量增加，误算率随之增加。但是如果元素数量太少，则使用散列表足矣。<br>另外，一般情况下不能从布隆过滤器中删除元素。我们很容易想到把位数组变成整数数组，每插入一个元素相应的计数器加1, 这样删除元素时将计数器减掉就可以了。然而要保证安全地删除元素并非如此简单。首先我们必须保证删除的元素的确在布隆过滤器里面。这一点单凭这个过滤器是无法保证的。另外计数器回绕也会造成问题。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/bloomfilter.png" alt="布隆过滤器" title="">
+                </div>
+                <div class="image-caption">布隆过滤器</div>
+            </figure>
+<p>上图中，m=18，k=3；插入x是，三个hash函数分别得到蓝线对应的三个值，并将对应的位向量改为1，插入y，z时，类似的，分别将红线，紫线对应的位向量改为1。查找时，当查找x时，三个hash值对应的位向量都为1，因此判断x在此数据集中。y，z也是如此。但是查找w时，w有个hash值对应的位向量为0，因此可以判断不在此集合中。但是，假如w的最后那个hash值比上图中的大1，这是就会认为w在此集合中，而事实上，w可能不在此集合中，因此可能出现误报。显然的，插入数据越多，1的位数越多，误报的概率越大。</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8</a><br><a href="http://www.cnblogs.com/allensun/archive/2011/02/16/1956532.html" target="_blank" rel="external">http://www.cnblogs.com/allensun/archive/2011/02/16/1956532.html</a></p>
+<h1 id="后缀树"><a href="#后缀树" class="headerlink" title="后缀树"></a>后缀树</h1><h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><p>堆肯定是一棵平衡二叉树(×)<br>因堆是二叉树，但不是二叉排序树，平衡二叉树是二叉排序树</p>
+<h1 id="jvm-堆栈"><a href="#jvm-堆栈" class="headerlink" title="jvm 堆栈"></a>jvm 堆栈</h1><h1 id="kmp"><a href="#kmp" class="headerlink" title="kmp"></a>kmp</h1><h1 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h1>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-03T11:40:28.000Z" itemprop="dateUpdated">2017年4月3日 19:40</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/10/二叉树及其相关/" target="_blank" rel="external">http://duyao.github.io/2017/03/10/二叉树及其相关/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/10/二叉树及其相关/&title=《二叉树及其相关》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/10/二叉树及其相关/&title=《二叉树及其相关》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/10/二叉树及其相关/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《二叉树及其相关》 — Du Yao's blog&url=http://duyao.github.io/2017/03/10/二叉树及其相关/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/10/二叉树及其相关/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/12/String相关/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">String相关</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/08/具体的集合/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">具体的集合</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="二叉树及其相关" data-title="二叉树及其相关" data-url="http://duyao.github.io/2017/03/10/二叉树及其相关/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/10/二叉树及其相关/&title=《二叉树及其相关》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/10/二叉树及其相关/&title=《二叉树及其相关》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/10/二叉树及其相关/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《二叉树及其相关》 — Du Yao's blog&url=http://duyao.github.io/2017/03/10/二叉树及其相关/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/10/二叉树及其相关/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/10/二叉树及其相关/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

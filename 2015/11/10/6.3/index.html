@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>6.3 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="计算数组的小和题目数组小和的定义如下：例如数组s=[1,3,5,2,4,6]，在s[0]的左边小于等于s[0]的数的和为0，在s[1]的左边小于等于s[1]的数的和为1，在s[2]的左边小于等于s[2]的数的和为1+3=4，在s[3]的左边小于等于s[3]的数的和为1，在s[4]的左边小于等于s[4]的数的和为1+3+2=6，在s[5]的左边小于等于s[5]的数的和为1+3+5+2+4=15,所以">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.3">
+<meta property="og:url" content="http://duyao.github.io/2015/11/10/6.3/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="计算数组的小和题目数组小和的定义如下：例如数组s=[1,3,5,2,4,6]，在s[0]的左边小于等于s[0]的数的和为0，在s[1]的左边小于等于s[1]的数的和为1，在s[2]的左边小于等于s[2]的数的和为1+3=4，在s[3]的左边小于等于s[3]的数的和为1，在s[4]的左边小于等于s[4]的数的和为1+3+2=6，在s[5]的左边小于等于s[5]的数的和为1+3+5+2+4=15,所以">
+<meta property="og:updated_time" content="2015-11-12T02:33:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6.3">
+<meta name="twitter:description" content="计算数组的小和题目数组小和的定义如下：例如数组s=[1,3,5,2,4,6]，在s[0]的左边小于等于s[0]的数的和为0，在s[1]的左边小于等于s[1]的数的和为1，在s[2]的左边小于等于s[2]的数的和为1+3=4，在s[3]的左边小于等于s[3]的数的和为1，在s[4]的左边小于等于s[4]的数的和为1+3+2=6，在s[5]的左边小于等于s[5]的数的和为1+3+5+2+4=15,所以">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">6.3</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">6.3</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-10T13:54:57.000Z" itemprop="datePublished" class="page-time">
+  2015-11-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#计算数组的小和"><span class="post-toc-number">1.</span> <span class="post-toc-text">计算数组的小和</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">代码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-6.3"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">6.3</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月10日 21:54" datetime="2015-11-10T13:54:57.000Z"  itemprop="datePublished">2015-11-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="计算数组的小和"><a href="#计算数组的小和" class="headerlink" title="计算数组的小和"></a>计算数组的小和</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>数组小和的定义如下：<br>例如数组s=[1,3,5,2,4,6]，<br>在s[0]的左边小于等于s[0]的数的和为0，<br>在s[1]的左边小于等于s[1]的数的和为1，<br>在s[2]的左边小于等于s[2]的数的和为1+3=4，<br>在s[3]的左边小于等于s[3]的数的和为1，<br>在s[4]的左边小于等于s[4]的数的和为1+3+2=6，<br>在s[5]的左边小于等于s[5]的数的和为1+3+5+2+4=15,<br>所以s的小和=0+1+4+1+6+15=27。<br>给定一个数组s，实现函数返回s的小和。<br><a id="more"></a></p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>归并排序merge sort<br>和归并相同，先分组，然后合并<br>合并的时候先算小和，再排序<br>算小和的规则</p>
+<ul>
+<li>左边小于等于右边的，可以算小和=当前数字*右边比该数字大的个数，然后在排序</li>
+<li>左边大与右边，只排序</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line">public static int getSmallSum(int[] a)&#123;</div><div class="line">	</div><div class="line">	if(a.length == 1 || a == null || a.length == 0)&#123;</div><div class="line">		return 0;</div><div class="line">	&#125; </div><div class="line">	</div><div class="line">	int ans = merge(a, 0, a.length-1);</div><div class="line">	return ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static int merge(int[] a, int low, int high)&#123;</div><div class="line">	if(low == high)&#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	int mid = (low + high)/2;</div><div class="line">	int start1 = low, end1 = mid;</div><div class="line">	int start2 = mid+1, end2 = high;</div><div class="line">	//和归并排序相同，就是算小和不仅排序还要算和</div><div class="line">	return merge(a, start1, end1) + merge(a, start2, end2) + sum(a, low, high);</div><div class="line">	</div><div class="line">	</div><div class="line">	//由于要算小和，每次相加，因此不能像归并排序那样，把后面的排序也写进来，必须分开写，才能算和</div><div class="line">//		int k = 0;</div><div class="line">//		int[] reg = new int[high-low+1];</div><div class="line">//		int tmpSum = 0;</div><div class="line">//		//归并排序中，下面的步骤是排序，这里是算小和加排序</div><div class="line">//		while(start1 &lt;= end1 &amp;&amp; start2 &lt;= end2)&#123;</div><div class="line">//			//左边小于等于右边，算小和且排序</div><div class="line">//			if(a[start1] &lt;= a[start2])&#123;</div><div class="line">//				tmpSum += a[start1]*(end2-start2+1);</div><div class="line">//				reg[k++] = a[start1++];</div><div class="line">//			&#125;else&#123;</div><div class="line">//				//只排序，不算和</div><div class="line">//				reg[k++] = a[start2++];</div><div class="line">//			&#125;</div><div class="line">//			</div><div class="line">//		&#125;</div><div class="line">//		while(start1 &lt;= end1)&#123;</div><div class="line">//			reg[k++] = a[start1++];</div><div class="line">//		&#125;</div><div class="line">//		while(start2 &lt;= end2)&#123;</div><div class="line">//			reg[k++] = a[start2++];</div><div class="line">//		&#125;</div><div class="line">//		for(int i = low, j = 0; i &lt;= high &amp;&amp; j&lt;=k; i++,j++)&#123;</div><div class="line">//			a[i] = reg[j];</div><div class="line">//		&#125;</div><div class="line">//		return tmpSum;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static int sum(int[] a, int low, int high)&#123;</div><div class="line">	</div><div class="line">	int mid = (low + high)/2;</div><div class="line">	int start1 = low, end1 = mid;</div><div class="line">	int start2 = mid+1, end2 = high;</div><div class="line">	</div><div class="line">	//k是reg数组的位置</div><div class="line">	int k = 0;</div><div class="line">	//reg存放排好序的新数组</div><div class="line">	int[] reg = new int[high-low+1];</div><div class="line">	//tmpSum小和</div><div class="line">	int tmpSum = 0;</div><div class="line">	//归并排序中，下面的步骤是排序，这里是算小和加排序</div><div class="line">	while(start1 &lt;= end1 &amp;&amp; start2 &lt;= end2)&#123;</div><div class="line">		//左边小于等于右边，算小和且排序</div><div class="line">		if(a[start1] &lt;= a[start2])&#123;</div><div class="line">			//注意这里是小的数字乘以比其大的数字的个数</div><div class="line">			tmpSum += a[start1]*(end2-start2+1);</div><div class="line">			//排序</div><div class="line">			reg[k++] = a[start1++];</div><div class="line">		&#125;else&#123;</div><div class="line">			//只排序，不算和</div><div class="line">			reg[k++] = a[start2++];</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	//剩余的排序</div><div class="line">	while(start1 &lt;= end1)&#123;</div><div class="line">		reg[k++] = a[start1++];</div><div class="line">	&#125;</div><div class="line">	while(start2 &lt;= end2)&#123;</div><div class="line">		reg[k++] = a[start2++];</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	for(int i = low, j = 0; i &lt;= high &amp;&amp; j&lt;=k; i++,j++)&#123;</div><div class="line">		//把排好序的数组赋值给a</div><div class="line">		a[i] = reg[j];</div><div class="line">	&#125;</div><div class="line">	return tmpSum;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static void main(String[] args) &#123;</div><div class="line">	//int[] a = &#123;1,3,5,2,4,6&#125;;</div><div class="line">	int[] a = &#123;1,2,3,4,5,6&#125;;</div><div class="line">	int ans = getSmallSum(a);</div><div class="line">	System.out.println(ans);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-12T02:33:50.000Z" itemprop="dateUpdated">2015年11月12日 10:33</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/10/6.3/" target="_blank" rel="external">http://duyao.github.io/2015/11/10/6.3/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/10/6.3/&title=《6.3》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/10/6.3/&title=《6.3》 — Du Yao's blog&source=计算数组的小和题目数组小和的定义如下：例如数组s=[1,3,5,2,4,6]，在s[0]的左边小于等于s[0]的数的和为0，在s[1]的左边小于等于s[1..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/10/6.3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《6.3》 — Du Yao's blog&url=http://duyao.github.io/2015/11/10/6.3/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/10/6.3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/12/hibernate/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">O/R Mapping</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/10/6.2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">6.2</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="6.3" data-title="6.3" data-url="http://duyao.github.io/2015/11/10/6.3/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/10/6.3/&title=《6.3》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/10/6.3/&title=《6.3》 — Du Yao's blog&source=计算数组的小和题目数组小和的定义如下：例如数组s=[1,3,5,2,4,6]，在s[0]的左边小于等于s[0]的数的和为0，在s[1]的左边小于等于s[1..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/10/6.3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《6.3》 — Du Yao's blog&url=http://duyao.github.io/2015/11/10/6.3/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/10/6.3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/10/6.3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

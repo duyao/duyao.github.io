@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>web开发 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="springmvc,mybatis,velocity">
+    <meta name="description" content="springmvcspringmvc主要是DipatcherServlet完成的。DipatcherServlet其本身是一个Servlet,他继承了HttpServlet，因此在servlet启动时调用init方法就可以把DipatcherServlet启动起来。DipatcherServlet在启动时做了很多事情，主要的是初始化了HandlerMappings映射关系和ViewResolver">
+<meta name="keywords" content="springmvc,mybatis,velocity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web开发">
+<meta property="og:url" content="http://duyao.github.io/2017/03/20/web开发/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="springmvcspringmvc主要是DipatcherServlet完成的。DipatcherServlet其本身是一个Servlet,他继承了HttpServlet，因此在servlet启动时调用init方法就可以把DipatcherServlet启动起来。DipatcherServlet在启动时做了很多事情，主要的是初始化了HandlerMappings映射关系和ViewResolver">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/springmvc1.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/springmvc.jpg">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/ibatis.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/mb1.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/mb2.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/velocity.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/AST.png">
+<meta property="og:updated_time" content="2017-05-13T13:41:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web开发">
+<meta name="twitter:description" content="springmvcspringmvc主要是DipatcherServlet完成的。DipatcherServlet其本身是一个Servlet,他继承了HttpServlet，因此在servlet启动时调用init方法就可以把DipatcherServlet启动起来。DipatcherServlet在启动时做了很多事情，主要的是初始化了HandlerMappings映射关系和ViewResolver">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/springmvc1.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">web开发</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">web开发</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-20T00:48:08.000Z" itemprop="datePublished" class="page-time">
+  2017-03-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#springmvc"><span class="post-toc-number">1.</span> <span class="post-toc-text">springmvc</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工作过程"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">工作过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DispatcherServlet中使用的特殊的Bean"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">DispatcherServlet中使用的特殊的Bean</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置文件"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">配置文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用注解"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">常用注解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RequestMapping"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">@RequestMapping</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RequestParam"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">@RequestParam</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#PathVariable"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">@PathVariable</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RequestBody"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">@RequestBody</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ModelAttribute"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">@ModelAttribute</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注释方法"><span class="post-toc-number">1.4.5.1.</span> <span class="post-toc-text">注释方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注释参数–数据绑定"><span class="post-toc-number">1.4.5.2.</span> <span class="post-toc-text">注释参数–数据绑定</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#redirect和forward"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">redirect和forward</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#springmvc与struts2的区别"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">springmvc与struts2的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程安全问题"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">线程安全问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ibatis"><span class="post-toc-number">2.</span> <span class="post-toc-text">ibatis</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#mybatis初始化过程"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">mybatis初始化过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mybatis数据源与连接池"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Mybatis数据源与连接池</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建DataSource"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">创建DataSource</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建connection"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">创建connection</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用完connection"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">用完connection</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缓存"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">缓存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一级缓存"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">一级缓存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一级缓存的生命周期"><span class="post-toc-number">2.3.1.1.</span> <span class="post-toc-text">一级缓存的生命周期</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cache原理"><span class="post-toc-number">2.3.1.2.</span> <span class="post-toc-text">Cache原理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.3.1.3.</span> <span class="post-toc-text">总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二级缓存"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">二级缓存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#具备的条件"><span class="post-toc-number">2.3.2.1.</span> <span class="post-toc-text">具备的条件</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#与-区别"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">#与$区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#velocity"><span class="post-toc-number">3.</span> <span class="post-toc-text">velocity</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#过程"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于AST解析"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">关于AST解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用优化技巧"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">常用优化技巧</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Velocity与JSP"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">Velocity与JSP</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-web开发"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">web开发</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月20日 8:48" datetime="2017-03-20T00:48:08.000Z"  itemprop="datePublished">2017-03-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="springmvc"><a href="#springmvc" class="headerlink" title="springmvc"></a>springmvc</h1><p>springmvc主要是<code>DipatcherServlet</code>完成的。<br><code>DipatcherServlet</code>其本身是一个Servlet,他继承了HttpServlet，因此在servlet启动时调用init方法就可以把<code>DipatcherServlet</code>启动起来。<br><code>DipatcherServlet</code>在启动时做了很多事情，主要的是初始化了<code>HandlerMappings</code>映射关系和<code>ViewResolvers</code>解析页面、<code>HandlerAdapters</code>实现业务逻辑的handler实例对象</p>
+<p>在<code>HandlerAdapters</code>中可以得到<code>ModelAndView</code>。<br><code>ModelAndView</code>是view和handler实例对象的纽带<br><code>ViewResolvers</code>可以完成设置页面渲染比如是freemaker或者velocity</p>
+<p><a href="http://jinnianshilongnian.iteye.com/blog/1617451" target="_blank" rel="external">http://jinnianshilongnian.iteye.com/blog/1617451</a></p>
+<h2 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/springmvc1.png" alt="springmvc工作过程" title="">
+                </div>
+                <div class="image-caption">springmvc工作过程</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/springmvc.jpg" alt="springmvc工作过程" title="">
+                </div>
+                <div class="image-caption">springmvc工作过程</div>
+            </figure>
+<p>工作原理:<br>(在HandlerMapping以前做的事情：1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传解析；)<br>1、客户端发出一个http请求给web服务器，web服务器对http请求进行解析，如果匹配DispatcherServlet的请求映射路径（在web.xml中指定），web容器将请求转交给DispatcherServlet.</p>
+<p>2、DipatcherServlet接收到这个请求之后将根据请求的信息（包括URL、Http方法、请求报文头和请求参数Cookie等）以及HandlerMapping的配置找到处理请求的处理器（Handler）。</p>
+<p>3-4、DispatcherServlet根据HandlerMapping找到对应的Handler,将处理权交给Handler（Handler将具体的处理进行封装），再由具体的HandlerAdapter对Handler进行具体的调用。</p>
+<p>5、Handler对数据处理完成以后将返回一个ModelAndView()对象给DispatcherServlet。</p>
+<p>6、Handler返回的ModelAndView()只是一个逻辑视图并不是一个正式的视图，DispatcherSevlet通过ViewResolver将逻辑视图转化为真正的视图View。</p>
+<p>7、Dispatcher通过model解析出ModelAndView()中的参数进行解析最终展现出完整的view并返回给客户端。</p>
+<h2 id="DispatcherServlet中使用的特殊的Bean"><a href="#DispatcherServlet中使用的特殊的Bean" class="headerlink" title="DispatcherServlet中使用的特殊的Bean"></a>DispatcherServlet中使用的特殊的Bean</h2><p>DispatcherServlet默认使用WebApplicationContext作为上下文，因此我们来看一下该上下文中有哪些特殊的Bean：<br>1、Controller：处理器/页面控制器，做的是MVC中的C的事情，但控制逻辑转移到前端控制器了，用于对请求进行处理；<br>2、HandlerMapping：请求到处理器的映射，如果映射成功返回一个HandlerExecutionChain对象（包含一个Handler处理器（页面控制器）对象、多个HandlerInterceptor拦截器）对象；如BeanNameUrlHandlerMapping将URL与Bean名字映射，映射成功的Bean就是此处的处理器；<br>3、HandlerAdapter：HandlerAdapter将会把处理器包装为适配器，从而支持多种类型的处理器，即适配器设计模式的应用，从而很容易支持很多类型的处理器；如SimpleControllerHandlerAdapter将对实现了Controller接口的Bean进行适配，并且掉处理器的handleRequest方法进行功能处理；<br>4、ViewResolver：ViewResolver将把逻辑视图名解析为具体的View，通过这种策略模式，很容易更换其他视图技术；如InternalResourceViewResolver将逻辑视图名映射为jsp视图；<br>5、LocalResover：本地化解析，因为Spring支持国际化，因此LocalResover解析客户端的Locale信息从而方便进行国际化；<br>6、ThemeResovler：主题解析，通过它来实现一个页面多套风格，即常见的类似于软件皮肤效果；<br>7、MultipartResolver：文件上传解析，用于支持文件上传；<br>8、HandlerExceptionResolver：处理器异常解析，可以将异常映射到相应的统一错误界面，从而显示用户友好的界面（而不是给用户看到具体的错误信息）；<br>9、RequestToViewNameTranslator：当处理器没有返回逻辑视图名等相关信息时，自动将请求URL映射为逻辑视图名；<br>10、FlashMapManager：用于管理FlashMap的策略接口，FlashMap用于存储一个请求的输出，当进入另一个请求时作为该请求的输入，通常用于重定向场景，后边会细述。</p>
+<p><a href="http://jinnianshilongnian.iteye.com/blog/1602617" target="_blank" rel="external">http://jinnianshilongnian.iteye.com/blog/1602617</a><br>更多资料<br><a href="http://jinnianshilongnian.iteye.com/blog/1752171" target="_blank" rel="external">http://jinnianshilongnian.iteye.com/blog/1752171</a></p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>在<code>web.xml</code>中配置springmvc和spring的applicationcontext<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;web-app version=&quot;2.4&quot; xmlns=&quot;http://java.sun.com/xml/ns/j2ee&quot;</div><div class="line">	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">	xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/j2ee</div><div class="line">	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd&quot;&gt;</div><div class="line">  &lt;display-name&gt;Spring MVC Study&lt;/display-name&gt;</div><div class="line">  &lt;!-- Spring应用上下文， 理解层次化的ApplicationContext --&gt;</div><div class="line">  &lt;context-param&gt;</div><div class="line"> 		&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">		&lt;param-value&gt;/WEB-INF/configs/spring/applicationContext*.xml&lt;/param-value&gt;</div><div class="line">  &lt;/context-param&gt;</div><div class="line"></div><div class="line">  &lt;listener&gt;</div><div class="line">		&lt;listener-class&gt;</div><div class="line">			org.springframework.web.context.ContextLoaderListener</div><div class="line">		&lt;/listener-class&gt;</div><div class="line">  &lt;/listener&gt;</div><div class="line"></div><div class="line">  &lt;!-- DispatcherServlet, Spring MVC的核心 --&gt;</div><div class="line">  &lt;servlet&gt;</div><div class="line">		&lt;servlet-name&gt;mvc-dispatcher&lt;/servlet-name&gt;</div><div class="line">		&lt;servlet-class&gt; org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</div><div class="line">		&lt;!-- DispatcherServlet对应的上下文配置， 默认为/WEB-INF/$servlet-name$-servlet.xml</div><div class="line">		 --&gt;</div><div class="line">		&lt;init-param&gt;</div><div class="line">          &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">          &lt;param-value&gt;/WEB-INF/configs/spring/mvc-dispatcher-servlet.xml&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">		&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</div><div class="line">	&lt;/servlet&gt;</div><div class="line">	&lt;servlet-mapping&gt;</div><div class="line">		&lt;servlet-name&gt;mvc-dispatcher&lt;/servlet-name&gt;</div><div class="line">	    &lt;!-- mvc-dispatcher拦截所有的请求--&gt;</div><div class="line">		&lt;url-pattern&gt;/&lt;/url-pattern&gt;</div><div class="line">	&lt;/servlet-mapping&gt;</div><div class="line">&lt;/web-app&gt;</div></pre></td></tr></table></figure></p>
+<p>继续对springmvc进行详细配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</div><div class="line">	xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</div><div class="line">	xsi:schemaLocation=&quot;</div><div class="line">        http://www.springframework.org/schema/beans</div><div class="line">        http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">        http://www.springframework.org/schema/context</div><div class="line">        http://www.springframework.org/schema/context/spring-context.xsd</div><div class="line">        http://www.springframework.org/schema/mvc</div><div class="line">        http://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;</div><div class="line"></div><div class="line">	&lt;!-- 本配置文件是工名为mvc-dispatcher的DispatcherServlet使用， 提供其相关的Spring MVC配置 --&gt;</div><div class="line"></div><div class="line">	&lt;!-- 启用Spring基于annotation的DI, 使用户可以在Spring MVC中使用Spring的强大功能。 激活 @Required</div><div class="line">		@Autowired,JSR 250&apos;s @PostConstruct, @PreDestroy and @Resource 等标注 --&gt;</div><div class="line">	&lt;context:annotation-config /&gt;</div><div class="line"></div><div class="line">	&lt;!-- DispatcherServlet上下文， 只管理@Controller类型的bean， 忽略其他型的bean, 如@Service --&gt;</div><div class="line">	&lt;context:component-scan base-package=&quot;com.imooc.mvcdemo&quot;&gt;</div><div class="line">		&lt;context:include-filter type=&quot;annotation&quot;</div><div class="line">			expression=&quot;org.springframework.stereotype.Controller&quot; /&gt;</div><div class="line">	&lt;/context:component-scan&gt;</div><div class="line"></div><div class="line">	&lt;!-- HandlerMapping, 无需配置， Spring MVC可以默认启动。 DefaultAnnotationHandlerMapping</div><div class="line">		annotation-driven HandlerMapping --&gt;</div><div class="line"></div><div class="line">	&lt;!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 --&gt;</div><div class="line">	&lt;mvc:annotation-driven /&gt;</div><div class="line"></div><div class="line">	&lt;!-- 静态资源处理， css， js， imgs --&gt;</div><div class="line">	&lt;mvc:resources mapping=&quot;/resources/**&quot; location=&quot;/resources/&quot; /&gt;</div><div class="line"></div><div class="line"></div><div class="line">	&lt;!-- 配置ViewResolver。 可以用多个ViewResolver。 使用order属性排序。 InternalResourceViewResolver放在最后。 --&gt;</div><div class="line">	&lt;bean</div><div class="line">		class=&quot;org.springframework.web.servlet.view.ContentNegotiatingViewResolver&quot;&gt;</div><div class="line">		&lt;property name=&quot;order&quot; value=&quot;1&quot; /&gt;</div><div class="line">		&lt;property name=&quot;mediaTypes&quot;&gt;</div><div class="line">			&lt;map&gt;</div><div class="line">				&lt;entry key=&quot;json&quot; value=&quot;application/json&quot; /&gt;</div><div class="line">				&lt;entry key=&quot;xml&quot; value=&quot;application/xml&quot; /&gt;</div><div class="line">				&lt;entry key=&quot;htm&quot; value=&quot;text/html&quot; /&gt;</div><div class="line">			&lt;/map&gt;</div><div class="line">		&lt;/property&gt;</div><div class="line"></div><div class="line">		&lt;property name=&quot;defaultViews&quot;&gt;</div><div class="line">			&lt;list&gt;</div><div class="line">				&lt;!-- JSON View --&gt;</div><div class="line">				&lt;bean</div><div class="line">					class=&quot;org.springframework.web.servlet.view.json.MappingJackson2JsonView&quot;&gt;</div><div class="line">				&lt;/bean&gt;</div><div class="line">			&lt;/list&gt;</div><div class="line">		&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;ignoreAcceptHeader&quot; value=&quot;true&quot; /&gt;</div><div class="line">	&lt;/bean&gt;</div><div class="line"></div><div class="line">	&lt;bean</div><div class="line">		class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</div><div class="line">		&lt;property name=&quot;viewClass&quot;</div><div class="line">			value=&quot;org.springframework.web.servlet.view.JstlView&quot; /&gt;</div><div class="line">		&lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsps/&quot; /&gt;</div><div class="line">		&lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;</div><div class="line">	&lt;/bean&gt;</div><div class="line"></div><div class="line"></div><div class="line">	&lt;!--200*1024*1024即200M resolveLazily属性启用是为了推迟文件解析，以便捕获文件大小异常 --&gt;</div><div class="line">	&lt;bean id=&quot;multipartResolver&quot;</div><div class="line">		class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;</div><div class="line">		&lt;property name=&quot;maxUploadSize&quot; value=&quot;209715200&quot; /&gt;</div><div class="line">		&lt;property name=&quot;defaultEncoding&quot; value=&quot;UTF-8&quot; /&gt;</div><div class="line">		&lt;property name=&quot;resolveLazily&quot; value=&quot;true&quot; /&gt;</div><div class="line">	&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="常用注解"><a href="#常用注解" class="headerlink" title="常用注解"></a>常用注解</h2><h3 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a><code>@RequestMapping</code></h3><ul>
+<li>value：指定请求的实际url</li>
+<li><p>method：指定请求的method类型， GET、POST、PUT、DELETE等<br><code>@RequestMapping(value=&quot;/get/{bookid}&quot;,method={RequestMethod.GET,RequestMethod.POST})</code></p>
+</li>
+<li><p>params：指定request中必须包含某些参数值是，才让该方法处理。<br><code>@RequestMapping(params=&quot;action=del&quot;)，请求参数包含“action=del”,如：http://localhost:8080/book?action=del</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Controller</div><div class="line">@RequestMapping(&quot;/owners/&#123;ownerId&#125;&quot;)</div><div class="line">public class RelativePathUriTemplateController &#123;</div><div class="line"></div><div class="line">  @RequestMapping(value = &quot;/pets/&#123;petId&#125;&quot;, method = RequestMethod.GET, params=&quot;myParam=myValue&quot;)</div><div class="line">  public void findPet(@PathVariable String ownerId, @PathVariable String petId, Model model) &#123;    </div><div class="line">    // implementation omitted</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>仅处理请求中包含了名为“myParam”，值为“myValue”的请求。</p>
+<ul>
+<li><p>headers：指定request中必须包含某些指定的header值，才能让该方法处理请求。<br><code>@RequestMapping(value=&quot;/header/id&quot;, headers = &quot;Accept=application/json&quot;)</code>：表示请求的URL必须为“/header/id 且请求头中必须有“Accept =application/json”参数即可匹配。</p>
+</li>
+<li><p>consumes：指定处理请求的提交内容类型（Content-Type），例如application/json, text/html。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Controller</div><div class="line">@RequestMapping(value = &quot;/pets&quot;, method = RequestMethod.POST, consumes=&quot;application/json&quot;)</div><div class="line">public void addPet(@RequestBody Pet pet, Model model) &#123;    </div><div class="line">    // implementation omitted</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>方法仅处理request Content-Type为“application/json”类型的请求。</p>
+<ul>
+<li>produces: 指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回。</li>
+</ul>
+<h3 id="RequestParam"><a href="#RequestParam" class="headerlink" title="@RequestParam"></a><code>@RequestParam</code></h3><p><code>@RequestParam</code>用于将请求参数区数据映射到功能处理方法的参数上。<br>比如<code>public String requestparam1(@RequestParam String username)</code> 请求中包含username参数（如/requestparam1?username=zhang），则自动传入。</p>
+<p><code>@RequestParam</code>有以下三个参数：</p>
+<ul>
+<li>value：参数名字，即入参的请求参数名字，如username表示请求的参数区中的名字为username的参数的值将传入；</li>
+<li>required：是否必须，默认是true，表示请求中一定要有相应的参数，否则将抛出异常；</li>
+<li>defaultValue：默认值，表示如果请求中没有同名参数时的默认值，设置该参数时，自动将required设为false。</li>
+</ul>
+<p><code>public String requestparam4(@RequestParam(value=&quot;username&quot;,required=false) String username)</code><br>表示请求中可以没有名字为username的参数，如果没有默认为null，此处需要注意如下几点：<br>原子类型：必须有值，否则抛出异常，如果允许空值请使用包装类代替。<br>Boolean包装类型：默认Boolean.FALSE，其他引用类型默认为null。</p>
+<p>如果请求参数类似于url?role=admin&amp;rule=user，则实际roleList参数入参的数据为“admin,user”，即多个数据之间使用“，”分割；<br>我们应该使用如下方式来接收多个请求参数：<br>a）<code>public String requestparam7(@RequestParam(value=&quot;role&quot;) String[] roleList)</code><br>b)<code>public String requestparam8(@RequestParam(value=&quot;list&quot;) List&lt;String&gt; list)</code></p>
+<h3 id="PathVariable"><a href="#PathVariable" class="headerlink" title="@PathVariable"></a><code>@PathVariable</code></h3><p>@PathVariable用于将请求URL中的模板变量映射到功能处理方法的参数上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@RequestMapping(value=&quot;/users/&#123;userId&#125;/topics/&#123;topicId&#125;&quot;)</div><div class="line">public String test(</div><div class="line">       @PathVariable(value=&quot;userId&quot;) int userId,</div><div class="line">       @PathVariable(value=&quot;topicId&quot;) int topicId)</div></pre></td></tr></table></figure></p>
+<p>如请求的URL为“控制器URL/users/123/topics/456”，则自动将URL中模板变量{userId}和{topicId}绑定到通过<code>@PathVariable</code>注解的同名参数上，即入参后userId=123、topicId=456。</p>
+<h3 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a><code>@RequestBody</code></h3><p><code>@ResponseBody</code>作用：<br>该注解用于将Controller的方法返回的对象，通过适当的HttpMessageConverter转换为指定格式后，写入到Response对象的body数据区。<br>使用时机：<br>返回的数据不是html标签的页面，而是其他某种格式的数据时（如json、xml等）使用；</p>
+<h3 id="ModelAttribute"><a href="#ModelAttribute" class="headerlink" title="@ModelAttribute"></a><code>@ModelAttribute</code></h3><h4 id="注释方法"><a href="#注释方法" class="headerlink" title="注释方法"></a>注释方法</h4><p>被@ModelAttribute注释的方法表示这个方法的目的是<strong>增加一个或多个模型(model)属性</strong>。<br>这个方法和被@RequestMapping注释的方法一样也支持@RequestParam参数，但是它不能直接被请求映射。<br>实际上，控制器中的@ModelAttribute方法是在<strong>同一控制器中的@RequestMapping方法被调用之前调用的</strong>。</p>
+<h4 id="注释参数–数据绑定"><a href="#注释参数–数据绑定" class="headerlink" title="注释参数–数据绑定"></a>注释参数–数据绑定</h4><p><code>@ModelAttribute</code>注释方法的一个参数表示应从模型model中取得。<br>若在model中未找到，那么这个参数将先被实例化后加入到model中。若在model中找到，则请求参数名称和model属性字段若相匹配就会自动填充。这个机制对于表单提交数据绑定到对象属性上很有效。</p>
+<p>当<code>@ModelAttribute</code>注解用于方法参数时，它有了双重功能，即“存/取”。<br>首先，它从模型中取出数据并赋予对应的参数，如果模型中尚不存在，则实例化一个，并存放于模型中；<br>其次，一旦模型中已存在此数据对象，接下来一个很重要的步骤便是将请求参数绑定到此对象上（请求参数名映射对象属性名）<br>这是Spring MVC提供的一个非常便利的机制–数据绑定。</p>
+<p>当<code>@ModelAttribute</code>注解用于方法时，与其处于同一个处理类的所有请求方法执行前都会执行一次此方法，这可能并不是我们想要的<br>因此，我们使用更多的是将其应用在请求方法的参数上，而它的一部分功能与<code>@RequestParam</code>注解是一致的，只不过<code>@RequestParam</code>用于绑定单个参数值，<br>而<code>@ModelAttribute</code>注解可以绑定所有名称匹配的，此外它自动将绑定后的数据添加到模型中，无形中也给我们提供了便利，这也可能是它命名为ModelAttribute的原因。</p>
+<p><a href="http://www.cnblogs.com/xiaoxi/p/5718894.html" target="_blank" rel="external">http://www.cnblogs.com/xiaoxi/p/5718894.html</a></p>
+<h2 id="redirect和forward"><a href="#redirect和forward" class="headerlink" title="redirect和forward"></a>redirect和forward</h2><blockquote>
+<p>forward 转发，如return “forward:/hello”; 浏览器的地址栏不会变，但是有视图返回来</p>
+</blockquote>
+<p>forward方式相当于request.getRequestDispatcher().forward(request,response)，这种方式的外部特征是浏览器地址显示的路径是转发前的路径.工作方式是这样,forward 发生在服务器内部,在前一个控制器处理完毕后,直接进入下一个控制器处理, 并将最后的response发给浏览器. 这种方式的结果是:</p>
+<p>A.转发前后是同一个request,后一个控制器可共享前一个控制器的参数与属性;<br>B.因为是同一个request,拦截器只会拦截前一个url,如果前一个url在映射时未配置到拦截器拦截，则拦截后一个url，即只拦截一次;<br>C.最后返回到浏览器后,因为地址栏显示的是转发前的url,所以刷新页面时会依次执行前后两个控制器.</p>
+<blockquote>
+<p>redirect 重定向，如return “redirect:/hello”; 浏览器的地址栏会变。</p>
+</blockquote>
+<p>spring控制器最后返回一个ModelAndView(urlName),其中urNamel可以是一个视图名称,由视图解析器负责解析后将响应流写回客户端;也可以通过redirect/forward:url方式转到另一个控制器进行处理.</p>
+<p>redirect方式相当于”response.sendRedirect()”.这种方式外部特征就是浏览器地址栏最后显示的路径是转发后的新的路径.工作方式是这样的, 服务器端会首先发一个response给浏览器, 然后浏览器收到这个response后再发一个requeset给服务器, 然后服务器发新的response给浏览器. 这时页面收到的request是一个新从浏览器发来的.这种方式的结果是:</p>
+<p>A.在转发前后有两个不同的request对象,转发前后的两个控制器在request上的参数(request.getParameter())和request属性(request.getAttribute())不能共享;<br>B.如果转发前后的两个控制器都配置在spring 拦截器范围内,这样拦截器会拦截前后两个request,即会拦截两次;<br>C.最后返回到浏览器后,因为地址栏显示的是转发后的url,所以刷新页面时只会执行后面的url映射的控制器.</p>
+<h2 id="springmvc与struts2的区别"><a href="#springmvc与struts2的区别" class="headerlink" title="springmvc与struts2的区别"></a>springmvc与struts2的区别</h2><p>1、Struts2是类级别的拦截， 一个类对应一个request上下文，SpringMVC是方法级别的拦截，一个方法对应一个request上下文，而方法同时又跟一个url对应,所以说从架构本身上SpringMVC就容易实现restful url,而struts2的架构实现起来要费劲，因为Struts2中Action的一个方法可以对应一个url，而其类属性却被所有方法共享，这也就无法用注解或其他方式标识其所属方法了。<br>2、由上边原因，SpringMVC的方法之间基本上独立的，独享request response数据，请求数据通过参数获取，处理结果通过ModelMap交回给框架，方法之间不共享变量，而Struts2搞的就比较乱，虽然方法之间也是独立的，但其所有Action变量是共享的，这不会影响程序运行，却给我们编码 读程序时带来麻烦，每次来了请求就创建一个Action，一个Action对象对应一个request上下文。<br>3、由于Struts2需要针对每个request进行封装，把request，session等servlet生命周期的变量封装成一个一个Map，供给每个Action使用，并保证线程安全，所以在原则上，是比较耗费内存的。<br>4、 拦截器实现机制上，Struts2有以自己的interceptor机制，SpringMVC用的是独立的AOP方式，这样导致Struts2的配置文件量还是比SpringMVC大。<br>5、SpringMVC的入口是servlet，而Struts2是filter（这里要指出，filter和servlet是不同的。以前认为filter是servlet的一种特殊），这就导致了二者的机制不同，这里就牵涉到servlet和filter的区别了。<br>6、SpringMVC集成了Ajax，使用非常方便，只需一个注解@ResponseBody就可以实现，然后直接返回响应文本即可，而Struts2拦截器集成了Ajax，在Action中处理时一般必须安装插件或者自己写代码集成进去，使用起来也相对不方便。<br><a href="http://blog.csdn.net/chenleixing/article/details/44570681" target="_blank" rel="external">http://blog.csdn.net/chenleixing/article/details/44570681</a><br><a href="http://blog.csdn.net/gstormspire/article/details/8239182" target="_blank" rel="external">http://blog.csdn.net/gstormspire/article/details/8239182</a></p>
+<h2 id="线程安全问题"><a href="#线程安全问题" class="headerlink" title="线程安全问题"></a>线程安全问题</h2><p>对于使用过SpringMVC和Struts2的人来说，大家都知道SpringMVC是基于方法的拦截，而Struts2是基于类的拦截。</p>
+<p>对于Struts2来说，因为每次处理一个请求，struts就会实例化一个对象；这样就不会有线程安全的问题了;<br>而Spring的controller默认是Singleton的，这意味着每一个request过来，系统都会用原有的instance去处理，这样导致两个结果：<br><strong>一是我们不用每次创建Controller，二是减少了对象创建和垃圾收集的时间;</strong><br>由于只有一个Controller的instance，当多个线程调用它的时候，它里面的instance变量就不是线程安全的了，会发生窜数据的问题。</p>
+<p>当然大多数情况下，我们根本不需要考虑线程安全的问题，比如dao,service等，除非在bean中声明了实例变量。因此，我们在使用spring mvc 的contrller时，应避免在controller中定义实例变量。<br>如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Controller</span> <span class="keyword">extends</span> <span class="title">AbstractCommandController</span> </span>&#123;    </div><div class="line">    <span class="keyword">protected</span> Company company;  </div><div class="line">    <span class="function"><span class="keyword">protected</span> ModelAndView <span class="title">handle</span><span class="params">(HttpServletRequest request,HttpServletResponse response,Object command,BindException errors)</span> <span class="keyword">throws</span> Exception </span>&#123;  </div><div class="line">        company = ................;           </div><div class="line">     &#125;             </div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>解决方案：<br>有几种解决方法：<br>1、在Controller中使用ThreadLocal变量<br>2、在spring配置文件Controller中声明 scope=”prototype”，每次都创建新的controller<br>所在在使用spring开发web 时要注意，默认Controller、Dao、Service都是单例的。</p>
+<p><a href="http://blog.csdn.net/hejingyuan6/article/details/50363647" target="_blank" rel="external">http://blog.csdn.net/hejingyuan6/article/details/50363647</a></p>
+<p>如果在spring中使用多线程<br><a href="http://blog.csdn.net/hejingyuan6/article/details/51498401" target="_blank" rel="external">http://blog.csdn.net/hejingyuan6/article/details/51498401</a></p>
+<h1 id="ibatis"><a href="#ibatis" class="headerlink" title="ibatis"></a>ibatis</h1><p>主要完成两件事情:<br>根据jdbc完成数据库的连接<br>通过反射打通java对象与数据库交互</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/ibatis.png" alt="ibatis的主要方法" title="">
+                </div>
+                <div class="image-caption">ibatis的主要方法</div>
+            </figure>
+<p><code>SqlMapClient</code>接口主要定义了客户端的操作行为比如insert、update、select和delete<br><code>SqlMapSession</code>主要定义了客户端的当前执行环境，可以共享也可以自己创建<br>但一个用户持有了<code>SqlMapClientImpl</code>就可以使用ibatis工作了</p>
+<p>iBATIS 框架的一个重要组成部分就是其 SqlMap 配置文件，SqlMap 配置文件的核心是 Statement 语句包括 CIUD。 iBATIS 通过解析 SqlMap 配置文件得到所有的 Statement 执行语句，同时会形成 ParameterMap、ResultMap 两个对象用于处理参数和经过解析后交给数据库处理的 Sql 对象。这样除去数据库的连接，一条 SQL 的执行条件已经具备了。</p>
+<p>数据的映射大体的过程是这样的：根据 Statement 中定义的 SQL 语句，解析出其中的参数，按照其出现的顺序保存在 Map 集合中，并按照 Statement 中定义的 ParameterMap 对象类型解析出参数的 Java 数据类型。并根据其数据类型构建 TypeHandler 对象，参数值的复制是通过 DataExchange 对象完成的。</p>
+<p><a href="http://blog.csdn.net/column/details/mybatis-principle.html" target="_blank" rel="external">http://blog.csdn.net/column/details/mybatis-principle.html</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html</a></p>
+<h2 id="mybatis初始化过程"><a href="#mybatis初始化过程" class="headerlink" title="mybatis初始化过程"></a>mybatis初始化过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String resource = &quot;mybatis-config.xml&quot;;  </div><div class="line">InputStream inputStream = Resources.getResourceAsStream(resource);  </div><div class="line">SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);  </div><div class="line">SqlSession sqlSession = sqlSessionFactory.openSession();  </div><div class="line">List list = sqlSession.selectList(&quot;com.foo.bean.BlogMapper.queryAllBlogInfo&quot;);</div></pre></td></tr></table></figure>
+<p>上述语句的作用是执行com.foo.bean.BlogMapper.queryAllBlogInfo 定义的SQL语句，返回一个List结果集。<br>总的来说，上述代码经历了<strong>mybatis初始化 –&gt;创建SqlSession –&gt;执行SQL语句</strong> 返回结果三个过程<br><code>new SqlSessionFactoryBuilder().build(inputStream)</code>这句话是SqlSessionFactoryBuilder根据传入的数据流生成Configuration对象，然后根据Configuration对象创建默认的SqlSessionFactory实例。</p>
+<p><a href="http://blog.csdn.net/luanlouis/article/details/37744073" target="_blank" rel="external">http://blog.csdn.net/luanlouis/article/details/37744073</a></p>
+<h2 id="Mybatis数据源与连接池"><a href="#Mybatis数据源与连接池" class="headerlink" title="Mybatis数据源与连接池"></a>Mybatis数据源与连接池</h2><p>MyBatis把数据源DataSource分为三种：</p>
+<ul>
+<li>UNPOOLED    不使用连接池的数据源</li>
+<li>POOLED      使用连接池的数据源</li>
+<li>JNDI            使用JNDI实现的数据源</li>
+</ul>
+<h3 id="创建DataSource"><a href="#创建DataSource" class="headerlink" title="创建DataSource"></a>创建DataSource</h3><p>MyBatis数据源DataSource对象的创建发生在MyBatis初始化的过程中。<br>在mybatis的XML配置文件中，使用<datasource>元素来配置数据源</datasource></p>
+<h3 id="创建connection"><a href="#创建connection" class="headerlink" title="创建connection"></a>创建connection</h3><p>当我们需要创建SqlSession对象并需要执行SQL语句时，这时候MyBatis才会去调用dataSource对象来创建java.sql.Connection对象。也就是说，java.sql.Connection对象的创建一直延迟到执行SQL语句的时候。</p>
+<ul>
+<li><p>不使用连接池<br>使用UnpooledDataSource的getConnection(),每调用一次就会产生一个新的Connection实例对象。</p>
+</li>
+<li><p>使用连接池<br>使用PooledDataSource的getConnection()方法来返回Connection对象。<br>PooledDataSource将java.sql.Connection对象包裹成PooledConnection对象放到了PoolState类型的容器中维护。<br>MyBatis将连接池中的PooledConnection分为两种状态： <code>空闲状态（idle）</code>和<code>活动状态(active)</code>，这两种状态的PooledConnection对象分别被存储到PoolState容器内的idleConnections和activeConnections两个List集合中：</p>
+</li>
+</ul>
+<p>idleConnections:空闲(idle)状态PooledConnection对象被放置到此集合中，表示当前闲置的没有被使用的PooledConnection集合，调用PooledDataSource的getConnection()方法时，会优先从此集合中取PooledConnection对象。当用完一个java.sql.Connection对象时，MyBatis会将其包裹成PooledConnection对象放到此集合中。</p>
+<p>activeConnections:活动(active)状态的PooledConnection对象被放置到名为activeConnections的ArrayList中，表示当前正在被使用的PooledConnection集合，调用PooledDataSource的getConnection()方法时，会优先从idleConnections集合中取PooledConnection对象,如果没有，则看此集合是否已满，如果未满，PooledDataSource会创建出一个PooledConnection，添加到此集合中，并返回。</p>
+<h3 id="用完connection"><a href="#用完connection" class="headerlink" title="用完connection"></a>用完connection</h3><p>使用代理模式，为真正的Connection对象创建一个代理对象，代理对象所有的方法都是调用相应的真正Connection对象的方法实现。当代理对象执行close()方法时，要特殊处理，不调用真正Connection对象的close()方法，而是将Connection对象添加到连接池中。</p>
+<p><a href="http://blog.csdn.net/luanlouis/article/details/37671851" target="_blank" rel="external">http://blog.csdn.net/luanlouis/article/details/37671851</a></p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h3 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h3><p>每当我们使用MyBatis开启一次和数据库的会话，MyBatis会创建出一个SqlSession对象表示一次数据库会话。<br>在对数据库的一次会话中，我们有可能会反复地执行完全相同的查询语句，如果不采取一些措施的话，每一次查询都会查询一次数据库,而我们在极短的时间内做了完全相同的查询，那么它们的结果极有可能完全相同，由于查询一次数据库的代价很大，这有可能造成很大的资源浪费。<br>为了解决这一问题，减少资源的浪费，MyBatis会在表示会话的SqlSession对象中建立一个简单的缓存，将每次查询到的结果结果缓存起来，当下次查询的时候，如果判断先前有个完全一样的查询，会直接从缓存中直接将结果取出，返回给用户，不需要再进行一次数据库查询了。</p>
+<p>MyBatis会在一次会话的表示—-一个SqlSession对象中创建一个本地缓存(local cache)，对于每一次查询，都会尝试根据查询的条件去本地缓存中查找是否在缓存中，如果在缓存中，就直接从缓存中取出，然后返回给用户；否则，从数据库读取数据，将查询结果存入缓存并返回给用户。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/mb1.png" alt="mybatis一级缓存" title="">
+                </div>
+                <div class="image-caption">mybatis一级缓存</div>
+            </figure></p>
+<p>实际上, SqlSession只是一个MyBatis对外的接口，SqlSession将它的工作交给了Executor执行器这个角色来完成，负责完成对数据库的各种操作。<br>当创建了一个SqlSession对象时，MyBatis会为这个SqlSession对象创建一个新的Executor执行器，而缓存信息就被维护在这个Executor执行器中，MyBatis将缓存和对缓存相关的操作封装成了Cache接口中。</p>
+<h4 id="一级缓存的生命周期"><a href="#一级缓存的生命周期" class="headerlink" title="一级缓存的生命周期"></a>一级缓存的生命周期</h4><p>a. MyBatis在开启一个数据库会话时，会创建一个新的SqlSession对象，SqlSession对象中会有一个新的Executor对象，Executor对象中持有一个新的PerpetualCache对象；当会话结束时，SqlSession对象及其内部的Executor对象还有PerpetualCache对象也一并释放掉。<br>b. 如果SqlSession调用了close()方法，会释放掉一级缓存PerpetualCache对象，一级缓存将不可用；<br>c. 如果SqlSession调用了clearCache()，会清空PerpetualCache对象中的数据，但是该对象仍可使用；<br>d.SqlSession中执行了任何一个update操作(update()、delete()、insert()) ，都会清空PerpetualCache对象的数据，但是该对象可以继续使用；</p>
+<h4 id="Cache原理"><a href="#Cache原理" class="headerlink" title="Cache原理"></a>Cache原理</h4><p>Cache最核心的实现其实就是一个Map，将本次查询使用的特征值作为key，将查询结果作为value存储到Map中。<br>怎样来确定一次查询的特征值？换句话说就是：怎样判断某两次查询是完全相同的查询？也可以这样说：如何确定Cache中的key值？<br>MyBatis认为，对于两次查询，如果以下条件都完全一样，那么就认为它们是完全相同的两次查询：</p>
+<ol>
+<li>传入的 statementId</li>
+<li>查询时要求的结果集中的结果范围 （结果的范围通过rowBounds.offset和rowBounds.limit表示）；</li>
+<li>这次查询所产生的最终要传递给JDBC Java.sql.Preparedstatement的Sql语句字符串（boundSql.getSql() ）</li>
+<li>传递给java.sql.Statement要设置的参数值<br>综上所述,CacheKey由以下条件决定：statementId  + rowBounds  + 传递给JDBC的SQL  + 传递给JDBC的参数值</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>1.MyBatis对会话（Session）级别的一级缓存设计的比较简单，就简单地使用了HashMap来维护，并没有对HashMap的容量和大小进行限制。<br>读者有可能就觉得不妥了：如果我一直使用某一个SqlSession对象查询数据，这样会不会导致HashMap太大，而导致 java.lang.OutOfMemoryError错误啊？ 读者这么考虑也不无道理，不过MyBatis的确是这样设计的。<br>MyBatis这样设计也有它自己的理由：<br>a.  一般而言SqlSession的生存时间很短。一般情况下使用一个SqlSession对象执行的操作不会太多，执行完就会消亡；<br>b.  对于某一个SqlSession对象而言，只要执行update操作（update、insert、delete），都会将这个SqlSession对象中对应的一级缓存清空掉，所以一般情况下不会出现缓存过大，影响JVM内存空间的问题；<br>c.  可以手动地释放掉SqlSession对象中的缓存。</p>
+<ol>
+<li>一级缓存是一个粗粒度的缓存，没有更新缓存和缓存过期的概念<br>MyBatis的一级缓存就是使用了简单的HashMap，MyBatis只负责将查询数据库的结果存储到缓存中去， 不会去判断缓存存放的时间是否过长、是否过期，因此也就没有对缓存的结果进行更新这一说了。</li>
+</ol>
+<p>根据一级缓存的特性，在使用的过程中，我认为应该注意：<br>1、对于数据变化频率很大，并且需要高时效准确性的数据要求，我们使用SqlSession查询的时候，要控制好SqlSession的生存时间，SqlSession的生存时间越长，它其中缓存的数据有可能就越旧，从而造成和真实数据库的误差；同时对于这种情况，用户也可以手动地适时清空SqlSession中的缓存；<br>2、对于只执行、并且频繁执行大范围的select操作的SqlSession对象，SqlSession对象的生存时间不应过长。</p>
+<h3 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h3><p>MyBatis并不是简单地对整个Application就只有一个Cache缓存对象，它将缓存划分的更细，即是Mapper级别的，即每一个Mapper都可以拥有一个Cache对象，具体如下：<br>a.为每一个Mapper分配一个Cache缓存对象（使用<cache>节点配置）；<br>b.多个Mapper共用一个Cache缓存对象（使用<cache-ref>节点配置）；</cache-ref></cache></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/mb2.png" alt="mybatis二级缓存" title="">
+                </div>
+                <div class="image-caption">mybatis二级缓存</div>
+            </figure>
+<h4 id="具备的条件"><a href="#具备的条件" class="headerlink" title="具备的条件"></a>具备的条件</h4><p>MyBatis对二级缓存的支持粒度很细，它会指定某一条查询语句是否使用二级缓存。<br>虽然在Mapper中配置了<code>&lt;cache&gt;</code>,并且为此Mapper分配了Cache对象，这并不表示我们使用Mapper中定义的查询语句查到的结果都会放置到Cache对象之中，我们必须指定Mapper中的某条选择语句是否支持缓存，即如下所示，在<code>&lt;select&gt;</code> 节点中配置useCache=”true”，Mapper才会对此Select的查询支持缓存特性，否则，不会对此Select查询，不会经过Cache缓存。如下所示，Select语句配置了useCache=”true”，则表明这条Select语句的查询会使用二级缓存。<br><code>&lt;select id=&quot;selectByMinSalary&quot; resultMap=&quot;BaseResultMap&quot; parameterType=&quot;java.util.Map&quot; useCache=&quot;true&quot;&gt;</code></p>
+<p>总之，要想使某条Select查询支持二级缓存，你需要保证：</p>
+<ol>
+<li>MyBatis支持二级缓存的总开关：全局配置变量参数   cacheEnabled=true</li>
+<li>该select语句所在的Mapper，配置了<cache> 或<cached-ref>节点，并且有效</cached-ref></cache></li>
+<li>该select语句的参数 useCache=true</li>
+</ol>
+<p>MyBatis查询数据的顺序是： 二级缓存    ———&gt; 一级缓存——&gt; 数据库<br><a href="http://blog.csdn.net/luanlouis/article/details/41408341" target="_blank" rel="external">http://blog.csdn.net/luanlouis/article/details/41408341</a></p>
+<h2 id="与-区别"><a href="#与-区别" class="headerlink" title="#与$区别"></a><code>#</code>与<code>$</code>区别</h2><p>一般如果可以使用<code>#</code>就不要使用<code>$</code>符号。<br>1）使用<code>#</code>入参，myBatis会生成PrepareStatement并且可以安全地设置参数（<code>=?</code>）的值。因为sql语句已经预编译好了，传入参数的时候，不会重新生产sql语句。安全性高。<br>2）用<code>$</code>可以会有sql注入的问题：例如，<code>select * from emp where ename = &#39;用户名&#39;</code>，如果使用<code>$</code>入参，用户名被传入例如<code>smith or 1 = 1</code>，那无论ename是否匹配都能查到结果。<br>3）在特定场景下，例如如果在使用诸如<code>order by &#39;{param}&#39;</code>，这时候就可以使用<code>$</code>.</p>
+<p><a href="http://www.mybatis.org/mybatis-3/sqlmap-xml.html#String_Substitution" target="_blank" rel="external">http://www.mybatis.org/mybatis-3/sqlmap-xml.html#String_Substitution</a></p>
+<h1 id="velocity"><a href="#velocity" class="headerlink" title="velocity"></a>velocity</h1><p>Velocity 是一个基于 Java 的模板引擎框架，提供的模板语言可以使用在 Java 中定义的对象和变量上。<br>Velocity 是 Apache 基金会的项目，开发的目标是分离 MVC 模式中的持久化层和业务层。但是在实际应用过程中，Velocity 不仅仅被用在了 MVC 的架构中，还可以被用在以下一些场景中。<br>1.Web 应用：开发者在不使用 JSP 的情况下，可以用 Velocity 让 HTML 具有动态内容的特性。<br>2.源代码生成：Velocity 可以被用来生成 Java 代码、SQL 或者 PostScript。有很多开源和商业开发的软件是使用 Velocity 来开发的。<br>3.自动 Email：很多软件的用户注册、密码提醒或者报表都是使用 Velocity 来自动生成的。使用 Velocity 可以在文本文件里面生成邮件内容，而不是在 Java 代码中拼接字符串。<br>4.转换 xml：Velocity 提供一个叫 Anakia 的 ant 任务，可以读取 XML 文件并让它能够被 Velocity 模板读取。一个比较普遍的应用是将 xdoc 文档转换成带样式的 HTML 文件。</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/velocity.png" alt="velocity过程" title="">
+                </div>
+                <div class="image-caption">velocity过程</div>
+            </figure>
+<p>Velocity模板引擎处理机制分为五个基本步骤：<br>a.引擎初始化，通过设置的引擎属性初始化引擎，包括国际化支持，ResourceLoader设置，字符编码等。<br>b.获取并解析模板文件，首先通过资源加载器（ResourceLoader）将模板文件加载到内存（转化为InputStream），然后通过AST（Abstract Syntax Tree）解析器将InputStream解析为一个AST。<br>c.创建一个Context<br>d.将模板渲染所需的参数放入context<br>e.执行模板渲染，产生输出流。渲染过程中通过遍历该模板对应的AST，调用相应节点的处理器执行渲染。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VelocityMergeTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">          VelocityEngine ve = <span class="keyword">new</span> VelocityEngine();</div><div class="line">          ve.setProperty(Velocity.RESOURCE_LOADER, <span class="string">"class"</span>);</div><div class="line">          <span class="comment">//设置引擎的资源加载使用ClasspathResourceLoader。</span></div><div class="line">          ve.setProperty(<span class="string">"class.resource.loader.class"</span>,</div><div class="line">          <span class="string">"org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader"</span>);</div><div class="line">          <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//引擎初始化</span></div><div class="line">            ve.init();</div><div class="line">            <span class="comment">//加载解析模板</span></div><div class="line">            Template tp = ve.getTemplate(<span class="string">"template.vm"</span>);</div><div class="line">            <span class="comment">//创建context</span></div><div class="line">            Context context = <span class="keyword">new</span> VelocityContext();</div><div class="line">            <span class="comment">//设置Context中参数值</span></div><div class="line">            <span class="comment">//创建一个context，并在其中放入一个foo=VV的参数。</span></div><div class="line">            context.put(<span class="string">"foo"</span>, <span class="string">"VV"</span>);</div><div class="line">            StringWriter writer = <span class="keyword">new</span> StringWriter();</div><div class="line">            <span class="comment">//执行渲染</span></div><div class="line">            tp.merge(context, writer);</div><div class="line">            System.out.println(writer.toString());</div><div class="line">          &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">          &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>加载解析模板<br>当执行ve.getTemplate(“template.vm”)时，首先通过ResourceLoader将tempalte加载为InputStream，然后通过Parser生成如下Token集合：<br>{[<html> <body> Hello], [$foo], [world! </body> </html> ]}，<br>可以发现velocity根本不关系模板最终要渲染出来的是html还是什么的其他的东西，也就以为这所有的html标签对velocity来讲都是纯文本。<br>最终构建的AST如下</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/AST.png" alt="velocity过程" title="">
+                </div>
+                <div class="image-caption">velocity过程</div>
+            </figure>
+<p>根节点下有三个子节点：</p>
+<p>[<html> <body> Hello]对应的ASTText节点；<br>[$foo]对应的ASTReference节点；<br>[world! </body> </html> ]对应的ASTText节点<br>Velocity引擎在这里有个优化策略，可以针对生成的语法树进行cache。</p>
+<ul>
+<li>执行渲染</li>
+</ul>
+<p>当执行tp.merge(context, writer);时，模板遍历其对应的AST树，执行每个节点的渲染过程。<br>如ASTText节点只是简单的将文本写入writer。ASTReference节点需要从context中获取引用的参数foo的值VV，将$foo替换，并写入到writer中。<br>Velocity的AST中有多种节点，如ASTIdentitor等，有些需要反射机制处理。当整个AST遍历结束，也就意味着模板渲染结束，渲染的结果位于writer流中。</p>
+<h2 id="关于AST解析"><a href="#关于AST解析" class="headerlink" title="关于AST解析"></a>关于AST解析</h2><p>Velocity作为模板语言，其核心在与模板文件的解析，构建AST。Velocity的解析器是通过JavaCC构建的，JavaCC（Java Complier Complier）是一个用于生成解析器的工具，可以根据语法定义（.jj文件）生成用于校验一份文本是否符合该语法定义的java代码。JJTree是JavaCC中提供的一种根据语法定义（.jjt文件）生成构建符合该语法定义的文本的语法树的java代码的工具。</p>
+<h2 id="常用优化技巧"><a href="#常用优化技巧" class="headerlink" title="常用优化技巧"></a>常用优化技巧</h2><p>Velocity渲染模板是先把模板解析成一棵语法树，然后去遍历这棵树分别渲染每个节点，知道了它的工作原理，我们就可以根据它的工作机制来优化渲染的速度。<br>既然是遍历这棵树来渲染节点的，而且是顺序遍历的，那么很容易想到有两种办法来优化渲染：</p>
+<ul>
+<li>减少树的总节点数量。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#set($one=-1)</div><div class="line">#set($pageid=&quot;$!page.id&quot;)</div><div class="line">#set($page=$one+$pageid)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这段代码实际上只是要计算一个值，但是由于不熟悉Velocity的一些语法，写得很麻烦，其实只要一个表达式就好了，如下：<br><code>#set($page=-1+$!page.id)</code><br>这样可以减少很多语法节点。</p>
+<ul>
+<li>减少渲染耗时的节点数量。<br>Velocity的方法调用是通过反射执行的，显然反射执行方法是耗时的，那么又如何减少反射执行的方法呢？<br>这个改进就如同Java中一样，可以增加一些中间变量来保存中间值，而减少反射方法的调用。<br>如在一个模板中要多次调用到$person.name，那么可以通过#set创建一个变量$name来保存$person.name这个反射方法的执行结果。<br>如#set($name=$person.name)，这样虽然增加了一个#set节点，但是如果能减少多次反射调用仍然是很值得的。<br>另外，Velocity本身提供了一个#macro语法，它类似于定义一个方法，然后可以调用这个方法，但在没有必要时尽量少用这种语法节点，这些语法节点比较耗时。还有一些大数计算等，最好定义在Java中，通过调用Java中的方法可以加快Velocity的执行效率。</li>
+</ul>
+<p>其他：</p>
+<ul>
+<li>改变Velocity的解释执行，变为编译执行。</li>
+<li>方法调用的无反射优化</li>
+<li>字符输出改成字节输出<br>静态字符串直接是<code>out.write(_S0)</code>，这里的_S0是一个字节数组，而vm模板中是字符串，将字符串转成字节数组是在这个模板类初始化时完成的。字符的编码是非常耗时的，如果我们将静态字符串提前编码好，那么在最终写Socket流时就会省去这个编码时间，从而提高执行效率。从实际的测试来看，这对提升性能很有帮助。另外，从代码中还可以发现，如果是变量输出，调用的是<code>out.write(_EVTCK(context,&quot;$str&quot;, context.get(&quot;str&quot;)))</code>，而_EVTCK方法在输出变量之前检查是否有事件需要调用，如XSS安全检查、为空检查等。</li>
+<li>去掉页面输出中多余的非中文空格。我们知道，页面的HTML输出中多余的空格是不会在HTML的展示时有作用的，多个连续的空格最终都只会显示一个空格的间距，除非你使用“ ”表示空格。虽然多余的空格并不能影响HTML的页面展示样式，但是服务端页面渲染和网络数据传输这些空格和其他字符没有区别，同样要做处理，这样的话，这些空格就会造成时间和空间维度上的浪费，所以完全可以将多个连续的空格合并成一个，从而既减少了字符又不会影响页面展示。</li>
+<li>压缩TAB和换行。同样的道理，还可以将TAB字符合并成一个，以及将多余的换行也合并一下，也能减少不少字符。</li>
+<li>合并相同的数据。在模板中有很多相同数据在循环中重复输出，如类目、商品、菜单等，可以将相同的重复内容提取出来合并在CSS中或者用JS来输出。<br>异步渲染。将一些静态内容抽取出来改成异步渲染，只在用户确实需要时再向服务器去请求，也能够减少很多不必要的数据传输。</li>
+</ul>
+<p><a href="http://www.cnblogs.com/wade-luffy/p/5996848.html" target="_blank" rel="external">http://www.cnblogs.com/wade-luffy/p/5996848.html</a></p>
+<h2 id="Velocity与JSP"><a href="#Velocity与JSP" class="headerlink" title="Velocity与JSP"></a>Velocity与JSP</h2><p>JSP文件渲染其实和Velocity的渲染机制很不一样，JSP文件实际上执行的是JSP对应的Java类，简单地说就是将JSP的HTML转化成out.write输出，而JSP中的Java代码直接复制到翻译后的Java类中。<br>最终执行的是翻译后的Java类，而Velocity是按照语法规则解析成一棵语法树，然后执行这棵语法树来渲染出结果。</p>
+<p>所以它们有如下这些区别:</p>
+<p>执行方式不一样：JSP是编译执行，而Velocity是解释执行。如果JSP文件被修改了，那么对应的Java类也会被重新编译，而Velocity却不需要，只是会重新生成一棵语法树。</p>
+<p>执行效率不同：从两者的执行方式不同可以看出，它们的执行效率不一样，从理论上来说，编译执行的效率明显好于解释执行，一个很明显的例子在JSP中方法调用是直接执行的，而Velocity的方法调用是反射执行的，JSP的效率会明显好于Velocity。当然如果JSP中有语法JSTL，语法标签的执行要看该标签的实现复杂度。<br>需要的环境支持不一样：JSP的执行必须要有Servlet的运行环境，也就是需要ServletContext、HttpServletRequest和HttpServletResponse类。而要渲染Velocity完全不需要其他环境类的支持，直接给定Velocity模板就可以渲染出结果。所以Velocity不只应用在Servlet环境中。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-13T13:41:00.000Z" itemprop="dateUpdated">2017年5月13日 21:41</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/20/web开发/" target="_blank" rel="external">http://duyao.github.io/2017/03/20/web开发/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springmvc/">springmvc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/velocity/">velocity</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/20/web开发/&title=《web开发》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/20/web开发/&title=《web开发》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/20/web开发/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《web开发》 — Du Yao's blog&url=http://duyao.github.io/2017/03/20/web开发/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/20/web开发/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/20/105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">105. Construct Binary Tree from Preorder and Inorder Traversal</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/19/确定字符异或/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">确定字符异或</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="web开发" data-title="web开发" data-url="http://duyao.github.io/2017/03/20/web开发/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/20/web开发/&title=《web开发》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/20/web开发/&title=《web开发》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/20/web开发/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《web开发》 — Du Yao's blog&url=http://duyao.github.io/2017/03/20/web开发/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/20/web开发/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/20/web开发/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

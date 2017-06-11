@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>反射和类加载 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="反射对象在java中万事万物都是对象。但是只有静态对象和类是java.lang.Class的对象即任何一个类都是Class的对象 表达实例对象表达实例对象有三种方法比如Foo的实例对象如何表示Foo foo1 = new Foo();//foo1就表示出来了.Foo这个类 也是一个实例对象，Class类的实例对象,如何表示呢任何一个类都是Class的实例对象，这个实例对象有三种表示方式 //第一种">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反射和类加载">
+<meta property="og:url" content="http://duyao.github.io/2017/03/25/反射和类加载/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="反射对象在java中万事万物都是对象。但是只有静态对象和类是java.lang.Class的对象即任何一个类都是Class的对象 表达实例对象表达实例对象有三种方法比如Foo的实例对象如何表示Foo foo1 = new Foo();//foo1就表示出来了.Foo这个类 也是一个实例对象，Class类的实例对象,如何表示呢任何一个类都是Class的实例对象，这个实例对象有三种表示方式 //第一种">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/load1.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/load2.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/classloaderfun.png">
+<meta property="og:updated_time" content="2017-05-04T03:35:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="反射和类加载">
+<meta name="twitter:description" content="反射对象在java中万事万物都是对象。但是只有静态对象和类是java.lang.Class的对象即任何一个类都是Class的对象 表达实例对象表达实例对象有三种方法比如Foo的实例对象如何表示Foo foo1 = new Foo();//foo1就表示出来了.Foo这个类 也是一个实例对象，Class类的实例对象,如何表示呢任何一个类都是Class的实例对象，这个实例对象有三种表示方式 //第一种">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/load1.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">反射和类加载</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">反射和类加载</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-25T12:37:02.000Z" itemprop="datePublished" class="page-time">
+  2017-03-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#反射"><span class="post-toc-number">1.</span> <span class="post-toc-text">反射</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#表达实例对象"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">表达实例对象</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#静态加载和动态加载"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">静态加载和动态加载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#静态加载"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">静态加载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态加载"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">动态加载</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取类的信息"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">获取类的信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取方法信息"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">获取方法信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取成员变量的信息"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">获取成员变量的信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取构造法方法信息"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">获取构造法方法信息</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#反射的基本操作"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">反射的基本操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#集合与泛型"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">集合与泛型</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类加载"><span class="post-toc-number">2.</span> <span class="post-toc-text">类加载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java-lang-ClassLoader类介绍"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">java.lang.ClassLoader类介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类加载器的树状组织结构"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">类加载器的树状组织结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类加载器的代理模式"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">类加载器的代理模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#loadClass-方法"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">loadClass()方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发自己的类加载器"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">开发自己的类加载器</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Class-forName和classloader的区别"><span class="post-toc-number">3.</span> <span class="post-toc-text">Class.forName和classloader的区别</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-反射和类加载"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">反射和类加载</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月25日 20:37" datetime="2017-03-25T12:37:02.000Z"  itemprop="datePublished">2017-03-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>在java中万事万物都是对象。<br>但是只有静态对象和<br>类是java.lang.Class的对象<br>即任何一个类都是Class的对象</p>
+<h3 id="表达实例对象"><a href="#表达实例对象" class="headerlink" title="表达实例对象"></a>表达实例对象</h3><p>表达实例对象有三种方法<br>比如Foo的实例对象如何表示<br><code>Foo foo1 = new Foo();</code>//foo1就表示出来了.<br>Foo这个类 也是一个实例对象，Class类的实例对象,如何表示呢<br>任何一个类都是Class的实例对象，这个实例对象有三种表示方式</p>
+<p>//第一种表示方式—&gt;实际在告诉我们任何一个类都有一个隐含的静态成员变量class<br><code>Class c1 = Foo.class;</code></p>
+<p>//第二中表达方式  已经知道该类的对象通过getClass方法<br><code>Class c2 = foo1.getClass();</code><br>官网 c1 ,c2 表示了Foo类的类类型(class type)<br>万事万物皆对象，类也是对象，是Class类的实例对象,这个对象我们称为该类的类类型</p>
+<p>不管c1  or c2都代表了Foo类的类类型，一个类只可能是Class类的一个实例对象<br><code>System.out.println(c1 == c2);//true</code></p>
+<p>第三种表达方式<code>c3 = Class.forName(&quot;com.imooc.reflect.Foo&quot;);</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Class c3 = <span class="keyword">null</span>;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	c3 = Class.forName(<span class="string">"com.imooc.reflect.Foo"</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">	<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">	e.printStackTrace();</div><div class="line">&#125;</div><div class="line">System.out.println(c2==c3);<span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+<h2 id="静态加载和动态加载"><a href="#静态加载和动态加载" class="headerlink" title="静态加载和动态加载"></a>静态加载和动态加载</h2><h3 id="静态加载"><a href="#静态加载" class="headerlink" title="静态加载"></a>静态加载</h3><p>一个程序需要先编译javac然后才能运行java<br>编译的过程可以认为是包括加载、验证、准备、解析和初始化<br>对于new关键字，在初始化阶段完成，也就是说如果一个类在new的时候没有找到，那么就会编译失败。<br>因此说new是静态加载机制。<br>比如<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/load1.png" alt="静态加载" title="">
+                </div>
+                <div class="image-caption">静态加载</div>
+            </figure></p>
+<h3 id="动态加载"><a href="#动态加载" class="headerlink" title="动态加载"></a>动态加载</h3><p>因此可以使用类类型实现动态加载<br><code>Interface intterface = (Interface)class.forName()</code><br>这里要写成interface接口，因为根部不知道要加载哪个类<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/load2.png" alt="动态加载" title="">
+                </div>
+                <div class="image-caption">动态加载</div>
+            </figure></p>
+<h2 id="获取类的信息"><a href="#获取类的信息" class="headerlink" title="获取类的信息"></a>获取类的信息</h2><h3 id="获取方法信息"><a href="#获取方法信息" class="headerlink" title="获取方法信息"></a>获取方法信息</h3><p>Method类，方法对象<br>一个成员方法就是一个Method对象<br>getMethods()方法获取的是所有的public的函数，包括父类继承而来的<br>getDeclaredMethods()获取的是所有该类自己声明的方法，不问访问权限<br>Method[] ms = c.getMethods();//c.getDeclaredMethods()<br>//得到方法的返回值类型的类类型<br>Class returnType = ms[i].getReturnType();<br>//得到方法的名称<br>ms[i].getName()<br>//获取参数类型—&gt;得到的是参数列表的类型的类类型<br>Class[] paramTypes = ms[i].getParameterTypes();<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 打印类的信息，包括类的成员函数、成员变量(只获取成员函数)</div><div class="line"> * <span class="doctag">@param</span> obj 该对象所属类的信息</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printClassMethodMessage</span><span class="params">(Object obj)</span></span>&#123;</div><div class="line">	<span class="comment">//要获取类的信息  首先要获取类的类类型</span></div><div class="line">	Class c = obj.getClass();<span class="comment">//传递的是哪个子类的对象  c就是该子类的类类型</span></div><div class="line">	<span class="comment">//获取类的名称</span></div><div class="line">	System.out.println(<span class="string">"类的名称是:"</span>+c.getName());</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * Method类，方法对象</div><div class="line">	 * 一个成员方法就是一个Method对象</div><div class="line">	 * getMethods()方法获取的是所有的public的函数，包括父类继承而来的</div><div class="line">	 * getDeclaredMethods()获取的是所有该类自己声明的方法，不问访问权限</div><div class="line">	 */</div><div class="line">	Method[] ms = c.getMethods();<span class="comment">//c.getDeclaredMethods()</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ms.length;i++)&#123;</div><div class="line">		<span class="comment">//得到方法的返回值类型的类类型</span></div><div class="line">		Class returnType = ms[i].getReturnType();</div><div class="line">		System.out.print(returnType.getName()+<span class="string">" "</span>);</div><div class="line">		<span class="comment">//得到方法的名称</span></div><div class="line">		System.out.print(ms[i].getName()+<span class="string">"("</span>);</div><div class="line">		<span class="comment">//获取参数类型---&gt;得到的是参数列表的类型的类类型</span></div><div class="line">		Class[] paramTypes = ms[i].getParameterTypes();</div><div class="line">		<span class="keyword">for</span> (Class class1 : paramTypes) &#123;</div><div class="line">			System.out.print(class1.getName()+<span class="string">","</span>);</div><div class="line">		&#125;</div><div class="line">		System.out.println(<span class="string">")"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>比如class是String，会打印出<br>会打印出int lastIndexOf(int,int,)、int length()、boolean matches(java.lang.String,)等</p>
+<h3 id="获取成员变量的信息"><a href="#获取成员变量的信息" class="headerlink" title="获取成员变量的信息"></a>获取成员变量的信息</h3><p>成员变量也是对象，java.lang.reflect.Field<br>Field类封装了关于成员变量的操作<br>getFields()方法获取的是所有的public的成员变量的信息<br>getDeclaredFields获取的是该类自己声明的成员变量的信息<br>Field[] fs = c.getDeclaredFields();<br>for (Field field : fs) {<br>//得到成员变量的类型的类类型<br>Class fieldType = field.getType();<br>//得到成员变量的名称<br>String fieldName = field.getName();</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">   * 获取成员变量的信息</div><div class="line">   * <span class="doctag">@param</span> obj</div><div class="line">   */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printFieldMessage</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">	Class c = obj.getClass();</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 成员变量也是对象</div><div class="line">	 * java.lang.reflect.Field</div><div class="line">	 * Field类封装了关于成员变量的操作</div><div class="line">	 * getFields()方法获取的是所有的public的成员变量的信息</div><div class="line">	 * getDeclaredFields获取的是该类自己声明的成员变量的信息</div><div class="line">	 */</div><div class="line">	<span class="comment">//Field[] fs = c.getFields();</span></div><div class="line">	Field[] fs = c.getDeclaredFields();</div><div class="line">	<span class="keyword">for</span> (Field field : fs) &#123;</div><div class="line">		<span class="comment">//得到成员变量的类型的类类型</span></div><div class="line">		Class fieldType = field.getType();</div><div class="line">		String typeName = fieldType.getName();</div><div class="line">		<span class="comment">//得到成员变量的名称</span></div><div class="line">		String fieldName = field.getName();</div><div class="line">		System.out.println(typeName+<span class="string">" "</span>+fieldName);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>比如class是String，会打印出int hash、long serialVersionUID等</p>
+<h3 id="获取构造法方法信息"><a href="#获取构造法方法信息" class="headerlink" title="获取构造法方法信息"></a>获取构造法方法信息</h3><p>构造函数也是对象，java.lang. Constructor中封装了构造函数的信息<br>getConstructors获取所有的public的构造函数<br>getDeclaredConstructors得到所有的构造函数</p>
+<p>Constructor[] cs = c.getDeclaredConstructors();<br>//获取构造函数的参数列表—&gt;得到的是参数列表的类类型<br>Class[] paramTypes = constructor.getParameterTypes();<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 打印对象的构造函数的信息</div><div class="line"> * <span class="doctag">@param</span> obj</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printConMessage</span><span class="params">(Object obj)</span></span>&#123;</div><div class="line">	Class c = obj.getClass();</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 构造函数也是对象</div><div class="line">	 * java.lang. Constructor中封装了构造函数的信息</div><div class="line">	 * getConstructors获取所有的public的构造函数</div><div class="line">	 * getDeclaredConstructors得到所有的构造函数</div><div class="line">	 */</div><div class="line">	<span class="comment">//Constructor[] cs = c.getConstructors();</span></div><div class="line">	Constructor[] cs = c.getDeclaredConstructors();</div><div class="line">	<span class="keyword">for</span> (Constructor constructor : cs) &#123;</div><div class="line">		System.out.print(constructor.getName()+<span class="string">"("</span>);</div><div class="line">		<span class="comment">//获取构造函数的参数列表---&gt;得到的是参数列表的类类型</span></div><div class="line">		Class[] paramTypes = constructor.getParameterTypes();</div><div class="line">		<span class="keyword">for</span> (Class class1 : paramTypes) &#123;</div><div class="line">			System.out.print(class1.getName()+<span class="string">","</span>);</div><div class="line">		&#125;</div><div class="line">		System.out.println(<span class="string">")"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>比如class是String，会打印出java.lang.String([B,int,int,)、java.lang.String([B,java.nio.charset.Charset,)等</p>
+<h2 id="反射的基本操作"><a href="#反射的基本操作" class="headerlink" title="反射的基本操作"></a>反射的基本操作</h2><p>主要过程：<br>1.要获取一个方法就是获取类的信息，获取类的信息首先要获取类的类类型<br>//要获取print(int ,int )方法<br>A a1 = new A();<br>Class c = a1.getClass();</p>
+<p>2.获取方法 名称和参数列表来决定<br>getMethod获取的是public的方法<br>getDelcaredMethod自己声明的方法</p>
+<p>//Method m =  c.getMethod(“print”, new Class[]{int.class,int.class});<br>Method m = c.getMethod(“print”, int.class,int.class);</p>
+<p>3.方法的反射操作<br>方法的反射操作是用m对象来进行方法调用 invoke和a1.print调用的效果完全相同<br>//方法如果没有返回值返回null,有返回值返回具体的返回值<br>//Object o = m.invoke(a1,new Object[]{10,20});<br>Object o = m.invoke(a1, 10,20);</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodDemo1</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//要获取print(int ,int )方法  </span></div><div class="line">        <span class="comment">//  1.要获取一个方法就是获取类的信息，获取类的信息首先要获取类的类类型</span></div><div class="line">        A a1 = <span class="keyword">new</span> A();</div><div class="line">        Class c = a1.getClass();</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 2.获取方法 名称和参数列表来决定  </div><div class="line">		 * getMethod获取的是public的方法</div><div class="line">		 * getDelcaredMethod自己声明的方法</div><div class="line">		 */</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//Method m =  c.getMethod("print", new Class[]&#123;int.class,int.class&#125;);</span></div><div class="line">            Method m = c.getMethod(<span class="string">"print"</span>, <span class="keyword">int</span>.class, <span class="keyword">int</span>.class);</div><div class="line"></div><div class="line">            <span class="comment">//方法的反射操作  </span></div><div class="line">            <span class="comment">//a1.print(10, 20);</span></div><div class="line">						<span class="comment">//方法的反射操作是用m对象来进行方法调用 和a1.print调用的效果完全相同</span></div><div class="line">            <span class="comment">//方法如果没有返回值返回null,有返回值返回具体的返回值</span></div><div class="line">            <span class="comment">//Object o = m.invoke(a1,new Object[]&#123;10,20&#125;);</span></div><div class="line">            Object o = m.invoke(a1, <span class="number">10</span>, <span class="number">20</span>);</div><div class="line">            System.out.println(<span class="string">"=================="</span>);</div><div class="line">            <span class="comment">//获取方法print(String,String)</span></div><div class="line">            Method m1 = c.getMethod(<span class="string">"print"</span>, String.class, String.class);</div><div class="line">            <span class="comment">//用方法进行反射操作</span></div><div class="line">            <span class="comment">//a1.print("hello", "WORLD");</span></div><div class="line">            o = m1.invoke(a1, <span class="string">"hello"</span>, <span class="string">"WORLD"</span>);</div><div class="line">            System.out.println(<span class="string">"==================="</span>);</div><div class="line">            <span class="comment">//  Method m2 = c.getMethod("print", new Class[]&#123;&#125;);</span></div><div class="line">            Method m2 = c.getMethod(<span class="string">"print"</span>);</div><div class="line">            <span class="comment">// m2.invoke(a1, new Object[]&#123;&#125;);</span></div><div class="line">            m2.invoke(a1);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"helloworld"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">        System.out.println(a + b);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(String a, String b)</span> </span>&#123;</div><div class="line">        System.out.println(a.toUpperCase() + <span class="string">","</span> + b.toLowerCase());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="集合与泛型"><a href="#集合与泛型" class="headerlink" title="集合与泛型"></a>集合与泛型</h2><p>对于集合来说一般会在创建的时候就制定其类型。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ArrayList list = new ArrayList();</div><div class="line">ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();</div></pre></td></tr></table></figure></p>
+<p>同时我们还知道java语法糖，即编译之后集合的泛型是去泛型化的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Class c1 = list.getClass();</div><div class="line">Class c2 = list1.getClass();</div><div class="line">System.out.println(c1 == c2);//true</div></pre></td></tr></table></figure></p>
+<p>如果错误地添加会导致编译失败，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list1.add(&quot;hello&quot;);</div><div class="line">//list1.add(20);错误的</div></pre></td></tr></table></figure></p>
+<p>但是通过泛型就可以绕过编译这一过程，完成添加不同类型的过程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Method m = c2.getMethod(&quot;add&quot;, Object.class);</div><div class="line">m.invoke(list1, 20);//绕过编译操作就绕过了泛型</div><div class="line">System.out.println(list1.size());</div><div class="line">System.out.println(list1);</div></pre></td></tr></table></figure></p>
+<p>完整程序<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		ArrayList list = <span class="keyword">new</span> ArrayList();</div><div class="line"></div><div class="line">		ArrayList&lt;String&gt; list1 = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">		list1.add(<span class="string">"hello"</span>);</div><div class="line">		<span class="comment">//list1.add(20);错误的</span></div><div class="line">		Class c1 = list.getClass();</div><div class="line">		Class c2 = list1.getClass();</div><div class="line">		System.out.println(c1 == c2);</div><div class="line">		<span class="comment">//反射的操作都是编译之后的操作</span></div><div class="line"></div><div class="line">		<span class="comment">/*</span></div><div class="line">		 * c1==c2结果返回true说明编译之后集合的泛型是去泛型化的</div><div class="line">		 * Java中集合的泛型，是防止错误输入的，只在编译阶段有效，</div><div class="line">		 * 绕过编译就无效了</div><div class="line">		 * 验证：我们可以通过方法的反射来操作，绕过编译</div><div class="line">		 */</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			Method m = c2.getMethod(<span class="string">"add"</span>, Object.class);</div><div class="line">			m.invoke(list1, <span class="number">20</span>);<span class="comment">//绕过编译操作就绕过了泛型</span></div><div class="line">			System.out.println(list1.size());</div><div class="line">			System.out.println(list1);</div><div class="line">			<span class="comment">/*for (String string : list1) &#123;</span></div><div class="line">				System.out.println(string);</div><div class="line">			&#125;*/<span class="comment">//现在不能这样遍历</span></div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		  e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h1><p>类加载器（class loader）用来加载 Java 类到 Java 虚拟机中。<br>一般来说，Java 虚拟机使用 Java 类的方式如下：Java 源程序（.java 文件）在经过 Java 编译器编译之后就被转换成 Java 字节代码（.class 文件）。<br>类加载器负责读取 Java 字节代码，并转换成 java.lang.Class类的一个实例。每个这样的实例用来表示一个 Java 类。<br>通过此实例的 newInstance()方法就可以创建出该类的一个对象。<br>实际的情况可能更加复杂，比如 Java 字节代码可能是通过工具动态生成的，也可能是通过网络下载的。</p>
+<p>基本上所有的类加载器都是 java.lang.ClassLoader类的一个实例。</p>
+<h2 id="java-lang-ClassLoader类介绍"><a href="#java-lang-ClassLoader类介绍" class="headerlink" title="java.lang.ClassLoader类介绍"></a><code>java.lang.ClassLoader</code>类介绍</h2><p>java.lang.ClassLoader类的基本职责就是根据一个指定的类的名称，找到或者生成其对应的字节代码，然后从这些字节代码中定义出一个 Java 类，即 java.lang.Class类的一个实例。<br>除此之外，ClassLoader还负责加载 Java 应用所需的资源，如图像文件和配置文件等。不过本文只讨论其加载类的功能。为了完成加载类的这个职责，ClassLoader提供了一系列的方法.<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/classloaderfun.png" alt="ClassLoader主要方法" title="">
+                </div>
+                <div class="image-caption">ClassLoader主要方法</div>
+            </figure></p>
+<h2 id="类加载器的树状组织结构"><a href="#类加载器的树状组织结构" class="headerlink" title="类加载器的树状组织结构"></a>类加载器的树状组织结构</h2><p>Java 中的类加载器大致可以分成两类，一类是系统提供的，另外一类则是由 Java 应用开发人员编写的。<br>系统提供的类加载器主要有下面三个：<br>引导类加载器（bootstrap class loader）：它用来加载 Java 的核心库，是用原生代码来实现的，<strong>并不继承自 java.lang.ClassLoader</strong>。<br>扩展类加载器（extensions class loader）：它用来加载 Java 的扩展库。Java 虚拟机的实现会提供一个扩展库目录。该类加载器在此目录里面查找并加载 Java 类。<br>系统类加载器（system class loader）：它根据 Java 应用的类路径（CLASSPATH）来加载 Java 类。一般来说，Java 应用的类都是由它来完成加载的。可以通过 ClassLoader.getSystemClassLoader()来获取它。<br>除了系统提供的类加载器以外，<strong>开发人员可以通过继承 java.lang.ClassLoader类的方式实现自己的类加载器，以满足一些特殊的需求</strong>。<br><strong>除了引导类加载器之外，所有的类加载器都有一个父类加载器</strong>。通过 <code>getParent()</code>方法可以得到。<br>对于系统提供的类加载器来说，系统类加载器的父类加载器是扩展类加载器，而扩展类加载器的父类加载器是引导类加载器；<br>对于开发人员编写的类加载器来说，其父类加载器是加载此类加载器 Java 类的类加载器。<br>因为类加载器 Java 类如同其它的 Java 类一样，也是要由类加载器来加载的。<br>一般来说，开发人员编写的类加载器的父类加载器是系统类加载器。类加载器通过这种方式组织起来，形成树状结构。</p>
+<h2 id="类加载器的代理模式"><a href="#类加载器的代理模式" class="headerlink" title="类加载器的代理模式"></a>类加载器的代理模式</h2><p>类加载器在尝试自己去查找某个类的字节代码并定义它时，会先代理给其父类加载器，由父类加载器先去尝试加载这个类，依次类推。</p>
+<p>Java 虚拟机是如何判定两个 Java 类是相同的?<br>Java 虚拟机不仅要看类的全名是否相同，还要看加载此类的类加载器是否一样。<br>只有两者都相同的情况，才认为两个类是相同的。即便是同样的字节代码，被不同的类加载器加载之后所得到的类，也是不同的。</p>
+<p>代理模式是为了保证 Java 核心库的类型安全。<br>所有 Java 应用都至少需要引用 java.lang.Object类，也就是说在运行的时候，java.lang.Object这个类需要被加载到 Java 虚拟机中。<br>如果这个加载过程由 Java 应用自己的类加载器来完成的话，很可能就存在多个版本的 java.lang.Object类，而且这些类之间是不兼容的。<br>通过代理模式，对于 Java 核心库的类的加载工作由引导类加载器来统一完成，保证了 Java 应用所使用的都是同一个版本的 Java 核心库的类，是互相兼容的。<br>不同的类加载器为相同名称的类创建了额外的名称空间。相同名称的类可以并存在 Java 虚拟机中，只需要用不同的类加载器来加载它们即可。<br>不同类加载器加载的类之间是不兼容的，这就相当于在 Java 虚拟机内部创建了一个个相互隔离的 Java 类空间。</p>
+<p>真正完成类的加载工作是通过调用 <code>defineClass</code>来实现的；而启动类的加载过程是通过调用 <code>loadClass</code>来实现的。<br>前者称为一个类的定义加载器（defining loader），后者称为初始加载器（initiating loader）。<br>在 Java 虚拟机判断两个类是否相同的时候，使用的是类的定义加载器。<br>也就是说，哪个类加载器启动类的加载过程并不重要，<strong>重要的是最终定义这个类的加载器</strong>。<br>两种类加载器的关联之处在于：一个类的定义加载器是它引用的其它类的初始加载器。<br>如类 com.example.Outer引用了类 com.example.Inner，则由类 com.example.Outer的定义加载器负责启动类 com.example.Inner的加载过程。</p>
+<p>方法 loadClass()抛出的是 java.lang.ClassNotFoundException异常；方法 defineClass()抛出的是 java.lang.NoClassDefFoundError异常。<br>类加载器在成功加载某个类之后，会把得到的 java.lang.Class类的实例缓存起来。<br>下次再请求加载该类的时候，类加载器会直接使用缓存的类的实例，而不会尝试再次加载。<br>也就是说，对于一个类加载器实例来说，相同全名的类只加载一次，<strong>即 loadClass方法不会被重复调用</strong>。</p>
+<h2 id="loadClass-方法"><a href="#loadClass-方法" class="headerlink" title="loadClass()方法"></a><code>loadClass()</code>方法</h2><p>java.lang.ClassLoader类的方法 <code>loadClass()</code>封装了前面提到的代理模式的实现。<br> 同时<code>loadClass()</code>体现了模板模式，这个方法定义了类加载的过程，属于方法基类，其中<code>findClass(String name)</code>是由子类实现的，即不同的classloader有不同的实现方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</div><div class="line">    <span class="keyword">throws</span> ClassNotFoundException</div><div class="line">&#123;</div><div class="line">    <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</div><div class="line">        <span class="comment">// First, check if the class has already been loaded</span></div><div class="line">        Class&lt;?&gt; c = findLoadedClass(name);</div><div class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">long</span> t0 = System.nanoTime();</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</div><div class="line">                    c = parent.loadClass(name, <span class="keyword">false</span>);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    c = findBootstrapClassOrNull(name);</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">                <span class="comment">// ClassNotFoundException thrown if class not found</span></div><div class="line">                <span class="comment">// from the non-null parent class loader</span></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="comment">// If still not found, then invoke findClass in order</span></div><div class="line">                <span class="comment">// to find the class.</span></div><div class="line">                <span class="keyword">long</span> t1 = System.nanoTime();</div><div class="line">                c = findClass(name);</div><div class="line"></div><div class="line">                <span class="comment">// this is the defining class loader; record the stats</span></div><div class="line">                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</div><div class="line">                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</div><div class="line">                sun.misc.PerfCounter.getFindClasses().increment();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (resolve) &#123;</div><div class="line">            resolveClass(c);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> c;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该方法会首先调用 findLoadedClass()方法来检查该类是否已经被加载过；<br>如果没有加载过的话，会调用父类加载器的 loadClass()方法来尝试加载该类；<br>如果父类加载器无法加载该类的话，就调用 findClass()方法来查找该类。<br>因此，为了保证类加载器都正确实现代理模式，<strong>在开发自己的类加载器时，最好不要覆写 loadClass()方法，而是覆写 findClass()方法</strong>。</p>
+<h2 id="开发自己的类加载器"><a href="#开发自己的类加载器" class="headerlink" title="开发自己的类加载器"></a>开发自己的类加载器</h2><p>首先继承 <code>java.lang.ClassLoader</code><br>然后，自己开发的类加载器只需要覆写 <code>findClass(String name)</code>方法即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> String rootDir;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">FileSystemClassLoader</span><span class="params">(String rootDir)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.rootDir = rootDir;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</div><div class="line">		<span class="comment">//得到类的全名的字节流</span></div><div class="line">		<span class="keyword">byte</span>[] classData = getClassData(name);</div><div class="line">		<span class="keyword">if</span> (classData == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">//定义一个类</span></div><div class="line">			<span class="keyword">return</span> defineClass(name, classData, <span class="number">0</span>, classData.length);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//将类的全名转为字节流输入</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">byte</span>[] getClassData(String className) &#123;</div><div class="line">		String path = classNameToPath(className);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			InputStream ins = <span class="keyword">new</span> FileInputStream(path);</div><div class="line">			ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">			<span class="keyword">int</span> bufferSize = <span class="number">4096</span>;</div><div class="line">			<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[bufferSize];</div><div class="line">			<span class="keyword">int</span> bytesNumRead = <span class="number">0</span>;</div><div class="line">			<span class="keyword">while</span> ((bytesNumRead = ins.read(buffer)) != -<span class="number">1</span>) &#123;</div><div class="line">				baos.write(buffer, <span class="number">0</span>, bytesNumRead);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">return</span> baos.toByteArray();</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> String <span class="title">classNameToPath</span><span class="params">(String className)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> rootDir + File.separatorChar</div><div class="line">				+ className.replace(<span class="string">'.'</span>, File.separatorChar) + <span class="string">".class"</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		String classDataRootPath = <span class="string">"C:\\Documents and Settings\\Administrator\\workspace\\Classloader\\classData"</span>;</div><div class="line">		FileSystemClassLoader fscl1 = <span class="keyword">new</span> FileSystemClassLoader(classDataRootPath);</div><div class="line">		FileSystemClassLoader fscl2 = <span class="keyword">new</span> FileSystemClassLoader(classDataRootPath);</div><div class="line">		String className = <span class="string">"com.example.Sample"</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			Class&lt;?&gt; class1 = fscl1.loadClass(className);</div><div class="line">			Object obj1 = class1.newInstance();</div><div class="line">			Class&lt;?&gt; class2 = fscl2.loadClass(className);</div><div class="line">			Object obj2 = class2.newInstance();</div><div class="line">			Method setSampleMethod = class1.getMethod(<span class="string">"setSample"</span>, java.lang.Object.class);</div><div class="line">			setSampleMethod.invoke(obj1, obj2);</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>类 FileSystemClassLoader的 findClass()方法首先根据类的全名在硬盘上查找类的字节代码文件（.class 文件），然后读取该文件内容，最后通过 defineClass()方法来把这些字节代码转换成 java.lang.Class类的实例。</p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-classloader/#minor1.1" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/j-lo-classloader/#minor1.1</a></p>
+<p>在每个类加载器中的执行顺序：loadClass-&gt;findClass-&gt;defineClass<br>首先classloader主动调用loadClass，在loadClass中，如果父类不能加载就调用findClass，在findClass中找到类的全限定名，然后调用defineClass生成class。</p>
+<p>#TODO<br><a href="http://www.infoq.com/cn/articles/cf-java-byte-code" target="_blank" rel="external">http://www.infoq.com/cn/articles/cf-java-byte-code</a><br><a href="http://zyjustin9.iteye.com/blog/2092131" target="_blank" rel="external">http://zyjustin9.iteye.com/blog/2092131</a><br><a href="http://www.cnblogs.com/xrq730/p/4847337.html" target="_blank" rel="external">http://www.cnblogs.com/xrq730/p/4847337.html</a><br>contextClassLoader</p>
+<h1 id="Class-forName和classloader的区别"><a href="#Class-forName和classloader的区别" class="headerlink" title="Class.forName和classloader的区别"></a>Class.forName和classloader的区别</h1><p>Java中class.forName()和classLoader都可用来对类进行加载。<br><strong>class.forName()除了将类的.class文件加载到jvm中之外，还会对类进行解释，执行类中的static块。</strong><br>而<strong>classLoader只干一件事情，就是将.class文件加载到jvm中，不会执行static中的内容,只有在newInstance才会去执行static块。</strong><br>Class.forName(name, initialize, loader)带参函数也可控制是否加载static块。并且只有调用了newInstance()方法采用调用构造函数，创建类的对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Class.forName(String className)  这是1.8的源码  </span></div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> Class&lt;?&gt; forName(String className) <span class="keyword">throws</span> ClassNotFoundException &#123;  </div><div class="line">       Class&lt;?&gt; caller = Reflection.getCallerClass();  </div><div class="line">       <span class="keyword">return</span> forName0(className, <span class="keyword">true</span>, ClassLoader.getClassLoader(caller), caller);  </div><div class="line">   &#125;  </div><div class="line"><span class="comment">//注意第二个参数，是指Class被loading后是不是必须被初始化。 不初始化就是不执行static的代码即静态代码</span></div></pre></td></tr></table></figure></p>
+<p>LoadClass（）方法加载类及初始化过程：<br>类加载（loadclass（））（加载）——》newInstance（）（链接+初始化）<br>newInstance（）:<br>（开始连接）静态代码块——》普通变量分配准备（a=0;b=0;c=null）——》（开始初始化）普通变量赋值（a=1;b=2;c=”haha”）——》构造方法——》初始化成功。</p>
+<p>Class.forName(Stirng className)一个参数方法加载类及初始化过程：<br>类加载(Class.forName())（加载）——》静态代码块——》newInstance（）（链接+初始化）</p>
+<p>newInstance（）：<br>（开始连接）普通变量分配准备（a=0;b=0;c=null）——》（开始初始化）普通变量赋值（a=1;b=2;c=”haha”）——》构造方法——》初始化成功。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-04T03:35:50.000Z" itemprop="dateUpdated">2017年5月4日 11:35</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/25/反射和类加载/" target="_blank" rel="external">http://duyao.github.io/2017/03/25/反射和类加载/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/25/反射和类加载/&title=《反射和类加载》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/25/反射和类加载/&title=《反射和类加载》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/25/反射和类加载/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《反射和类加载》 — Du Yao's blog&url=http://duyao.github.io/2017/03/25/反射和类加载/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/25/反射和类加载/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/26/分布式技术/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">分布式技术</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/24/juc之同步工具和并发容器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">juc之同步工具和并发容器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="反射和类加载" data-title="反射和类加载" data-url="http://duyao.github.io/2017/03/25/反射和类加载/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/25/反射和类加载/&title=《反射和类加载》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/25/反射和类加载/&title=《反射和类加载》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/25/反射和类加载/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《反射和类加载》 — Du Yao's blog&url=http://duyao.github.io/2017/03/25/反射和类加载/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/25/反射和类加载/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/25/反射和类加载/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

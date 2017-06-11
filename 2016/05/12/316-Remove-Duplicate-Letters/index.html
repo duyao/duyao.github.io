@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>316. Remove Duplicate Letters | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,algorithm">
+    <meta name="description" content="316. Remove Duplicate Letters 区间寻找思路找到每个字母出现的最后位置，把整个串化为若干个区间，找到每个区间的最小值，然后把字符串中最小值删除 TIPS  区间开始一定是最小值第一次出现的地方 区间结束是该原来的end或者新的end  代码123456789101112131415161718192021222324252627282930313233343536373">
+<meta name="keywords" content="leetcode,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="316. Remove Duplicate Letters">
+<meta property="og:url" content="http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="316. Remove Duplicate Letters 区间寻找思路找到每个字母出现的最后位置，把整个串化为若干个区间，找到每个区间的最小值，然后把字符串中最小值删除 TIPS  区间开始一定是最小值第一次出现的地方 区间结束是该原来的end或者新的end  代码123456789101112131415161718192021222324252627282930313233343536373">
+<meta property="og:updated_time" content="2016-05-12T12:52:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="316. Remove Duplicate Letters">
+<meta name="twitter:description" content="316. Remove Duplicate Letters 区间寻找思路找到每个字母出现的最后位置，把整个串化为若干个区间，找到每个区间的最小值，然后把字符串中最小值删除 TIPS  区间开始一定是最小值第一次出现的地方 区间结束是该原来的end或者新的end  代码123456789101112131415161718192021222324252627282930313233343536373">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">316. Remove Duplicate Letters</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">316. Remove Duplicate Letters</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-12T09:06:52.000Z" itemprop="datePublished" class="page-time">
+  2016-05-12
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#区间寻找"><span class="post-toc-number">1.</span> <span class="post-toc-text">区间寻找</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reference"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">reference</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#栈"><span class="post-toc-number">2.</span> <span class="post-toc-text">栈</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reference-1"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">reference</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-316-Remove-Duplicate-Letters"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">316. Remove Duplicate Letters</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年05月12日 17:06" datetime="2016-05-12T09:06:52.000Z"  itemprop="datePublished">2016-05-12</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="https://leetcode.com/problems/remove-duplicate-letters/" target="_blank" rel="external">316. Remove Duplicate Letters</a></p>
+<h2 id="区间寻找"><a href="#区间寻找" class="headerlink" title="区间寻找"></a>区间寻找</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>找到每个字母出现的最后位置，把整个串化为若干个区间，<br>找到每个区间的最小值，然后把字符串中最小值删除</p>
+<p><strong>TIPS</strong></p>
+<ul>
+<li>区间开始一定是最小值第一次出现的地方</li>
+<li>区间结束是该原来的end或者新的end</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">public static int findMinPos(HashMap&lt;Character, Integer&gt; map) &#123;</div><div class="line">	int pos = Integer.MAX_VALUE;</div><div class="line">	for (char c : map.keySet()) &#123;</div><div class="line">		int x = map.get(c);</div><div class="line">		if (x &lt; pos) &#123;</div><div class="line">			pos = x;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return pos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 找到所有字母最后出现的位置，然后按照这些位置依次划分区间，找到每个区间中最小的字母</div><div class="line"> * </div><div class="line"> * @param s</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public String removeDuplicateLetters(String s) &#123;</div><div class="line">	if (s == null || s.length() == 0) &#123;</div><div class="line">		return &quot;&quot;;</div><div class="line">	&#125;</div><div class="line">	HashMap&lt;Character, Integer&gt; map = new HashMap&lt;Character, Integer&gt;();</div><div class="line">	char[] c = s.toCharArray();</div><div class="line">	for (int i = 0; i &lt; c.length; i++) &#123;</div><div class="line">		map.put(c[i], i);</div><div class="line">	&#125;</div><div class="line">	int start = 0, end = findMinPos(map);</div><div class="line">	char[] res = new char[map.size()];</div><div class="line">	char min = &apos;z&apos; + 1;</div><div class="line">	for (int j = 0; j &lt; res.length; j++) &#123;</div><div class="line">		// 区间内部找最小值</div><div class="line">		for (int i = start; i &lt;= end; i++) &#123;</div><div class="line">			//这里一定是c[i] &lt; min，无等号，这样才能找到一个min出现的位置</div><div class="line">			if (c[i] &lt; min &amp;&amp; map.containsKey(c[i])) &#123;</div><div class="line">				min = c[i];</div><div class="line">				start = i + 1;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		// 先remove掉min，后面才可以重新查找</div><div class="line">		res[j] = min;</div><div class="line">		map.remove(min);</div><div class="line">		</div><div class="line">		if (min == c[end]) &#123;</div><div class="line">			end = findMinPos(map);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		// 重置min</div><div class="line">		min = &apos;z&apos; + 1;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return new String(res);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h3><p><a href="https://leetcode.com/discuss/73777/easy-to-understand-iterative-java-solution" target="_blank" rel="external">easy-to-understand-iterative-java-solution</a></p>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>int[] count: 记录每个字母出现的次数</li>
+<li>boolean[] b: 是否已经被记录过</li>
+<li>Stack<character> stack: 结果集<br>当栈中栈顶元素比当前元素大，且元素没有被记录过，以后还会出现的，出栈顶<br>即栈中元素就是结果集，比栈顶大的元素才可以进栈</character></li>
+</ul>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public String removeDuplicateLetters(String s) &#123;</div><div class="line">	int[] count = new int[26];</div><div class="line">	boolean[] b = new boolean[26];</div><div class="line">	Stack&lt;Character&gt; stack = new Stack&lt;Character&gt;();</div><div class="line">	char[] c = s.toCharArray();</div><div class="line">	for (int i = 0; i &lt; c.length; i++) &#123;</div><div class="line">		count[c[i]-&apos;a&apos;]++;</div><div class="line">	&#125;</div><div class="line">	for (int i = 0; i &lt; c.length; i++) &#123;</div><div class="line">		count[c[i]-&apos;a&apos;]--;</div><div class="line">		while(!stack.isEmpty() &amp;&amp; stack.peek() &gt; c[i] &amp;&amp; !b[c[i]-&apos;a&apos;]&amp;&amp; count[stack.peek()-&apos;a&apos;] &gt; 0)&#123;</div><div class="line">			b[stack.peek()-&apos;a&apos;] = false;</div><div class="line">			stack.pop();</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">		if(!b[c[i]-&apos;a&apos;])&#123;</div><div class="line">			stack.push(c[i]);</div><div class="line">			b[c[i]-&apos;a&apos;] = true;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	StringBuffer sb = new StringBuffer();</div><div class="line">	while(!stack.isEmpty())&#123;</div><div class="line">		sb.insert(0,stack.pop());</div><div class="line">	&#125;</div><div class="line">	return sb.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="reference-1"><a href="#reference-1" class="headerlink" title="reference"></a>reference</h3><p><a href="https://leetcode.com/discuss/75738/java-solution-using-stack-with-comments" target="_blank" rel="external">java-solution-using-stack-with-comments</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-05-12T12:52:20.000Z" itemprop="dateUpdated">2016年5月12日 20:52</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2016/05/12/316-Remove-Duplicate-Letters/" target="_blank" rel="external">http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/&title=《316. Remove Duplicate Letters》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/&title=《316. Remove Duplicate Letters》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《316. Remove Duplicate Letters》 — Du Yao's blog&url=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/06/27/363-Max-Sum-of-Rectangle-No-Larger-Than-K/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">363. Max Sum of Rectangle No Larger Than K</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/05/10/315-Count-of-Smaller-Numbers-After-Self/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">315. Count of Smaller Numbers After Self</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="316-Remove-Duplicate-Letters" data-title="316. Remove Duplicate Letters" data-url="http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/&title=《316. Remove Duplicate Letters》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/&title=《316. Remove Duplicate Letters》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《316. Remove Duplicate Letters》 — Du Yao's blog&url=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2016/05/12/316-Remove-Duplicate-Letters/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>shoppingSite | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="project">
+    <meta name="description" content="shoppingSite本文只要记录在开发工程中遇到的问题以及解决方法以及待改进  技术  struts2 spring mybatis    做项目时候，先将各种包，接口等做好然后依次配置xml,先从mybatis，spring，struts2">
+<meta name="keywords" content="project">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shoppingSite">
+<meta property="og:url" content="http://duyao.github.io/2015/10/31/shoppingSite/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="shoppingSite本文只要记录在开发工程中遇到的问题以及解决方法以及待改进  技术  struts2 spring mybatis    做项目时候，先将各种包，接口等做好然后依次配置xml,先从mybatis，spring，struts2">
+<meta property="og:updated_time" content="2015-11-09T14:34:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shoppingSite">
+<meta name="twitter:description" content="shoppingSite本文只要记录在开发工程中遇到的问题以及解决方法以及待改进  技术  struts2 spring mybatis    做项目时候，先将各种包，接口等做好然后依次配置xml,先从mybatis，spring，struts2">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">shoppingSite</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">shoppingSite</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-31T06:26:14.000Z" itemprop="datePublished" class="page-time">
+  2015-10-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#shoppingSite"><span class="post-toc-number">1.</span> <span class="post-toc-text">shoppingSite</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置spring的xml文件中的bean"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">配置spring的xml文件中的bean</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#spring-与-struts2-联合使用加入struts2-spring-plugin"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">spring 与 struts2 联合使用加入struts2-spring-plugin</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#得到id随机数串"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">得到id随机数串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ajax和jquery需要服务器端返回一个无参数的函数"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">ajax和jquery需要服务器端返回一个无参数的函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分页操作"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">分页操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现搜索条件保存和翻页的结合"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">实现搜索条件保存和翻页的结合</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#先得到旧数据，再更新"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">先得到旧数据，再更新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#mybatis相关"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">mybatis相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传入多个同类型的参数，使用-序号-取出"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">传入多个同类型的参数，使用#{序号}取出</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jdbcType-VARCHAR可以传入空值，且不报错"><span class="post-toc-number">1.8.2.</span> <span class="post-toc-text">jdbcType = VARCHAR可以传入空值，且不报错</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#得到多个相同类型的数据"><span class="post-toc-number">1.8.3.</span> <span class="post-toc-text">得到多个相同类型的数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#column不一定是数据库中的名字，property是在java中get，set方法的那些属性"><span class="post-toc-number">1.8.4.</span> <span class="post-toc-text">column不一定是数据库中的名字，property是在java中get，set方法的那些属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#parameterType不是hashmap等时，不需要加所属，反之必加-amp-hashmap注意判空-amp-bind实现模糊查询"><span class="post-toc-number">1.8.5.</span> <span class="post-toc-text">parameterType不是hashmap等时，不需要加所属，反之必加&hashmap注意判空&bind实现模糊查询</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#struts2-相关"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">struts2 相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#struts2-文件上传"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">struts2 文件上传</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#struts得到界面的值"><span class="post-toc-number">1.9.2.</span> <span class="post-toc-text">struts得到界面的值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#strut2-验证码"><span class="post-toc-number">1.9.3.</span> <span class="post-toc-text">strut2 验证码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#跳转"><span class="post-toc-number">1.9.4.</span> <span class="post-toc-text">跳转</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#spring相关"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">spring相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#spring事务"><span class="post-toc-number">1.10.1.</span> <span class="post-toc-text">spring事务</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jsp"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">jsp</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#c-forEach中的varStatus-amp-el表达式计算比较等要放在括号内"><span class="post-toc-number">1.11.1.</span> <span class="post-toc-text">c:forEach中的varStatus&el表达式计算比较等要放在括号内</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-shoppingSite"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">shoppingSite</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月31日 14:26" datetime="2015-10-31T06:26:14.000Z"  itemprop="datePublished">2015-10-31</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="shoppingSite"><a href="#shoppingSite" class="headerlink" title="shoppingSite"></a>shoppingSite</h1><p>本文只要记录在开发工程中遇到的问题以及解决方法以及待改进</p>
+<ul>
+<li><p>技术</p>
+<ul>
+<li>struts2</li>
+<li>spring</li>
+<li>mybatis</li>
+</ul>
+</li>
+</ul>
+<p>做项目时候，先将各种包，接口等做好<br>然后依次配置xml,先从mybatis，spring，struts2</p>
+<a id="more"></a>
+<p>一些还能改进的地方</p>
+<ul>
+<li><p>待改进</p>
+<ul>
+<li>商品修改时，如果修改了类别，那么新类别数目+1，旧类别数目-1，删除也是</li>
+<li>购物车添加商品后，显示慢一步</li>
+<li>商品显示分页</li>
+<li>当前位置的显示，一直是手机</li>
+<li>清空购物车</li>
+</ul>
+</li>
+<li><p>未完成</p>
+<ul>
+<li>我的账户，订单</li>
+<li>管理员查询管理订单</li>
+<li>评价功能</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="配置spring的xml文件中的bean"><a href="#配置spring的xml文件中的bean" class="headerlink" title="配置spring的xml文件中的bean"></a>配置spring的<code>xml</code>文件中的<code>bean</code></h2><p>应该全部配置实例的？！！<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userMapper"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.mapper.MapperFactoryBean"</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!--接口--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapperInterface"</span> <span class="attr">value</span>=<span class="string">"com.dy.shoppingSite.dao.UserDao"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">ref</span>=<span class="string">"sqlSessionFactory"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--实例--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.dy.shoppingSite.service.impl.UserServiceImpl"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"userDao"</span> <span class="attr">ref</span>=<span class="string">"userMapper"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="spring-与-struts2-联合使用加入struts2-spring-plugin"><a href="#spring-与-struts2-联合使用加入struts2-spring-plugin" class="headerlink" title="spring 与 struts2 联合使用加入struts2-spring-plugin"></a>spring 与 struts2 联合使用加入<code>struts2-spring-plugin</code></h2><blockquote>
+<p>Exception starting filter struts2 Unable to load configuration.<br>[unknown location] at org.apache.struts2.dispatcher.Dispatcher.init</p>
+</blockquote>
+<p>报错原因是没有<code>struts2-spring-plugin</code></p>
+<hr>
+<h2 id="得到id随机数串"><a href="#得到id随机数串" class="headerlink" title="得到id随机数串"></a>得到id随机数串</h2><p>使用<code>UUID.randomUUID()</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getID</span><span class="params">()</span></span>&#123;</div><div class="line">	UUID uuid = UUID.randomUUID();</div><div class="line">	<span class="keyword">return</span> uuid.toString().replace(<span class="string">"-"</span>, <span class="string">""</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="ajax和jquery需要服务器端返回一个无参数的函数"><a href="#ajax和jquery需要服务器端返回一个无参数的函数" class="headerlink" title="ajax和jquery需要服务器端返回一个无参数的函数"></a>ajax和jquery需要服务器端返回一个无参数的函数</h2><p>使用ajax和jquery来实现，需要服务器端返回一个无参数的函数,参数传递使用response<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">isExist</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">boolean</span> b = userService.isExist(user.getName());</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		PrintWriter writer = ServletActionContext.getResponse().getWriter();</div><div class="line">		writer.print(b);</div><div class="line">		writer.flush();</div><div class="line">		writer.close();</div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="分页操作"><a href="#分页操作" class="headerlink" title="分页操作"></a>分页操作</h2><ul>
+<li><p>建立pageBean的实体类，使用泛型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public class PageBean&lt;T&gt; &#123;</div><div class="line">	//数据</div><div class="line">	private List&lt;T&gt; data;</div><div class="line">	//设置每页显示多少条，固定的</div><div class="line">	private int pageSize;</div><div class="line">	//当前页的记录的标号，mysql中的参数</div><div class="line">	private int pageNo;</div><div class="line">	//总页数</div><div class="line">	private int totalPage;</div><div class="line">	//当前页数</div><div class="line">	private int page;</div><div class="line">	//总的条数，即一共多少条记录</div><div class="line">	private int totalNum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在dao层进行查询得到data的值，比如<code>List&lt;Goods&gt;</code></p>
+</li>
+<li>在service层实现pageBean的封装,比如<code>totalPage</code></li>
+<li>在action中传入所需要的参数,比如<code>page</code></li>
+</ul>
+<hr>
+<h2 id="实现搜索条件保存和翻页的结合"><a href="#实现搜索条件保存和翻页的结合" class="headerlink" title="实现搜索条件保存和翻页的结合"></a>实现搜索条件保存和翻页的结合</h2><p>在项目中搜索栏中会有各种搜索条件，搜索完成后，需要分页浏览，<br>但是进入下一页时，要保证搜索条件仍然显示出来<br>这是需要用form表单将他们放在一起，并用jquery控制分页及整体form提交</p>
+<ul>
+<li>jquery检查到page发生变化，就向后台提交</li>
+</ul>
+<p>page是向后台传送的属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">	function goPage(p)&#123;</div><div class="line">		$(&quot;#page&quot;).val(p);</div><div class="line">		$(&quot;#form1&quot;).submit();</div><div class="line">	&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>使用form把搜索条件和页码一起控制</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;!-- //为了解决 将搜索内容和page都传到后台--&gt;</div><div class="line">&lt;form action=&quot;goods_listGoodsByPage&quot; method=&quot;post&quot; id=&quot;form1&quot;&apos;&gt;</div><div class="line">	&lt;!-- 因此添加hidden属性将page和goods一起传到后台,在jquery中goPage实现的 --&gt;</div><div class="line">	&lt;!-- name是传到后台的属性名，id是jquery中使用的属性名 --&gt;</div><div class="line">	&lt;input type=&quot;hidden&quot; name=&quot;page&quot; id=&quot;page&quot; /&gt; </div><div class="line">	&lt;select class=&quot;auto&quot; name=&quot;goods.categoryId&quot; id=&quot;category&quot;&gt;</div><div class="line">		&lt;option value=&quot;&quot;&gt;选择分类&lt;/option&gt;</div><div class="line">		&lt;c:forEach items=&quot;$&#123;categories&#125;&quot; var=&quot;category&quot;&gt;</div><div class="line">			&lt;option value=&quot;$&#123;category.id&#125;&quot;&gt;$&#123;category.name&#125;&lt;/option&gt;</div><div class="line">		&lt;/c:forEach&gt;</div><div class="line">	&lt;/select&gt; 商品名： &lt;input class=&quot;small&quot; name=&quot;goods.name&quot; id=&quot;name&quot; type=&quot;text&quot;</div><div class="line">		value=&quot;&quot;&gt;</div><div class="line">	&lt;button class=&quot;btn&quot; type=&quot;submit&quot;&gt;</div><div class="line">		&lt;span class=&quot;sel&quot;&gt;筛 选&lt;/span&gt;</div><div class="line">	&lt;/button&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>分页实现</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&apos;pages_bar&apos;&gt;</div><div class="line">	&lt;a href=&apos;javascript:goPage(1)&apos; id=&quot;first&quot;&gt;首页&lt;/a&gt;</div><div class="line">	&lt;c:forEach begin=&quot;1&quot; end=&quot;$&#123;pageBean.totalPage&#125;&quot; var=&quot;p&quot;&gt;</div><div class="line">		&lt;a href=&quot;javascript:goPage(&apos;$&#123;p&#125;&apos;)&quot;&gt;$&#123;p&#125;&lt;/a&gt;</div><div class="line">	&lt;/c:forEach&gt;</div><div class="line">	&lt;a href=&apos;javascript:goPage($&#123;pageBean.totalPage&#125;)&apos; id=&quot;last&quot;&gt;尾页&lt;/a&gt;&lt;span&gt;当前第$&#123;pageBean.page&#125;页/共$&#123;pageBean.totalPage&#125;页&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="先得到旧数据，再更新"><a href="#先得到旧数据，再更新" class="headerlink" title="先得到旧数据，再更新"></a>先得到旧数据，再更新</h2><p>在实际中，比如要更新商品，要先得到旧数据，然后对旧数据进行修改，输入到数据库中<br>这样做的原因是，修改界面不一定所有的属性都要修改，所以直接拿新数据进行修改可能会产生空值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public void updateGoods(Goods goods) &#123;</div><div class="line">	// TODO Auto-generated method stub</div><div class="line">	//这里更新要先将beforeGoods拿来，然后把新的goods中属性付给beforeGoods</div><div class="line">	//因为goods中不一定所有属性都进行更新，会产生空值，导致出错</div><div class="line">	Goods beforeGoods = goodsDao.getGoodsById(goods.getId());</div><div class="line">	beforeGoods.setCategory(goods.getCategory());</div><div class="line">	beforeGoods.setCategoryId(goods.getCategoryId());	</div><div class="line">	goodsDao.updateGoods(beforeGoods);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="mybatis相关"><a href="#mybatis相关" class="headerlink" title="mybatis相关"></a>mybatis相关</h2><h3 id="传入多个同类型的参数，使用-序号-取出"><a href="#传入多个同类型的参数，使用-序号-取出" class="headerlink" title="传入多个同类型的参数，使用#{序号}取出"></a>传入多个同类型的参数，使用#{序号}取出</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getUserByNameAndPwd"</span> <span class="attr">resultType</span>=<span class="string">"User"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 传入多个参数可以使用map，通过名字来取出，对于同一类型的多个传入参数，可以使用列号来取出 --&gt;</span></div><div class="line">	select * from shop_user where name = #&#123;0&#125; and password = #&#123;1&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="jdbcType-VARCHAR可以传入空值，且不报错"><a href="#jdbcType-VARCHAR可以传入空值，且不报错" class="headerlink" title="jdbcType = VARCHAR可以传入空值，且不报错"></a>jdbcType = VARCHAR可以传入空值，且不报错</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- #&#123;avatar,jdbcType = VARCHAR&#125;当传入值为空的时候，使用varchar可以传入空值 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addUser"</span> <span class="attr">parameterType</span>=<span class="string">"User"</span>&gt;</span></div><div class="line">	insert into shop_user</div><div class="line">	values(#&#123;id&#125;, #&#123;name&#125;, #&#123;password&#125;, #&#123;phoneNum&#125;,</div><div class="line">	#&#123;money&#125;,</div><div class="line">	#&#123;avatar,jdbcType = VARCHAR&#125;, #&#123;regTime&#125;, #&#123;role&#125; )</div><div class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="得到多个相同类型的数据"><a href="#得到多个相同类型的数据" class="headerlink" title="得到多个相同类型的数据"></a>得到多个相同类型的数据</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- While this approach is simple, it will not perform well for large data </span></div><div class="line">	sets or lists. This problem is known as the "N+1 Selects Problem". In a nutshell, </div><div class="line">	the N+1 selects problem is caused. We can Nest Results for Association --&gt;</div><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getAddress"</span> <span class="attr">parameterType</span>=<span class="string">"string"</span> <span class="attr">resultType</span>=<span class="string">"Address"</span>&gt;</span></div><div class="line">	select * from shop_address where userid = #&#123;0&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>java可以直接用list取得<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;Address&gt; <span class="title">getAddress</span><span class="params">(String userid)</span> </span>&#123;</div><div class="line">	<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">	<span class="keyword">return</span> addressDao.getAddress(userid);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="column不一定是数据库中的名字，property是在java中get，set方法的那些属性"><a href="#column不一定是数据库中的名字，property是在java中get，set方法的那些属性" class="headerlink" title="column不一定是数据库中的名字，property是在java中get，set方法的那些属性"></a>column不一定是数据库中的名字，property是在java中get，set方法的那些属性</h3><p><code>association</code>查询一个属性，该属性和另一张表关联，从而查出另一站标的所有属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!--property是在java中get，set方法的那些属性 --&gt;</div><div class="line">&lt;resultMap type=&quot;Goods&quot; id=&quot;GoodsResultMap&quot;&gt;</div><div class="line">	&lt;id column=&quot;id&quot; property=&quot;id&quot; /&gt;</div><div class="line">	&lt;result column=&quot;goodsNo&quot; property=&quot;goodsNo&quot; /&gt;</div><div class="line">	&lt;association property=&quot;category&quot; javaType=&quot;Category&quot;&gt;</div><div class="line">		&lt;id column=&quot;id&quot; property=&quot;id&quot; /&gt;</div><div class="line">		&lt;!-- 因为goods中也有name属性，因此查询出来的结果会重复。 故把category中的name重新命名为cname，这样就不会重复。 </div><div class="line">			由此可以看出column属性不一定是数据库中的列名， 而是查询后显示的列名 --&gt;</div><div class="line">		&lt;result column=&quot;cname&quot; property=&quot;name&quot; /&gt;</div><div class="line">	&lt;/association&gt;</div><div class="line">&lt;/resultMap&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="parameterType不是hashmap等时，不需要加所属，反之必加-amp-hashmap注意判空-amp-bind实现模糊查询"><a href="#parameterType不是hashmap等时，不需要加所属，反之必加-amp-hashmap注意判空-amp-bind实现模糊查询" class="headerlink" title="parameterType不是hashmap等时，不需要加所属，反之必加&amp;hashmap注意判空&amp;bind实现模糊查询"></a>parameterType不是hashmap等时，不需要加所属，反之必加&amp;hashmap注意判空&amp;<code>bind</code>实现模糊查询</h3><p><code>parameterType</code>是<code>Goods</code>，是普通的java类型，因此不要<code>goods.name</code>,mybatis直接会用Goods中的get/set方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;getGoodses&quot; resultMap=&quot;GoodsResultMap&quot; parameterType=&quot;Goods&quot;&gt;</div><div class="line">	&lt;!-- 这里给c.name使用别名cname，因为g中也name列，会重复 --&gt;</div><div class="line">	select g.*, c.name cname from shop_goods g, shop_category c where</div><div class="line">	g.categoryId = c.id</div><div class="line">	&lt;!-- parameterType单一的情况下，就是只有goods或者只有string，(不是hashmap或者list等)， 查询时不需要加所属名字的，比如goods.name --&gt;</div><div class="line">	&lt;if test=&quot;categoryId != null and categoryId!= &apos;&apos; &quot;&gt;</div><div class="line">		and g.categoryId = #&#123;categoryId&#125;</div><div class="line">	&lt;/if&gt;</div><div class="line">	&lt;if test=&quot;name != null and name != &apos;&apos; &quot;&gt;</div><div class="line">		&lt;!-- 模糊查询，1.要用bind 将查询的东西与页面的显示联系起来 --&gt;</div><div class="line">		&lt;bind name=&quot;name&quot; value=&quot;&apos;%&apos; + name + &apos;%&apos;&quot; /&gt;</div><div class="line">		&lt;!-- 模糊查询，2.like关键字模糊查询 --&gt;</div><div class="line">		and g.name like #&#123;name&#125;</div><div class="line">	&lt;/if&gt;</div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p><code>parameterType</code>是<code>hashmap</code>，含有多种不同类型的值，一定要加上key值，才能取出，比如<code>goods.categoryId</code>,<br>mybatis直接会用hashmap中的get/set得到key值，然后在用key中的get/set方法得到属性值</p>
+</li>
+<li><p>hashmap中放多种key时，注意<strong>判断key是否为空</strong>，否则报错<code>source is null for getProperty(null, &quot;categoryId&quot;)</code></p>
+</li>
+<li><p><code>bind</code>实现模糊查询:<a href="https://mybatis.github.io/mybatis-3/dynamic-sql.html" title="https://mybatis.github.io/mybatis-3/dynamic-sql.html" target="_blank" rel="external">模糊查询</a></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;listGoodsByPage&quot; parameterType=&quot;hashmap&quot; resultMap=&quot;GoodsResultMap&quot;&gt;</div><div class="line">	select g.*, c.name cname from shop_goods g, shop_category c</div><div class="line">	where</div><div class="line">	g.categoryId = c.id</div><div class="line">	&lt;!--  一定要判断goods是否为空，否则会报错</div><div class="line">	source is null for getProperty(null, &quot;categoryId&quot;) --&gt;</div><div class="line">	&lt;if test=&quot;goods != null&quot;&gt; </div><div class="line">		&lt;!-- parameterType为hashmap的情况下，查询时一定要加key的名字，比如goods.name --&gt;</div><div class="line">		&lt;if test=&quot;goods.categoryId != null and goods.categoryId!= &apos;&apos; &quot;&gt;</div><div class="line">			and g.categoryId = #&#123;goods.categoryId&#125;</div><div class="line">		&lt;/if&gt;</div><div class="line">		&lt;!-- 这里要指出key值，因为hashmap中放了多个值，比如goods.name --&gt;</div><div class="line">		&lt;if test=&quot;goods.name != null and goods.name != &apos;&apos; &quot;&gt;</div><div class="line">			&lt;!-- 模糊查询，1.要用bind 将查询的东西与页面的显示联系起来 --&gt;</div><div class="line">			&lt;bind name=&quot;goods.name&quot; value=&quot;&apos;%&apos; + goods.name + &apos;%&apos;&quot; /&gt;</div><div class="line">			&lt;!-- 模糊查询，2.like关键字模糊查询 --&gt;</div><div class="line">			and g.name like #&#123;goods.name&#125;</div><div class="line">		&lt;/if&gt;</div><div class="line">	&lt;/if&gt; </div><div class="line">	ORDER BY id LIMIT #&#123;pageNo&#125;, #&#123;pageSize&#125;</div><div class="line"></div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="struts2-相关"><a href="#struts2-相关" class="headerlink" title="struts2 相关"></a>struts2 相关</h2><h3 id="struts2-文件上传"><a href="#struts2-文件上传" class="headerlink" title="struts2 文件上传"></a>struts2 文件上传</h3><p><a href="https://struts.apache.org/docs/file-upload.html" title="https://struts.apache.org/docs/file-upload.html" target="_blank" rel="external">struts upload</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 上传头像</span></div><div class="line"><span class="comment">// struts2对于文件上传已经规定好了属性</span></div><div class="line"><span class="comment">// setX(File file),setXFileName(String fileName),setXContentType(String contentType)</span></div><div class="line"><span class="keyword">private</span> File avatar;</div><div class="line"><span class="keyword">private</span> String avatarFileName;</div><div class="line"><span class="comment">// 上传用户头像</span></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">uploadAvatar</span><span class="params">()</span> </span>&#123;</div><div class="line">	String userId = ((User) ActionContext.getContext().getSession()</div><div class="line">			.get(<span class="string">"user"</span>)).getId();</div><div class="line">	<span class="comment">// 得到文件存放的绝对地址</span></div><div class="line">	String path = ServletActionContext.getServletContext().getRealPath(</div><div class="line">			<span class="string">"/userAvatars"</span>);</div><div class="line">	System.out.println(path);</div><div class="line">	<span class="keyword">if</span> (avatar != <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="comment">// 得到才上传文件的后缀名</span></div><div class="line">		String suffix = avatarFileName.substring(avatarFileName</div><div class="line">				.lastIndexOf(<span class="string">"."</span>));</div><div class="line">		System.out.println(userId + suffix);</div><div class="line">		<span class="comment">// 得到新的文件，与上传文件相同，文件名是id+后缀名</span></div><div class="line">		File saveFile = <span class="keyword">new</span> File(<span class="keyword">new</span> File(path), userId + suffix);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">if</span> (!saveFile.getParentFile().exists()) &#123;</div><div class="line">				saveFile.getParentFile().mkdir();</div><div class="line">			&#125;</div><div class="line">			<span class="comment">// 把上传文件拷贝到服务器端/avatar</span></div><div class="line">			FileUtils.copyFile(avatar, saveFile);</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 存放到数据库中</span></div><div class="line">		userService.upadteAvatar(userId, <span class="string">"userAvatars/"</span> + userId + suffix);</div><div class="line">		<span class="comment">// 更新session</span></div><div class="line">		((User) ActionContext.getContext().getSession().get(<span class="string">"user"</span>))</div><div class="line">				.setAvatar(<span class="string">"userAvatars/"</span> + userId + suffix);</div><div class="line">		<span class="keyword">return</span> <span class="string">"usercenter"</span>;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> path;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="struts得到界面的值"><a href="#struts得到界面的值" class="headerlink" title="struts得到界面的值"></a>struts得到界面的值</h3><p>jsp中有captcha，要去后台验证是否正确<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;td&gt;&lt;input style=&quot;width:85px&quot; type=&apos;text&apos; class=&apos;normal&apos; name=&apos;captcha&apos; /&gt;</div><div class="line">&lt;label&gt;填写下图所示字符&lt;/label&gt;&lt;/td&gt;</div></pre></td></tr></table></figure></p>
+<p>在action中可以直接定义该属性，要保持名字一致，并且使用set/get方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">private String captcha;</div><div class="line">public String getCaptcha() &#123;</div><div class="line">	return captcha;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public void setCaptcha(String captcha) &#123;</div><div class="line">	this.captcha = captcha;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="strut2-验证码"><a href="#strut2-验证码" class="headerlink" title="strut2 验证码"></a>strut2 验证码</h3><p>注意将<code>BufferedImage</code>转化为<code>ByteArrayInputStream</code>，才能在前端显示出来<br><code>RandomAction.java</code>后台验证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">public class RandomAction &#123;</div><div class="line"></div><div class="line">	private ByteArrayInputStream image;   </div><div class="line">	</div><div class="line">	public String execute()&#123;</div><div class="line">		RandomUtils randomUtils = RandomUtils.Instance();</div><div class="line">		//验证码的图片</div><div class="line">		image = randomUtils.getImage();</div><div class="line">		//把验证码放入session中</div><div class="line">		ActionContext.getContext().getSession().put(&quot;vcode&quot;, randomUtils.getString());</div><div class="line">		System.out.println(&quot;vcode&quot;+randomUtils.getString());</div><div class="line">		System.out.println(&quot;session&quot;+ActionContext.getContext().getSession().get(&quot;vcode&quot;)</div><div class="line">				.toString());</div><div class="line">		return &quot;success&quot;;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public ByteArrayInputStream getImage() &#123;</div><div class="line">		return image;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setImage(ByteArrayInputStream image) &#123;</div><div class="line">		this.image = image;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>RandomUtils.java</code>产生验证码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line">public class RandomUtils &#123;</div><div class="line"></div><div class="line">	// public static final char[] CHARS = &#123; &apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;, &apos;6&apos;, &apos;7&apos;, &apos;8&apos;,</div><div class="line">	// &apos;9&apos;, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;, &apos;H&apos;, &apos;J&apos;, &apos;K&apos;, &apos;L&apos;, &apos;M&apos;,</div><div class="line">	// &apos;N&apos;, &apos;P&apos;, &apos;Q&apos;, &apos;R&apos;, &apos;S&apos;, &apos;T&apos;, &apos;U&apos;, &apos;V&apos;, &apos;W&apos;, &apos;X&apos;, &apos;Y&apos;, &apos;Z&apos; &#125;;</div><div class="line"></div><div class="line">	public static final char[] CHARS = &#123; &apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;, &apos;6&apos;,</div><div class="line">			&apos;7&apos;, &apos;8&apos;, &apos;9&apos;, &#125;;</div><div class="line">	private ByteArrayInputStream image;// 图像</div><div class="line">	private String str;// 验证码</div><div class="line"></div><div class="line">	private RandomUtils() &#123;</div><div class="line">		init();// 初始化属性</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static RandomUtils Instance() &#123;</div><div class="line">		return new RandomUtils();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * 取得验证码图片</div><div class="line">	 */</div><div class="line">	public ByteArrayInputStream getImage() &#123;</div><div class="line">		return this.image;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * 取得图片的验证码</div><div class="line">	 */</div><div class="line">	public String getString() &#123;</div><div class="line">		return this.str;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	private void init() &#123;</div><div class="line">		// 在内存中创建图象</div><div class="line">		int width = 85, height = 20;</div><div class="line">		BufferedImage image = new BufferedImage(width, height,</div><div class="line">				BufferedImage.TYPE_INT_RGB);</div><div class="line">		// 获取图形上下文</div><div class="line">		Graphics g = image.getGraphics();</div><div class="line">		// 生成随机类</div><div class="line">		Random random = new Random();</div><div class="line">		// 设定背景色</div><div class="line">		g.setColor(getRandColor(200, 250));</div><div class="line">		g.fillRect(0, 0, width, height);</div><div class="line">		// 设定字体</div><div class="line">		g.setFont(new Font(&quot;Times New Roman&quot;, Font.PLAIN, 18));</div><div class="line">		// 随机产生155条干扰线，使图象中的认证码不易被其它程序探测到</div><div class="line">		g.setColor(getRandColor(160, 200));</div><div class="line">		for (int i = 0; i &lt; 155; i++) &#123;</div><div class="line">			int x = random.nextInt(width);</div><div class="line">			int y = random.nextInt(height);</div><div class="line">			int xl = random.nextInt(12);</div><div class="line">			int yl = random.nextInt(12);</div><div class="line">			g.drawLine(x, y, x + xl, y + yl);</div><div class="line">		&#125;</div><div class="line">		// 取随机产生的认证码(6位数字)</div><div class="line">		StringBuffer sRand = new StringBuffer();</div><div class="line">		for (int i = 0; i &lt; 6; i++) &#123;</div><div class="line">			String rand = String.valueOf(CHARS[random.nextInt(CHARS.length)]);</div><div class="line">			sRand.append(rand);</div><div class="line"></div><div class="line">			// 将认证码显示到图象中</div><div class="line">			g.setColor(new Color(20 + random.nextInt(110), 20 + random</div><div class="line">					.nextInt(110), 20 + random.nextInt(110)));</div><div class="line">			// 调用函数出来的颜色相同，可能是因为种子太接近，所以只能直接生成</div><div class="line">			g.drawString(rand, 13 * i + 6, 16);</div><div class="line">		&#125;</div><div class="line">		// 赋值验证码</div><div class="line">		this.str = sRand.toString();</div><div class="line"></div><div class="line">		// 图象生效</div><div class="line">		g.dispose();</div><div class="line">		ByteArrayInputStream input = null;</div><div class="line">		ByteArrayOutputStream output = new ByteArrayOutputStream();</div><div class="line">		try &#123;</div><div class="line">			ImageOutputStream imageOut = ImageIO</div><div class="line">					.createImageOutputStream(output);</div><div class="line">			ImageIO.write(image, &quot;JPEG&quot;, imageOut);</div><div class="line">			imageOut.close();</div><div class="line">			input = new ByteArrayInputStream(output.toByteArray());</div><div class="line">		&#125; catch (Exception e) &#123;</div><div class="line">			System.out.println(&quot;验证码图片产生出现错误：&quot; + e.toString());</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		this.image = input;/* 赋值图像 */</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * 给定范围获得随机颜色</div><div class="line">	 */</div><div class="line">	private Color getRandColor(int fc, int bc) &#123;</div><div class="line">		Random random = new Random();</div><div class="line">		if (fc &gt; 255)</div><div class="line">			fc = 255;</div><div class="line">		if (bc &gt; 255)</div><div class="line">			bc = 255;</div><div class="line">		int r = fc + random.nextInt(bc - fc);</div><div class="line">		int g = fc + random.nextInt(bc - fc);</div><div class="line">		int b = fc + random.nextInt(bc - fc);</div><div class="line">		return new Color(r, g, b);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>前端显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;tr&gt;</div><div class="line">	&lt;th valign=&quot;middle&quot;&gt;验证码：&lt;/th&gt;</div><div class="line">	&lt;td&gt;&lt;input style=&quot;width:85px&quot; type=&apos;text&apos; class=&apos;normal&apos; name=&apos;captcha&apos; /&gt;</div><div class="line">	&lt;label&gt;填写下图所示字符&lt;/label&gt;&lt;/td&gt;</div><div class="line">&lt;/tr&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="跳转"><a href="#跳转" class="headerlink" title="跳转"></a>跳转</h3><p><code>redirectAction</code>直接跳转到action中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;action name=&quot;address_*&quot; class=&quot;addressAction&quot; method=&quot;&#123;1&#125;&quot;&gt;</div><div class="line">	&lt;result name=&quot;oprsuc&quot; type=&quot;redirectAction&quot;&gt;address_list&lt;/result&gt;</div><div class="line">	&lt;result name=&quot;list&quot;&gt;/usercenter/address_list.jsp&lt;/result&gt;</div><div class="line">&lt;/action&gt;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="spring相关"><a href="#spring相关" class="headerlink" title="spring相关"></a>spring相关</h2><h3 id="spring事务"><a href="#spring事务" class="headerlink" title="spring事务"></a>spring事务</h3><p>一般在service层可以操作多个dao，因此要设置事务<br>service层，每个dao是一个对数据库的操作，下面这种2个dao一起添加的操作一定是事务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public void addGoods(Goods goods) &#123;</div><div class="line">	goods.setId(MyUntil.getID());</div><div class="line">	goodsDao.addGoods(goods);</div><div class="line">	//这是类别的更新，与商品添加一起完成</div><div class="line">	categoryDao.updateGoodsNum(goods.getCategoryId(), 1);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>添加<code>c3p0</code>，并在spring的xml文件中配置<br>不用添加任何其余代码就完成了事务的配置，基于AOP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 添加事务的dataSource --&gt;</div><div class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;</div><div class="line">	&lt;property name=&quot;driverClass&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;&lt;/property&gt;</div><div class="line">	&lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:mysql://localhost:3306/shoppingsite&quot;&gt;&lt;/property&gt;</div><div class="line">	&lt;property name=&quot;user&quot; value=&quot;root&quot;&gt;&lt;/property&gt;</div><div class="line">	&lt;property name=&quot;password&quot; value=&quot;mysql&quot;&gt;&lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;bean id=&quot;transactionManager&quot;</div><div class="line">	class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</div><div class="line">	&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line">&lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;</div><div class="line">	&lt;tx:attributes&gt;</div><div class="line">		&lt;!-- REQUIRED表示不是事务就建立事务 --&gt;</div><div class="line">		&lt;tx:method name=&quot;*&quot; propagation=&quot;REQUIRED&quot; /&gt;</div><div class="line">		&lt;!--SUPPORTS不是事务就不建立 --&gt;</div><div class="line">		&lt;tx:method name=&quot;get*&quot; propagation=&quot;SUPPORTS&quot; read-only=&quot;true&quot; /&gt;</div><div class="line">	&lt;/tx:attributes&gt;</div><div class="line">&lt;/tx:advice&gt;</div><div class="line">&lt;aop:config&gt;</div><div class="line">&lt;!-- 包名一定要写清楚，对应好 com.dy.shoppingSite.*.*(..)这个就不能对应，因为shoppingSite.*是包，也就没有方法--&gt;</div><div class="line">	&lt;aop:pointcut id=&quot;pointcut&quot; expression=&quot;execution(* com.dy.shoppingSite.service.impl.*.*(..))&quot; /&gt;</div><div class="line">	&lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;pointcut&quot; /&gt;</div><div class="line">&lt;/aop:config&gt;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="jsp"><a href="#jsp" class="headerlink" title="jsp"></a>jsp</h2><h3 id="c-forEach中的varStatus-amp-el表达式计算比较等要放在括号内"><a href="#c-forEach中的varStatus-amp-el表达式计算比较等要放在括号内" class="headerlink" title="c:forEach中的varStatus&amp;el表达式计算比较等要放在括号内"></a><code>c:forEach</code>中的<code>varStatus</code>&amp;el表达式计算比较等要放在括号内</h3><ul>
+<li><code>c:forEach</code>中的<code>varStatus</code><br><code>varStatus</code>有很多属性，<code>index</code>是序号，从0开始，也有<code>first</code>等<br>more:<a href="http://www.opencms-wiki.org/wiki/C:forEach" title="http://www.opencms-wiki.org/wiki/C:forEach" target="_blank" rel="external">varStatus</a></li>
+<li>el表达式计算比较等要放在括号内<br>比如<code>${string1 eq string 2}</code>而不是<code>${string1} eq ${string 2}</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;c:set var=&quot;totalMoney&quot; value=&quot;0&quot;&gt;&lt;/c:set&gt;</div><div class="line">	&lt;c:forEach items=&quot;$&#123;orderDetails&#125;&quot; var=&quot;orderDetail&quot; varStatus=&quot;s&quot;&gt;</div><div class="line">		&lt;tr&gt;&lt;td&gt;</div><div class="line">			&lt;!-- //传递orderDetail要使用index，直接传是不成功的 --&gt;</div><div class="line">			&lt;!-- 下标用s.index表示，http://www.opencms-wiki.org/wiki/C:forEach --&gt;</div><div class="line">			&lt;input type=&quot;hidden&quot; name=&quot;orderDetails[$&#123;s.index &#125;].goods.id&quot; value=&quot;$&#123;orderDetail.goods.id&#125;&quot;/&gt;</div><div class="line">			&lt;input type=&quot;hidden&quot; name=&quot;orderDetails[$&#123;s.index &#125;].nums&quot; value=&quot;$&#123;orderDetail.nums&#125;&quot; /&gt;</div><div class="line">			&lt;b class=&quot;red2&quot;&gt;$&#123;orderDetail.nums*orderDetail.goods.price2&#125;&lt;/b&gt;</div><div class="line">		&lt;/td&gt;&lt;/tr&gt;</div><div class="line">	&lt;c:set var=&quot;totalMoney&quot; value=&quot;$&#123;totalMoney+orderDetail.nums*orderDetail.goods.price2&#125;&quot;/&gt;</div><div class="line">&lt;/c:forEach&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-09T14:34:06.000Z" itemprop="dateUpdated">2015年11月9日 22:34</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/10/31/shoppingSite/" target="_blank" rel="external">http://duyao.github.io/2015/10/31/shoppingSite/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/project/">project</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/31/shoppingSite/&title=《shoppingSite》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/31/shoppingSite/&title=《shoppingSite》 — Du Yao's blog&source=shoppingSite本文只要记录在开发工程中遇到的问题以及解决方法以及待改进
+
+技术
+
+struts2
+spring
+mybatis
+
+
+
+做项目时候..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/31/shoppingSite/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《shoppingSite》 — Du Yao's blog&url=http://duyao.github.io/2015/10/31/shoppingSite/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/31/shoppingSite/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/01/3.4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">3.4</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/29/git心得/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">git心得</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="shoppingSite" data-title="shoppingSite" data-url="http://duyao.github.io/2015/10/31/shoppingSite/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/31/shoppingSite/&title=《shoppingSite》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/31/shoppingSite/&title=《shoppingSite》 — Du Yao's blog&source=shoppingSite本文只要记录在开发工程中遇到的问题以及解决方法以及待改进
+
+技术
+
+struts2
+spring
+mybatis
+
+
+
+做项目时候..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/31/shoppingSite/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《shoppingSite》 — Du Yao's blog&url=http://duyao.github.io/2015/10/31/shoppingSite/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/31/shoppingSite/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/10/31/shoppingSite/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

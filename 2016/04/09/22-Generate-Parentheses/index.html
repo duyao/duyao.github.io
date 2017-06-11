@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>22. Generate Parentheses | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,algorithm">
+    <meta name="description" content="22. Generate Parentheses 方法一思路addPairs添加括号l表示该字符串s末尾还可以添加左括号的个数r表示该字符串s末尾还可以添加右括号的个数 对于添加括号的过程  如果r不为0，则r-1，这是添加右括号的过程 如果l不为0，则先l-1，这是添加左括号的过程，然后r+1，因为添加左括号，就要有对应的右括号进行匹配123456789101112public void add">
+<meta name="keywords" content="leetcode,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="22. Generate Parentheses">
+<meta property="og:url" content="http://duyao.github.io/2016/04/09/22-Generate-Parentheses/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="22. Generate Parentheses 方法一思路addPairs添加括号l表示该字符串s末尾还可以添加左括号的个数r表示该字符串s末尾还可以添加右括号的个数 对于添加括号的过程  如果r不为0，则r-1，这是添加右括号的过程 如果l不为0，则先l-1，这是添加左括号的过程，然后r+1，因为添加左括号，就要有对应的右括号进行匹配123456789101112public void add">
+<meta property="og:updated_time" content="2016-04-10T05:56:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="22. Generate Parentheses">
+<meta name="twitter:description" content="22. Generate Parentheses 方法一思路addPairs添加括号l表示该字符串s末尾还可以添加左括号的个数r表示该字符串s末尾还可以添加右括号的个数 对于添加括号的过程  如果r不为0，则r-1，这是添加右括号的过程 如果l不为0，则先l-1，这是添加左括号的过程，然后r+1，因为添加左括号，就要有对应的右括号进行匹配123456789101112public void add">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">22. Generate Parentheses</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">22. Generate Parentheses</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-09T14:34:00.000Z" itemprop="datePublished" class="page-time">
+  2016-04-09
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法一"><span class="post-toc-number">1.</span> <span class="post-toc-text">方法一</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法二"><span class="post-toc-number">2.</span> <span class="post-toc-text">方法二</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#延伸"><span class="post-toc-number">3.</span> <span class="post-toc-text">延伸</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-22-Generate-Parentheses"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">22. Generate Parentheses</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年04月09日 22:34" datetime="2016-04-09T14:34:00.000Z"  itemprop="datePublished">2016-04-09</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="external">22. Generate Parentheses</a></p>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p><code>addPairs</code>添加括号<br><code>l</code>表示该字符串s末尾还可以添加左括号的个数<br><code>r</code>表示该字符串s末尾还可以添加右括号的个数</p>
+<p>对于添加括号的过程</p>
+<ol>
+<li>如果r不为0，则r-1，这是添加右括号的过程</li>
+<li>如果l不为0，则先l-1，这是添加左括号的过程，然后r+1，因为添加左括号，就要有对应的右括号进行匹配<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public void addPairs(List&lt;String&gt; res, String s, int l, int r)&#123;</div><div class="line">	if(l == 0 &amp;&amp; r == 0)&#123;</div><div class="line">		res.add(s);</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	if(r &gt; 0)&#123;</div><div class="line">		addPairs(res, s+&quot;)&quot;, l, r-1);</div><div class="line">	&#125;</div><div class="line">	if(l &gt; 0)&#123;</div><div class="line">		addPairs(res, s+&quot;(&quot;, l-1, r+1);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>调用过程</p>
+<table>
+<thead>
+<tr>
+<th>string</th>
+<th>l</th>
+<th>r</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>(</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>()</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>()(</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>()()</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>()()(</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>()()()</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>()((</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>()(()</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>()(())</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>((</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>(()</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>(())</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>(())(</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>(())()</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>(()(</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>(()()</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>(()())</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>(((</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>((()</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>((())</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>((()))</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public List&lt;String&gt; generateParenthesis(int n) &#123;</div><div class="line">	List&lt;String&gt; res = new ArrayList&lt;String&gt;();</div><div class="line">	addPairs(res, &quot;&quot;, n, 0);</div><div class="line">	return res;</div><div class="line">&#125;</div><div class="line">public void addPairs(List&lt;String&gt; res, String s, int l, int r)&#123;</div><div class="line">	System.out.println(&quot;|&quot;+s+&quot;|&quot;+l+&quot;|&quot;+r+&quot;|&quot;);</div><div class="line">	if(l == 0 &amp;&amp; r == 0)&#123;</div><div class="line">		res.add(s);</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	if(r &gt; 0)&#123;</div><div class="line">		addPairs(res, s+&quot;)&quot;, l, r-1);</div><div class="line">	&#125;</div><div class="line">	if(l &gt; 0)&#123;</div><div class="line">		addPairs(res, s+&quot;(&quot;, l-1, r+1);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>全排列的思路</p>
+<p><a href="http://duyao.github.io/2016/02/18/46-Permutations/">46. Permutations</a><br>把一对括号看成一个整体插入，利用<code>StringBuffer.insert(int offSet, String s)</code></p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public List&lt;String&gt; generateParenthesis(int n) &#123;</div><div class="line">	Set&lt;String&gt; res  = new HashSet&lt;String&gt;();</div><div class="line">	res.add(&quot;&quot;);</div><div class="line">	for (int i = 0; i &lt; n; i++) &#123;</div><div class="line">		Set&lt;String&gt; tres  = new HashSet&lt;String&gt;();</div><div class="line">		for (int j = 0; j &lt;= i; j++) &#123;</div><div class="line">			for (String string : res) &#123;</div><div class="line">				StringBuffer sb = new StringBuffer(string);</div><div class="line">				sb.insert(j,&quot;()&quot;);</div><div class="line">				tres.add(sb.toString());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		res = tres;</div><div class="line">	&#125;</div><div class="line">	return new ArrayList&lt;String&gt;(res);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h2><p>如果此题目只要求求出方法个数，用dp<br>思路类似于<a href="https://leetcode.com/discuss/24282/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i" target="_blank" rel="external">96. Unique Binary Search Trees</a></p>
+<p>图示中#代表空位, n表示有括号的对数, f(n)表示有n对括号时的方法总数</p>
+<ul>
+<li><p>n = 0 //1</p>
+</li>
+<li><p>n = 1 //1<br>() </p>
+</li>
+<li><p>n = 2 //2</p>
+</li>
+</ul>
+<p>()## //2.1 f(0)<em>f(1)<br>(##) //2.2 f(1)</em>f(0)</p>
+<ul>
+<li>n = 3</li>
+</ul>
+<p>()#### //3.1 f(0)<em>f(2)<br>(##)## //3.2 f(1)</em>f(1)<br>(####) //3.3 f(2)*f(0)</p>
+<ul>
+<li>n = 4</li>
+</ul>
+<p>()###### //4.1 f(0)<em>f(3)<br>(##)#### //4.2 f(1)</em>f(2)<br>(####)## //4.3 f(2)<em>f(1)<br>(######) //4.4 f(3)</em>f(0)</p>
+<p>比如n = 4,<br>4.1中，1对括号相隔0个位置，剩余3对括号的排列方法就是f(3)<br>4.2中，1对括号相隔1个位置，则被分为2个批次，一批是f(1)，另一批是f(2)<br>…</p>
+<p>因此得到递推公式<br>f(n) = f(0) * f(n-1) + f(1) * f(n-2) + f(2) * f(n-3) + … + f(n-2) * f(1) + f(n-1) * f(0)<br>f(0) = 1</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-04-10T05:56:54.000Z" itemprop="dateUpdated">2016年4月10日 13:56</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2016/04/09/22-Generate-Parentheses/" target="_blank" rel="external">http://duyao.github.io/2016/04/09/22-Generate-Parentheses/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/&title=《22. Generate Parentheses》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/&title=《22. Generate Parentheses》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《22. Generate Parentheses》 — Du Yao's blog&url=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/04/10/89-Gray-Code/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">89. Gray Code</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/04/08/91-Decode-Ways/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">91. Decode Ways</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="22-Generate-Parentheses" data-title="22. Generate Parentheses" data-url="http://duyao.github.io/2016/04/09/22-Generate-Parentheses/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/&title=《22. Generate Parentheses》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/&title=《22. Generate Parentheses》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《22. Generate Parentheses》 — Du Yao's blog&url=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2016/04/09/22-Generate-Parentheses/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

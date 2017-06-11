@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>设计模式-观察者模式和责任链模式 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计模式">
+    <meta name="description" content="观察模式观察者模式（有时又被称为发布-订阅模式、模型-视图模式、源-收听者模式或从属者模式）是软件设计模式的一种。在此种模式中，一个目标物件管理所有相依于它的观察者物件，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。此种模式通常被用来实作事件处理系统。简单点概括成通俗的话来说，就是一个类管理着所有依赖于它的观察者类，并且它状态变化时会主动给这些依赖它的类发出通知。">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式-观察者模式和责任链模式">
+<meta property="og:url" content="http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="观察模式观察者模式（有时又被称为发布-订阅模式、模型-视图模式、源-收听者模式或从属者模式）是软件设计模式的一种。在此种模式中，一个目标物件管理所有相依于它的观察者物件，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。此种模式通常被用来实作事件处理系统。简单点概括成通俗的话来说，就是一个类管理着所有依赖于它的观察者类，并且它状态变化时会主动给这些依赖它的类发出通知。">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/Obeserver.jpg">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/chainResponsibility.jpg">
+<meta property="og:updated_time" content="2017-05-08T13:56:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式-观察者模式和责任链模式">
+<meta name="twitter:description" content="观察模式观察者模式（有时又被称为发布-订阅模式、模型-视图模式、源-收听者模式或从属者模式）是软件设计模式的一种。在此种模式中，一个目标物件管理所有相依于它的观察者物件，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。此种模式通常被用来实作事件处理系统。简单点概括成通俗的话来说，就是一个类管理着所有依赖于它的观察者类，并且它状态变化时会主动给这些依赖它的类发出通知。">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/Obeserver.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">设计模式-观察者模式和责任链模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">设计模式-观察者模式和责任链模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-05T12:45:43.000Z" itemprop="datePublished" class="page-time">
+  2017-05-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#观察模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">观察模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#推模型和拉模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">推模型和拉模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java中对观察者模式的实现"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">java中对观察者模式的实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#点评"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">点评</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#回调函数"><span class="post-toc-number">2.</span> <span class="post-toc-text">回调函数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#事件监听"><span class="post-toc-number">3.</span> <span class="post-toc-text">事件监听</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#责任链模式"><span class="post-toc-number">4.</span> <span class="post-toc-text">责任链模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#纯的与不纯的责任链模式"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">纯的与不纯的责任链模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#点评-1"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">点评</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-设计模式-观察者模式和责任链模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">设计模式-观察者模式和责任链模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年05月05日 20:45" datetime="2017-05-05T12:45:43.000Z"  itemprop="datePublished">2017-05-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="观察模式"><a href="#观察模式" class="headerlink" title="观察模式"></a>观察模式</h1><p>观察者模式（有时又被称为发布-订阅模式、模型-视图模式、源-收听者模式或从属者模式）是软件设计模式的一种。<br>在此种模式中，一个目标物件管理所有相依于它的观察者物件，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。<br>此种模式通常被用来实作事件处理系统。<br>简单点概括成通俗的话来说，就是一个类管理着所有依赖于它的观察者类，并且它状态变化时会主动给这些依赖它的类发出通知。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/Obeserver.jpg" alt="观察者模式" title="">
+                </div>
+                <div class="image-caption">观察者模式</div>
+            </figure><br>我们的被观察者类Observable只关联了一个Observer的列表，然后在自己状态变化时，使用notifyObservers方法通知这些Observer，具体这些Observer都是什么，被观察者是不关心也不需要知道的。</p>
+<p>一对多的方法，当一个对象的状态发生改变，那么依赖这个状态的相应对象都会发生改变。<br>目标与观察者的关系，可以多目标一个观察者，也可以多个观察者一个目标<br>单向依赖：只有目标什么更新观察者<br>命名：目标subject，观察者observer，更新方法update<br>触发通知的时机：先设置值再更新<br>观察者实现的顺序：<br>通知顺序：顺序不确定</p>
+<h2 id="推模型和拉模型"><a href="#推模型和拉模型" class="headerlink" title="推模型和拉模型"></a>推模型和拉模型</h2><blockquote>
+<p>推模型：</p>
+</blockquote>
+<p>目标对象主动向观察者推送目标的详细信息，推送的信息通常是目标对象的全部或者部分数据，广播方式，在update方法中传递的是定制的内容</p>
+<blockquote>
+<p>拉模型：</p>
+</blockquote>
+<p>目标对象在通知观察着的时候，只传递少量信息<br>如果观察者需要更具体的信息，有观察者主动到目标对象中去获取，相当于观察者从目标对象中拉数据<br>一般这种模型的实现中，会把目标对象自身通过update方法传递给观察者</p>
+<blockquote>
+<p>比较：</p>
+</blockquote>
+<p>推模型假定目标是知道自己想要什么的，因此update中传递的是定制的值，同时这样做会使得代码难以复用<br>拉模型是目标对象不知道自己想要什么值，因此要把对象本身给观察者，由观察者来取值</p>
+<h2 id="java中对观察者模式的实现"><a href="#java中对观察者模式的实现" class="headerlink" title="java中对观察者模式的实现"></a>java中对观察者模式的实现</h2><p>由于JDK中为了方便开发人员，已经写好了现成的观察者接口和被观察者类<br>观察者接口。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//观察者接口，每一个观察者都必须实现这个接口</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">   <span class="comment">//这个方法是观察者在观察对象产生变化时所做的响应动作，从中传入了观察的对象和一个预留参数</span></div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>被观察者类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Vector;</div><div class="line"></div><div class="line"><span class="comment">//被观察者类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</div><div class="line">    <span class="comment">//这是一个改变标识，来标记该被观察者有没有改变</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> changed = <span class="keyword">false</span>;</div><div class="line">    <span class="comment">//持有一个观察者列表</span></div><div class="line">    <span class="keyword">private</span> Vector obs;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Observable</span><span class="params">()</span> </span>&#123;</div><div class="line">      obs = <span class="keyword">new</span> Vector();</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//添加观察者，添加时会去重</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer o)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        <span class="keyword">if</span> (!obs.contains(o)) &#123;</div><div class="line">            obs.addElement(o);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//删除观察者</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObserver</span><span class="params">(Observer o)</span> </span>&#123;</div><div class="line">        obs.removeElement(o);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//notifyObservers(Object arg)的重载方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">      notifyObservers(<span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//通知所有观察者，被观察者改变了，你可以执行你的update方法了。</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</div><div class="line">        <span class="comment">//一个临时的数组，用于并发访问被观察者时，留住观察者列表的当前状态，这种处理方式其实也算是一种设计模式，即备忘录模式。</span></div><div class="line">        Object[] arrLocal;</div><div class="line">        <span class="comment">//注意这个同步块，它表示在获取观察者列表时，该对象是被锁定的</span></div><div class="line">        <span class="comment">//也就是说，在我获取到观察者列表之前，不允许其他线程改变观察者列表</span></div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">            <span class="comment">//如果没变化直接返回</span></div><div class="line">            <span class="keyword">if</span> (!changed)</div><div class="line">                    <span class="keyword">return</span>;</div><div class="line">            <span class="comment">//这里将当前的观察者列表放入临时数组</span></div><div class="line">            arrLocal = obs.toArray();</div><div class="line">            <span class="comment">//将改变标识重新置回未改变</span></div><div class="line">            clearChanged();</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//注意这个for循环没有在同步块，此时已经释放了被观察者的锁，其他线程可以改变观察者列表</span></div><div class="line">        <span class="comment">//但是这并不影响我们当前进行的操作，因为我们已经将观察者列表复制到临时数组</span></div><div class="line">        <span class="comment">//在通知时我们只通知数组中的观察者，当前删除和添加观察者，都不会影响我们通知的对象</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = arrLocal.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)</div><div class="line">            ((Observer)arrLocal[i]).update(<span class="keyword">this</span>, arg);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//删除所有观察者</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        obs.removeAllElements();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//标识被观察者被改变过了</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        changed = <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//标识被观察者没改变</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">clearChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        changed = <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//返回被观察者是否改变</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">hasChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> changed;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//返回观察者数量</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">countObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> obs.size();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="点评"><a href="#点评" class="headerlink" title="点评"></a>点评</h2><p>观察者和目标之间是松耦合；观察者实现了动态联动；观察者支持广播通信<br>可能会引起无谓的操作<br>何时使用观察者模式<br><a href="http://www.runoob.com/design-pattern/observer-pattern.html" target="_blank" rel="external">http://www.runoob.com/design-pattern/observer-pattern.html</a><br><a href="http://www.cnblogs.com/zuoxiaolong/p/pattern7.html" target="_blank" rel="external">http://www.cnblogs.com/zuoxiaolong/p/pattern7.html</a><br><a href="http://www.cnblogs.com/fingerboy/p/6393644.html" target="_blank" rel="external">http://www.cnblogs.com/fingerboy/p/6393644.html</a><br><a href="http://abc08010051.iteye.com/blog/1972960" target="_blank" rel="external">http://abc08010051.iteye.com/blog/1972960</a></p>
+<h1 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h1><p><a href="http://www.cnblogs.com/heshuchao/p/5376298.html" target="_blank" rel="external">http://www.cnblogs.com/heshuchao/p/5376298.html</a><br><a href="https://www.zhihu.com/question/19801131" target="_blank" rel="external">https://www.zhihu.com/question/19801131</a><br><a href="http://blog.csdn.net/xiaanming/article/details/8703708" target="_blank" rel="external">http://blog.csdn.net/xiaanming/article/details/8703708</a></p>
+<h1 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h1><p><a href="https://my.oschina.net/u/923324/blog/792857" target="_blank" rel="external">https://my.oschina.net/u/923324/blog/792857</a></p>
+<h1 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h1><p>责任链模式是一种对象的行为模式。<br>在责任链模式里，很多对象由每一个对象对其下家的引用而连接起来形成一条链。请求在这个链上传递，直到链上的某一个对象决定处理此请求。<br>发出这个请求的客户端并不知道链上的哪一个对象最终处理这个请求，这使得系统可以在不影响客户端的情况下动态地重新组织和分配责任。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/chainResponsibility.jpg" alt="责任链模式" title="">
+                </div>
+                <div class="image-caption">责任链模式</div>
+            </figure>
+<p>责任链模式涉及到的角色如下所示：<br>抽象处理者(Handler)角色：定义一个处理请求的抽象类。如果需要，可以定义一个方法以设定和返回对下家的引用。<br>具体处理者(ConcreteHandler)角色：具体处理者接到请求后，可以选择将请求处理掉，或者将请求传给下家。由于具体处理者持有对下家的引用，因此，如果需要，具体处理者可以访问下家。</p>
+<h2 id="纯的与不纯的责任链模式"><a href="#纯的与不纯的责任链模式" class="headerlink" title="纯的与不纯的责任链模式"></a>纯的与不纯的责任链模式</h2><p>一个纯的责任链模式要求一个具体的处理者对象只能在两个行为中选择一个：一是承担责任，而是把责任推给下家。不允许出现某一个具体处理者对象在承担了一部分责任后又把责任向下传的情况。<br>在一个纯的责任链模式里面，一个请求必须被某一个处理者对象所接收；在一个不纯的责任链模式里面，一个请求可以最终不被任何接收端对象所接收。<br>纯的责任链模式的实际例子很难找到，一般看到的例子均是不纯的责任链模式的实现。</p>
+<h2 id="点评-1"><a href="#点评-1" class="headerlink" title="点评"></a>点评</h2><p>不用职责链的结构，我们需要和公司中的每一个层级都发生耦合关系。<br>如果反映在代码上即使我们需要在一个类中去写上很多丑陋的if….else语句。<br>如果用了职责链，相当于我们面对的是一个黑箱，我们只需要认识其中的一个部门，然后让黑箱内部去负责传递就好了</p>
+<p>缺点：构造大量的对象，但是最终只有一个对象响应请求，因此内存中的性能会有所损耗，可以使用观察者模式代替<br>还有就是责任链必须遍历整条链才能找到响应，比较耗时</p>
+<p>应用：异常处理，filter(多个filter可以响应，不止是一个)<br><a href="http://www.cnblogs.com/java-my-life/archive/2012/05/28/2516865.html" target="_blank" rel="external">http://www.cnblogs.com/java-my-life/archive/2012/05/28/2516865.html</a></p>
+<p><a href="http://blog.csdn.net/zuoxiaolong8810/article/category/1434962/2" target="_blank" rel="external">http://blog.csdn.net/zuoxiaolong8810/article/category/1434962/2</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-08T13:56:44.000Z" itemprop="dateUpdated">2017年5月8日 21:56</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/05/05/设计模式-观察者模式和责任链模式/" target="_blank" rel="external">http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/&title=《设计模式-观察者模式和责任链模式》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/&title=《设计模式-观察者模式和责任链模式》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式-观察者模式和责任链模式》 — Du Yao's blog&url=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/05/08/设计模式-策略模式和模板方法模式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">设计模式-策略模式和模板方法模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/30/设计模式原则和UML图/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">设计模式原则和UML图</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="设计模式-观察者模式和责任链模式" data-title="设计模式-观察者模式和责任链模式" data-url="http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/&title=《设计模式-观察者模式和责任链模式》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/&title=《设计模式-观察者模式和责任链模式》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计模式-观察者模式和责任链模式》 — Du Yao's blog&url=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

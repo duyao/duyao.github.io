@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>红黑树 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="algorithm">
+    <meta name="description" content="红黑树Red-Black Tree(R B-tree) 性质本质是一个有限制的二叉搜索树BST,即每个结点上增加一个存储位表示结点的颜色，可以是Red或Black。通过对任何一条从根到叶子的路径上各个结点着色方式的限制，红黑树确保没有一条路径会比其他路径长出俩倍，因而是接近平衡的。">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红黑树">
+<meta property="og:url" content="http://duyao.github.io/2016/03/19/红黑树/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="红黑树Red-Black Tree(R B-tree) 性质本质是一个有限制的二叉搜索树BST,即每个结点上增加一个存储位表示结点的颜色，可以是Red或Black。通过对任何一条从根到叶子的路径上各个结点着色方式的限制，红黑树确保没有一条路径会比其他路径长出俩倍，因而是接近平衡的。">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/%E6%A0%91%E7%9A%84%E6%97%8B%E8%BD%AC.gif">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A5.png">
+<meta property="og:updated_time" content="2016-03-28T14:14:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="红黑树">
+<meta name="twitter:description" content="红黑树Red-Black Tree(R B-tree) 性质本质是一个有限制的二叉搜索树BST,即每个结点上增加一个存储位表示结点的颜色，可以是Red或Black。通过对任何一条从根到叶子的路径上各个结点着色方式的限制，红黑树确保没有一条路径会比其他路径长出俩倍，因而是接近平衡的。">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">红黑树</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">红黑树</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-19T05:01:16.000Z" itemprop="datePublished" class="page-time">
+  2016-03-19
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#性质"><span class="post-toc-number">1.</span> <span class="post-toc-text">性质</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作"><span class="post-toc-number">2.</span> <span class="post-toc-text">操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#树的左旋与右旋"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">树的左旋与右旋</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#插入节点"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">插入节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除节点"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">删除节点</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-红黑树"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">红黑树</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年03月19日 13:01" datetime="2016-03-19T05:01:16.000Z"  itemprop="datePublished">2016-03-19</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>红黑树Red-Black Tree(R B-tree)</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>本质是一个有限制的二叉搜索树BST,即每个结点上增加一个存储位表示结点的颜色，可以是Red或Black。<br>通过对任何一条从根到叶子的路径上各个结点着色方式的限制，红黑树确保<strong>没有</strong>一条路径会比其他路径长出俩倍，因而是接近平衡的。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91.png" alt="红黑树示例" title="">
+                </div>
+                <div class="image-caption">红黑树示例</div>
+            </figure></p>
+<ul>
+<li>每个结点不是红色就是黑色</li>
+<li>根节点一定是黑色</li>
+<li>红色结点的子节点一定全部都是黑色</li>
+<li>每个叶子节点(叶结点即指树尾端NIL指针或NULL结点)一定是黑色</li>
+<li>对于任意一个节点，其到叶子节点NIL的路径中黑色节点的个数都是相同的<br>(确保没有一条路径会比其他路径长出俩倍。因而，红黑树是相对是接近平衡的二叉树)</li>
+</ul>
+<p><strong>一棵含有n个节点的红黑树的高度至多为2log(n+1)</strong></p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="树的左旋与右旋"><a href="#树的左旋与右旋" class="headerlink" title="树的左旋与右旋"></a>树的左旋与右旋</h3><ul>
+<li>左旋指的是该节点旋转后，变为左孩子，该节点的右孩子变为其父亲</li>
+<li>右旋指的是该节点旋转后，变为右孩子，该节点的左孩子变为其父亲</li>
+</ul>
+<p>不论左旋还是右旋指的都是该被旋转节点变为左或右孩子<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/%E6%A0%91%E7%9A%84%E6%97%8B%E8%BD%AC.gif" alt="左旋与右旋" title="">
+                </div>
+                <div class="image-caption">左旋与右旋</div>
+            </figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">LEFT-ROTATE(T, x)  </div><div class="line"> y ← right[x]            // 前提：这里假设x的右孩子为y。下面开始正式操作</div><div class="line"> right[x] ← left[y]      // 将 “y的左孩子” 设为 “x的右孩子”，即 将β设为x的右孩子</div><div class="line"> p[left[y]] ← x          // 将 “x” 设为 “y的左孩子的父亲”，即 将β的父亲设为x</div><div class="line"> p[y] ← p[x]             // 将 “x的父亲” 设为 “y的父亲”</div><div class="line"> if p[x] = nil[T]       </div><div class="line"> then root[T] ← y                 // 情况1：如果 “x的父亲” 是空节点，则将y设为根节点</div><div class="line"> else if x = left[p[x]]  </div><div class="line">           then left[p[x]] ← y    // 情况2：如果 x是它父节点的左孩子，则将y设为“x的父节点的左孩子”</div><div class="line">           else right[p[x]] ← y   // 情况3：(x是它父节点的右孩子) 将y设为“x的父节点的右孩子”</div><div class="line"> left[y] ← x             // 将 “x” 设为 “y的左孩子”</div><div class="line"> p[x] ← y                // 将 “x的父节点” 设为 “y”</div><div class="line"></div><div class="line"></div><div class="line"> RIGHT-ROTATE(T, y)  </div><div class="line"> x ← left[y]             // 前提：这里假设y的左孩子为x。下面开始正式操作</div><div class="line"> left[y] ← right[x]      // 将 “x的右孩子” 设为 “y的左孩子”，即 将β设为y的左孩子</div><div class="line"> p[right[x]] ← y         // 将 “y” 设为 “x的右孩子的父亲”，即 将β的父亲设为y</div><div class="line"> p[x] ← p[y]             // 将 “y的父亲” 设为 “x的父亲”</div><div class="line"> if p[y] = nil[T]       </div><div class="line"> then root[T] ← x                 // 情况1：如果 “y的父亲” 是空节点，则将x设为根节点</div><div class="line"> else if y = right[p[y]]  </div><div class="line">           then right[p[y]] ← x   // 情况2：如果 y是它父节点的右孩子，则将x设为“y的父节点的左孩子”</div><div class="line">           else left[p[y]] ← x    // 情况3：(y是它父节点的左孩子) 将x设为“y的父节点的左孩子”</div><div class="line"> right[x] ← y            // 将 “y” 设为 “x的右孩子”</div><div class="line"> p[y] ← x                // 将 “y的父节点” 设为 “x”</div></pre></td></tr></table></figure>
+<h3 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h3><p>插入节点一共有有3步<br>→1. [插入]把红黑树当做二叉查找树，插入节点<br>→2. [着色]把插入的节点置为红色</p>
+<ul>
+<li>插入节点的父节点为黑色，结束</li>
+<li>插入节点的父节点为红色，进入3修复</li>
+</ul>
+<p>→3. [修复]根据5种情况进行旋转，使之成为符合要求的红黑树<br>前提是父节点红色</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A5.png" alt="插入情况" title="">
+                </div>
+                <div class="image-caption">插入情况</div>
+            </figure>
+<h3 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h3><p>将红黑树内的某一个节点删除。需要执行的操作依次是：<br>首先，将红黑树当作一颗二叉查找树，将该节点从二叉查找树中删除；<br>然后，通过”旋转和重新着色”等一系列来修正该树，使之重新成为一棵红黑树。</p>
+<p>详细描述如下：<br>第一步：将红黑树当作一颗二叉查找树，将节点删除。<br>这和”删除常规二叉查找树中删除节点的方法是一样的”。分3种情况：<br>① 被删除节点没有儿子，即为叶节点。那么，直接将该节点删除就OK了。<br>② 被删除节点只有一个儿子。那么，直接删除该节点，并用该节点的唯一子节点顶替它的位置。<br>③ 被删除节点有两个儿子。那么，先找出它的后继节点；<strong>然后把“它的后继节点的内容”复制给“该节点的内容”</strong>；之后，删除“它的后继节点”。在这里，后继节点相当于替身，在将后继节点的内容复制给”被删除节点”之后，再将后继节点删除。<br>这样就巧妙的<strong>将问题转换为”删除后继节点”的情况了</strong>，下面就考虑后继节点。 在”被删除节点”有两个非空子节点的情况下，它的后继节点不可能是双子非空。既然”的后继节点”不可能双子都非空，就意味着”该节点的后继节点”要么没有儿子，要么只有一个儿子。若没有儿子，则按”情况① “进行处理；若只有一个儿子，则按”情况② “进行处理。</p>
+<p>第二步：通过”旋转和重新着色”等一系列来修正该树，使之重新成为一棵红黑树。<br>        因为”第一步”中删除节点之后，可能会违背红黑树的特性。所以需要通过”旋转和重新着色”来修正该树，使之重新成为一棵红黑树。</p>
+<p>① 情况说明：x是“红+黑”节点。<br>    处理方法：直接把x设为黑色，结束。此时红黑树性质全部恢复。<br>② 情况说明：x是“黑+黑”节点，且x是根。<br>    处理方法：什么都不做，结束。此时红黑树性质全部恢复。<br>③ 情况说明：x是“黑+黑”节点，且x不是根。<br>    处理方法：这种情况又可以划分为4种子情况。这4种子情况如下：</p>
+<p>Case 1    x是”黑+黑”节点，x的兄弟节点是红色。(此时x的父节点和x的兄弟节点的子节点都是黑节点)。<br>(01) 将x的兄弟节点设为“黑色”。<br>(02) 将x的父节点设为“红色”。<br>(03) 对x的父节点进行左旋。<br>(04) 左旋后，重新设置x的兄弟节点。</p>
+<p>Case 2    x是“黑+黑”节点，x的兄弟节点是黑色，x的兄弟节点的两个孩子都是黑色。<br>(01) 将x的兄弟节点设为“红色”。<br>(02) 设置“x的父节点”为“新的x节点”。</p>
+<p>Case 3    x是“黑+黑”节点，x的兄弟节点是黑色；x的兄弟节点的左孩子是红色，右孩子是黑色的。<br>(01) 将x兄弟节点的左孩子设为“黑色”。<br>(02) 将x兄弟节点设为“红色”。<br>(03) 对x的兄弟节点进行右旋。<br>(04) 右旋后，重新设置x的兄弟节点。</p>
+<p>Case 4    x是“黑+黑”节点，x的兄弟节点是黑色；x的兄弟节点的右孩子是红色的，x的兄弟节点的左孩子任意颜色。<br>(01) 将x父节点颜色 赋值给 x的兄弟节点。<br>(02) 将x父节点设为“黑色”。<br>(03) 将x兄弟节点的右子节设为“黑色”。<br>(04) 对x的父节点进行左旋。<br>(05) 设置“x”为“根节点”。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cs.usfca.edu/~galles/visualization/RedBlack.html" target="_blank" rel="external">红黑树插入删除动画演示</a><br><a href="http://blog.csdn.net/v_JULY_v/article/details/6124989" target="_blank" rel="external">July红黑树总结</a><br>深度好文 -&gt; <a href="https://www.ibm.com/developerworks/cn/java/j-lo-tree/" target="_blank" rel="external">JDK 源代码研究 TreeMap 红黑树算法实现</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-03-28T14:14:24.000Z" itemprop="dateUpdated">2016年3月28日 22:14</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2016/03/19/红黑树/" target="_blank" rel="external">http://duyao.github.io/2016/03/19/红黑树/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/03/19/红黑树/&title=《红黑树》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/03/19/红黑树/&title=《红黑树》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/03/19/红黑树/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《红黑树》 — Du Yao's blog&url=http://duyao.github.io/2016/03/19/红黑树/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/03/19/红黑树/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/21/Comparator and Comparable/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Comparator and Comparable</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/14/集合和迭代器接口/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">集合和迭代器接口</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="红黑树" data-title="红黑树" data-url="http://duyao.github.io/2016/03/19/红黑树/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/03/19/红黑树/&title=《红黑树》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/03/19/红黑树/&title=《红黑树》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/03/19/红黑树/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《红黑树》 — Du Yao's blog&url=http://duyao.github.io/2016/03/19/红黑树/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/03/19/红黑树/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2016/03/19/红黑树/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

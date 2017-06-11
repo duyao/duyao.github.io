@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>nio | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java nio">
+    <meta name="description" content="io模型一些概念用户空间与内核空间现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全。操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对Linux操作系">
+<meta name="keywords" content="java nio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nio">
+<meta property="og:url" content="http://duyao.github.io/2017/04/18/nio/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="io模型一些概念用户空间与内核空间现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全。操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对Linux操作系">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/linuxkernel.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/blockingio.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/nonblockingio.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/iomultiplexing.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/asynchronousio.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/ComparisonIOmodels.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/reactor.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/nio.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/buufer.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/bufferfun.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/allocateDirect.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/mapdirectheap.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/bufferchannel.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/filechannel.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/selectablechannel.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/selector.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/selelctablekey.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/pipe.png">
+<meta property="og:updated_time" content="2017-04-23T12:51:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nio">
+<meta name="twitter:description" content="io模型一些概念用户空间与内核空间现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全。操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对Linux操作系">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/linuxkernel.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">nio</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">nio</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-18T08:16:57.000Z" itemprop="datePublished" class="page-time">
+  2017-04-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#io模型"><span class="post-toc-number">1.</span> <span class="post-toc-text">io模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一些概念"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">一些概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户空间与内核空间"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">用户空间与内核空间</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程切换"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">进程切换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程的阻塞"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">进程的阻塞</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件描述符fd"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">文件描述符fd</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缓存-I-O"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">缓存 I/O</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#io模型-1"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">io模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#阻塞I-O"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">阻塞I/O</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非阻塞I-O"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">非阻塞I/O</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#I-O-多路复用"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">I/O 多路复用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#select，poll，epoll区别"><span class="post-toc-number">1.2.3.1.</span> <span class="post-toc-text">select，poll，epoll区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#异步-I-O"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">异步 I/O</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#几种-I-O-模型的比较"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">几种 I/O 模型的比较</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java中的io模型"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">java中的io模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#两种IO多路复用方案-Reactor-and-Proactor"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">两种IO多路复用方案:Reactor and Proactor</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#nio"><span class="post-toc-number">2.</span> <span class="post-toc-text">nio</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#buffer"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">buffer</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本属性"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">基本属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Buffer常用方法"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">Buffer常用方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#直接缓冲区和非直接缓冲区"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">直接缓冲区和非直接缓冲区</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#HeapByteBuffer和DirectByteBuffer以及MappedByteBuffer区别"><span class="post-toc-number">2.1.3.1.</span> <span class="post-toc-text">HeapByteBuffer和DirectByteBuffer以及MappedByteBuffer区别</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#channel"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">channel</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通道的数据传输"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">通道的数据传输</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分散-Scatter-和聚集-Gather"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">分散(Scatter)和聚集(Gather)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通道之间的传输"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">通道之间的传输</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络channel"><span class="post-toc-number">2.2.4.</span> <span class="post-toc-text">网络channel</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Selector"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Selector</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SelectionKey"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">SelectionKey</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#选择器（-Selector）的应用"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">选择器（ Selector）的应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NIO中的server"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">NIO中的server</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#管道-Pipe"><span class="post-toc-number">3.</span> <span class="post-toc-text">管道 (Pipe)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Path、-Paths、-Files、CharSet"><span class="post-toc-number">4.</span> <span class="post-toc-text">Path、 Paths、 Files、CharSet</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-nio"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">nio</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年04月18日 16:16" datetime="2017-04-18T08:16:57.000Z"  itemprop="datePublished">2017-04-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="io模型"><a href="#io模型" class="headerlink" title="io模型"></a>io模型</h1><h2 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h2><h3 id="用户空间与内核空间"><a href="#用户空间与内核空间" class="headerlink" title="用户空间与内核空间"></a>用户空间与内核空间</h3><p>现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。<br>操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全。<br>操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。<br>针对Linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/linuxkernel.png" alt="用户空间和内核空间" title="">
+                </div>
+                <div class="image-caption">用户空间和内核空间</div>
+            </figure></p>
+<h3 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h3><p>为了控制进程的执行，内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行。这种行为被称为进程切换。<br>因此可以说，任何进程都是在操作系统内核的支持下运行的，是与内核紧密相关的。</p>
+<p>从一个进程的运行转到另一个进程上运行，这个过程中经过下面这些变化：</p>
+<ol>
+<li>保存处理机上下文，包括程序计数器和其他寄存器。</li>
+<li>更新PCB信息。</li>
+<li>把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列。</li>
+<li>选择另一个进程执行，并更新其PCB。</li>
+<li>更新内存管理的数据结构。</li>
+<li>恢复处理机上下文。</li>
+</ol>
+<h3 id="进程的阻塞"><a href="#进程的阻塞" class="headerlink" title="进程的阻塞"></a>进程的阻塞</h3><p>正在执行的进程，由于期待的某些事件未发生，如请求系统资源失败、等待某种操作的完成、新数据尚未到达或无新工作做等，则由系统自动执行阻塞原语(Block)，使自己由运行状态变为阻塞状态。<br>可见，进程的阻塞是进程自身的一种主动行为，也因此<strong>只有处于运行态的进程（获得CPU），才可能将其转为阻塞状态</strong>。<strong>当进程进入阻塞状态，是不占用CPU资源的</strong>。</p>
+<h3 id="文件描述符fd"><a href="#文件描述符fd" class="headerlink" title="文件描述符fd"></a>文件描述符fd</h3><p>文件描述符（File descriptor）是计算机科学中的一个术语，是一个用于表述指向文件的引用的抽象化概念。</p>
+<p>文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。<strong>当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符</strong>。在程序设计中，一些涉及底层的程序编写往往会围绕着文件描述符展开。但是文件描述符这一概念往往只适用于UNIX、Linux这样的操作系统。</p>
+<h3 id="缓存-I-O"><a href="#缓存-I-O" class="headerlink" title="缓存 I/O"></a>缓存 I/O</h3><p>缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。<br>在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，<strong>数据会先被拷贝到操作系统内核的缓冲区中</strong>，<strong>然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间</strong>。</p>
+<p>缓存 I/O 的缺点：<br>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<h2 id="io模型-1"><a href="#io模型-1" class="headerlink" title="io模型"></a>io模型</h2><p>刚才说了，对于一次IO访问（以read举例），数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。所以说，当一个read操作发生时，它会经历两个阶段：</p>
+<ol>
+<li>等待数据准备 (Waiting for the data to be ready)</li>
+<li>将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
+</ol>
+<p>正式因为这两个阶段，linux系统产生了下面五种网络模式的方案。</p>
+<ul>
+<li>阻塞I/O（blocking IO）</li>
+<li>非阻塞I/O（nonblocking IO）</li>
+<li>I/O多路复用（ IO multiplexing）</li>
+<li>异步I/O（asynchronous IO）</li>
+</ul>
+<h3 id="阻塞I-O"><a href="#阻塞I-O" class="headerlink" title="阻塞I/O"></a>阻塞I/O</h3><p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/blockingio.png" alt="阻塞I/O" title="">
+                </div>
+                <div class="image-caption">阻塞I/O</div>
+            </figure><br>当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据（对于网络IO来说，很多时候数据在一开始还没有到达。比如，还没有收到一个完整的UDP包。这个时候kernel就要等待足够的数据到来）。这个过程需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中是需要一个过程的。而在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当kernel一直等到数据准备好了，它就会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。</p>
+<blockquote>
+<p>blocking IO的特点就是在IO执行的两个阶段都被block了。</p>
+</blockquote>
+<h3 id="非阻塞I-O"><a href="#非阻塞I-O" class="headerlink" title="非阻塞I/O"></a>非阻塞I/O</h3><p>linux下，可以通过设置socket使其变为non-blocking。当对一个non-blocking socket执行读操作时，流程是这个样子：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/nonblockingio.png" alt="非阻塞I/O" title="">
+                </div>
+                <div class="image-caption">非阻塞I/O</div>
+            </figure><br>当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error。从用户进程角度讲 ，它发起一个read操作后，并不需要等待，而是马上就得到了一个结果。用户进程判断结果是一个error时，它就知道数据还没有准备好，于是它可以再次发送read操作。一旦kernel中的数据准备好了，并且又再次收到了用户进程的system call，那么它马上就将数据拷贝到了用户内存，然后返回。</p>
+<blockquote>
+<p>nonblocking IO的特点是用户进程需要不断的主动询问kernel数据好了没有。</p>
+</blockquote>
+<h3 id="I-O-多路复用"><a href="#I-O-多路复用" class="headerlink" title="I/O 多路复用"></a>I/O 多路复用</h3><p>IO multiplexing就是我们说的select，poll，epoll，有些地方也称这种IO方式为event driven IO。<br>select/epoll的好处就在于单个process就可以同时处理多个网络连接的IO。它的基本原理就是select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/iomultiplexing.png" alt="I/O" title="">
+                </div>
+                <div class="image-caption">I/O</div>
+            </figure><br>当用户进程调用了select，那么整个进程会被block，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程。</p>
+<blockquote>
+<p>所以，I/O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回。</p>
+</blockquote>
+<h4 id="select，poll，epoll区别"><a href="#select，poll，epoll区别" class="headerlink" title="select，poll，epoll区别"></a>select，poll，epoll区别</h4><p>1、支持一个进程所能打开的最大连接数<br>select有上限，poll没有上限、epoll基本没有上限<br>2、FD剧增后带来的IO效率问题<br>select和poll每次调用都要线性遍历，而epoll使用callback回调函数<br>3、消息传递方式<br>select和poll消息要从内核空间传递到用户空间，需要内核拷贝，epoll通过内核和用户空间共享一块内存空间来实现消息传递</p>
+<p>select低效是因为每次它都需要轮询。但低效也是相对的，视情况而定，也可通过良好的设计改善<br><strong>java nio包是select模型</strong></p>
+<p><a href="https://my.oschina.net/xianggao/blog/663655" target="_blank" rel="external">https://my.oschina.net/xianggao/blog/663655</a><br><a href="http://blog.sae.sina.com.cn/archives/5042" target="_blank" rel="external">http://blog.sae.sina.com.cn/archives/5042</a></p>
+<h3 id="异步-I-O"><a href="#异步-I-O" class="headerlink" title="异步 I/O"></a>异步 I/O</h3><p>Linux下的asynchronous IO其实用得很少。先看一下它的流程：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/asynchronousio.png" alt="异步" title="">
+                </div>
+                <div class="image-caption">异步</div>
+            </figure><br>用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。</p>
+<p><a href="http://blog.csdn.net/ywcpig/article/details/52540853?locationNum=1&amp;fps=1" target="_blank" rel="external">http://blog.csdn.net/ywcpig/article/details/52540853?locationNum=1&amp;fps=1</a></p>
+<h3 id="几种-I-O-模型的比较"><a href="#几种-I-O-模型的比较" class="headerlink" title="几种 I/O 模型的比较"></a>几种 I/O 模型的比较</h3><p>前三种模型的区别是阶段1不相同，阶段2基本相同，都是将数据从内核拷贝到调用者的缓冲区。而异步 I/O 的两个阶段都不同于三四个模型。<br>同步 I/O 操作引起请求进程阻塞，直到 I/O 操作完成。异步 I/O 操作不引起请求进程阻塞。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/ComparisonIOmodels.png" alt="I/O" title="">
+                </div>
+                <div class="image-caption">I/O</div>
+            </figure><br>阻塞与非阻塞指的的是当不能进行读写（网卡满时的写/网卡空的时候的读）的时候，I/O 操作立即返回还是阻塞；同步异步指的是，当数据已经ready的时候，读写操作是同步读还是异步读，阶段不同而已。</p>
+<h2 id="java中的io模型"><a href="#java中的io模型" class="headerlink" title="java中的io模型"></a>java中的io模型</h2><p>阻塞I/O：服务器启动后，等待客户端连接。在客户端连接服务器后，服务器就阻塞读写取数据流。就是普通的serversocket，这种情况一个客户端连接之后，只能accept一个客户端，其他的是连接不到的</p>
+<p>阻塞I/O+多线程：每次接收到新的连接都要新建一个线程，处理完成后销毁线程，但是这样做代价大，当有大量地短连接出现时，性能比较低。</p>
+<p>阻塞I/O+线程池：针对上面多线程的模型中，出现的线程重复创建、销毁带来的开销，可以采用线程池来优化。每次接收到新连接后从池中取一个空闲线程进行处理，处理完成后再放回池中，重用线程避免了频率地创建和销毁线程带来的开销。<br>存在着问题：在大量短连接的场景中性能会有提升，因为不用每次都创建和销毁线程，而是重用连接池中的线程。但在大量长连接的场景中，因为线程被连接长期占用，不需要频繁地创建和销毁线程，因而没有什么优势。虽然这种方法可以适用于小到中度规模的客户端的并发数，如果连接数超过 100,000或更多，那么性能将很不理想。</p>
+<p>“阻塞I/O+线程池”网络模型虽然比”阻塞I/O+多线程”网络模型在性能方面有提升，但这两种模型都存在一个共同的问题：读和写操作都是同步阻塞的,面对大并发（持续大量连接同时请求）的场景，需要消耗大量的线程来维持连接。CPU 在大量的线程之间频繁切换，性能损耗很大。一旦单机的连接超过1万，甚至达到几万的时候，服务器的性能会急剧下降。</p>
+<p>而 NIO 的 Selector 却很好地解决了这个问题，用主线程（一个线程或者是 CPU 个数的线程）保持住所有的连接，管理和读取客户端连接的数据，将读取的数据交给后面的线程池处理，线程池处理完业务逻辑后，将结果交给主线程发送响应给客户端，少量的线程就可以处理大量连接的请求。<br>Java NIO 由以下几个核心部分组成：</p>
+<ul>
+<li>Channel</li>
+<li>Buffer</li>
+<li>Selector</li>
+</ul>
+<p>要使用 Selector，得向 Selector 注册 Channel，然后调用它的 select()方法。这个方法会一直阻塞到某个注册的通道有事件就绪。一旦这个方法返回，线程就可以处理这些事件，事件的例子有如新连接进来，数据接收等。</p>
+<p>异步I/O”模式<br>Java SE 7 版本之后，引入了异步 I/O （NIO.2） 的支持，为构建高性能的网络应用提供了一个利器。</p>
+<p><a href="https://waylau.com/java-io-model-evolution/#" target="_blank" rel="external">https://waylau.com/java-io-model-evolution/#</a><br><a href="https://github.com/waylau/essential-java/blob/master/docs/io-model.md" target="_blank" rel="external">https://github.com/waylau/essential-java/blob/master/docs/io-model.md</a></p>
+<h2 id="两种IO多路复用方案-Reactor-and-Proactor"><a href="#两种IO多路复用方案-Reactor-and-Proactor" class="headerlink" title="两种IO多路复用方案:Reactor and Proactor"></a>两种IO多路复用方案:Reactor and Proactor</h2><p>一般情况下，I/O 复用机制需要事件分享器(event demultiplexor )。 事件分享器的作用，即将那些读写事件源分发给各读写事件的处理者，就像送快递的在楼下喊: 谁的什么东西送了， 快来拿吧。开发人员在开始的时候需要在分享器那里注册感兴趣的事件，并提供相应的处理者(event handlers)，或者是回调函数; 事件分享器在适当的时候会将请求的事件分发给这些handler或者回调函数。<br>涉及到事件分享器的两种模式称为：Reactor and Proactor 。<br><strong>Reactor模式是基于同步I/O的，而Proactor模式是和异步I/O相关的</strong>。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/reactor.png" alt="Reactor" title="">
+                </div>
+                <div class="image-caption">Reactor</div>
+            </figure><br>在Reactor模式中，事件分离者等待某个事件或者可应用或个操作的状态发生（比如文件描述符可读写，或者是socket可读写），事件分离者就把这个事件传给事先注册的事件处理函数或者回调函数，由后者来做实际的读写操作。</p>
+<p>而在Proactor模式中，事件处理者(或者代由事件分离者发起)直接发起一个异步读写操作(相当于请求)，而实际的工作是由操作系统来完成的。发起时，需要提供的参数包括用于存放读到数据的缓存区，读的数据大小，或者用于存放外发数据的缓存区，以及这个请求完后的回调函数等信息。事件分离者得知了这个请求，它默默等待这个请求的完成，然后转发完成事件给相应的事件处理者或者回调。举例来说，在Windows上事件处理者投递了一个异步IO操作(称有overlapped的技术)，事件分离者等IOCompletion事件完成。 这种异步模式的典型实现是基于操作系统底层异步API的，所以我们可称之为“系统级别”的或者“真正意义上”的异步，因为具体的读写是由操作系统代劳的。<br><a href="http://blog.jobbole.com/59676/" target="_blank" rel="external">http://blog.jobbole.com/59676/</a></p>
+<h1 id="nio"><a href="#nio" class="headerlink" title="nio"></a>nio</h1><p>Java NIO（ New IO） 是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。<br>NIO与原来的IO有同样的作用和目的，但是使用的方式完全不同， NIO支持面向缓冲区的、基于通道的IO操作。 NIO将以更加高效的方式进行文件的读写操作。</p>
+<table>
+<thead>
+<tr>
+<th>IO</th>
+<th style="text-align:center">NIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>面向流(Stream Oriented)</td>
+<td style="text-align:center">面向缓冲区(Buffer Oriented)</td>
+</tr>
+<tr>
+<td>阻塞IO(Blocking IO)</td>
+<td style="text-align:center">非阻塞IO(Non Blocking IO)</td>
+</tr>
+<tr>
+<td>(无)</td>
+<td style="text-align:center">选择器(Selectors)</td>
+</tr>
+</tbody>
+</table>
+<p>Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。<br>Java NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/nio.png" alt="Java" title="">
+                </div>
+                <div class="image-caption">Java</div>
+            </figure>
+<p>Java NIO系统的核心在于：通道(Channel)和缓冲区(Buffer)。<br>通道表示打开到 IO 设备(例如：文件、套接字)的连接。若需要使用 NIO 系统，需要获取用于连接 IO 设备的通道以及用于容纳数据的缓冲区。<br>然后操作缓冲区，对数据进行处理。</p>
+<h2 id="buffer"><a href="#buffer" class="headerlink" title="buffer"></a>buffer</h2><p>缓冲区（ Buffer） ：一个用于特定基本数据类型的容器。由 java.nio 包定义的，所有缓冲区都是 Buffer 抽象类的子类。<br>Java NIO 中的 Buffer 主要用于与 NIO 通道进行交互，数据是从通道读入缓冲区，从缓冲区写入通道中的。<br>Buffer 就像一个数组，可以保存多个相同类型的数据。根据数据类型不同(boolean 除外) ，有以下 Buffer 常用子类：</p>
+<ul>
+<li>ByteBuffer</li>
+<li>CharBuffer</li>
+<li>ShortBuffer</li>
+<li>IntBuffer</li>
+<li>LongBuffer</li>
+<li>FloatBuffer</li>
+<li>DoubleBuffer</li>
+</ul>
+<p>上述 Buffer 类 他们都采用相似的方法进行管理数据，只是各自管理的数据类型不同而已。都是通过如下方法获取一个 Buffer对象：<br>static XxxBuffer allocate(int capacity) : 创建一个容量为 capacity 的 XxxBuffer 对象</p>
+<h3 id="基本属性"><a href="#基本属性" class="headerlink" title="基本属性"></a>基本属性</h3><p>容量 (capacity) ： 表示 Buffer 最大数据容量，缓冲区容量不能为负，并且创建后不能更改。<br>限制 (limit)： 第一个不应该读取或写入的数据的索引，即位于 limit 后的数据不可读写。缓冲区的限制不能为负，并且不能大于其容量。<br>位置 (position)： 下一个要读取或写入的数据的索引。缓冲区的位置不能为负，并且不能大于其限制<br>标记 (mark)与重置 (reset)： 标记是一个索引，通过 Buffer 中的 mark() 方法指定 Buffer 中一个特定的 position，之后可以通过调用 reset() 方法恢复到这个 position.<br>标记、 位置、 限制、 容量遵守不变式：<strong>0 &lt;= mark &lt;= position &lt;= limit &lt;= capacity</strong><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/buufer.png" alt="I/O" title="">
+                </div>
+                <div class="image-caption">I/O</div>
+            </figure></p>
+<p>Buffer 所有子类提供了两个用于数据操作的方法： get()与 put() 方法<br>获取 Buffer 中的数据</p>
+<ul>
+<li>get() ：读取单个字节</li>
+<li>get(byte[] dst)：批量读取多个字节到 dst 中</li>
+<li>get(int index)：读取指定索引位置的字节(不会移动 position)<br>放入数据到 Buffer 中</li>
+<li>put(byte b)：将给定单个字节写入缓冲区的当前位置</li>
+<li>put(byte[] src)：将 src 中的字节写入缓冲区的当前位置</li>
+<li>put(int index, byte b)：将指定字节写入缓冲区的索引位置(不会移动 position)</li>
+</ul>
+<p>equals()与compareTo()方法<br>可以使用equals()和compareTo()方法两个Buffer。</p>
+<p>equals()当满足下列条件时，表示两个Buffer相等：</p>
+<ul>
+<li>有相同的类型（byte、char、int等）。</li>
+<li>Buffer中剩余的byte、char等的个数相等。</li>
+<li>Buffer中所有剩余的byte、char等都相同。<br>如你所见，equals只是比较Buffer的一部分，不是每一个在它里面的元素都比较。实际上，它只比较Buffer中的剩余元素。</li>
+</ul>
+<p>compareTo()方法比较两个Buffer的剩余元素(byte、char等)， 如果满足下列条件，则认为一个Buffer“小于”另一个Buffer：</p>
+<ul>
+<li>第一个不相等的元素小于另一个Buffer中对应的元素 。</li>
+<li>所有元素都相等，但第一个Buffer比另一个先耗尽(第一个Buffer的元素个数比另一个少)。<br><strong>剩余元素是从 position到limit之间的元素</strong></li>
+</ul>
+<p>compact()和clear()<br>如果Buffer中仍有未读的数据，且后续还需要这些数据，但是此时想要先先写些数据，那么使用compact()方法。compact()方法将所有未读的数据拷贝到Buffer起始处。然后将position设到最后一个未读元素正后面。limit属性依然像clear()方法一样，设置成capacity。现在Buffer准备好写数据了，但是不会覆盖未读的数据。<br>如果调用的是clear()方法，position将被设回0，limit被设置成 capacity的值。换句话说，Buffer相当于 被清空了（实际上Buffer中的内容并未真正被清空，此时如果调用rewind()或者设置position=0仍然可读取旧的数据）。该方法实际上只是重设了position和limit的值，进而告诉我们可以从哪里开始往Buffer里写数据。如果Buffer中有一些未读的数据，调用clear()方法，数据将“被遗忘”，意味着不再有任何标记会告诉你哪些数据被读过，哪些还没有。</p>
+<h3 id="Buffer常用方法"><a href="#Buffer常用方法" class="headerlink" title="Buffer常用方法"></a>Buffer常用方法</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/bufferfun.png" alt="Buffer常用方法" title="">
+                </div>
+                <div class="image-caption">Buffer常用方法</div>
+            </figure>
+<h3 id="直接缓冲区和非直接缓冲区"><a href="#直接缓冲区和非直接缓冲区" class="headerlink" title="直接缓冲区和非直接缓冲区"></a>直接缓冲区和非直接缓冲区</h3><p>字节缓冲区要么是直接的，要么是非直接的。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/allocateDirect.png" alt="直接缓冲区和非直接缓冲区" title="">
+                </div>
+                <div class="image-caption">直接缓冲区和非直接缓冲区</div>
+            </figure><br>非直接缓冲区：通过 allocate() 方法分配缓冲区，将缓冲区建立在 JVM 的内存中<br>直接缓冲区：通过 allocateDirect() 方法分配直接缓冲区，将缓冲区建立在物理内存中。可以提高效率</p>
+<p>如果为直接字节缓冲区，则 Java 虚拟机会尽最大努力直接在此缓冲区上执行本机 I/O 操作。也就是说，在每次调用基础操作系统的一个本机 I/O 操作之前（或之后），<strong>虚拟机都会尽量避免将缓冲区的内容复制到中间缓冲区中（或从中间缓冲区中复制内容）</strong>。<br>直接字节缓冲区可以通过调用此类的 <code>allocateDirect()</code> 工厂方法来创建。此方法返回的缓冲区进行分配和取消分配所需成本通常高于非直接缓冲区。直接缓冲区的内容可以驻留在常规的垃圾回收堆之外，因此，它们对应用程序的内存需求量造成的影响可能并不明显。所以，建议将直接缓冲区主要分配给那些易受基础系统的本机 I/O 操作影响的大型、持久的缓冲区。一般情况下，最好仅在直接缓冲区能在程序性能方面带来明显好处时分配它们。</p>
+<p><code>public abstract MappedByteBuffer map(MapMode mode,long position, long size)</code><br>直接字节缓冲区还可以通过 <code>FileChannel</code> 的 <code>map()</code> 方法 将<strong>文件区域直接映射到物理内存中来创建</strong>。该方法返回<code>MappedByteBuffer</code> 。 Java 平台的实现有助于通过 JNI 从本机代码创建直接字节缓冲区。如果以上这些缓冲区中的某个缓冲区实例指的是不可访问的内存区域，则试图访问该区域不会更改该缓冲区的内容，并且将会在访问期间或稍后的某个时间导致抛出不确定的异常。</p>
+<p>字节缓冲区是直接缓冲区还是非直接缓冲区可通过调用其 <code>isDirect()</code> 方法来确定。提供此方法是为了能够在性能关键型代码中执行显式缓冲区管理。</p>
+<h4 id="HeapByteBuffer和DirectByteBuffer以及MappedByteBuffer区别"><a href="#HeapByteBuffer和DirectByteBuffer以及MappedByteBuffer区别" class="headerlink" title="HeapByteBuffer和DirectByteBuffer以及MappedByteBuffer区别"></a>HeapByteBuffer和DirectByteBuffer以及MappedByteBuffer区别</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/mapdirectheap.png" alt="三者的关系" title="">
+                </div>
+                <div class="image-caption">三者的关系</div>
+            </figure>
+<p>在<code>ByteBuffer.allocate(int capacity)</code>和<code>ByteBuffer.wrap(byte[] array)</code>中，通过实例化<code>HeapByteBuffer</code>来创建的ByteBuffer对象就是heap buffer.<br>在<code>ByteBuffer.allocateDirect(int capacity)</code>方法中调用<code>DirectByteBuffer(capacity)</code>这个类创建的是direct buffer</p>
+<p>Direct Buffer则是通过JNI(native方法)在Java的虚拟机外的内存中分配了一块缓冲区(所以即使在运行时通过-Xmx指定了Java虚拟机的最大堆内存，还是可以实例化超出该大小的Direct ByteBuffer),该块并不直接由Java虚拟机负责垃圾回收收集，但是在direct buffer包装类<code>DirectByteBuffer</code>被回收时，会通过Java Reference机制来释放该内存块。(但Direct Buffer的JAVA对象<code>DirectByteBuffer</code>是归GC管理的，只要GC回收了它的JAVA对象，操作系统才会释放Direct Buffer所申请的空间)。<br>DirectByteBuffer 自身是一个Java对象，在Java堆中；而这个对象中有个long类型字段address，记录着一块调用 malloc() 申请到的native memory。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">		 Java        |      native</div><div class="line">                  |</div><div class="line">DirectByteBuffer  |     malloc&apos;d</div><div class="line">[    address   ] -+-&gt; [   data    ]</div><div class="line">                  |</div></pre></td></tr></table></figure></p>
+<p><strong>DirectByteBuffer 自身是（Java）堆内的，它背后真正承载数据的buffer是在（Java）堆外——native memory中的</strong>。这是 malloc() 分配出来的内存，是用户态的。<br><a href="https://www.zhihu.com/question/57374068/answer/152691891" target="_blank" rel="external">https://www.zhihu.com/question/57374068/answer/152691891</a></p>
+<p><strong>heap buffer这种缓冲区是分配在堆上面的，直接由Java虚拟机负责垃圾回收</strong>，可以直接想象成一个字节数组的包装类。<br>FileChannel 的read(ByteBuffer dst)函数,write(ByteBuffer src)函数中，<strong>如果传入的参数是HeapBuffer类型,则会临时申请一块DirectBuffer,进行数据拷贝，而不是直接进行数据传输.</strong></p>
+<p>劣势：创建和释放Direct Buffer的代价比Heap Buffer得要高；<br>优势：当我们把一个Direct Buffer写入Channel的时候，就好比是“内核缓冲区”的内容直接写入了Channel，这样显然快了，减少了数据拷贝（因为我们平时的read/write都是需要在I/O设备与应用程序空间之间的“内核缓冲区”中转一下的）。而当我们把一个Heap Buffer写入Channel的时候，实际上底层实现会先构建一个临时的Direct Buffer，然后把Heap Buffer的内容复制到这个临时的Direct Buffer上，再把这个Direct Buffer写出去。当然，如果我们多次调用write方法，把一个Heap Buffer写入Channel，底层实现可以重复使用临时的Direct Buffer，这样不至于因为频繁地创建和销毁Direct Buffer影响性能。</p>
+<p>结论：Direct Buffer创建和销毁的代价很高，所以要用在尽可能重用的地方。 比如周期长传输文件大采用direct buffer，不然一般情况下就直接用heap buffer 就好。<br><a href="http://eyesmore.iteye.com/blog/1133335" target="_blank" rel="external">http://eyesmore.iteye.com/blog/1133335</a></p>
+<blockquote>
+<p>The difference between the buffer types is that MappedByteBuffers are allocated in virtual-memory space in the operating system. R/W done with MappedByteBuffers is managed at the OS level by the VM paging logic. Direct ByteBuffers are just a solid slab of free memory (e.g. malloc) in RAM that you can utilize from within Java and treated by the OS as a standard memory allocation.<br>A MappedByteBuffer represents a section of memory allocated using mmap call, which is used to perform memory mapped I/O. Therefore MappedByteBuffers won’t register their use of memory in the same way a Direct ByteBuffer will.</p>
+</blockquote>
+<p><a href="http://www.developersite.org/903-129308-file" target="_blank" rel="external">http://www.developersite.org/903-129308-file</a><br><a href="http://stackoverflow.com/questions/1229037/difference-between-bytebuffer-allocatedirect-and-mappedbytebuffer-load" target="_blank" rel="external">http://stackoverflow.com/questions/1229037/difference-between-bytebuffer-allocatedirect-and-mappedbytebuffer-load</a><br>DirectByteBuffers是操作系统中真实的区域，通过malloc在用户空间申请的内存区域，并不是在jvm中<br>MappedByteBuffers申请了操作系统中的虚拟内存，当这块buffer进行读写操作的时候，需要操作系统进行页的置换，并没有真正的申请内存，只是调用了mmap()方法</p>
+<p><strong>内存映射文件和标准IO操作最大的不同之处就在于它虽然最终也是要从磁盘读取数据，但是它并不需要将数据读取到OS内核缓冲区，而是直接将进程的用户私有地址空间中的一部分区域与文件对象建立起映射关系</strong>，就好像直接从内存中读、写文件一样，速度当然快了<br>Linux只能怪有块区域叫做“Memory mapped region for shared libraries” ，这段区域就是在内存映射文件的时候将某一段的虚拟地址和文件对象的某一部分建立起映射关系，此时并没有拷贝数据到内存中去，而是当进程代码第一次引用这段代码内的虚拟地址时，触发了缺页异常，这时候OS根据映射关系直接将文件的相关部分数据拷贝到进程的用户私有空间中去，当有操作第N页数据的时候重复这样的OS页面调度程序操作。注意啦，原来内存映射文件的效率比标准IO高的重要原因就是因为少了把数据拷贝到OS内核缓冲区这一步</p>
+<p><a href="http://blog.csdn.net/fcbayernmunchen/article/details/8635427" target="_blank" rel="external">http://blog.csdn.net/fcbayernmunchen/article/details/8635427</a></p>
+<h2 id="channel"><a href="#channel" class="headerlink" title="channel"></a>channel</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/bufferchannel.png" alt="数据的传输过程" title="">
+                </div>
+                <div class="image-caption">数据的传输过程</div>
+            </figure>
+<p>通道（ Channel）：由 java.nio.channels 包定义的。 Channel 表示 IO 源与目标打开的连接。Channel 类似于传统的“流”。只不过 Channel本身不能直接访问数据， Channel 只能与Buffer 进行交互。</p>
+<p>Java 为 Channel 接口提供的最主要实现类如下：</p>
+<ul>
+<li>FileChannel：用于读取、写入、映射和操作文件的通道。</li>
+<li>DatagramChannel：通过 UDP 读写网络中的数据通道。</li>
+<li>SocketChannel：通过 TCP 读写网络中的数据。</li>
+<li>ServerSocketChannel：可以监听新进来的 TCP 连接，对每一个新进来的连接都会创建一个 SocketChannel。</li>
+</ul>
+<p>获取通道的一种方式是对支持通道的对象调用getChannel() 方法。支持通道的类如下：</p>
+<ul>
+<li>FileInputStream</li>
+<li>FileOutputStream</li>
+<li>RandomAccessFile</li>
+<li>DatagramSocket</li>
+<li>Socket</li>
+<li>ServerSocket</li>
+</ul>
+<p>获取通道的其他方式是使用 Files 类的静态方法 newByteChannel() 获取字节通道。<br><code>FileChannel channel = new RandomAccessFile(&quot;1.txt&quot;, &quot;rw&quot;).getChannel()</code><br>或者通过通道的静态方法 open() 打开并返回指定通道。<br><code>public static FileChannel open(Path path, OpenOption... options) throws IOException</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/filechannel.png" alt="FileChannel常见用法" title="">
+                </div>
+                <div class="image-caption">FileChannel常见用法</div>
+            </figure></p>
+<h3 id="通道的数据传输"><a href="#通道的数据传输" class="headerlink" title="通道的数据传输"></a>通道的数据传输</h3><p>通道将数据传输给ByteBuffer对象或者从ByteBuffer对象获取数据进行传输<br>通道可以是单向(unidirectional)或者双向的(bidirectional)。一个channel类可能实现定义read()方法的ReadableByteChannel接口，而另一个channel类也许实现WritableByteChannel接口以提供write()方法。实现这两种接口其中之一的类都是单向的，只能在一个方向上传输数据。如果一个类同时实现这两个接口，那么它是双向的，可以双向传输数据。</p>
+<p>标准io<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">	FileInputStream fis = <span class="keyword">null</span>;</div><div class="line">	FileOutputStream fos = <span class="keyword">null</span>;</div><div class="line">	<span class="comment">//①获取通道</span></div><div class="line">	FileChannel inChannel = <span class="keyword">null</span>;</div><div class="line">	FileChannel outChannel = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		fis = <span class="keyword">new</span> FileInputStream(<span class="string">"d:/1.mkv"</span>);</div><div class="line">		fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"d:/2.mkv"</span>);</div><div class="line"></div><div class="line">		inChannel = fis.getChannel();</div><div class="line">		outChannel = fos.getChannel();</div><div class="line"></div><div class="line">		<span class="comment">//②分配指定大小的缓冲区</span></div><div class="line">		ByteBuffer buf = ByteBuffer.allocate(<span class="number">1024</span>);</div><div class="line"></div><div class="line">		<span class="comment">//③将通道中的数据存入缓冲区中</span></div><div class="line">		<span class="keyword">while</span>(inChannel.read(buf) != -<span class="number">1</span>)&#123;</div><div class="line">			buf.flip(); <span class="comment">//切换读取数据的模式</span></div><div class="line">			<span class="comment">//④将缓冲区中的数据写入通道中</span></div><div class="line">			outChannel.write(buf);</div><div class="line">			buf.clear(); <span class="comment">//清空缓冲区</span></div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		<span class="keyword">if</span>(outChannel != <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				outChannel.close();</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(inChannel != <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				inChannel.close();</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(fos != <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				fos.close();</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(fis != <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				fis.close();</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>直接io<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line"></div><div class="line">	FileChannel inChannel = FileChannel.open(Paths.get(<span class="string">"d:/1.mkv"</span>), StandardOpenOption.READ);</div><div class="line">	FileChannel outChannel = FileChannel.open(Paths.get(<span class="string">"d:/2.mkv"</span>), StandardOpenOption.WRITE, StandardOpenOption.READ, StandardOpenOption.CREATE);</div><div class="line"></div><div class="line">	<span class="comment">//内存映射文件</span></div><div class="line">	MappedByteBuffer inMappedBuf = inChannel.map(MapMode.READ_ONLY, <span class="number">0</span>, inChannel.size());</div><div class="line">	MappedByteBuffer outMappedBuf = outChannel.map(MapMode.READ_WRITE, <span class="number">0</span>, inChannel.size());</div><div class="line"></div><div class="line">	<span class="comment">//直接对缓冲区进行数据的读写操作</span></div><div class="line">	<span class="keyword">byte</span>[] dst = <span class="keyword">new</span> <span class="keyword">byte</span>[inMappedBuf.limit()];</div><div class="line">	inMappedBuf.get(dst);</div><div class="line">	outMappedBuf.put(dst);</div><div class="line"></div><div class="line">	inChannel.close();</div><div class="line">	outChannel.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="分散-Scatter-和聚集-Gather"><a href="#分散-Scatter-和聚集-Gather" class="headerlink" title="分散(Scatter)和聚集(Gather)"></a>分散(Scatter)和聚集(Gather)</h3><p>分散读取（ Scattering Reads）是指从 Channel 中读取的数据“分散” 到多个 Buffer 中。<br>注意：按照缓冲区的顺序，从 Channel 中读取的数据依次将 Buffer 填满。<br><code>public final long read(ByteBuffer[] dsts) throws IOException</code><br>聚集写入（ Gathering Writes）是指将多个 Buffer 中的数据“聚集”到 Channel。<br>注意：按照缓冲区的顺序，写入 position 和 limit 之间的数据到 Channel 。<br><code>public final long write(ByteBuffer[] srcs) throws IOException</code></p>
+<h3 id="通道之间的传输"><a href="#通道之间的传输" class="headerlink" title="通道之间的传输"></a>通道之间的传输</h3><p><code>public abstract long transferFrom(ReadableByteChannel src, long position, long count)</code><br><code>public abstract long transferTo(long position, long count, WritableByteChannel target)</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">	FileChannel inChannel = FileChannel.open(Paths.get(<span class="string">"d:/1.mkv"</span>), StandardOpenOption.READ);</div><div class="line">	FileChannel outChannel = FileChannel.open(Paths.get(<span class="string">"d:/2.mkv"</span>), StandardOpenOption.WRITE, StandardOpenOption.READ, StandardOpenOption.CREATE);</div><div class="line"></div><div class="line"><span class="comment">//		inChannel.transferTo(0, inChannel.size(), outChannel);</span></div><div class="line">	outChannel.transferFrom(inChannel, <span class="number">0</span>, inChannel.size());</div><div class="line"></div><div class="line">	inChannel.close();</div><div class="line">	outChannel.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="网络channel"><a href="#网络channel" class="headerlink" title="网络channel"></a>网络channel</h3><p>ServerSocketChannel： Java NIO中的 ServerSocketChannel 是一个可以监听新进来的TCP连接的通道，就像标准IO中的ServerSocket一样。</p>
+<p>SocketChannel：Java NIO中的SocketChannel是一个连接到TCP网络套接字的通道。<br>操作步骤：① 打开 SocketChannel ② 读写数据 ③ 关闭 SocketChanne</p>
+<p>DatagramChannel：Java NIO中的DatagramChannel是一个能收发UDP包的通道。<br>操作步骤： ① 打开 DatagramChannel ② 接收/发送数据</p>
+<h2 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h2><p>选择器（ Selector） 是 <code>SelectableChannle</code> 对象的多路复用器， Selector 可以同时监控多个 SelectableChannel 的 IO 状况，也就是说，利用 Selector可使一个单独的线程管理多个 Channel。 Selector 是非阻塞 IO 的核心。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/selectablechannel.png" alt="SelectableChannle" title="">
+                </div>
+                <div class="image-caption">SelectableChannle</div>
+            </figure><br>由此可见selector只能监控网络channel</p>
+<p>Selector 的常用方法<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/selector.png" alt="Selector" title="">
+                </div>
+                <div class="image-caption">Selector</div>
+            </figure></p>
+<h3 id="SelectionKey"><a href="#SelectionKey" class="headerlink" title="SelectionKey"></a>SelectionKey</h3><p>SelectionKey： 表示 SelectableChannel 和 Selector 之间的注册关系。<br>每次向选择器注册通道时就会选择一个事件(选择键)。 选择键包含两个表示为整数值的操作集。操作集的每一位都表示该键的通道所支持的一类可选择操作。<br>可以监听的事件类型（ 可使用 SelectionKey 的四个常量表示）：<br>读 : SelectionKey.OP_READ （ 1）<br>写 : SelectionKey.OP_WRITE （ 4）<br>连接 : SelectionKey.OP_CONNECT （ 8）<br>接收 : SelectionKey.OP_ACCEPT （ 16）<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/selelctablekey.png" alt="SelectionKey" title="">
+                </div>
+                <div class="image-caption">SelectionKey</div>
+            </figure></p>
+<h3 id="选择器（-Selector）的应用"><a href="#选择器（-Selector）的应用" class="headerlink" title="选择器（ Selector）的应用"></a>选择器（ Selector）的应用</h3><p>1.创建 Selector ：通过调用 <code>Selector selector = Selector.open()</code> 方法创建一个 Selector。<br>2.向选择器注册通道： <code>SelectableChannel.register(Selector sel, int ops)</code><br>当调用 <code>register(Selector sel, int ops)</code> 将通道注册选择器时，选择器对通道的监听事件，需要通过第二个参数 ops 指定。</p>
+<p>若注册时不止监听一个事件，则可以使用“位或”操作符连接。<br><code>SelectableChannel.register(selector, SelectionKey.OP_ACCEPT|SelectionKey.OP_READ)</code></p>
+<h3 id="NIO中的server"><a href="#NIO中的server" class="headerlink" title="NIO中的server"></a>NIO中的server</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">server</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">	<span class="comment">//1. 获取通道</span></div><div class="line">	ServerSocketChannel ssChannel = ServerSocketChannel.open();</div><div class="line"></div><div class="line">	<span class="comment">//2. 切换非阻塞模式</span></div><div class="line">	ssChannel.configureBlocking(<span class="keyword">false</span>);</div><div class="line"></div><div class="line">	<span class="comment">//3. 绑定连接</span></div><div class="line">	ssChannel.bind(<span class="keyword">new</span> InetSocketAddress(<span class="number">9898</span>));</div><div class="line"></div><div class="line">	<span class="comment">//4. 获取选择器</span></div><div class="line">	Selector selector = Selector.open();</div><div class="line"></div><div class="line">	<span class="comment">//5. 将通道注册到选择器上, 并且指定“监听接收事件”</span></div><div class="line">	ssChannel.register(selector, SelectionKey.OP_ACCEPT);</div><div class="line"></div><div class="line">	<span class="comment">//6. 轮询式的获取选择器上已经“准备就绪”的事件</span></div><div class="line">	<span class="keyword">while</span>(selector.select() &gt; <span class="number">0</span>)&#123;</div><div class="line"></div><div class="line">		<span class="comment">//7. 获取当前选择器中所有注册的“选择键(已就绪的监听事件)”</span></div><div class="line">		Iterator&lt;SelectionKey&gt; it = selector.selectedKeys().iterator();</div><div class="line"></div><div class="line">		<span class="keyword">while</span>(it.hasNext())&#123;</div><div class="line">			<span class="comment">//8. 获取准备“就绪”的是事件</span></div><div class="line">			SelectionKey sk = it.next();</div><div class="line"></div><div class="line">			<span class="comment">//9. 判断具体是什么事件准备就绪</span></div><div class="line">			<span class="keyword">if</span>(sk.isAcceptable())&#123;</div><div class="line">				<span class="comment">//10. 若“接收就绪”，获取客户端连接</span></div><div class="line">				SocketChannel sChannel = ssChannel.accept();</div><div class="line"></div><div class="line">				<span class="comment">//11. 切换非阻塞模式</span></div><div class="line">				sChannel.configureBlocking(<span class="keyword">false</span>);</div><div class="line"></div><div class="line">				<span class="comment">//12. 将该通道注册到选择器上</span></div><div class="line">				sChannel.register(selector, SelectionKey.OP_READ);</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(sk.isReadable())&#123;</div><div class="line">				<span class="comment">//13. 获取当前选择器上“读就绪”状态的通道</span></div><div class="line">				SocketChannel sChannel = (SocketChannel) sk.channel();</div><div class="line"></div><div class="line">				<span class="comment">//14. 读取数据</span></div><div class="line">				ByteBuffer buf = ByteBuffer.allocate(<span class="number">1024</span>);</div><div class="line"></div><div class="line">				<span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">				<span class="keyword">while</span>((len = sChannel.read(buf)) &gt; <span class="number">0</span> )&#123;</div><div class="line">					buf.flip();</div><div class="line">					System.out.println(<span class="keyword">new</span> String(buf.array(), <span class="number">0</span>, len));</div><div class="line">					buf.clear();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">//15. 取消选择键 SelectionKey</span></div><div class="line">			it.remove();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="管道-Pipe"><a href="#管道-Pipe" class="headerlink" title="管道 (Pipe)"></a>管道 (Pipe)</h1><p>Java NIO 管道是2个线程之间的单向数据连接。<br>Pipe有一个source通道和一个sink通道。<strong>数据会被写到sink通道，从source通道读取</strong>。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/pipe.png" alt="SelectionKey" title="">
+                </div>
+                <div class="image-caption">SelectionKey</div>
+            </figure><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">	<span class="comment">//1. 获取管道</span></div><div class="line">	Pipe pipe = Pipe.open();</div><div class="line"></div><div class="line">	<span class="comment">//2. 将缓冲区中的数据写入管道</span></div><div class="line">	ByteBuffer buf = ByteBuffer.allocate(<span class="number">1024</span>);</div><div class="line"></div><div class="line">	Pipe.SinkChannel sinkChannel = pipe.sink();</div><div class="line">	buf.put(<span class="string">"通过单向管道发送数据"</span>.getBytes());</div><div class="line">	buf.flip();</div><div class="line">	sinkChannel.write(buf);</div><div class="line"></div><div class="line">	<span class="comment">//3. 读取缓冲区中的数据</span></div><div class="line">	Pipe.SourceChannel sourceChannel = pipe.source();</div><div class="line">	buf.flip();</div><div class="line">	<span class="keyword">int</span> len = sourceChannel.read(buf);</div><div class="line">	System.out.println(<span class="keyword">new</span> String(buf.array(), <span class="number">0</span>, len));</div><div class="line"></div><div class="line">	sourceChannel.close();</div><div class="line">	sinkChannel.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="Path、-Paths、-Files、CharSet"><a href="#Path、-Paths、-Files、CharSet" class="headerlink" title="Path、 Paths、 Files、CharSet"></a>Path、 Paths、 Files、CharSet</h1><p><a href="http://www.365mini.com/page/tag/java-nio" target="_blank" rel="external">http://www.365mini.com/page/tag/java-nio</a><br><a href="http://ifeve.com/?x=0&amp;y=0&amp;s=nio" target="_blank" rel="external">http://ifeve.com/?x=0&amp;y=0&amp;s=nio</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-23T12:51:44.000Z" itemprop="dateUpdated">2017年4月23日 20:51</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/04/18/nio/" target="_blank" rel="external">http://duyao.github.io/2017/04/18/nio/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-nio/">java nio</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/18/nio/&title=《nio》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/18/nio/&title=《nio》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/18/nio/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《nio》 — Du Yao's blog&url=http://duyao.github.io/2017/04/18/nio/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/18/nio/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/21/数据库/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">数据库</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/17/排序/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="nio" data-title="nio" data-url="http://duyao.github.io/2017/04/18/nio/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/18/nio/&title=《nio》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/18/nio/&title=《nio》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/18/nio/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《nio》 — Du Yao's blog&url=http://duyao.github.io/2017/04/18/nio/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/18/nio/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/04/18/nio/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

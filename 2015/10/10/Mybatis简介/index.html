@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Mybatis简介 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Mybatis">
+    <meta name="description" content="Mybatis主要是使用配置文件来完成操作 config.xml这里可以配置数据库的基本信息 SqlSession 作用 向sql语句传入参数 执行sql语句 获取sql语句的结果 事物的控制   如何获得SqlSession 通过配置文件获取数据库相关信息 通过信息构建SqlSessonFactory 通过SqlSessionFactory打开数据库会话">
+<meta name="keywords" content="Mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis简介">
+<meta property="og:url" content="http://duyao.github.io/2015/10/10/Mybatis简介/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="Mybatis主要是使用配置文件来完成操作 config.xml这里可以配置数据库的基本信息 SqlSession 作用 向sql语句传入参数 执行sql语句 获取sql语句的结果 事物的控制   如何获得SqlSession 通过配置文件获取数据库相关信息 通过信息构建SqlSessonFactory 通过SqlSessionFactory打开数据库会话">
+<meta property="og:updated_time" content="2015-10-24T13:28:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mybatis简介">
+<meta name="twitter:description" content="Mybatis主要是使用配置文件来完成操作 config.xml这里可以配置数据库的基本信息 SqlSession 作用 向sql语句传入参数 执行sql语句 获取sql语句的结果 事物的控制   如何获得SqlSession 通过配置文件获取数据库相关信息 通过信息构建SqlSessonFactory 通过SqlSessionFactory打开数据库会话">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Mybatis简介</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Mybatis简介</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-10T01:45:41.000Z" itemprop="datePublished" class="page-time">
+  2015-10-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#config-xml"><span class="post-toc-number">1.</span> <span class="post-toc-text">config.xml</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SqlSession"><span class="post-toc-number">2.</span> <span class="post-toc-text">SqlSession</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Mybatis简介"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Mybatis简介</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月10日 9:45" datetime="2015-10-10T01:45:41.000Z"  itemprop="datePublished">2015-10-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Mybatis主要是使用配置文件来完成操作</p>
+<h2 id="config-xml"><a href="#config-xml" class="headerlink" title="config.xml"></a>config.xml</h2><p>这里可以配置数据库的基本信息</p>
+<h2 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h2><ul>
+<li>作用<ul>
+<li>向sql语句传入参数</li>
+<li>执行sql语句</li>
+<li>获取sql语句的结果</li>
+<li>事物的控制</li>
+</ul>
+</li>
+<li>如何获得SqlSession<ul>
+<li>通过配置文件获取数据库相关信息</li>
+<li>通过信息构建SqlSessonFactory</li>
+<li>通过SqlSessionFactory打开数据库会话</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>查询的配置文件，用来对应，一个JavaBean对应一个配置文件，对应数据库中的一张表</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">//namespace相当于包名，是一个作用域，可以保证id不重复</div><div class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"User"</span>&gt;</span></div><div class="line">//resultMap的type是查询时候的类型javaBean，id随意，与下面的id重复也没有关系</div><div class="line">  <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"UserAlias"</span> <span class="attr">id</span>=<span class="string">"UserResult"</span>&gt;</span></div><div class="line">    //resultMap下面包含2中类型，一个是id一个是result,两者内容是相同的</div><div class="line">    //数据库中是主键，用id，其余用result</div><div class="line">    //column是数据库中的名字，jdbcType中java.sql.Type中的名字，property是javaBean中的名字</div><div class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">jdbcType</span>=<span class="string">"INTEGER"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"username"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"username"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"password"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"password.encrypted"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"administrator"</span> <span class="attr">jdbcType</span>=<span class="string">"BOOLEAN"</span> <span class="attr">property</span>=<span class="string">"administrator"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></div><div class="line"></div><div class="line">//每个select的id都不相同，parameterType是参数的类型，resultMap对应上面的id</div><div class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryMessageList"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultMap</span>=<span class="string">"UserResult"</span>&gt;</span></div><div class="line">    SELECT * FROM user WHERE id = #&#123;id:INTEGER&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"version"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></div><div class="line">    SELECT version FROM user WHERE id = #&#123;id,jdbcType=INTEGER&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"delete"</span> <span class="attr">parameterType</span>=<span class="string">"UserAlias"</span>&gt;</span></div><div class="line">    DELETE FROM user WHERE id = #&#123;id:INTEGER&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insert"</span> <span class="attr">parameterType</span>=<span class="string">"UserAlias"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"false"</span>&gt;</span></div><div class="line">    INSERT INTO user</div><div class="line">    ( id,</div><div class="line">    username,</div><div class="line">    password,</div><div class="line">    administrator</div><div class="line">    )</div><div class="line">    VALUES</div><div class="line">    ( #&#123;id&#125;,</div><div class="line">    #&#123;username,jdbcType=VARCHAR&#125;,</div><div class="line">    #&#123;password.encrypted:VARCHAR&#125;,</div><div class="line">    #&#123;administrator,jdbcType=BOOLEAN&#125;</div><div class="line">    )</div><div class="line">  <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"update"</span> <span class="attr">parameterType</span>=<span class="string">"UserAlias"</span>&gt;</span></div><div class="line">    UPDATE user SET</div><div class="line">    username = #&#123;username,jdbcType=VARCHAR&#125;,</div><div class="line">    password = #&#123;password.encrypted,jdbcType=VARCHAR&#125;,</div><div class="line">    administrator = #&#123;administrator,jdbcType=BOOLEAN&#125;</div><div class="line">    WHERE</div><div class="line">    id = #&#123;id,jdbcType=INTEGER&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">update</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!--   Unique constraint check --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"isUniqueUsername"</span> <span class="attr">parameterType</span>=<span class="string">"map"</span> <span class="attr">resultType</span>=<span class="string">"boolean"</span>&gt;</span></div><div class="line">    SELECT (count(*) = 0)</div><div class="line">    FROM user</div><div class="line">    WHERE ((#&#123;userId,jdbcType=BIGINT&#125; IS NOT NULL AND id != #&#123;userId,jdbcType=BIGINT&#125;) OR #&#123;userId,jdbcType=BIGINT&#125; IS</div><div class="line">    NULL)  <span class="comment">&lt;!-- other than me --&gt;</span></div><div class="line">    AND (username = #&#123;username,jdbcType=VARCHAR&#125;)</div><div class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-10-24T13:28:32.000Z" itemprop="dateUpdated">2015年10月24日 21:28</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/10/10/Mybatis简介/" target="_blank" rel="external">http://duyao.github.io/2015/10/10/Mybatis简介/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mybatis/">Mybatis</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/10/Mybatis简介/&title=《Mybatis简介》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/10/Mybatis简介/&title=《Mybatis简介》 — Du Yao's blog&source=Mybatis主要是使用配置文件来完成操作
+config.xml这里可以配置数据库的基本信息
+SqlSession
+作用
+向sql语句传入参数
+执行sql..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/10/Mybatis简介/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mybatis简介》 — Du Yao's blog&url=http://duyao.github.io/2015/10/10/Mybatis简介/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/10/Mybatis简介/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/14/Mybatis 标签/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Mybatis 标签</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/01/git使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">git 笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Mybatis简介" data-title="Mybatis简介" data-url="http://duyao.github.io/2015/10/10/Mybatis简介/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/10/Mybatis简介/&title=《Mybatis简介》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/10/Mybatis简介/&title=《Mybatis简介》 — Du Yao's blog&source=Mybatis主要是使用配置文件来完成操作
+config.xml这里可以配置数据库的基本信息
+SqlSession
+作用
+向sql语句传入参数
+执行sql..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/10/Mybatis简介/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mybatis简介》 — Du Yao's blog&url=http://duyao.github.io/2015/10/10/Mybatis简介/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/10/Mybatis简介/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/10/10/Mybatis简介/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

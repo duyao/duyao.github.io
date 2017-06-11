@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>内部类 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="广泛意义上的内部类一般来说包括这四种：成员内部类、局部内部类、匿名内部类和静态内部类 内部类会再生成一个class文件编译器会为匿名内部类和局部内部类起名为Outter$Inner.class内部类(非静态内部类)访问可以任意直接访问外部类，但是外部类不行内部类(非静态内部类)不可以有静态的方法或者声明 创建静态内部类对象的一般形式为：  外部类类名.内部类类名 xxx = new 外部类类名.内">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内部类">
+<meta property="og:url" content="http://duyao.github.io/2017/04/01/内部类/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="广泛意义上的内部类一般来说包括这四种：成员内部类、局部内部类、匿名内部类和静态内部类 内部类会再生成一个class文件编译器会为匿名内部类和局部内部类起名为Outter$Inner.class内部类(非静态内部类)访问可以任意直接访问外部类，但是外部类不行内部类(非静态内部类)不可以有静态的方法或者声明 创建静态内部类对象的一般形式为：  外部类类名.内部类类名 xxx = new 外部类类名.内">
+<meta property="og:updated_time" content="2017-04-10T05:15:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="内部类">
+<meta name="twitter:description" content="广泛意义上的内部类一般来说包括这四种：成员内部类、局部内部类、匿名内部类和静态内部类 内部类会再生成一个class文件编译器会为匿名内部类和局部内部类起名为Outter$Inner.class内部类(非静态内部类)访问可以任意直接访问外部类，但是外部类不行内部类(非静态内部类)不可以有静态的方法或者声明 创建静态内部类对象的一般形式为：  外部类类名.内部类类名 xxx = new 外部类类名.内">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">内部类</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">内部类</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-01T02:23:51.000Z" itemprop="datePublished" class="page-time">
+  2017-04-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#成员内部类"><span class="post-toc-number">1.</span> <span class="post-toc-text">成员内部类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么成员内部类可以无条件访问外部类的成员？"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">为什么成员内部类可以无条件访问外部类的成员？</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#局部内部类"><span class="post-toc-number">2.</span> <span class="post-toc-text">局部内部类</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#匿名内部类"><span class="post-toc-number">3.</span> <span class="post-toc-text">匿名内部类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么局部内部类和匿名内部类只能访问局部final变量？"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">为什么局部内部类和匿名内部类只能访问局部final变量？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java不允许在非静态内部类里定义static成员却允许static-final"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Java不允许在非静态内部类里定义static成员却允许static final</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#静态内部类"><span class="post-toc-number">4.</span> <span class="post-toc-text">静态内部类</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-内部类"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">内部类</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年04月01日 10:23" datetime="2017-04-01T02:23:51.000Z"  itemprop="datePublished">2017-04-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>广泛意义上的内部类一般来说包括这四种：成员内部类、局部内部类、匿名内部类和静态内部类</p>
+<p>内部类会再生成一个class文件<br>编译器会为匿名内部类和局部内部类起名为Outter$Inner.class<br>内部类(非静态内部类)访问可以任意直接访问外部类，但是外部类不行<br>内部类(非静态内部类)不可以有静态的方法或者声明</p>
+<p>创建静态内部类对象的一般形式为：  外部类类名.内部类类名 xxx = new 外部类类名.内部类类名()<br>创建成员内部类对象的一般形式为：  外部类类名.内部类类名 xxx = 外部类对象名.new 内部类类名()</p>
+<h1 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h1><p><strong>成员内部类可以无条件访问外部类的所有成员属性和成员方法（包括private成员和静态成员）</strong>。<br>虽然成员内部类可以无条件地访问外部类的成员，而外部类想访问成员内部类的成员却不是这么随心所欲了。<br>在外部类中如果要访问成员内部类的成员，必须<strong>先创建一个成员内部类的对象，再通过指向这个对象的引用来访问</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outter</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">double</span> radius = <span class="number">0</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Outter</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Outter</span><span class="params">(<span class="keyword">double</span> radius)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.radius = radius;</div><div class="line">        getInnerInstance().drawSahpe();   <span class="comment">//必须先创建成员内部类的对象，再进行访问</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> Inner <span class="title">getInnerInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Inner();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;     <span class="comment">//内部类</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawSahpe</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"drawshape"</span>);</div><div class="line">            System.out.println(radius);  <span class="comment">//外部类的private成员</span></div><div class="line">            System.out.println(count);   <span class="comment">//外部类的静态成员</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//第一种方式：</span></div><div class="line">        Outter outter = <span class="keyword">new</span> Outter();</div><div class="line">        Outter.Inner inner = outter.new Inner();  <span class="comment">//必须通过Outter对象来创建</span></div><div class="line"></div><div class="line">        <span class="comment">//第二种方式：</span></div><div class="line">        Outter.Inner inner1 = outter.getInnerInstance();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="为什么成员内部类可以无条件访问外部类的成员？"><a href="#为什么成员内部类可以无条件访问外部类的成员？" class="headerlink" title="为什么成员内部类可以无条件访问外部类的成员？"></a>为什么成员内部类可以无条件访问外部类的成员？</h2><p>反编译Outter$Inner.class<br>虽然我们在定义的内部类的构造器是无参构造器，编译器还是会默认添加一个参数，该参数的类型为指向外部类对象的一个引用，所以成员内部类中的Outter this&amp;0 指针便指向了外部类对象，因此可以在成员内部类中随意访问外部类的成员。从这里也间接说明了成员内部类是依赖于外部类的，如果没有创建外部类的对象，则无法对Outter this&amp;0引用进行初始化赋值，也就无法创建成员内部类的对象了。</p>
+<h1 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h1><p>局部内部类是定义在一个方法或者一个作用域里面的类<br>它和成员内部类的区别在于局部内部类的访问仅限于方法内或者该作用域内。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">People</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Man</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> People <span class="title">getWoman</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Woman</span> <span class="keyword">extends</span> <span class="title">People</span></span>&#123;   <span class="comment">//局部内部类</span></div><div class="line">            <span class="keyword">int</span> age =<span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Woman();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意，<strong>局部内部类就像是方法里面的一个局部变量一样，是不能有public、protected、private以及static修饰符的</strong>。</p>
+<h1 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h1><p>匿名内部类应该是平时我们编写代码时用得最多的<br>形式为<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> 父类构造器（参数列表）|实现接口（）  </div><div class="line">    &#123;  </div><div class="line">     <span class="comment">//匿名内部类的类体部分  </span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">       &#125;</div><div class="line">   &#125;);</div></pre></td></tr></table></figure></p>
+<p>匿名内部类是唯一一种没有构造器的类。正因为其没有构造器，所以匿名内部类的使用范围非常有限，大部分匿名内部类用于接口回调。<br>匿名内部类在编译的时候由系统自动起名为Outter$1.class。<br>一般来说，匿名内部类用于继承其他类或是实现接口，并不需要增加额外的方法，只是对继承方法的实现或是重写。</p>
+<p>匿名内部类的使用它是存在一个缺陷的，就是它仅能被使用一次，创建匿名内部类时它会立即创建一个该类的实例，该类的定义会立即消失，所以匿名内部类是不能够被重复使用。</p>
+<p>在使用匿名内部类的过程中，我们需要注意如下几点：<br>1、使用匿名内部类时，我们必须是继承一个类或者实现一个接口，但是两者不可兼得，同时也只能继承一个类或者实现一个接口。<br>2、匿名内部类中是不能定义构造函数的。<br>3、匿名内部类中不能存在任何的静态成员变量和静态方法。<br>4、匿名内部类为局部内部类，所以局部内部类的所有限制同样对匿名内部类生效。<br>5、匿名内部类不能是抽象的，它必须要实现继承的类或者实现的接口的所有抽象方法。</p>
+<h2 id="为什么局部内部类和匿名内部类只能访问局部final变量？"><a href="#为什么局部内部类和匿名内部类只能访问局部final变量？" class="headerlink" title="为什么局部内部类和匿名内部类只能访问局部final变量？"></a>为什么局部内部类和匿名内部类只能访问局部final变量？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">final</span> String name,String age)</span></span>&#123;</div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span></span>&#123;</div><div class="line">            <span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>&#123;</div><div class="line">                System.out.println(name);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//编译后实际是这个样子</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span>$<span class="title">InnerClass</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">InnerClass</span><span class="params">(String name,String age)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.InnerClass$name = name;</div><div class="line">        <span class="keyword">this</span>.InnerClass$age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="keyword">this</span>.InnerClass$name + <span class="string">"----"</span> + <span class="keyword">this</span>.InnerClass$age );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>内部类并不是直接调用方法传递的参数，而是利用自身的构造器对传入的参数进行备份，自己内部方法调用的实际上时自己的属性而不是外部方法传递进来的参数。<br>也就说如果局部变量的值在编译期间就可以确定，则直接在匿名内部里面创建一个拷贝。如果局部变量的值无法在编译期间确定，则通过构造器传参的方式来对拷贝进行初始化赋值。<br>从上面可以看出，在run方法中访问的变量a根本就不是test方法中的局部变量a。这样一来就解决了前面所说的 生命周期不一致的问题。但是新的问题又来了，既然在run方法中访问的变量a和test方法中的变量a不是同一个变量，当在run方法中改变变量a的值的话，会出现什么情况？</p>
+<p>对，会造成数据不一致性，这样就达不到原本的意图和要求。为了解决这个问题，java编译器就限定必须将变量a限制为final变量，不允许对变量a进行更改（对于引用类型的变量，是不允许指向新的对象），这样数据不一致性的问题就得以解决了。</p>
+<p>到这里，想必大家应该清楚为何方法中的局部变量和形参都必须用final进行限定了。<br>在java1.8中，可以允许不加final<br><a href="http://www.cnblogs.com/chenssy/p/3390871.html" target="_blank" rel="external">http://www.cnblogs.com/chenssy/p/3390871.html</a></p>
+<h2 id="Java不允许在非静态内部类里定义static成员却允许static-final"><a href="#Java不允许在非静态内部类里定义static成员却允许static-final" class="headerlink" title="Java不允许在非静态内部类里定义static成员却允许static final"></a>Java不允许在非静态内部类里定义static成员却允许static final</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Out</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="comment">//static final Integer ia = 0;//compile error</span></div><div class="line">        <span class="comment">//static final Object o = new Object();//同上，内部类不允许定义static</span></div><div class="line">        <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ib = <span class="number">100</span>;</div><div class="line">        <span class="keyword">static</span> <span class="keyword">final</span> String ibb = <span class="string">"fs"</span>;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"Inner ib="</span> + ib);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Out out = <span class="keyword">new</span> Out();</div><div class="line">        Out.Inner inner = out.new Inner();</div><div class="line">        inner.f();</div><div class="line">        <span class="comment">//相当于 常量</span></div><div class="line">        System.out.println(<span class="string">"Inner.ib="</span> + Inner.ib);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每一个非静态内部类，必须维持一个对其外部类实例的应用，这就表明了非静态内部类的作用域是实例级别；而static关键字显式指定某个属性、方法或内部类的作用域是属于类级别。既然二者在语言层面要求的作用域不同，自然无法编译通过。<br>为什么添加final就可以了呢。final关键字的字面语义就是指明不可变，用在属性上，表示属性一旦赋值后即不可改变。与static关键字合用即表示定义一个常量，一旦作为常量，其作用域自然不再是实例级别了，而是全局级别了，类级别作用域其实就只是加了一个访问权限修饰的全局作用域而已。所以编译自然OK</p>
+<p>这个问题有点类似于局部变量必须初始化才能使用，而静态变量无需初始化也能使用。</p>
+<p><a href="http://stackoverflow.com/questions/27095847/why-static-final-variables-are-accepted-in-local-classes" target="_blank" rel="external">http://stackoverflow.com/questions/27095847/why-static-final-variables-are-accepted-in-local-classes</a><br><a href="http://stackoverflow.com/questions/2482327/why-can-we-have-static-final-members-but-cant-have-static-method-in-an-inner-cla" target="_blank" rel="external">http://stackoverflow.com/questions/2482327/why-can-we-have-static-final-members-but-cant-have-static-method-in-an-inner-cla</a></p>
+<p>相似的问题还有：非静态变量不能被静态方法引用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> bar;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getBar</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> bar; <span class="comment">// does not compile;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="http://stackoverflow.com/questions/4584258/communication-between-static-method-and-instance-field-in-java" target="_blank" rel="external">http://stackoverflow.com/questions/4584258/communication-between-static-method-and-instance-field-in-java</a></p>
+<h1 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h1><p>静态内部类也是定义在另一个类里面的类，只不过在类的前面多了一个关键字static。<br><strong>静态内部类是不需要依赖于外部类的</strong>，这点和类的静态成员属性有点类似<br><strong>静态内部类不能使用外部类的非static成员变量或者方法</strong>，这点很好理解，因为在没有外部类的对象的情况下，可以创建静态内部类的对象，如果允许访问外部类的非static成员就会产生矛盾，因为外部类的非static成员必须依附于具体的对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span>&#123;</div><div class="line">        Outter.Inner inner = <span class="keyword">new</span> Outter.Inner();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outter</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Outter</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Inner</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="http://www.cnblogs.com/dolphin0520/p/3811445.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3811445.html</a></p>
+<p><a href="http://www.jianshu.com/p/b447bd84a512" target="_blank" rel="external">http://www.jianshu.com/p/b447bd84a512</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-10T05:15:40.000Z" itemprop="dateUpdated">2017年4月10日 13:15</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/04/01/内部类/" target="_blank" rel="external">http://duyao.github.io/2017/04/01/内部类/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/01/内部类/&title=《内部类》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/01/内部类/&title=《内部类》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/01/内部类/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《内部类》 — Du Yao's blog&url=http://duyao.github.io/2017/04/01/内部类/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/01/内部类/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/05/设计模式-单例模式和工厂模式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">设计模式-单例模式和工厂模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/26/分布式技术/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">分布式技术</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="内部类" data-title="内部类" data-url="http://duyao.github.io/2017/04/01/内部类/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/01/内部类/&title=《内部类》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/01/内部类/&title=《内部类》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/01/内部类/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《内部类》 — Du Yao's blog&url=http://duyao.github.io/2017/04/01/内部类/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/01/内部类/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/04/01/内部类/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

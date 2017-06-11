@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>String相关 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="String12345public final class String    implements java.io.Serializable, Comparable&amp;lt;String&amp;gt;, CharSequence &amp;#123;    /** The value is used for character storage. */    private final char value[];">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String相关">
+<meta property="og:url" content="http://duyao.github.io/2017/03/12/String相关/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="String12345public final class String    implements java.io.Serializable, Comparable&amp;lt;String&amp;gt;, CharSequence &amp;#123;    /** The value is used for character storage. */    private final char value[];">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/s1.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/s2.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/s3.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/s4.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/s5.png">
+<meta property="og:updated_time" content="2017-04-06T01:47:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="String相关">
+<meta name="twitter:description" content="String12345public final class String    implements java.io.Serializable, Comparable&amp;lt;String&amp;gt;, CharSequence &amp;#123;    /** The value is used for character storage. */    private final char value[];">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/s1.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">String相关</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">String相关</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-12T07:23:56.000Z" itemprop="datePublished" class="page-time">
+  2017-03-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#String"><span class="post-toc-number">1.</span> <span class="post-toc-text">String</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么是string是不可变的"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">为什么是string是不可变的</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hashCode-和-equal方法"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">hashCode 和 equal方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hash常见方法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">hash常见方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重写equals"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">重写equals</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他方法"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">其他方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一个例子"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">一个例子</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#StringBuffer和StringBuilder"><span class="post-toc-number">2.</span> <span class="post-toc-text">StringBuffer和StringBuilder</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#与String的关系"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">与String的关系</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一些例子"><span class="post-toc-number">3.</span> <span class="post-toc-text">一些例子</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-String相关"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">String相关</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月12日 15:23" datetime="2017-03-12T07:23:56.000Z"  itemprop="datePublished">2017-03-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></div><div class="line">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span> &#123;</div><div class="line">    <span class="comment">/** The value is used for character storage. */</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>1）String类是<strong>final类</strong>，也即意味着String类不能被继承，并且它的成员方法都默认为final方法。<br>2）上面列举出了String类中所有的成员属性，从上面可以看出String类其实是通过<strong>char数组来保存字符串</strong>的</p>
+<h2 id="为什么是string是不可变的"><a href="#为什么是string是不可变的" class="headerlink" title="为什么是string是不可变的"></a>为什么是string是不可变的</h2><p>安全性：网络连接中的参数通常是string的数据库url、password</p>
+<p>Security: parameters are typically represented as String in network connections, database connection urls, usernames/passwords etc. If it were mutable, these parameters could be easily changed.<br>Synchronization and concurrency: making String immutable automatically makes them thread safe thereby solving the synchronization issues.<br>Caching: when compiler optimizes your String objects, it sees that if two objects have same value (a=”test”, and b=”test”) and thus you need only one string object (for both a and b, these two will point to the same object).<br>Class loading: String is used as arguments for class loading. If mutable, it could result in wrong class being loaded (because mutable objects change their state).<br><a href="http://stackoverflow.com/questions/22397861/why-is-string-immutable-in-java" target="_blank" rel="external">http://stackoverflow.com/questions/22397861/why-is-string-immutable-in-java</a></p>
+<h2 id="hashCode-和-equal方法"><a href="#hashCode-和-equal方法" class="headerlink" title="hashCode 和 equal方法"></a>hashCode 和 equal方法</h2><p> hash code(散列码，也可以叫哈希码值)是对象产生的一个整型值。<br> 其生成没有规律的。二者散列码可以获取对象中的信息，转成那个对象的“相对唯一”的整型值。所有对象都有一个散列码。<br><code>h = 31 * h + val[i];</code>这里的计算为什么要用31呢？看看《Effective Java》第二版第三章第42页中的原话：<br>之所以选择31，是因为它是个奇素数，如果乘数是偶数，并且乘法溢出的话，信息就会丢失，因为与2相乘等价于移位运算。使用素数的好处并不是很明显，但是习惯上都使用素数来计算散列结果。<br>31有个很好的特性，就是用移位和减法来代替乘法，可以得到更好的性能：31*i==(i&lt;&lt;5)-i。现在的VM可以自动完成这种优化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> h = hash;</div><div class="line">    <span class="keyword">if</span> (h == <span class="number">0</span> &amp;&amp; value.length &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">char</span> val[] = value;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;</div><div class="line">            h = <span class="number">31</span> * h + val[i];</div><div class="line">        &#125;</div><div class="line">        hash = h;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> h;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果传入参数地址相同，那一定是相等的。<br>如果传入参数anObject是String类型，那么就循环迭代这两个字符串对应的字符数组中的每一个值是否相等，如有一个字符不相等，则返回false。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</div><div class="line">        String anotherString = (String)anObject;</div><div class="line">        <span class="keyword">int</span> n = value.length;</div><div class="line">        <span class="keyword">if</span> (n == anotherString.value.length) &#123;</div><div class="line">            <span class="keyword">char</span> v1[] = value;</div><div class="line">            <span class="keyword">char</span> v2[] = anotherString.value;</div><div class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">            <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">if</span> (v1[i] != v2[i])</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="hash常见方法"><a href="#hash常见方法" class="headerlink" title="hash常见方法"></a>hash常见方法</h2><p>XXX.hashCode(primitive); // primitve 是基本类型，XXX 是 primitve 的 Wrapper Class<br>Objects.hashCode(obj); // obj 是对象<br>Arrays.hashCode(ary); // ary 是各种数组<br>Objects.hash(x, y, z); // 参数是 varargs，可以是多个各种类型，但不建议参数个数只有一个</p>
+<h2 id="重写equals"><a href="#重写equals" class="headerlink" title="重写equals"></a>重写equals</h2><p>根据《effective java》这本书的内容，进行总结一下：</p>
+<p>我们若要重写equals方法时，必须遵守他的通用约定，否则会出现异常。</p>
+<ul>
+<li>对称性（symmetric）：任何非空=null引用值x y，如果x.equals(y)返回是“true”，那么y.equals(x)也应该返回是“true”。</li>
+<li>自反性（reflexive）：任何非空=null引用值 x，x.equals(x)必须返回是“true”。</li>
+<li>传递性（transitive）：任何非空=null引用值x y z ，如果x.equals(y)返回是“true”，而且y.equals(z)返回是“true”，那么z.equals(x)也应该返回是“true”。</li>
+<li>一致性（consistent）：任何非空=null引用值x y,如果x.equals(y)返回是“true”，只要x和y内容一直不变，不管你重复x.equals(y)多少次，返回都是“true”。</li>
+<li>任何情况下，<strong>x.equals(null)，永远返回是“false”</strong>；<strong>x.equals(和x不同类型的对象)永远返回false</strong></li>
+</ul>
+<p>当我们重写equals方法时，也要重写hashCode方法，因为我们要保证，如果两个对象equals等于true，那么hashCode返回值必须也是相等的<br>1、当两个对象equals方法返回true，那么hashCode返回值一定是相等的；如果两个对象equals方法返回值是false，那么这两个对象的hashCode的返回值有可能相等。<br>2、当两个对象的hashCode返回值相等时，两个对象的equals方法不一定true（hash冲突）；但是如果<strong>两个对象的hashCode返回值不相等，那么这个对象equals返回值一定是false</strong>.</p>
+<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">substring</span><span class="params">(<span class="keyword">int</span> beginIndex, <span class="keyword">int</span> endIndex)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (beginIndex &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(beginIndex);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (endIndex &gt; value.length) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(endIndex);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> subLen = endIndex - beginIndex;</div><div class="line">    <span class="keyword">if</span> (subLen &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(subLen);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//当子串还是原来的就不会new，而是返回原来的</span></div><div class="line">    <span class="keyword">return</span> ((beginIndex == <span class="number">0</span>) &amp;&amp; (endIndex == value.length)) ? <span class="keyword">this</span></div><div class="line">            : <span class="keyword">new</span> String(value, beginIndex, subLen);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">concat</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> otherLen = str.length();</div><div class="line">  <span class="keyword">if</span> (otherLen == <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">char</span> buf[] = <span class="keyword">new</span> <span class="keyword">char</span>[count + otherLen];</div><div class="line">  getChars(<span class="number">0</span>, count, buf, <span class="number">0</span>);</div><div class="line">  str.getChars(<span class="number">0</span>, otherLen, buf, count);</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> String(<span class="number">0</span>, count + otherLen, buf);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看出，string 的方法都是返回new出来的新字符串，只有当结果不变的时候才是返回原字符串的<br><strong>“对String对象的任何改变都不影响到原对象，相关的任何change操作都会生成新的对象”。</strong></p>
+<h2 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h2><p>先看java内存区域<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/s1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>执行<code>String str = &quot;hello&quot;</code>语句的过程<br>首先编译，形成class文件<br>然后进入加载阶段：把class文件加载到虚拟机中，class文件中大部分的数据会被加载到“运行常量池running time pool”中<br>但是string不会，<strong>其中的“hello”的一个引用会被存在“字符串常量池中string pool”，而“hello”本体还是和所有对象一样创建在堆heap上</strong><br><code>这只是在Test类被类加载器加载时候的情形。主线程中的str变量这时候都还没有被创建，但Hello的实例已经在Heap里了，对它的引用也已经在字符串常量池里了。</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/s2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>等主线程开始创建str变量的时候，虚拟机就会到字符串常量池里找，看有没有能equals(“Hello”)的String。<br>如果找到了，就在栈区当前栈帧的局部变量表里创建str变量，然后把字符串常量池里对Hello对象的引用复制给str变量。<br>找不到的话，才会在heap堆重新创建一个对象，然后把引用驻留到字符串常量区。然后再把引用复制栈帧的局部变量表。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/s3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>如果我们当时定义了很多个值为”Hello”的String，比如<code>String str1 = &quot;hello&quot;;String str2 = &quot;hello&quot;;String str3 = &quot;hello&quot;;</code>，有三个变量str1,str2,str3，也不会在堆上增加String实例。局部变量表里三个变量统一指向同一个堆内存地址。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/s4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>但如果是用new关键字来创建字符串<code>String str1 = &quot;Hello&quot;;String str2 = &quot;Hello&quot;;String str3 = new String(&quot;Hello&quot;);</code>，情况就不一样了<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/s5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>这时候，str1和str2还是和之前一样。但str3因为new关键字会在Heap堆申请一块全新的内存，来创建新对象。虽然字面还是”Hello”，但是完全不同的对象，有不同的内存地址。</p>
+<p><a href="https://www.zhihu.com/question/29884421" target="_blank" rel="external">https://www.zhihu.com/question/29884421</a><br>关于不同的常量池<a href="http://tangxman.github.io/2015/07/27/the-difference-of-java-string-pool/" target="_blank" rel="external">http://tangxman.github.io/2015/07/27/the-difference-of-java-string-pool/</a></p>
+<h1 id="StringBuffer和StringBuilder"><a href="#StringBuffer和StringBuilder" class="headerlink" title="StringBuffer和StringBuilder"></a>StringBuffer和StringBuilder</h1><p>初始大小都是16<br>而StringBuffer是线程安全的，因为他的方法被<code>synchronized</code>修饰，而StringBuilder不安全<br>所以通常来说<strong>StringBuilder &gt; StringBuffer &gt; String</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//StringBuffer</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (toStringCache == <span class="keyword">null</span>) &#123;</div><div class="line">        toStringCache = Arrays.copyOfRange(value, <span class="number">0</span>, count);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(toStringCache, <span class="keyword">true</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//StringBuilder</span></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// Create a copy, don't share the array</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(value, <span class="number">0</span>, count);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="与String的关系"><a href="#与String的关系" class="headerlink" title="与String的关系"></a>与String的关系</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main1</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    String string = <span class="string">""</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000</span>;i++)&#123;</div><div class="line">        string += <span class="string">"hello"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main2</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000</span>;i++)&#123;</div><div class="line">        stringBuilder.append(<span class="string">"hello"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在main1中，每次循环会<strong>new出一个StringBuilder对象，然后进行append操作，最后通过toString方法返回String对象。</strong><br>也就是说这个循环执行完毕new出了10000个对象，试想一下，如果这些对象没有被回收，会造成多大的内存资源浪费。<br>在main2中，new操作只进行了一次，也就是说只生成了一个对象，append操作是在原有对象的基础上进行的。因此在循环了10000次之后，这段代码所占的资源要比上面小得多。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test1String</span> <span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">long</span> begin = System.currentTimeMillis();</div><div class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;time; i++)&#123;</div><div class="line">       String s = <span class="string">"I"</span>+<span class="string">"love"</span>+<span class="string">"java"</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">long</span> over = System.currentTimeMillis();</div><div class="line">   System.out.println(<span class="string">"字符串直接相加操作："</span>+(over-begin)+<span class="string">"毫秒"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test2String</span> <span class="params">()</span> </span>&#123;</div><div class="line">   String s1 =<span class="string">"I"</span>;</div><div class="line">   String s2 = <span class="string">"love"</span>;</div><div class="line">   String s3 = <span class="string">"java"</span>;</div><div class="line">   <span class="keyword">long</span> begin = System.currentTimeMillis();</div><div class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;time; i++)&#123;</div><div class="line">       String s = s1+s2+s3;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">long</span> over = System.currentTimeMillis();</div><div class="line">   System.out.println(<span class="string">"字符串间接相加操作："</span>+(over-begin)+<span class="string">"毫秒"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由此可以得出结论：<br>1）对于直接相加字符串，效率很高，因为在编译器便确定了它的值，也就是说形如<code>&quot;I&quot;+&quot;love&quot;+&quot;java&quot;</code>; 的字符串相加，在编译期间便被优化成了<code>&quot;Ilovejava&quot;</code>。这个可以用javap -c命令反编译生成的class文件进行验证。<br>2）对于间接相加（即包含字符串引用），形如s1+s2+s3; 效率要比直接相加低，因为在编译器不会对引用变量进行优化。</p>
+<h1 id="一些例子"><a href="#一些例子" class="headerlink" title="一些例子"></a>一些例子</h1><p>1）下面这段代码的输出结果是什么？</p>
+<p><code>String a = &quot;hello2&quot;; 　　String b = &quot;hello&quot; + 2; 　　System.out.println((a == b));</code></p>
+<p>输出结果为：true。原因很简单，”hello”+2在编译期间就已经被优化成”hello2”，因此在运行期间，变量a和变量b指向的是同一个对象。</p>
+<p>2）下面这段代码的输出结果是什么？</p>
+<p><code>String a = &quot;hello2&quot;; 　  String b = &quot;hello&quot;;       String c = b + 2;       System.out.println((a == c));</code></p>
+<p>输出结果为:false。由于有符号引用的存在，所以  String c = b + 2;不会在编译期间被优化，不会把b+2当做字面常量来处理的，因此这种方式生成的对象事实上是保存在堆上的。因此a和c指向的并不是同一个对象。</p>
+<p>3）下面这段代码的输出结果是什么？</p>
+<p><code>String a = &quot;hello2&quot;;   　 final String b = &quot;hello&quot;;       String c = b + 2;       System.out.println((a == c));</code></p>
+<p>输出结果为：true。对于被final修饰的变量，会在class文件常量池中保存一个副本，也就是说不会通过连接而进行访问，对final变量的访问在编译期间都会直接被替代为真实的值。那么String c = b + 2;在编译期间就会被优化成：String c = “hello” + 2;</p>
+<p>4）下面这段代码输出结果为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        String a = <span class="string">"hello2"</span>;</div><div class="line">        <span class="keyword">final</span> String b = getHello();</div><div class="line">        String c = b + <span class="number">2</span>;</div><div class="line">        System.out.println((a == c));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getHello</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出结果为false。这里面虽然将b用final修饰了，但是由于其赋值是通过方法调用返回的，那么它的值只能在运行期间确定，因此a和c指向的不是同一个对象。</p>
+<p>5）下面这段代码的输出结果是什么？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class Main &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        String a = &quot;hello&quot;;</div><div class="line">        String b =  new String(&quot;hello&quot;);</div><div class="line">        String c =  new String(&quot;hello&quot;);</div><div class="line">        String d = b.intern();</div><div class="line"></div><div class="line">        System.out.println(a==b);</div><div class="line">        System.out.println(b==c);</div><div class="line">        System.out.println(b==d);</div><div class="line">        System.out.println(a==d);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ffft<br>这里面涉及到的是String.intern方法的使用。在String类中，intern方法是一个本地方法，在JAVA SE6之前，intern方法会在运行时常量池中查找是否存在内容相同的字符串，如果存在则返回指向该字符串的引用，如果不存在，则会将该字符串入池，并返回一个指向该字符串的引用。因此，a和d指向的是同一个对象。<br>参考书57页</p>
+<p>6）下面这段代码1）和2）的区别是什么？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class Main &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        String str1 = &quot;I&quot;;</div><div class="line">        //str1 += &quot;love&quot;+&quot;java&quot;;        1)</div><div class="line">        str1 = str1+&quot;love&quot;+&quot;java&quot;;      //2)</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>1）的效率比2）的效率要高，1）中的”love”+”java”在编译期间会被优化成”lovejava”，而2）中的不会被优化。<br>可以看出，在1）中只进行了一次append操作，而在2）中进行了两次append操作。</p>
+<p>堆（Heap）：最大一块空间。存放对象实例和数组。全局共享</p>
+<p><a href="http://rednaxelafx.iteye.com/blog/774673/" target="_blank" rel="external">http://rednaxelafx.iteye.com/blog/774673/</a><br><a href="http://www.cnblogs.com/dolphin0520/p/3778589.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3778589.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-06T01:47:46.000Z" itemprop="dateUpdated">2017年4月6日 9:47</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/12/String相关/" target="_blank" rel="external">http://duyao.github.io/2017/03/12/String相关/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/12/String相关/&title=《String相关》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/12/String相关/&title=《String相关》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/12/String相关/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《String相关》 — Du Yao's blog&url=http://duyao.github.io/2017/03/12/String相关/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/12/String相关/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/13/448-Find-All-Numbers-Disappeared-in-an-Array/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">448. Find All Numbers Disappeared in an Array</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/10/二叉树及其相关/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">二叉树及其相关</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="String相关" data-title="String相关" data-url="http://duyao.github.io/2017/03/12/String相关/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/12/String相关/&title=《String相关》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/12/String相关/&title=《String相关》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/12/String相关/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《String相关》 — Du Yao's blog&url=http://duyao.github.io/2017/03/12/String相关/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/12/String相关/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/12/String相关/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

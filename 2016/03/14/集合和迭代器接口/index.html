@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>集合和迭代器接口 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="各种关系浅蓝色是接口深蓝色是类                                                                                             collection的关系              Collection接口继承于接口Iterator1234567891011121314151617181920public in">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合和迭代器接口">
+<meta property="og:url" content="http://duyao.github.io/2016/03/14/集合和迭代器接口/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="各种关系浅蓝色是接口深蓝色是类                                                                                             collection的关系              Collection接口继承于接口Iterator1234567891011121314151617181920public in">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/java.util.Collection.gif">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/Iterator.png">
+<meta property="og:updated_time" content="2016-03-21T02:39:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="集合和迭代器接口">
+<meta name="twitter:description" content="各种关系浅蓝色是接口深蓝色是类                                                                                             collection的关系              Collection接口继承于接口Iterator1234567891011121314151617181920public in">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/java.util.Collection.gif">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">集合和迭代器接口</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">集合和迭代器接口</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-14T01:43:21.000Z" itemprop="datePublished" class="page-time">
+  2016-03-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#各种关系"><span class="post-toc-number">1.</span> <span class="post-toc-text">各种关系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Collection接口"><span class="post-toc-number">2.</span> <span class="post-toc-text">Collection接口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Iterator接口"><span class="post-toc-number">3.</span> <span class="post-toc-text">Iterator接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#访问元素"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">访问元素</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Iterator使用方法"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Iterator使用方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AbstractCollection类"><span class="post-toc-number">4.</span> <span class="post-toc-text">AbstractCollection类</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-集合和迭代器接口"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">集合和迭代器接口</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年03月14日 9:43" datetime="2016-03-14T01:43:21.000Z"  itemprop="datePublished">2016-03-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="各种关系"><a href="#各种关系" class="headerlink" title="各种关系"></a>各种关系</h2><p>浅蓝色是接口<br>深蓝色是类<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/java.util.Collection.gif" alt="collection的关系" title="">
+                </div>
+                <div class="image-caption">collection的关系</div>
+            </figure></p>
+<h2 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h2><p>继承于接口<code>Iterator</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    int size();</div><div class="line">    boolean isEmpty();</div><div class="line">    boolean contains(Object o);</div><div class="line">    Iterator&lt;E&gt; iterator();</div><div class="line">    Object[] toArray();</div><div class="line">    &lt;T&gt; T[] toArray(T[] a);</div><div class="line">    boolean add(E e);</div><div class="line">    boolean remove(Object o);</div><div class="line">    boolean containsAll(Collection&lt;?&gt; c);</div><div class="line">    boolean addAll(Collection&lt;? extends E&gt; c);</div><div class="line">    //删除所有与c中相同的元素</div><div class="line">    boolean removeAll(Collection&lt;?&gt; c);</div><div class="line">    //保留与c中相同的元素，即删除与c中不同的元素</div><div class="line">    boolean retainAll(Collection&lt;?&gt; c);</div><div class="line">    void clear();</div><div class="line">    boolean equals(Object o);</div><div class="line">    int hashCode();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Iterator接口"><a href="#Iterator接口" class="headerlink" title="Iterator接口"></a>Iterator接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public interface Iterator&lt;E&gt; &#123;</div><div class="line"></div><div class="line">    boolean hasNext();</div><div class="line">    E next();</div><div class="line">    void remove();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a>访问元素</h3><p>Iterator可以用于访问元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Collection&lt;String&gt; c = ...;</div><div class="line">Iterator&lt;String&gt; it = c.iterator();</div><div class="line">while(it.hasNext())&#123;</div><div class="line">	String s = it.next();</div><div class="line">	//do something</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>访问元素还可用<code>for each</code>,并且<strong>推荐使用<code>for each</code></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Collection&lt;String&gt; c = ...;</div><div class="line">for (String string : c) &#123;</div><div class="line">	//do someting with string</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Iterator使用方法"><a href="#Iterator使用方法" class="headerlink" title="Iterator使用方法"></a>Iterator使用方法</h3><ul>
+<li><p>next()<br>java迭代器Iterator处于<strong>两个元素之间</strong><br>当调用next时候，<strong>迭代器就跳过元素，返回刚刚元素的引用</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/Iterator.png" alt="迭代器向前移动" title="">
+                </div>
+                <div class="image-caption">迭代器向前移动</div>
+            </figure>
+</li>
+<li><p>remove()<br>删除一个元素，是删除上一次next返回的元素(当前位置左边元素)<br>remove和next具有相互依赖型，如果没有调用next，使用remove是非法的，会抛出<code>java.lang.IllegalStateException</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">bIterator = b.iterator();</div><div class="line">bIterator.remove();</div><div class="line">bIterator.remove();//error</div><div class="line"></div><div class="line">bIterator.next();</div><div class="line">bIterator.remove();//right</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="AbstractCollection类"><a href="#AbstractCollection类" class="headerlink" title="AbstractCollection类"></a>AbstractCollection类</h2><p>实现了Collection接口<br>设计上体现了接口与实现的分离，各个类可以实现自己的iterator和size，通用的Collection已经实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public abstract class AbstractCollection&lt;E&gt; implements Collection&lt;E&gt; &#123;</div><div class="line">	//iterator和size抽象化</div><div class="line">    public abstract Iterator&lt;E&gt; iterator();</div><div class="line">    public abstract int size();</div><div class="line">    //实现Collection中的方法</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-03-21T02:39:00.000Z" itemprop="dateUpdated">2016年3月21日 10:39</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2016/03/14/集合和迭代器接口/" target="_blank" rel="external">http://duyao.github.io/2016/03/14/集合和迭代器接口/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/03/14/集合和迭代器接口/&title=《集合和迭代器接口》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/03/14/集合和迭代器接口/&title=《集合和迭代器接口》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/03/14/集合和迭代器接口/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《集合和迭代器接口》 — Du Yao's blog&url=http://duyao.github.io/2016/03/14/集合和迭代器接口/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/03/14/集合和迭代器接口/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/19/红黑树/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">红黑树</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/11/330-Patching-Array/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">330. Patching Array</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="集合和迭代器接口" data-title="集合和迭代器接口" data-url="http://duyao.github.io/2016/03/14/集合和迭代器接口/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/03/14/集合和迭代器接口/&title=《集合和迭代器接口》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/03/14/集合和迭代器接口/&title=《集合和迭代器接口》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/03/14/集合和迭代器接口/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《集合和迭代器接口》 — Du Yao's blog&url=http://duyao.github.io/2016/03/14/集合和迭代器接口/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/03/14/集合和迭代器接口/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2016/03/14/集合和迭代器接口/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

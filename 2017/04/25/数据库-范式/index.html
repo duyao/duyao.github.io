@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>数据库-范式 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="数据库">
+    <meta name="description" content="范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。实际上你可以把它粗略地理解为一张数据表的表结构所符合的某种设计标准的级别。 第一范式1NF定义为：符合1NF的关系中的每个属性都不可再分。1NF是所有关系型数据库的最基本要求    编号 商品 进货 销售 备注       数量+单价 数量+单价     但是仅仅符合1NF的设计，仍然会存在数据冗余过大，插入异">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库-范式">
+<meta property="og:url" content="http://duyao.github.io/2017/04/25/数据库-范式/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。实际上你可以把它粗略地理解为一张数据表的表结构所符合的某种设计标准的级别。 第一范式1NF定义为：符合1NF的关系中的每个属性都不可再分。1NF是所有关系型数据库的最基本要求    编号 商品 进货 销售 备注       数量+单价 数量+单价     但是仅仅符合1NF的设计，仍然会存在数据冗余过大，插入异">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/2nf.jpg">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/dependency.jpg">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/dependency1.jpg">
+<meta property="og:updated_time" content="2017-05-08T08:29:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库-范式">
+<meta name="twitter:description" content="范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。实际上你可以把它粗略地理解为一张数据表的表结构所符合的某种设计标准的级别。 第一范式1NF定义为：符合1NF的关系中的每个属性都不可再分。1NF是所有关系型数据库的最基本要求    编号 商品 进货 销售 备注       数量+单价 数量+单价     但是仅仅符合1NF的设计，仍然会存在数据冗余过大，插入异">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/2nf.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">数据库-范式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">数据库-范式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-25T02:23:30.000Z" itemprop="datePublished" class="page-time">
+  2017-04-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第一范式1NF"><span class="post-toc-number">1.</span> <span class="post-toc-text">第一范式1NF</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第二范式（2NF）"><span class="post-toc-number">2.</span> <span class="post-toc-text">第二范式（2NF）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数依赖"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">函数依赖</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#码"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#非主属性"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">非主属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第三范式（3NF）"><span class="post-toc-number">3.</span> <span class="post-toc-text">第三范式（3NF）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BCNF范式"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">BCNF范式</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-数据库-范式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">数据库-范式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年04月25日 10:23" datetime="2017-04-25T02:23:30.000Z"  itemprop="datePublished">2017-04-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。<br>实际上你可以把它粗略地理解为一张数据表的表结构所符合的某种设计标准的级别。</p>
+<h1 id="第一范式1NF"><a href="#第一范式1NF" class="headerlink" title="第一范式1NF"></a>第一范式1NF</h1><p>定义为：<strong>符合1NF的关系中的每个属性都不可再分</strong>。<br>1NF是所有关系型数据库的最基本要求</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">编号</th>
+<th style="text-align:center">商品</th>
+<th style="text-align:center">进货</th>
+<th style="text-align:center">销售</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">数量+单价</td>
+<td style="text-align:center">数量+单价</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>但是仅仅符合1NF的设计，仍然会存在<strong>数据冗余过大，插入异常，删除异常，修改异常</strong>的问题，例如对于图1中的设计：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/2nf.jpg" alt="图1" title="">
+                </div>
+                <div class="image-caption">图1</div>
+            </figure></p>
+<h1 id="第二范式（2NF）"><a href="#第二范式（2NF）" class="headerlink" title="第二范式（2NF）"></a>第二范式（2NF）</h1><p>对1NF进行了一些改进。其改进是，<strong>2NF在1NF的基础之上，消除了非主属性对于码的部分函数依赖</strong>。<br>接下来对这句话中涉及到的四个概念——“函数依赖”、“码”、“非主属性”、与“部分函数依赖”进行一下解释。</p>
+<h2 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h2><p>我们可以这么理解（但并不是特别严格的定义）：<strong>若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y。</strong><br>也就是说，在数据表中，不存在任意两条记录，它们在X属性（或属性组）上的值相同，而在Y属性上的值不同。<br>这也就是“函数依赖”名字的由来，类似于函数关系 y = f(x)，在x的值确定的情况下，y的值一定是确定的。<br>例如，对于图1中的数据，找不到任何一条记录，它们的学号相同而对应的姓名不同。所以我们可以说姓名函数依赖于学号，写作 <code>学号 → 姓名</code>。<br>但是反过来，因为可能出现同名的学生，所以有可能不同的两条学生记录，它们在姓名上的值相同，但对应的学号不同，所以我们不能说学号函数依赖于姓名。<br>表中其他的函数依赖关系还有如：</p>
+<ul>
+<li><code>系名 → 系主任</code></li>
+<li><code>学号 → 系主任</code></li>
+<li><code>（学号，课名） → 分数</code></li>
+</ul>
+<p>但以下函数依赖关系则不成立：</p>
+<ul>
+<li><code>学号 → 课名</code></li>
+<li><code>学号 → 分数</code></li>
+<li><code>课名 → 系主任</code></li>
+<li><code>（学号，课名） → 姓名</code></li>
+</ul>
+<p>从“函数依赖”这个概念展开，还会有三个概念：</p>
+<blockquote>
+<p>完全函数依赖</p>
+</blockquote>
+<p>在一张表中，若 X → Y，且对于 X 的任何一个真子集（假如属性组 X 包含超过一个属性的话），X ‘ → Y 不成立，那么我们称 Y 对于 X 完全函数依赖，记作 X F→ Y。（那个F应该写在箭头的正上方）<br>例如： 学号 F→ 姓名 （学号，课名） F→ 分数  （注：因为同一个的学号对应的分数不确定，同一个课名对应的分数也不确定）</p>
+<blockquote>
+<p>部分函数依赖</p>
+</blockquote>
+<p>假如 Y 函数依赖于 X，但同时 Y 并不完全函数依赖于 X，那么我们就称 Y 部分函数依赖于 X，记作 X  P→ Y（P在箭头上方）<br>例如：（学号，课名） P→ 姓名</p>
+<blockquote>
+<p>传递函数依赖</p>
+</blockquote>
+<p>假如 Z 函数依赖于 Y，且 Y 函数依赖于 X （严格来说还有一个X 不包含于Y，且 Y 不函数依赖于Z的前提条件），那么我们就称 Z 传递函数依赖于 X ，记作 X T→ Z(T在箭头上方)</p>
+<h2 id="码"><a href="#码" class="headerlink" title="码"></a>码</h2><p>设 K 为某表中的一个属性或属性组，若除 K 之外的所有属性都<strong>完全</strong>函数依赖于 K（这个“完全”不要漏了），那么我们称 K 为候选码，简称为码。<br>在实际中我们通常可以理解为：<strong>假如当 K 确定的情况下，该表除 K 之外的所有属性的值也就随之确定，那么 K 就是码。</strong><br>一张表中可以有超过一个码。（实际应用中为了方便，通常选择其中的一个码作为主码）<br>例如：对于图1，（学号、课名）这个属性组就是码。该表中有且仅有这一个码。（假设所有课没有重名的情况）</p>
+<h2 id="非主属性"><a href="#非主属性" class="headerlink" title="非主属性"></a>非主属性</h2><p>包含在任何一个码中的属性成为主属性。例如：对于图1，主属性就有两个，学号 与 课名。</p>
+<p>终于可以回过来看2NF了。首先，我们需要判断，图1是否符合2NF的要求？根据2NF的定义，<strong>判断的依据实际上就是看数据表中是否存在非主属性对于码的部分函数依赖</strong>。<br>若存在，则数据表最高只符合1NF的要求，若不存在，则符合2NF的要求。<br>判断的方法是：<br>第一步：找出数据表中所有的码。<br>第二步：根据第一步所得到的码，找出所有的主属性。<br>第三步：数据表中，除去所有的主属性，剩下的就都是非主属性了。<br>第四步：查看是否存在非主属性对码的部分函数依赖。<br>对于图1，根据前面所说的四步，我们可以图中所有的函数依赖关系：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/dependency.jpg" alt="函数依赖" title="">
+                </div>
+                <div class="image-caption">函数依赖</div>
+            </figure><br>这一步完成以后，可以得到，图1的码只有一个，就是（学号、课名）。<br>第二步：主属性有两个：学号 与 课名<br>第三步：非主属性有四个：姓名、系名、系主任、分数<br>第四步：<br>对于<code>（学号，课名） → 姓名</code>，有 <code>学号 → 姓名</code>，存在非主属性 <code>姓名</code> 对码<code>（学号，课名）</code>的部分函数依赖。<br>对于<code>（学号，课名） → 系名</code>，有 <code>学号 → 系名</code>，存在非主属性 <code>系名</code> 对码<code>（学号，课名）</code>的部分函数依赖。<br>对于<code>（学号，课名） → 系主任</code>，有<code>学号 → 系主任</code>，存在非主属性 <code>系主任</code>  对码<code>（学号，课名）</code>的部分函数依赖。<br>所以图1存在非主属性对于码的部分函数依赖，最高只符合1NF的要求，不符合2NF的要求。</p>
+<p>为了让图1符合2NF的要求，我们必须消除这些部分函数依赖，只有一个办法，就是将大数据表拆分成两个或者更多个更小的数据表，在拆分的过程中，要达到更高一级范式的要求，这个过程叫做”模式分解“。<br>模式分解的方法不是唯一的，以下是其中一种方法：<br>选课（学号，课名，分数）<br>学生（学号，姓名，系名，系主任）<br>新的函数依赖如下图所示：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/dependency1.jpg" alt="新的函数依赖" title="">
+                </div>
+                <div class="image-caption">新的函数依赖</div>
+            </figure><br>对于选课表，其码是（学号，课名），主属性是学号和课名，非主属性是分数，学号确定，并不能唯一确定分数，课名确定，也不能唯一确定分数，所以不存在非主属性分数对于码 （学号，课名）的部分函数依赖，所以此表符合2NF的要求。<br>对于学生表，其码是学号，主属性是学号，非主属性是姓名、系名和系主任，因为码只有一个属性，所以不可能存在非主属性对于码 的部分函数依赖，所以此表符合2NF的要求</p>
+<h1 id="第三范式（3NF）"><a href="#第三范式（3NF）" class="headerlink" title="第三范式（3NF）"></a>第三范式（3NF）</h1><p>3NF在2NF的基础之上，<strong>消除了非主属性对于码的传递函数依赖</strong>。也就是说， 如果存在非主属性对于码的传递函数依赖，则不符合3NF的要求。</p>
+<p>对于上面新的函数依赖，可以分析：<br>对于选课表，主码为（学号，课名），主属性为学号和课名，非主属性只有一个，为分数，不可能存在传递函数依赖，所以选课表的设计，符合3NF的要求。<br>对于学生表，主码为学号，主属性为学号，非主属性为姓名、系名和系主任。因为 学号 → 系名，同时 系名 → 系主任，所以存在非主属性系主任对于码学号的传递函数依赖，所以学生表的设计，不符合3NF的要求。。</p>
+<p>为了让数据表设计达到3NF，我们必须进一步进行模式分解为以下形式：<br>选课（学号，课名，分数）<br>学生（学号，姓名，系名）<br>系（系名，系主任）<br>对于选课表，符合3NF的要求，之前已经分析过了。<br>对于学生表，码为学号，主属性为学号，非主属性为系名，不可能存在非主属性对于码的传递函数依赖，所以符合3NF的要求。<br>对于系表，码为系名，主属性为系名，非主属性为系主任，不可能存在非主属性对于码的传递函数依赖（至少要有三个属性才可能存在传递函数依赖关系），所以符合3NF的要求。</p>
+<p>结论<br>由此可见，符合3NF要求的数据库设计，基本上解决了数据冗余过大，插入异常，修改异常，删除异常的问题。当然，在实际中，往往为了性能上或者应对扩展的需要，经常 做到2NF或者1NF，但是作为数据库设计人员，至少应该知道，3NF的要求是怎样的。</p>
+<h2 id="BCNF范式"><a href="#BCNF范式" class="headerlink" title="BCNF范式"></a>BCNF范式</h2><p>要了解 BCNF 范式，那么先看这样一个问题：若：某公司有若干个仓库；每个仓库只能有一名管理员，一名管理员只能在一个仓库中工作；一个仓库中可以存放多种物品，一种物品也可以存放在不同的仓库中。每种物品在每个仓库中都有对应的数量。<br>那么关系模式 仓库（仓库名，管理员，物品名，数量） 属于哪一级范式？<br>答：<br>已知函数依赖集：仓库名 → 管理员，管理员 → 仓库名，（仓库名，物品名）→ 数量<br>码：（管理员，物品名），（仓库名，物品名）<br>主属性：仓库名、管理员、物品名<br>非主属性：数量<br>∵ 不存在非主属性对码的部分函数依赖和传递函数依赖。∴ 此关系模式属于3NF。</p>
+<p>因此BCNF就是解决存在着主属性对于码的部分函数依赖与传递函数依赖。（在此例中就是存在主属性【仓库名】对于码【（管理员，物品名）】的部分函数依赖。<br>解决办法就是要在 3NF 的基础上消除主属性对于码的部分与传递函数依赖。</p>
+<p>仓库（仓库名，管理员）<br>库存（仓库名，物品名，数量）</p>
+<p><a href="https://www.zhihu.com/question/24696366/answer/29189700" target="_blank" rel="external">https://www.zhihu.com/question/24696366/answer/29189700</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-05-08T08:29:04.000Z" itemprop="dateUpdated">2017年5月8日 16:29</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/04/25/数据库-范式/" target="_blank" rel="external">http://duyao.github.io/2017/04/25/数据库-范式/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/25/数据库-范式/&title=《数据库-范式》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/25/数据库-范式/&title=《数据库-范式》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/25/数据库-范式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据库-范式》 — Du Yao's blog&url=http://duyao.github.io/2017/04/25/数据库-范式/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/25/数据库-范式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/30/设计模式原则和UML图/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">设计模式原则和UML图</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/21/数据库/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">数据库</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="数据库-范式" data-title="数据库-范式" data-url="http://duyao.github.io/2017/04/25/数据库-范式/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/04/25/数据库-范式/&title=《数据库-范式》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/04/25/数据库-范式/&title=《数据库-范式》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/04/25/数据库-范式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据库-范式》 — Du Yao's blog&url=http://duyao.github.io/2017/04/25/数据库-范式/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/04/25/数据库-范式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/04/25/数据库-范式/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

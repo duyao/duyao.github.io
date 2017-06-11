@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>分布式技术 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="分布式">
+    <meta name="description" content="分布式系统的难点分布式系统比起单机系统存在哪些难点呢？ 网络因素由于服务和数据分布在不同的机器上，每次交互都需要跨机器运行，这带来如下几个问题：1.网络延迟：性能、超时 同机房的网络IO还是比较块的，但是跨机房，尤其是跨IDC，网络IO就成为不可忽视的性能瓶颈了。并且，延迟不是带宽，带宽可以随便增加，千兆网卡换成万兆，只是成本的问题，但延迟是物理限制，基本不可能降低。这带来的问题就是系统整体性能的">
+<meta name="keywords" content="分布式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式技术">
+<meta property="og:url" content="http://duyao.github.io/2017/03/26/分布式技术/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="分布式系统的难点分布式系统比起单机系统存在哪些难点呢？ 网络因素由于服务和数据分布在不同的机器上，每次交互都需要跨机器运行，这带来如下几个问题：1.网络延迟：性能、超时 同机房的网络IO还是比较块的，但是跨机房，尤其是跨IDC，网络IO就成为不可忽视的性能瓶颈了。并且，延迟不是带宽，带宽可以随便增加，千兆网卡换成万兆，只是成本的问题，但延迟是物理限制，基本不可能降低。这带来的问题就是系统整体性能的">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/2pc.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/3pc.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/paxos-flow.png">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/Transaction-Across-DataCenter.jpg">
+<meta property="og:updated_time" content="2017-04-24T09:26:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式技术">
+<meta name="twitter:description" content="分布式系统的难点分布式系统比起单机系统存在哪些难点呢？ 网络因素由于服务和数据分布在不同的机器上，每次交互都需要跨机器运行，这带来如下几个问题：1.网络延迟：性能、超时 同机房的网络IO还是比较块的，但是跨机房，尤其是跨IDC，网络IO就成为不可忽视的性能瓶颈了。并且，延迟不是带宽，带宽可以随便增加，千兆网卡换成万兆，只是成本的问题，但延迟是物理限制，基本不可能降低。这带来的问题就是系统整体性能的">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/2pc.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">分布式技术</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">分布式技术</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-26T11:50:51.000Z" itemprop="datePublished" class="page-time">
+  2017-03-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分布式系统的难点"><span class="post-toc-number">1.</span> <span class="post-toc-text">分布式系统的难点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络因素"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">网络因素</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分布式系统特性-CAP理论-鱼和熊掌不可兼得"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">分布式系统特性-CAP理论(鱼和熊掌不可兼得)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一致性模型"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">一致性模型</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分布式系统常用技术和应用场景"><span class="post-toc-number">2.</span> <span class="post-toc-text">分布式系统常用技术和应用场景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一致性哈希"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">一致性哈希</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Quorum-W-R-gt-N：抽屉原理，数据一致性的另一种解决方案"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Quorum W+R>N：抽屉原理，数据一致性的另一种解决方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#vector-clock：时钟向量，多版本数据修改"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">vector clock：时钟向量，多版本数据修改</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lease机制"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">lease机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gossip协议"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">Gossip协议</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2PC、3PC、Paxos协议、Raft-分布式事务的解决方案"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">2PC、3PC、Paxos协议、Raft: 分布式事务的解决方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2PC"><span class="post-toc-number">2.6.1.</span> <span class="post-toc-text">2PC</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3PC"><span class="post-toc-number">2.6.2.</span> <span class="post-toc-text">3PC</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Paxos"><span class="post-toc-number">2.6.3.</span> <span class="post-toc-text">Paxos</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#过程"><span class="post-toc-number">2.6.3.1.</span> <span class="post-toc-text">过程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#常见的疑问、及异常处理"><span class="post-toc-number">2.6.3.2.</span> <span class="post-toc-text">常见的疑问、及异常处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Raft"><span class="post-toc-number">2.6.4.</span> <span class="post-toc-text">Raft</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三个角色"><span class="post-toc-number">2.6.4.1.</span> <span class="post-toc-text">三个角色</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#leader选举"><span class="post-toc-number">2.6.4.2.</span> <span class="post-toc-text">leader选举</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#log复制"><span class="post-toc-number">2.6.4.3.</span> <span class="post-toc-text">log复制</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MVCC：多版本并发控制"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">MVCC：多版本并发控制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#各种一致性的比较"><span class="post-toc-number">2.7.1.</span> <span class="post-toc-text">各种一致性的比较</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Two-Generals-Problem（两将军问题）"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">Two Generals Problem（两将军问题）</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Map-Reduce思想"><span class="post-toc-number">3.</span> <span class="post-toc-text">Map-Reduce思想</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-分布式技术"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">分布式技术</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月26日 19:50" datetime="2017-03-26T11:50:51.000Z"  itemprop="datePublished">2017-03-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="分布式系统的难点"><a href="#分布式系统的难点" class="headerlink" title="分布式系统的难点"></a>分布式系统的难点</h1><p>分布式系统比起单机系统存在哪些难点呢？</p>
+<h2 id="网络因素"><a href="#网络因素" class="headerlink" title="网络因素"></a>网络因素</h2><p>由于服务和数据分布在不同的机器上，每次交互都需要跨机器运行，这带来如下几个问题：<br>1.网络延迟：性能、超时</p>
+<p>同机房的网络IO还是比较块的，但是跨机房，尤其是跨IDC，网络IO就成为不可忽视的性能瓶颈了。<br>并且，延迟不是带宽，带宽可以随便增加，千兆网卡换成万兆，只是成本的问题，但延迟是物理限制，基本不可能降低。<br>这带来的问题就是系统整体性能的降低，会带来一系列的问题，比如资源的锁住，所以系统调用一般都要设置一个超时时间进行自我保护，但是过度的延迟就会带来系统的RPC调用超时，引发一个令人头疼的问题：分布式系统调用的三态结果：成功、失败、超时。不要小看这个第三态，这几乎是所有分布式系统复杂性的根源。<br>针对这个问题有一些相应的解决方案：异步化，失败重试。 而对于跨IDC数据分布带来的巨大网络因素影响，则一般会采用数据同步，代理专线等处理方式。<br>2.网络故障：丢包、乱序、抖动。</p>
+<p>这个可以通过将服务建立在可靠的传输协议上来解决，比如TCP协议。不过带来的是更多的网络交互。<br>因此是性能和流量的一个trade off。这个在移动互联网中更需要考虑。</p>
+<h2 id="分布式系统特性-CAP理论-鱼和熊掌不可兼得"><a href="#分布式系统特性-CAP理论-鱼和熊掌不可兼得" class="headerlink" title="分布式系统特性-CAP理论(鱼和熊掌不可兼得)"></a>分布式系统特性-CAP理论(鱼和熊掌不可兼得)</h2><p>CAP理论是由Eric Brewer提出的分布式系统中最为重要的理论之一：<br>Consistency：[强]一致性，事务保障，ACID模型。<br>Availiablity：[高]可用性，冗余以避免单点，至少做到柔性可用（服务降级）。<br>Partition tolerance：[高]可扩展性（分区容忍性）：一般要求系统能够自动按需扩展，比如HBase。<br>CAP原理告诉我们，这三个因素最多只能满足两个，不可能三者兼顾。<br>对于分布式系统来说，分区容错是基本要求，所以必然要放弃一致性。<br>对于大型网站来说，分区容错和可用性的要求更高，所以一般都会选择适当放弃一致性。<br>对应CAP理论，NoSQL追求的是AP，而传统数据库追求的是CA，这也可以解释为什么传统数据库的扩展能力有限的原因。</p>
+<p>在CAP三者中，“可扩展性”是分布式系统的特有性质。分布式系统的设计初衷就是利用集群多机的能力处理单机无法解决的问题。<br>当需要扩展系统性能时，一种做法是优化系统的性能或者升级硬件(scale up)，一种做法就是“简单”的增加机器来扩展系统的规模(scale out)。<br>好的分布式系统总在追求”线性扩展性”，即性能可以随集群数量增长而线性增长。</p>
+<p>可用性和可扩展性一般是相关联的，可扩展行好的系统，其可用性一般会比较高，因为有多个服务(数据)节点，不是整体的单点<br>所以分布式系统的所有问题，基本都是在一致性与可用性和可扩展性这两者之间的一个协调和平衡。<br>对于没有状态的系统，不存在一致性问题，根据CAP原理，它们的可用性和分区容忍性都是很高，简单的添加机器就可以实现线性扩展。而对于有状态的系统，则需要根据业务需求和特性在CAP三者中牺牲其中的一者。一般来说，交易系统类的业务对一致性的要求比较高，一般会采用ACID模型来保证数据的强一致性，所以其可用性和扩展性就比较差。而其他大多数业务系统一般不需要保证强一致性，只要最终一致就可以了，它们一般采用BASE模型，用最终一致性的思想来设计分布式系统，从而使得系统可以达到很高的可用性和扩展性。</p>
+<p>CAP定律其实也是衡量分布式系统的重要指标，另一个重要的指标是性能。</p>
+<h3 id="一致性模型"><a href="#一致性模型" class="headerlink" title="一致性模型"></a>一致性模型</h3><p>主要有三种：<br>Strong Consistency（强一致性）：新的数据一旦写入，在任意副本任意时刻都能读到新值。比如：文件系统，RDBMS，Azure Table都是强一致性的。<br>Week Consistency（弱一致性）：不同副本上的值有新有旧，需要应用方做更多的工作获取最新值。比如Dynamo。<br>Evantual Consistency（最终一致性）：一旦更新成功，各副本的数据最终将达到一致。<br>从这三种一致型的模型上来说，我们可以看到，Weak和Eventually一般来说是异步冗余的，而Strong一般来说是同步冗余的(多写)，异步的通常意味着更好的性能，但也意味着更复杂的状态控制。同步意味着简单，但也意味着性能下降。<br>以及其他变体：<br>Causal Consistency（因果一致性）：如果Process A通知Process B它已经更新了数据，那么Process B的后续读取操作则读取A写入的最新值，而与A没有因果关系的C则可以最终一致性。<br>Read-your-writes Consistency（读你所写一致性）：如果Process A写入了最新的值，那么 Process A的后续操作都会读取到最新值。但是其它用户可能要过一会才可以看到。<br>Session Consistency（会话一致性）：一次会话内一旦读到某个值，不会读到更旧的值。<br>Monotonic Read Consistency（单调一致性）：一个用户一旦读到某个值，不会读到比这个值更旧的值，其他用户不一定。<br>等等。<br>其中最重要的变体是第二条：Read-your-Writes Consistency。特别适用于数据的更新同步，用户的修改马上对自己可见，但是其他用户可以看到他老的版本。Facebook的数据同步就是采用这种原则。</p>
+<h1 id="分布式系统常用技术和应用场景"><a href="#分布式系统常用技术和应用场景" class="headerlink" title="分布式系统常用技术和应用场景"></a>分布式系统常用技术和应用场景</h1><ul>
+<li>consistent hashing [with virtual node]：一致性哈希，数据分布</li>
+<li>vector clock：时钟向量，多版本数据修改</li>
+<li>Quorum W+R&gt;N [with vector clock]：抽屉原理，数据一致性的另一种解决方案。时钟向量，多版本数据修改。</li>
+<li>Merkle tree [with anti-entropy]：数据复制</li>
+<li>MVCC：copy-on-write与snapshot</li>
+<li>2PC/3PC：分布式事务</li>
+<li>Paxos：强一致性协议</li>
+<li>Raft:简化版的Paxos</li>
+<li>Symmetry and Decentralization：对称性和去中心化。<br>对称性(symmetry)简化了系统的配置和维护。去中心化是对对称性的延伸，可以避免master单点，同时方便集群scale out。</li>
+<li>Map-Reduce：分而治之；移动数据不如移动计算。<br>将计算尽量调度到与存储节点在同一台物理机器上的计算节点上进行，这称之为本地化计算。本地化计算是计算调度的一种重要优化。</li>
+<li>Gossip协议：节点管理</li>
+<li>Lease机制</li>
+</ul>
+<h2 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h2><p>我们通常使用的hash算法是hash() mod n，但是如果发生某个节点失效时，无法快速切换到其他节点。<br>为了解决单点故障的问题，我们为每个节点都增加一个备用节点，当某个节点失效时，就自动切换到备用节点上，类似于数据库的master和slave。<br>但是依然无法解决增加或删除节点后，需要做hash重分布的问题，也就是无法动态增删节点。</p>
+<p>这时就引入了一致性hash的概念 ：<br>将所有的节点分布到一个hash环上，每个请求都落在这个hash环上的某个位置，只需要按照顺时针方向找到的第一个节点，就是自己需要的服务节点。<br>当某个节点发生故障时，只需要在环上找到下一个可用节点即可</p>
+<p>virtual node<br>前面说过，有的Consistent Hashing的实现方法采用了虚拟节点的思想。使用一般的hash函数的话，服务器的映射地点的分布非常不均匀。<br>因此，使用虚拟节点的思想，为每个物理节点（服务器）在continuum上分配100～200个点。<br>这样就能抑制分布不均匀，最大限度地减小服务器增减时的缓存重新分布。</p>
+<p><a href="http://blog.codinglabs.org/articles/consistent-hashing.html" target="_blank" rel="external">http://blog.codinglabs.org/articles/consistent-hashing.html</a></p>
+<h2 id="Quorum-W-R-gt-N：抽屉原理，数据一致性的另一种解决方案"><a href="#Quorum-W-R-gt-N：抽屉原理，数据一致性的另一种解决方案" class="headerlink" title="Quorum W+R&gt;N：抽屉原理，数据一致性的另一种解决方案"></a>Quorum W+R&gt;N：抽屉原理，数据一致性的另一种解决方案</h2><p>N: 复制的节点数，即一份数据被保存的份数。<br>R: 成功读操作的最小节点数，即每次读取成功需要的份数。<br>W: 成功写操作的最小节点数 ，即每次写成功需要的份数。<br>所以 W+R&gt;N的意思是：对于有N份拷贝的分布式系统，写到W(W&lt;=N)份成功算写成功，读R(R&lt;=N)份数据算读成功。</p>
+<p>这三个因素决定了可用性，一致性和分区容错性。<br><strong>W+R&gt;N可以保证数据的一致性(C)和分区容错性(P)，W越大数据一致性越高</strong>。<br>这个NWR模型把CAP的选择权交给了用户，让用户自己在功能，性能和成本效益之间进行权衡。<br>对于一个分布式系统来说，N通常都大于3，也就说同一份数据需要保存在三个以上不同的节点上，以防止单点故障。<br>W是成功写操作的最小节点数，这里的写成功可以理解为“同步”写，比如N=3，W=1，那么只要写成功一个节点就可以了，另外的两份数据是通过异步的方式复制的。<br>R是成功读操作的最小节点数，读操作为什么要读多份数据呢？在分布式系统中，数据在不同的节点上可能存在着不一致的情况，我们可以选择读取多个节点上的不同版本，来达到增强一致性的目的。<br>NWR模型的一些设置会造成脏数据和版本冲突问题，所以一般要引入vector clock算法来解决这个问题。<br>需要保证系统中有max(N-W+1,N-R+1)个节点可用。<br><a href="http://coolshell.cn/articles/10910.html" target="_blank" rel="external">http://coolshell.cn/articles/10910.html</a><br><a href="https://my.oschina.net/manmao/blog/618344" target="_blank" rel="external">https://my.oschina.net/manmao/blog/618344</a></p>
+<h2 id="vector-clock：时钟向量，多版本数据修改"><a href="#vector-clock：时钟向量，多版本数据修改" class="headerlink" title="vector clock：时钟向量，多版本数据修改"></a>vector clock：时钟向量，多版本数据修改</h2><p><a href="http://coolshell.cn/articles/10910.html" target="_blank" rel="external">http://coolshell.cn/articles/10910.html</a><br>参见 分布式系统的事务处理，写的很通俗易懂。</p>
+<h2 id="lease机制"><a href="#lease机制" class="headerlink" title="lease机制"></a>lease机制</h2><p>lease的原理：<br>lease的思想非常简单，既然中心节点需要获取目标节点是否异常的情况，同时又要考虑网络出问题等异常。<br>那就干脆考虑各种异常情况在内，只单方面给对方一个期限，在这个期限内，我认为你是正常的，不正常也认为正常。超出这个期限，我就认为你异常了。由于网络延迟等原因，这个期限不能使用相对时间，而必须使用绝对时间。<br>比如，1点之间，节点A就是主节点。这样就能避免双主问题。节点A为如果收到这个lease，即得到了中心节点的授权，1点前绝对只有自己是主。心跳依旧照发，只是每次中心节点都只根据lease是否有效来判断节点状况，不会出问题。</p>
+<p>lease是一种颁发的带期限的承诺，有两方面的意义：颁发者在承诺期限内一定遵守承诺，被颁发者在承诺期限内可放心行使承诺的内容；期限过了以后，被颁发者一定不可再行使承诺。</p>
+<p>lease与活锁<br>lease的颁发往往是被动的，比如A节点需要中心节点的某个承诺，比如读并缓存，则会向中心节点请求lease，中心节点回复最新可缓存的数据与一个lease，在此lease期限内，中心节点保证目标节点缓存内容与中心节点一致。<br>按lease方案，如果中心节点需要修改对应数据，必须等全部lease失效。问题是等lease失效的过程中，可能有新的请求元数据的请求到达，这时中心节点又会继续颁发新的lease，使得lease一直不结束，形成“活锁”，即修改请求等待lease失效，而又源源不断颁发新lease而一直无法完成。<br>解决活锁的办法：当有修改请求在等待着lease失效时，如果后续有读请求，则只返回请求数据而不颁发新lease，或者是只颁发目前最长的lease。<br>解决活锁后，修改请求仍然需要等待全部lease结束，写请求可能阻塞太久。可以在写请求到达时，中心节点主动给各节点发取消lease的消息。如果全部正确返回，则写可立即进行。如果有异常，那就正常等待lease结束。</p>
+<p>lease的容错：<br>由于仅依赖于绝对时间，因此lease机制天生即可容忍网络、lease接收方的出错。<br>对于中心节点异常，比如宕机，只需要在颁发者恢复后，等待一个最大lease期限就可保证所有lease失效；另一方面，颁发者宕机可能使得全部节点没有lease，系统处于不可用状态，解决的方法就是使用一个小集群而不是单一节点作为颁发者。<br>颁发者与被颁发者之间的时钟可能也存在误差，只需要颁发者考虑时钟误差即可。<br>lease时间长短一般取经验值10秒。太短网络压力大，太长则收回承诺时间过长影响可用性。</p>
+<p>应用：</p>
+<p>GFS中，Master通过lease机制决定哪个是主副本，lease在给各节点的心跳响应消息中携带。收不到心跳时，则等待lease过期，再颁发给其他节点。<br>Niobe中，主副本持有从副本颁发的lease，当lease过期时，主从分别会在中心节点上标记对方不可用，而中心节点是全局一致的，两者只有一个会成功。如果主成功了，从不可用，需要重新与主同步才能可用；如果从成功了，则自己成为新主。<br>chubby中，paxos选主后，从节点会给主颁发lease，在期限内不选其他节点为主。另一方面，主节点给每个client节点发送lease，用于判断client死活。<br>zookeeper中，选主不用lease，而是直接发现没有主则选主。其余和chubby一致。</p>
+<h2 id="Gossip协议"><a href="#Gossip协议" class="headerlink" title="Gossip协议"></a>Gossip协议</h2><p>Gossip用于P2P系统中自治节点获悉对集群认识（如集群的节点状态，负载情况等）。 系统中的节点定期互相八卦，很快八卦就在整个系统传开了。 A、B两个节点八卦的方式主要是：A告诉B知道哪些人的什么八卦；B告诉A这些八卦里B知道哪些更新了；B更新A告诉他的八卦…… 说是自治系统，其实节点中还有一些种子节点。种子节点的作用主要是在有新节点加入系统时体现。新节点加入系统中，先与种子节点八卦，新节点获得系统信息，种子节点知道系统中多了新节点。其他节点定期与种子节点八卦的时候就知道有新节点加入了。 各个节点互相八卦的过程中，如果发现某个节点的状态很长时间都没更新，就认为该节点已经宕机了。<br>Dynamo使用了Gossip协议来做会员和故障检测。</p>
+<h2 id="2PC、3PC、Paxos协议、Raft-分布式事务的解决方案"><a href="#2PC、3PC、Paxos协议、Raft-分布式事务的解决方案" class="headerlink" title="2PC、3PC、Paxos协议、Raft: 分布式事务的解决方案"></a>2PC、3PC、Paxos协议、Raft: 分布式事务的解决方案</h2><p>分布式事务很难做，所以除非必要，一般来说都是采用最终一致性来规避分布式事务。<br>目前底层NoSQL存储系统实现分布式事务的只有Google的系统，它在Bigtable之上用Java语言开发了一个系统 Megastore，实现了两阶段锁，并通过Chubby来避免两阶段锁协调者宕机带来的问题。Megastore实现目前只有简单介绍，还没有相关论文。</p>
+<h3 id="2PC"><a href="#2PC" class="headerlink" title="2PC"></a>2PC</h3><p>这个协议的缩写又叫2PC，中文叫两阶段提交。<br>在分布式系统中，每个节点虽然可以知晓自己的操作时成功或者失败，却无法知道其他节点的操作的成功或失败。<br>当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件来统一掌控所有节点(称作参与者)的操作结果并最终指示这些节点是否要把操作结果进行真正的提交(比如将更新后的数据写入磁盘等等)。</p>
+<p>两阶段提交的算法如下：</p>
+<p>第一阶段：</p>
+<blockquote>
+<p>协调者会问所有的参与者结点，是否可以执行提交操作。<br>各个参与者开始事务执行的准备工作：如：为资源上锁，预留资源，写undo/redo log……<br>参与者响应协调者，如果事务的准备工作成功，则回应“可以提交”，否则回应“拒绝提交”。</p>
+</blockquote>
+<p>第二阶段：</p>
+<blockquote>
+<p>如果所有的参与者都回应“可以提交”，那么，协调者向所有的参与者发送“正式提交”的命令。参与者完成正式提交，并释放所有资源，然后回应“完成”，协调者收集各结点的“完成”回应后结束这个Global Transaction。<br>如果有一个参与者回应“拒绝提交”，那么，协调者向所有的参与者发送“回滚操作”，并释放所有资源，然后回应“回滚完成”，协调者收集各结点的“回滚”回应后，取消这个Global Transaction。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/2pc.png" alt="2PC" title="">
+                </div>
+                <div class="image-caption">2PC</div>
+            </figure>
+<p>2PC说白了就是第一阶段做Vote，第二阶段做决定的一个算法，也可以看到2PC这个事是强一致性的算法。<br>在前面我们讨论过Master-Slave的强一致性策略，和2PC有点相似，只不过2PC更为保守一些——先尝试再提交。<br>2PC用的是比较多的，在一些系统设计中，会串联一系列的调用，比如：A -&gt; B -&gt; C -&gt; D，每一步都会分配一些资源或改写一些数据。<br>比如我们B2C网上购物的下单操作在后台会有一系列的流程需要做。<br>如果我们一步一步地做，就会出现这样的问题，如果某一步做不下去了，那么前面每一次所分配的资源需要做反向操作把他们都回收掉，所以，操作起来比较复杂。</p>
+<p>实现简单，但是效率低，所有参与者需要block，throughput低；无容错，一个节点失败整个事务失败。<br>如果第一阶段完成后，参与者在第二阶没有收到决策，那么数据结点会进入“不知所措”的状态，这个状态会block住整个事务。</p>
+<h3 id="3PC"><a href="#3PC" class="headerlink" title="3PC"></a>3PC</h3><p>在2pc中，如果第一阶段完成后，参与者在第二阶没有收到决策，那么数据结点会进入“不知所措”的状态，这个状态会block住整个事务。<br>也就是说，协调者Coordinator对于事务的完成非常重要，Coordinator的可用性是个关键。<br>因些，我们引入三段提交，三段提交在Wikipedia上的描述如下，他把二段提交的第一个段break成了两段：询问，然后再锁资源。最后真正提交。三段提交的示意图如下：</p>
+<p>三段提交的核心理念是：<strong>在询问的时候并不锁定资源，除非所有人都同意了，才开始锁资源。</strong><br>如果结点处在P状态（PreCommit）的时候发生了F/T的问题，三段提交比两段提交的好处是，<strong>三段提交可以继续直接把状态变成C状态（Commit），而两段提交则不知所措</strong>。<br>理论上来说，如果第一阶段所有的结点返回成功，那么有理由相信成功提交的概率很大。<br>这样一来，可以降低参与者Cohorts的状态未知的概率。<br>也就是说，一旦参与者收到了PreCommit，意味他知道大家其实都同意修改了。这一点很重要。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/3pc.png" alt="3PC" title="">
+                </div>
+                <div class="image-caption">3PC</div>
+            </figure></p>
+<p>改进版的2PC，把2PC的第一个段break成了两段: 询问，然后再锁资源，最后真正提交。<br>3PC的核心理念是：在询问的时候并不锁定资源，除非所有人都同意了，才开始锁资源。<br>3PC比2PC的好处是，如果结点处在P状态（PreCommit）的时候发生了Fail/Timeout的问题，3PC可以继续直接把状态变成C状态（Commit），而2PC则不知所措。<br>不过3PC实现比较困难，而且无法处理网络分离问题。如果preCommit消息发送后两个机房断开，这时候coordinator所在的机房会abort，剩余的participant会commit。</p>
+<h3 id="Paxos"><a href="#Paxos" class="headerlink" title="Paxos"></a>Paxos</h3><p>Paxos 算法解决的问题是在一个可能发生上述异常的分布式系统中如何就某个值达成一致，保证不论发生以上任何异常，都不会破坏决议的一致性。<br>一个典型的场景是，在一个分布式数据库系统中，如果各节点的初始状态一致，每个节点都执行相同的操作序列，那么他们最后能得到一个一致的状态。<br>为保证每个节点执行相同的命令序列，需要在每一条指令上执行一个「一致性算法」以保证每个节点看到的指令一致。<br>一个通用的一致性算法可以应用在许多场景中，是分布式计算中的重要问题。从20世纪80年代起对于一致性算法的研究就没有停止过。</p>
+<p>Notes：Paxos算法是莱斯利·兰伯特（Leslie Lamport，就是 LaTeX 中的”La”，此人现在在微软研究院）于1990年提出的一种基于消息传递的一致性算法。由于算法难以理解起初并没有引起人们的重视，使Lamport在八年后1998年重新发表到ACM Transactions on Computer Systems上（The Part-Time Parliament）。即便如此paxos算法还是没有得到重视，2001年Lamport 觉得同行无法接受他的幽默感，于是用容易接受的方法重新表述了一遍（Paxos Made Simple）。可见Lamport对Paxos算法情有独钟。近几年Paxos算法的普遍使用也证明它在分布式一致性算法中的重要地位。<br>2006年Google的三篇论文初现“云”的端倪，其中的Chubby Lock服务使用Paxos作为Chubby Cell中的一致性算法，Paxos的人气从此一路狂飙。（Lamport 本人在 他的blog 中描写了他用9年时间发表这个算法的前前后后）</p>
+<p>简单说来，Paxos的目的是让整个集群的结点对某个值的变更达成一致。<br>Paxos算法基本上来说是个民主选举的算法——大多数的决定会成个整个集群的统一决定。<br>任何一个点都可以提出要修改某个数据的提案，是否通过这个提案取决于这个集群中是否有超过半数的结点同意（所以Paxos算法需要集群中的结点是单数）。</p>
+<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><p>主要涉及到的角色有：<code>Proposer</code>提交者、<code>Acceptor</code>仲裁者、<code>learner</code>、<code>client</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/paxos-flow.png" alt="paxos-flow" title="">
+                </div>
+                <div class="image-caption">paxos-flow</div>
+            </figure><br>第一阶段 Prepare</p>
+<blockquote>
+<p>P1a：Proposer 发送 Prepare请求</p>
+</blockquote>
+<p>Proposer 生成全局唯一且递增的ProposalID，向 Paxos 集群的所有机器发送 Prepare请求，这里不携带value，只携带 ProposalID 。</p>
+<blockquote>
+<p>P1b：Acceptor 应答 Prepare</p>
+</blockquote>
+<p>Acceptor 收到 Prepare请求 后，判断：收到的ProposalID 是否比之前已响应的所有提案的ProposalID 大：<br>如果是，则：<br>(1) 在本地持久化 ProposalID，可记为Max_ProposalID。<br>(2) 回复请求，并带上 <strong>已Accept的提案中 ProposalID 最大的 value</strong>（若此时还没有已Accept的提案，则返回value为空）。<br>(3) 做出承诺：不会Accept 任何小于 Max_ProposalID的提案。<br>如果否：不回复。</p>
+<p>第二阶段 Accept</p>
+<blockquote>
+<p>P2a：Proposer 发送 Accept</p>
+</blockquote>
+<p>经过一段时间后，Proposer 收集到一些 Accpet 的 Prepare 回复，有下列几种情况：<br>(1) 回复数量 &gt; 一半的Acceptor数量，且<strong>所有的回复的 value 都为空</strong>，则 Porposer发出accept请求，并带上自己指定的value。<br>(2) 回复数量 &gt; 一半的Acceptor数量，且<strong>有的回复 value 不为空</strong>，则 Porposer发出accept请求，并<strong>带上回复中 ProposalID最大的value</strong>(作为自己的提案内容)。<br>(3) 回复数量 &lt;= 一半的Acceptor数量，则尝试更新生成更大的 ProposalID，再转P1a执行。</p>
+<blockquote>
+<p>P2b：Acceptor 应答 Accept</p>
+</blockquote>
+<p>Accpetor 收到 Accpet请求 后，判断：<br>(1) 收到的ProposalID &gt;= Max_ProposalID (一般情况下是等于)，则回复提交成功，并持久化ProposalID 和value。<br>(2) 收到的ProposalID &lt; Max_ProposalID，则 不回复 或者 回复提交失败。</p>
+<blockquote>
+<p>P2c: Proposer 统计投票</p>
+</blockquote>
+<p>经过一段时间后，Proposer 收集到一些 Accept 回复提交成功，有几种情况：<br>(1) 回复数量 &gt; 一半的Acceptor数量，则表示提交value成功。此时，可以发一个广播给所有Proposer、Learner，通知它们 已commit的value。<br>(2) 回复数量 &lt;= 一半的Acceptor数量，则 尝试更新生成更大的 ProposalID，再转 P1a 执行。<br>(3) 收到一条提交失败的回复，则 尝试更新生成更大的ProposalID，再转 P1a 执行。</p>
+<p>最后，经过多轮投票后，达到的结果是：<br>(1) 所有Proposer都提交提案成功了，且提交的value是同一个value。<br>(2) 过半数的 Acceptor都提交成功了，且提交的是 同一个value。</p>
+<p>Paxos 协议 的几个约束：<br>P1: 一个Acceptor必须接受(accept)第一次收到的提案;<br>P2a: 一旦一个具有value v的提案被批准(chosen)，那么之后任何Acceptor 再次接受(accept)的提案必须具有value v;<br>P2b: 一旦一个具有value v的提案被批准(chosen)，那么以后任何 Proposer 提出的提案必须具有value v;<br>P2c: 如果一个编号为n的提案具有value v，那么存在一个多数派，要么他们中所有人都没有接受(accept)编号小于n的任何提案，要么他们已经接受(accpet)的所有编号小于n的提案中编号最大的那个提案具有value v;<br><a href="https://angus.nyc/2012/paxos-by-example/" target="_blank" rel="external">https://angus.nyc/2012/paxos-by-example/</a><br><a href="http://www.tudou.com/programs/view/e8zM8dAL6hM/" target="_blank" rel="external">http://www.tudou.com/programs/view/e8zM8dAL6hM/</a></p>
+<h4 id="常见的疑问、及异常处理"><a href="#常见的疑问、及异常处理" class="headerlink" title="常见的疑问、及异常处理"></a>常见的疑问、及异常处理</h4><p>1、Paxos算法的核心思想是什么？<br>(1) 引入了 多个Acceptor，避免单个Acceptor成为单点。<br>Proposer用更大ProposalID 来抢占临时的访问权，避免其中一个 Proposer崩溃宕机导致死锁。<br>(2) 保证一个ProposalID，只有一个Proposer能进行到第二阶段运行，Proposer按照ProposalID递增的顺序依次运行。<br>(3) 新ProposalID 的 proposer 采用 后者认同前者的思路运行。<br>在肯定旧ProposalID 还没有生成确定的value (Acceptor 提交成功一个value)时，新ProposalID 会提交自己的value，不会冲突。<br>一旦旧ProposalID 生成了确定的value，新ProposalID 肯定可以获取到此值，并且认同此值。</p>
+<p>2、容错要求：<br>(1) 半数以内的Acceptor失效、任意数量的Proposer 失效，都能运行。<br>(2) 一旦value值被确定，即使 半数以内的Acceptor失效，此值也可以被获取，并不再修改。</p>
+<p>3、工程实践中 ProposalID 怎么定？<br>在《Paxos made simple》中提到，推荐Proposer从不相交的数据集合中进行选择，例如系统有5个Proposer，则可为每一个Proposer分配一个标识j(0~4)，则每一个proposer每次提出决议的编号可以为5*i + j(i可以用来表示提出议案的次数)。<br>在实践过程中，可以用<code>时间戳 + 提出提案的次数 + 机器 IP/机器ID</code>来保证唯一性和递增性。</p>
+<p>4、如何保证 更大的ProposalID的Proposer不会破坏已经达成的确定性取值value？<br>在P2a阶段中，Proposer会以所有回复中ProposalID最大 的value 作为自己的提案内容。<br>其中，prepare阶段的目的有两个: 1) 检查是否有被批准的值，如果有，就改用批准的值。2) 如果之前的提案还没有被批准，则阻塞掉他们以便不让他们和我们发生竞争，当然最终由ProposalID 的大小决定。</p>
+<p>5、Paxos协议的活锁问题<br>新轮次的抢占会使旧轮次停止运行，如果每一轮在第二阶段执行成功之前 都 被 新一轮抢占，则导致活锁。怎么解决？<br>这个问题在实际应用会发生地比较少，一般可通过 随机改变 ProposalID的增长幅度 或者 增加Proposer发送新一轮提案的间隔 来解决。</p>
+<p>6、Paxos 运行过程中，半数以内的Acceptor失效，都能运行。为什么？<br>(1) 如果 半数以内的Acceptor失效时 还没确定最终的value，此时，所有Proposer会竞争 提案的权限，最终会有一个提案会 成功提交。之后，会有半过数的Acceptor以这个value提交成功。<br>(2) 如果 半数以内的Acceptor失效时 已确定最终的value，此时，所有Proposer提交前 必须以 最终的value 提交，因为，一个Proposer要拿到过半数的accept响应，必须同一个已提交的Acceptor存在交集，故会在P2a阶段中会继续沿用该value。</p>
+<p>7、若两个Proposer以不同的ProposalID，在进行到P2a阶段，收到的prepare回复的value值都为空，则两个proposer都以自己的值作为value(提案内容)，向Acceptor提交请求，最后，两个proposer都会认为自己提交成功了吗？<br>不会，因为Acceptor会根据ProposalID，批准执行最大的ProposalID的value，另一个会回复 执行失败。当proposer收到执行失败的回复时，就知道：当前具有更大的ProposalID的提案提交成功了。</p>
+<p>8、由于大ProposalID 可以抢占小ProposalID 的提交权限，如果 此时 Acceptor还没有一个确定性取值，有一个具有最大ProposalID的proposer进行到P2a阶段了，但这时 这个proposer挂了，会造成一种死锁状态（小ProposalID的会提交失败，但是 具有最大ProposalID的proposer却不能提交accept请求），如何解决这种死锁状态？<br>不会产生这种死锁状态，acceptor回复提交失败后，proposer再生成更大的ProposalID，下一轮可以用自己value提交成功。</p>
+<p><a href="https://baozh.github.io/2016-03/paxos-learning/" target="_blank" rel="external">https://baozh.github.io/2016-03/paxos-learning/</a></p>
+<h3 id="Raft"><a href="#Raft" class="headerlink" title="Raft"></a>Raft</h3><p>Paxos 相比 Raft 比较复杂和难以理解。角色扮演和流程比 Raft 都要啰嗦。<br>比如 Agreement 这个流程，在 Paxos 里边：Client 发起请求举荐 Proposer 成为 Leader，Proposer 然后向全局 Acceptors 寻求确认，Acceptors 全部同意 Proposer 后，Proposer 的 Leader 地位得已承认，Acceptors 还得再向Learners 进行全局广播来同步。<br>而在 Raft 里边，只有 Follower/Candidate/Leader 三种角色，角色本身代表状态，角色之间进行状态转移是一件非常自由民主的事情。<br>Raft虽然有角色之分但是是全民参与进行选举的模式；但是在Paxos里边，感觉更像议员参政模式。</p>
+<h4 id="三个角色"><a href="#三个角色" class="headerlink" title="三个角色"></a>三个角色</h4><p>follower、candidate、leader。<br>最开始大家都是follower，当follower监听不到leader，就可以自己成为candidate，发起投票</p>
+<h4 id="leader选举"><a href="#leader选举" class="headerlink" title="leader选举"></a>leader选举</h4><p>主要通过2个timeout来控制：election timeout和heartbeat timeout<br>lection timeout：<br>follower成为candidate的超时时间，每个follower都在150ms - 300ms之间随机，之后看谁先timeout，谁就先成为candidate，然后它会先投自己一票，再向其他节点发起投票邀请。<br>如果其他节点在这轮选举还没有投过票，那么就给candidate投票，然后重置自己的选举timeout。<br>如果得到大多数的投票就成为leader，之后定期开始向follower发送心跳heartbeat timeout。</p>
+<p>期间还有可能发生split vote：<br>如果两个follower同时成为candidate的话，如果最后得到的票数相同，则等待其他follower的选择timeout之后成为candidate，继续开始新一轮的选举。</p>
+<h4 id="log复制"><a href="#log复制" class="headerlink" title="log复制"></a>log复制</h4><p>leader把变动的log借助心跳同步给follower，过半回复之后才成功提交，之后再下一次心跳之后，follower也commit变动，在自己的node上生效。</p>
+<p>分裂之后，另一个分区的follower接受不到leader的timeout，然后会有一个先timeout，成为candidate，最后成为leader。于是两个分区就有了两个leader。<br>当客户端有变动时，其中的leader由于无法收到过半的提交，则保持未提交状态。有的leader的修改，可以得到过半的提交，则可以修改生效。<br>当分裂恢复之后，leader开始对比选举的term，发现有更高的term存在时，他们会撤销未提交的修改，然后以最新的为准。</p>
+<p><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="external">http://thesecretlivesofdata.com/raft/</a><br><a href="https://raft.github.io/" target="_blank" rel="external">https://raft.github.io/</a></p>
+<h2 id="MVCC：多版本并发控制"><a href="#MVCC：多版本并发控制" class="headerlink" title="MVCC：多版本并发控制"></a>MVCC：多版本并发控制</h2><p>在并发读写数据库时，读操作可能会不一致的数据（脏读）。为了避免这种情况，需要实现数据库的并发访问控制，最简单的方式就是加锁访问。<br>由于，加锁会将读写操作串行化，所以不会出现不一致的状态。但是，读操作会被写操作阻塞，大幅降低读性能。<br>在Java concurrent包中，有copyonwrite系列的类，专门用于优化读远大于写的情况。而其优化的手段就是，在进行写操作时，将数据copy一份，不会影响原有数据，然后进行修改，修改完成后原子替换掉旧的数据，而读操作只会读取原有数据。通过这种方式实现写操作不会阻塞读操作，从而优化读效率。而写操作之间是要互斥的，并且每次写操作都会有一次copy，所以只适合读大于写的情况。</p>
+<p>MVCC的原理与copyonwrite类似，全称是Multiversion Concurrency Controll，即多版本并发控制。在MVCC协议下，<strong>每个读操作会看到一个一致性的snapshot，并且可以实现非阻塞的读</strong>。MVCC允许数据具有多个版本，这个版本可以是时间戳或者是全局递增的事务ID，在同一个时间点，不同的事务看到的数据是不同的。<br>由此可以看出MVCC是一种用来解决读-写冲突的无锁并发控制.</p>
+<p>MVCC的基本原理是：<br>MVCC的实现，通过<strong>保存数据在某个时间点的快照</strong>来实现的。<br>这意味着一个事务无论运行多长时间，在同一个事务里能够看到数据一致的视图。<br>根据事务开始的时间不同，同时也意味着在同一个时刻不同事务看到的相同表里的数据可能是不同的。</p>
+<p><a href="http://blog.duyaokeep.cn/2017/03/24/%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_blank" rel="external">http://blog.duyaokeep.cn/2017/03/24/%E6%95%B0%E6%8D%AE%E5%BA%93/</a></p>
+<h3 id="各种一致性的比较"><a href="#各种一致性的比较" class="headerlink" title="各种一致性的比较"></a>各种一致性的比较</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/Transaction-Across-DataCenter.jpg" alt="Transaction-Across-DataCenter" title="">
+                </div>
+                <div class="image-caption">Transaction-Across-DataCenter</div>
+            </figure>
+<h2 id="Two-Generals-Problem（两将军问题）"><a href="#Two-Generals-Problem（两将军问题）" class="headerlink" title="Two Generals Problem（两将军问题）"></a>Two Generals Problem（两将军问题）</h2><p>Two Generals Problem 两将军问题是这么一个思维性实验问题： 有两支军队，它们分别有一位将军领导，现在准备攻击一座修筑了防御工事的城市。<br>这两支军队都驻扎在那座城市的附近，分占一座山头。一道山谷把两座山分隔开来，并且两位将军唯一的通信方式就是派各自的信使来往于山谷两边。不幸的是，这个山谷已经被那座城市的保卫者占领，并且存在一种可能，那就是任何被派出的信使通过山谷是会被捕。<br>请注意，虽然两位将军已经就攻击那座城市达成共识，但在他们各自占领山头阵地之前，并没有就进攻时间达成共识。<br>两位将军必须让自己的军队同时进攻城市才能取得成功。因此，他们必须互相沟通，以确定一个时间来攻击，并同意就在那时攻击。<br>如果只有一个将军进行攻击，那么这将是一个灾难性的失败。 这个思维实验就包括考虑他们如何去做这件事情。下面是我们的思考：</p>
+<p>1）第一位将军先发送一段消息“让我们在上午9点开始进攻”。然而，一旦信使被派遣，他是否通过了山谷，第一位将军就不得而知了。任何一点的不确定性都会使得第一位将军攻击犹豫，因为如果第二位将军不能在同一时刻发动攻击，那座城市的驻军就会击退他的军队的进攻，导致他的军对被摧毁。<br>2）知道了这一点，第二位将军就需要发送一个确认回条：“我收到您的邮件，并会在9点的攻击。”但是，如果带着确认消息的信使被抓怎么办？所以第二位将军会犹豫自己的确认消息是否能到达。<br>3）于是，似乎我们还要让第一位将军再发送一条确认消息——“我收到了你的确认”。然而，如果这位信使被抓怎么办呢？<br>4）这样一来，是不是我们还要第二位将军发送一个“确认收到你的确认”的信息。</p>
+<p>靠，于是你会发现，这事情很快就发展成为不管发送多少个确认消息，都没有办法来保证两位将军有足够的自信自己的信使没有被敌军捕获。</p>
+<p>这个问题是无解的。</p>
+<p>从工程上来说，一个解决两个将军问题的实际方法是使用一个能够承受通信信道不可靠性的方案，并不试图去消除这个不可靠性，但要将不可靠性削减到一个可以接受的程度。<br>比如，第一位将军排出了100位信使并预计他们都被捕的可能性很小。在这种情况下，不管第二位将军是否会攻击或者受到任何消息，第一位将军都会进行攻击。另外，第一位将军可以发送一个消息流，而第二位将军可以对其中的每一条消息发送一个确认消息，这样如果每条消息都被接收到，两位将军会感觉更好。<br>然而我们可以从证明中看出，他们俩都不能肯定这个攻击是可以协调的。他们没有算法可用（比如，收到4条以上的消息就攻击）能够确保防止仅有一方攻击。<br>再者，第一位将军还可以为每条消息编号，说这是1号，2号……直到n号。这种方法能让第二位将军知道通信信道到底有多可靠，并且返回合适的数量的消息来确保最后一条消息被接收到。如果信道是可靠的话，只要一条消息就行了，其余的就帮不上什么忙了。最后一条和第一条消息丢失的概率是相等的。</p>
+<p>两将军问题可以扩展成更变态的拜占庭将军问题 (Byzantine Generals Problem)，其故事背景是这样的：<br>拜占庭位于现在土耳其的伊斯坦布尔，是东罗马帝国的首都。由于当时拜占庭罗马帝国国土辽阔，为了防御目的，因此每个军队都分隔很远，将军与将军之间只能靠信差传消息。<br>在战争的时候，拜占庭军队内所有将军必需达成一致的共识，决定是否有赢的机会才去攻打敌人的阵营。但是，军队可能有叛徒和敌军间谍，这些叛徒将军们会扰乱或左右决策的过程。<br>这时候，在已知有成员谋反的情况下，其余忠诚的将军在不受叛徒的影响下如何达成一致的协议，这就是拜占庭将军问题。</p>
+<h1 id="Map-Reduce思想"><a href="#Map-Reduce思想" class="headerlink" title="Map-Reduce思想"></a>Map-Reduce思想</h1><p>1.分而治之</p>
+<p>2.移动数据不如移动计算</p>
+<p>如果计算节点和存储节点位于不同的物理机器则计算的数据需要通过网络传输，此种方式的开销很大。<br>另一种思路是，将计算尽量调度到与存储节点在同一台物理机器上的计算节点上进行，这称之为本地化计算。<br>本地化计算是计算调度的一种重要优化。</p>
+<p><a href="http://coolshell.cn/articles/10910.html" target="_blank" rel="external">http://coolshell.cn/articles/10910.html</a><br><a href="http://coolshell.cn/articles/17459.html" target="_blank" rel="external">http://coolshell.cn/articles/17459.html</a><br><a href="http://blog.hebiace.net/other/428.html" target="_blank" rel="external">http://blog.hebiace.net/other/428.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-24T09:26:58.000Z" itemprop="dateUpdated">2017年4月24日 17:26</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/26/分布式技术/" target="_blank" rel="external">http://duyao.github.io/2017/03/26/分布式技术/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式/">分布式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/26/分布式技术/&title=《分布式技术》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/26/分布式技术/&title=《分布式技术》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/26/分布式技术/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《分布式技术》 — Du Yao's blog&url=http://duyao.github.io/2017/03/26/分布式技术/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/26/分布式技术/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/01/内部类/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">内部类</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/25/反射和类加载/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">反射和类加载</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="分布式技术" data-title="分布式技术" data-url="http://duyao.github.io/2017/03/26/分布式技术/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/26/分布式技术/&title=《分布式技术》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/26/分布式技术/&title=《分布式技术》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/26/分布式技术/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《分布式技术》 — Du Yao's blog&url=http://duyao.github.io/2017/03/26/分布式技术/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/26/分布式技术/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/26/分布式技术/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

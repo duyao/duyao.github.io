@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>HDFS分析 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Hadoop">
+    <meta name="description" content="Namenode 重点掌握： NameNode 的作用；NameNode 元数据的底层结构；SecondaryNameNode 的作用以及工作流程，以及为什么需要SecondaryNameNode。NameNode简介管理节点核心元数据，包括文件(夹)的目录结构和属性信息，还有文件与其所在位置的映射信息。一切读写的操作必须经过NameNode，但是传输数据本身不经过NameNode（好好理解这句话">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS分析">
+<meta property="og:url" content="http://duyao.github.io/2017/03/14/HDFS分析/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="Namenode 重点掌握： NameNode 的作用；NameNode 元数据的底层结构；SecondaryNameNode 的作用以及工作流程，以及为什么需要SecondaryNameNode。NameNode简介管理节点核心元数据，包括文件(夹)的目录结构和属性信息，还有文件与其所在位置的映射信息。一切读写的操作必须经过NameNode，但是传输数据本身不经过NameNode（好好理解这句话">
+<meta property="og:image" content="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160412193118.png">
+<meta property="og:image" content="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626120418.png">
+<meta property="og:image" content="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626195254.png">
+<meta property="og:image" content="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626143146.png">
+<meta property="og:image" content="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626174605.png">
+<meta property="og:image" content="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626180932.png">
+<meta property="og:updated_time" content="2017-03-14T07:28:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HDFS分析">
+<meta name="twitter:description" content="Namenode 重点掌握： NameNode 的作用；NameNode 元数据的底层结构；SecondaryNameNode 的作用以及工作流程，以及为什么需要SecondaryNameNode。NameNode简介管理节点核心元数据，包括文件(夹)的目录结构和属性信息，还有文件与其所在位置的映射信息。一切读写的操作必须经过NameNode，但是传输数据本身不经过NameNode（好好理解这句话">
+<meta name="twitter:image" content="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160412193118.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">HDFS分析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">HDFS分析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-14T07:11:36.000Z" itemprop="datePublished" class="page-time">
+  2017-03-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Namenode"><span class="post-toc-number">1.</span> <span class="post-toc-text">Namenode</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#NameNode简介"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">NameNode简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NameNode"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">NameNode</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SecondaryNameNode"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">SecondaryNameNode</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#底层文件查看"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">底层文件查看</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DateNode"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">DateNode</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-HDFS分析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">HDFS分析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月14日 15:11" datetime="2017-03-14T07:11:36.000Z"  itemprop="datePublished">2017-03-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Namenode"><a href="#Namenode" class="headerlink" title="Namenode"></a>Namenode</h1><p><ul></ul></p>
+<p><li><strong>重点掌握</strong>：</li><br></p>
+<ol><br><li><code>NameNode</code> 的作用；</li><br><li><code>NameNode</code> 元数据的底层结构；</li><br><li><code>SecondaryNameNode</code> 的作用以及工作流程，以及为什么需要SecondaryNameNode。</li><br></ol><br><a id="more"></a><br><h2 id="NameNode简介"><a href="#NameNode简介" class="headerlink" title="NameNode简介"></a>NameNode简介</h2><ul><br><li><strong>管理节点</strong></li><br></ul><br><ol><br><li><strong>核心元数据</strong>，包括文件(夹)的目录结构和属性信息，还有文件与其所在位置的映射信息。</li><br><li><strong>一切读写的操作必须经过NameNode，但是传输数据本身不经过NameNode</strong>（好好理解这句话）。</li><br></ol><br><h3 id="NameNode"><a href="#NameNode" class="headerlink" title="NameNode"></a>NameNode</h3><ul><br><li><p><strong>NameNode</strong> 包括以下文件：（<strong>保存在linux的文件系统中</strong>）</p><br><blockquote><br><ol><br><li><code>fsimage</code>：元数据镜像文件，存储某一时段NameNode内存元数据信息即保存了最新的元数据checkpoint。</li><br><li><code>edits</code>：操作日志文件。</li><br><li><code>fstime</code>：保存最近一次checkpoint的时间<br><img src="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160412193118.png" alt="NameNode元数据信息"></li><br></ol><br></blockquote><br></li><br><li><p><strong>NameNode</strong> 元数据</p><br></li><br></ul><br><ol><br><li>NameNode 为了保证交互速度，会在内存中保存这些元数据信息，但同时也会将这些信息保存到硬盘上进行持久化存储；</li><br><li>fsimage文件是内存中的元数据在硬盘上的checkpoint，它是一种序列化的格式，不能直接修改。</li><br><li>Hadoop在重启时就是通过<code>fsimage+edits</code>来状态恢复，fsimage相当于一个checkpoint，首先将最新的checkpoint的元数据信息从fsimage中加载到内存，然后逐一执行edits修改日志文件中的操作以恢复到重启之前的最终状态。</li><br><li>Hadoop的持久化过程是将上一次checkpoint以后最近一段时间的操作保存到修改日志文件edits中。</li><br></ol><br><h3 id="SecondaryNameNode"><a href="#SecondaryNameNode" class="headerlink" title="SecondaryNameNode"></a>SecondaryNameNode</h3><p>上面出现的一个问题是：edits会随着时间增加而越来越大，导致以后重启时需要花费很长的时间来按照edits中记录的操作进行恢复，于是Hadoop就专门弄了一个进程<strong>SecondaryNameNode</strong>。</p><br><p><img src="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626120418.png" alt="SecondaryNameNode工作流程"></p><br><ul><br><li><strong>SecondaryNameNode节点</strong> 的主要功能是周期性将元数据节点的命名空间镜像文件（<em>fsimage</em>）和修改日志（<em>edits</em>）进行合并，以防edits日志文件过大。下面来看一看<strong>合并的流程</strong>：</li><br></ul><br><ol><br><li>SecondaryNameNode节点 需要合并时，首先通知<code>NameNode节点</code>生成新的日志文件，以后的日志都写到新的日志文件中。</li><br><li>SecondaryNameNode节点 用<code>http get</code>从<code>NameNode节点</code>获得<code>fsimage文件</code>及<code>旧的edits日志文件</code>。</li><br><li>SecondaryNameNode节点 将 <strong>fsimage 文件加载到内存中，并执行日志文件中的操作，然后生成新的fsimage文件</strong>。</li><br><li>SecondaryNameNode 节点将新的fsimage文件用http post<strong>传回</strong>NameNode节点上。</li><br><li>NameNode 节点可以将旧的fsimage文件及旧的日志文件，换为新的fsimage文件和新的日志文件(第一步生成的)，然后更新fstime文件，写入此次checkpoint的时间。</li><br><li>这样NameNode 节点中的fsimage文件保存了最新的checkpoint的元数据信息，日志文件也重新开始，不会变的很大了</li><br></ol><br><ul><br><li><code>注意</code>：</li><br></ul><br><ol><br><li>这种机制有个问题：因edits存放在NameNode中，当NameNode挂掉，edits也会丢失，导致<strong>利用Secondary NameNode恢复Namenode时，会有部分数据丢失</strong>。</li><br><li>HDFS设置了两种机制进行条件合并（hdfs-site.xml）：<br>第一种：当时间间隔大于或者等于dfs.namenode.checkpoint.period配置的时间是做合并（默认一小时）<br>第二种：当最后一次往journalNode写入的TxId（这个可以在namenode日志或者50070界面可以看到）和最近一次做Checkpoint的TxId的差值大于或者等于dfs.namenode.checkpoint.txns配置的数量（默认1000000）时做一次合并<br><img src="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626195254.png" alt="HDFS设置了两种条件合并"></li><br></ol><br><h2 id="底层文件查看"><a href="#底层文件查看" class="headerlink" title="底层文件查看"></a>底层文件查看</h2><ul><br><li><p>保存的<code>NameNode元数据</code>信息，在<code>HADOOP_HOME/etc/hadoop/hdfs-site.xml 的 dfs.namenode.name.dir</code>配置，如下图：</p><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///usr/local/hadoop_repo/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!– 我切换到/usr/local/hadoop_repo/name/current就能查看元数据信息了 –&gt;</span></span><br><span class="line"><span class="comment">&lt;!– value可以配置多个，用逗号隔开，这样也算是一种备份方式吧–&gt;</span></span><br></pre></td></tr></table></figure><br></li><br><li><p><strong>第一步：开启服务</strong>，查看某个fsimage文件，开启服务命令：<code>bin/hdfs oiv -i fsimage文件</code>，不然提示：ls: Connection refused</p><br></li><br><li><p><strong>第二步：查看内容</strong>，命令：<code>bin/hdfs dfs -ls -R webhdfs://127.0.0.1:5978/</code>。我的hdfs里面有hbase和hive的数据，所以元数据也比较多，这里来个部分截图（这个看上去就和<code>web</code>以及<code>hdfs dfs -ls</code>查看的结果差不多）：<br><img src="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626143146.png" alt="NameNode元数据信息"></p><br></li><br><li><p><strong>第三步：导出结果</strong>，这是导出fsimage文件内容，命令：<code>hdfs oiv -p XML -i /usr/local/hadoop_repo/name/current/fsimage_0000000000000003292 -o fsimage.xml</code><br><img src="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626174605.png" alt="导出的fsimage.xml文件"></p><br></li><br></ul><br><ol><br><li>xml节点在上面大家也能看见，主要看inode节点，下面就是文件以及文件夹的基本信息；</li><br><li><code>id</code>、<code>name</code>、<code>type</code>、<code>mtime</code>、<code>permission</code>、<code>nsquota</code>、<code>dsquota</code>；</li><br><li>如果是文件还有更多属性，比如<code>atime</code>、<code>perferredBlockSize</code>、<code>blocks</code>等</li><br><li>fsimage 保存有如下信息：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">一、加载Img头信息，如下：</span><br><span class="line">  <span class="number">1</span>、imgVersion(<span class="keyword">int</span>)：当前image的版本信息</span><br><span class="line">  <span class="number">2</span>、namespaceID(<span class="keyword">int</span>)：用来确保别的HDFS instance中的datanode不会误连上当前NN。</span><br><span class="line">  <span class="number">3</span>、numFiles(<span class="keyword">long</span>)：整个文件系统中包含有多少文件和目录</span><br><span class="line">  <span class="number">4</span>、genStamp(<span class="keyword">long</span>)：生成该image时的时间戳信息。</span><br><span class="line">二 、如果加载目录，包含以下信息：</span><br><span class="line">  <span class="number">1</span>、path(String)：该目录的路径，如”/user/build/build-index”</span><br><span class="line">  <span class="number">2</span>、replications(<span class="keyword">short</span>)：副本数（目录虽然没有副本，但这里记录的目录副本数也为<span class="number">3</span>）</span><br><span class="line">  <span class="number">3</span>、mtime(<span class="keyword">long</span>)：该目录的修改时间的时间戳信息</span><br><span class="line">  <span class="number">4</span>、atime(<span class="keyword">long</span>)：该目录的访问时间的时间戳信息</span><br><span class="line">  <span class="number">5</span>、blocksize(<span class="keyword">long</span>)：目录的blocksize都为<span class="number">0</span></span><br><span class="line">  <span class="number">6</span>、numBlocks(<span class="keyword">int</span>)：文件块数,<span class="number">-1</span>表示目录,大于<span class="number">1</span>时，表示该文件对应有多个block信息</span><br><span class="line">  <span class="number">7</span>、nsQuota(<span class="keyword">long</span>)：<span class="keyword">namespace</span> Quota值，若没加Quota限制则为<span class="number">-1</span></span><br><span class="line">  <span class="number">8</span>、dsQuota(<span class="keyword">long</span>)：disk Quota值，若没加限制则也为<span class="number">-1</span></span><br><span class="line">  <span class="number">9</span>、username(String)：该目录的所属用户名</span><br><span class="line">  <span class="number">10</span>、group(String)：该目录的所属组</span><br><span class="line">  <span class="number">11</span>、permission(<span class="keyword">short</span>)：该目录的permission信息，如<span class="number">644</span>等，有一个<span class="keyword">short</span>来记录。</span><br><span class="line">三、如果加载文件，则还会额外包含如下信息：</span><br><span class="line">  <span class="number">1</span>、blockid(<span class="keyword">long</span>)：属于该文件的block的blockid，</span><br><span class="line">  <span class="number">2</span>、numBytes(<span class="keyword">long</span>)：该block的大小</span><br><span class="line">  <span class="number">3</span>、genStamp(<span class="keyword">long</span>)：该block的时间戳</span><br></pre></td></tr></table></figure><br></li><br></ol><br><p>在namenode启动时，就需要对fsimage按照如下格式进行顺序的加载，以将fsimage中记录的HDFS元数据信息加载到内存中。</p><br><ul><br><li><strong>第三步：继续导出</strong>，这是导出edits文件内容，命令：<code>bin/hdfs oev -i /usr/local/hadoop_repo/name/current/edits_0000000000000003295-0000000000000003296 -o edits.xml</code><br><img src="http://img.xiaoxiaomo.com/blog%2Fimg%2F20160626180932.png" alt="导出的edits.xml文件"></li><br></ul><br><ol><br><li>最大的节点是<code>EDITS</code>，下面就是版本信息<code>EDITS_VERSION</code>和很多的<code>RECORD</code>节点;</li><br><li>每个<strong>edits</strong>文件第一个<code>RECORD</code>的<code>RECORD</code>都是以<code>OP_START_LOG_SEGMENT</code>开头;</li><br><li><code>RECORD</code>类型有很多，比如 OP_ADD、OP_TIMES、OP_DELETE、OP_ALLOCATE_BLOCK_ID、OP_ADD_BLOCK、OP_RENAME_OLD、OP_CLOSE等</li><br></ol><br><ul><br><li><strong>总结</strong>：</li><br></ul><br><ol><br><li>从上面我们就可以看出，edits文件的信息特别详细，记录了每一步操作，所以文件大小增长也特别的快；</li><br><li>fsimage文件内容就是edits文件详细步骤的浓缩。</li><br></ol>
+
+<h2 id="DateNode"><a href="#DateNode" class="headerlink" title="DateNode"></a>DateNode</h2><p>一、Block块（数据存储单元），二、文件备份数，掌握Block块信息，副本数的设置。<br><a href="http://blog.csdn.net/androidlushangderen/article/details/47945597" target="_blank" rel="external">http://blog.csdn.net/androidlushangderen/article/details/47945597</a></p>
+<p><a href="http://blog.xiaoxiaomo.com/2016/06/26/Hadoop-HDFS%E4%B9%8BDataNode/" target="_blank" rel="external">http://blog.xiaoxiaomo.com/2016/06/26/Hadoop-HDFS%E4%B9%8BDataNode/</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-03-14T07:28:52.000Z" itemprop="dateUpdated">2017年3月14日 15:28</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/03/14/HDFS分析/" target="_blank" rel="external">http://duyao.github.io/2017/03/14/HDFS分析/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/14/HDFS分析/&title=《HDFS分析》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/14/HDFS分析/&title=《HDFS分析》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/14/HDFS分析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HDFS分析》 — Du Yao's blog&url=http://duyao.github.io/2017/03/14/HDFS分析/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/14/HDFS分析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/14/MapReduce分析/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">MapReduce分析</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/14/大数据算法题目/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">大数据算法题目</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="HDFS分析" data-title="HDFS分析" data-url="http://duyao.github.io/2017/03/14/HDFS分析/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/03/14/HDFS分析/&title=《HDFS分析》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/03/14/HDFS分析/&title=《HDFS分析》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/03/14/HDFS分析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HDFS分析》 — Du Yao's blog&url=http://duyao.github.io/2017/03/14/HDFS分析/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/03/14/HDFS分析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/03/14/HDFS分析/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

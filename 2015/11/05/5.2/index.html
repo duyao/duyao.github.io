@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>5.2 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="BFPRT algorithm - Median of mediansO(n) running timea selection algorithm based on the quickselect algorithm having worst-case linear time complexity for selecting the kth largest element题目给定一个无序的整型数组">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.2">
+<meta property="og:url" content="http://duyao.github.io/2015/11/05/5.2/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="BFPRT algorithm - Median of mediansO(n) running timea selection algorithm based on the quickselect algorithm having worst-case linear time complexity for selecting the kth largest element题目给定一个无序的整型数组">
+<meta property="og:updated_time" content="2015-11-06T05:16:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5.2">
+<meta name="twitter:description" content="BFPRT algorithm - Median of mediansO(n) running timea selection algorithm based on the quickselect algorithm having worst-case linear time complexity for selecting the kth largest element题目给定一个无序的整型数组">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">5.2</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">5.2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-05T14:17:34.000Z" itemprop="datePublished" class="page-time">
+  2015-11-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#BFPRT-algorithm-Median-of-medians"><span class="post-toc-number">1.</span> <span class="post-toc-text">BFPRT algorithm - Median of medians</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#having-worst-case-linear-time-complexity-for-selecting-the-kth-largest-element"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">having worst-case linear time complexity for selecting the kth largest element</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"></span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BFPRT"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">BFPRT</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#堆排序"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">堆排序</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">代码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-5.2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">5.2</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月05日 22:17" datetime="2015-11-05T14:17:34.000Z"  itemprop="datePublished">2015-11-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="BFPRT-algorithm-Median-of-medians"><a href="#BFPRT-algorithm-Median-of-medians" class="headerlink" title="BFPRT algorithm - Median of medians"></a>BFPRT algorithm - Median of medians</h1><p>O(n) running time<br>a selection algorithm based on the quickselect algorithm</p>
+<h2 id="having-worst-case-linear-time-complexity-for-selecting-the-kth-largest-element"><a href="#having-worst-case-linear-time-complexity-for-selecting-the-kth-largest-element" class="headerlink" title="having worst-case linear time complexity for selecting the kth largest element"></a>having worst-case linear time complexity for selecting the kth largest element</h2><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个无序的整型数组arr，找到其中最小的k个数。</p>
+<p>如果数组arr的长度为N，排序之后自然可以得到最小的k个数，此时时间复杂度为排序的时间复杂度即O(N<em>logN)<br>本题要求读者实现时间复杂度O(N</em>logK)和O(N)的方法</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>快排也能做，但是由于是随机的选择k，因此只能O(N*logN)</p>
+<h3 id="BFPRT"><a href="#BFPRT" class="headerlink" title="BFPRT"></a>BFPRT</h3><p>时间复杂度O(N)<br>其精髓是选择pivot，不是任意的选,<br>而是选择中位数中的中位数-Median of medians</p>
+<p>步骤：</p>
+<ol>
+<li>5个数分一组，分为n/5一组</li>
+<li>组内插入排序，选择所有的上中位数，单独组成一个数组arrm[]</li>
+<li>求所有中位数的中位数，即arrm[]的中位数，使用递归调用，求出次中位数pivot</li>
+<li>然后快排使用pivot来划分区域，看k是否是中间区域</li>
+</ol>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>时间复杂度O(N*logK)<br>不需要所有的都排序，因此比快排好，更加适合从一堆选前k个大的</p>
+<p>步骤:</p>
+<ol>
+<li>建k长度的堆</li>
+<li>然后对于数组里的剩余数字，每次替换堆顶，<br>对于大于当前堆顶的数字，不用替换，因为他不可能是前k大的数字</li>
+<li>每次替换后调整结构，保证堆的定义</li>
+</ol>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>BFPRT<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//得到0-k大的数组</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] getMinKNumsByBFPRT(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> k) &#123;</div><div class="line">	<span class="keyword">if</span> (k &lt; <span class="number">1</span> || k &gt; arr.length) &#123;</div><div class="line">		<span class="keyword">return</span> arr;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> minKth = getMinKthByBFPRT(arr, k);</div><div class="line">	<span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[k];</div><div class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != arr.length; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (arr[i] &lt; minKth) &#123;</div><div class="line">			res[index++] = arr[i];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span> (; index != res.length; index++) &#123;</div><div class="line">		res[index] = minKth;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//得到第k个大的数字</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMinKthByBFPRT</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> K)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span>[] copyArr = copyArray(arr);</div><div class="line">	<span class="keyword">return</span> select(copyArr, <span class="number">0</span>, copyArr.length - <span class="number">1</span>, K - <span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] copyArray(<span class="keyword">int</span>[] arr) &#123;</div><div class="line">	<span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[arr.length];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != res.length; i++) &#123;</div><div class="line">		res[i] = arr[i];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//返回值是int，选择i位置的数字，返回结果</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> begin, <span class="keyword">int</span> end, <span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (begin == end) &#123;</div><div class="line">		<span class="keyword">return</span> arr[begin];</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//选择中位数的中位数</span></div><div class="line">	<span class="keyword">int</span> pivot = medianOfMedians(arr, begin, end);</div><div class="line">	<span class="comment">//找到与pivot相等的数组下标</span></div><div class="line">	<span class="keyword">int</span>[] pivotRange = partition(arr, begin, end, pivot);</div><div class="line">	<span class="keyword">if</span> (i &gt;= pivotRange[<span class="number">0</span>] &amp;&amp; i &lt;= pivotRange[<span class="number">1</span>]) &#123;</div><div class="line">		<span class="keyword">return</span> arr[i];</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i &lt; pivotRange[<span class="number">0</span>]) &#123;</div><div class="line">		<span class="comment">//如果没命中就去找比pivot小的中位数</span></div><div class="line">		<span class="comment">//pivotRange[0]是与pivot值相等的左边位置</span></div><div class="line">		<span class="keyword">return</span> select(arr, begin, pivotRange[<span class="number">0</span>] - <span class="number">1</span>, i);</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="comment">//pivotRange[1]是与pivot值相等的右边位置</span></div><div class="line">		<span class="keyword">return</span> select(arr, pivotRange[<span class="number">1</span>] + <span class="number">1</span>, end, i);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//找中位数的中位数</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">medianOfMedians</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> num = end - begin + <span class="number">1</span>;</div><div class="line">	<span class="comment">//不是5的倍数，就要多一组</span></div><div class="line">	<span class="keyword">int</span> offset = num % <span class="number">5</span> == <span class="number">0</span> ? <span class="number">0</span> : <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span>[] mArr = <span class="keyword">new</span> <span class="keyword">int</span>[num / <span class="number">5</span> + offset];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mArr.length; i++) &#123;</div><div class="line">		<span class="keyword">int</span> beginI = begin + i * <span class="number">5</span>;</div><div class="line">		<span class="keyword">int</span> endI = beginI + <span class="number">4</span>;</div><div class="line">		<span class="comment">//mArr是中位数的集合</span></div><div class="line">		mArr[i] = getMedian(arr, beginI, Math.min(end, endI));</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//选择中位数组中的中位数</span></div><div class="line">	<span class="keyword">return</span> select(mArr, <span class="number">0</span>, mArr.length - <span class="number">1</span>, mArr.length / <span class="number">2</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@param</span> pivotValue 选择的中间位置</div><div class="line"> * partition的目的是利用快排将arr进行分区</div><div class="line"> * 左边比pivotValue小，右边比pivotValue大，中间是与pivotValue相等的</div><div class="line"> * <span class="doctag">@return</span> 返回值是int数组，返回的是与pivotValue相等的数组下标</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] partition(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> begin, <span class="keyword">int</span> end, <span class="keyword">int</span> pivotValue) &#123;</div><div class="line">	<span class="keyword">int</span> small = begin - <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> cur = begin;</div><div class="line">	<span class="keyword">int</span> big = end + <span class="number">1</span>;</div><div class="line">	<span class="comment">//快排原理，将arr分区，</span></div><div class="line">	<span class="comment">//左边是比pivotValue小的,右边比pivotValue大，中间的和pivotValue等</span></div><div class="line">	<span class="keyword">while</span> (cur != big) &#123;</div><div class="line">		<span class="keyword">if</span> (arr[cur] &lt; pivotValue) &#123;</div><div class="line">			swap(arr, ++small, cur++);</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[cur] &gt; pivotValue) &#123;</div><div class="line">			swap(arr, cur, --big);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			cur++;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//得到与pivotValue相等的位置的坐标范围</span></div><div class="line">	<span class="keyword">int</span>[] range = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</div><div class="line">	<span class="comment">//最左边</span></div><div class="line">	range[<span class="number">0</span>] = small + <span class="number">1</span>;</div><div class="line">	<span class="comment">//最右边</span></div><div class="line">	range[<span class="number">1</span>] = big - <span class="number">1</span>;</div><div class="line">	<span class="keyword">return</span> range;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//得到中间位置的数字</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMedian</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">	insertionSort(arr, begin, end);</div><div class="line">	<span class="keyword">int</span> sum = end + begin;</div><div class="line">	<span class="keyword">int</span> mid = (sum / <span class="number">2</span>) + (sum % <span class="number">2</span>);</div><div class="line">	<span class="keyword">return</span> arr[mid];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//插入排序</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertionSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = begin + <span class="number">1</span>; i != end + <span class="number">1</span>; i++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i; j != begin; j--) &#123;</div><div class="line">			<span class="keyword">if</span> (arr[j - <span class="number">1</span>] &gt; arr[j]) &#123;</div><div class="line">				swap(arr, j - <span class="number">1</span>, j);</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index1, <span class="keyword">int</span> index2)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> tmp = arr[index1];</div><div class="line">	arr[index1] = arr[index2];</div><div class="line">	arr[index2] = tmp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Heap<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] getMinKNumsByHeap(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> k) &#123; </div><div class="line">    <span class="keyword">if</span> (k &lt; <span class="number">1</span> || k &gt; arr.length) &#123; </div><div class="line">        <span class="keyword">return</span> arr; </div><div class="line">    &#125; </div><div class="line">    </div><div class="line">    <span class="comment">//建堆，长度为k，因为只需要找出前k大的数字</span></div><div class="line">    <span class="keyword">int</span>[] kHeap = <span class="keyword">new</span> <span class="keyword">int</span>[k]; </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != k; i++) &#123;</div><div class="line">    	<span class="comment">//向堆中插入数字</span></div><div class="line">        heapInsert(kHeap, arr[i], i); </div><div class="line">    &#125; </div><div class="line">    </div><div class="line">    <span class="comment">//找出前k大的数字</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = k; i != arr.length; i++) &#123; </div><div class="line">    	<span class="comment">//kHeap[0]是当前第k大的数字</span></div><div class="line">    	<span class="comment">//因为只需要找前k大的数字，因此比堆顶大的数字不需要考虑，因为他至少是k+1大的数字了</span></div><div class="line">        <span class="keyword">if</span> (arr[i] &lt; kHeap[<span class="number">0</span>]) &#123; </div><div class="line">        	<span class="comment">//将当前堆顶换掉，换位目前第k大的数字</span></div><div class="line">            kHeap[<span class="number">0</span>] = arr[i]; </div><div class="line">            <span class="comment">//调整堆，因为换了堆顶，要满足堆的定义</span></div><div class="line">            heapify(kHeap, <span class="number">0</span>, k); </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">return</span> kHeap; </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">heapInsert</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> value, <span class="keyword">int</span> index)</span> </span>&#123; </div><div class="line">    arr[index] = value; </div><div class="line">    <span class="comment">//保证是堆，即每个树父亲比孩子大</span></div><div class="line">    <span class="keyword">while</span> (index != <span class="number">0</span>) &#123; </div><div class="line">        <span class="keyword">int</span> parent = (index - <span class="number">1</span>) / <span class="number">2</span>;</div><div class="line">        <span class="comment">//父亲小，作调整，在循环里，保证交换后都可以符合堆的定义</span></div><div class="line">        <span class="keyword">if</span> (arr[parent] &lt; arr[index]) &#123; </div><div class="line">            swap(arr, parent, index); </div><div class="line">            index = parent; </div><div class="line">        &#125; <span class="keyword">else</span> &#123; </div><div class="line">            <span class="keyword">break</span>; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index, <span class="keyword">int</span> heapSize)</span> </span>&#123; </div><div class="line">	<span class="comment">//找到左右孩子</span></div><div class="line">    <span class="keyword">int</span> left = index * <span class="number">2</span> + <span class="number">1</span>; </div><div class="line">    <span class="keyword">int</span> right = index * <span class="number">2</span> + <span class="number">2</span>; </div><div class="line">    <span class="comment">//假设堆顶最大</span></div><div class="line">    <span class="keyword">int</span> largest = index; </div><div class="line">    <span class="comment">//发现比堆顶大的就交换，循环里保证堆的定义</span></div><div class="line">    <span class="keyword">while</span> (left &lt; heapSize) &#123; </div><div class="line">    	</div><div class="line">    	<span class="comment">//2个if找到父亲，左右孩子中最大的值，然后交换</span></div><div class="line">        <span class="keyword">if</span> (arr[left] &gt; arr[index]) &#123; </div><div class="line">            largest = left; </div><div class="line">        &#125; </div><div class="line">        <span class="keyword">if</span> (right &lt; heapSize &amp;&amp; arr[right] &gt; arr[largest]) &#123; </div><div class="line">            largest = right; </div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">//交换</span></div><div class="line">        <span class="keyword">if</span> (largest != index) &#123; </div><div class="line">            swap(arr, largest, index); </div><div class="line">        &#125; <span class="keyword">else</span> &#123; </div><div class="line">            <span class="keyword">break</span>; </div><div class="line">        &#125;</div><div class="line">        <span class="comment">//使当前位置指向交换过的位置，继续检查</span></div><div class="line">        index = largest; </div><div class="line">        left = index * <span class="number">2</span> + <span class="number">1</span>; </div><div class="line">        right = index * <span class="number">2</span> + <span class="number">2</span>; </div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index1, <span class="keyword">int</span> index2)</span> </span>&#123; </div><div class="line">    <span class="keyword">int</span> tmp = arr[index1]; </div><div class="line">    arr[index1] = arr[index2]; </div><div class="line">    arr[index2] = tmp; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-06T05:16:18.000Z" itemprop="dateUpdated">2015年11月6日 13:16</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/05/5.2/" target="_blank" rel="external">http://duyao.github.io/2015/11/05/5.2/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/05/5.2/&title=《5.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/05/5.2/&title=《5.2》 — Du Yao's blog&source=BFPRT algorithm - Median of mediansO(n) running timea selection algorithm bas..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/05/5.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《5.2》 — Du Yao's blog&url=http://duyao.github.io/2015/11/05/5.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/05/5.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/06/Myeclipsee快捷键/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Myeclipsee快捷键</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/05/5.1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">5.1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="5.2" data-title="5.2" data-url="http://duyao.github.io/2015/11/05/5.2/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/05/5.2/&title=《5.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/05/5.2/&title=《5.2》 — Du Yao's blog&source=BFPRT algorithm - Median of mediansO(n) running timea selection algorithm bas..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/05/5.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《5.2》 — Du Yao's blog&url=http://duyao.github.io/2015/11/05/5.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/05/5.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/05/5.2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

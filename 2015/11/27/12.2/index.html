@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>12.2 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="niuke">
+    <meta name="description" content="设计有setAll功能的哈希表哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。现在想加一个 setAll 功能,就是把所有记录的 value 都设成统一的值。请设计并实现 这种有 setAll 功能的哈希表,并且 put、get、containsKey 和 setAll 四个操作的时间复杂度 都为 O(1)。 思路setAll是把所有数据">
+<meta name="keywords" content="niuke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12.2">
+<meta property="og:url" content="http://duyao.github.io/2015/11/27/12.2/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="设计有setAll功能的哈希表哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。现在想加一个 setAll 功能,就是把所有记录的 value 都设成统一的值。请设计并实现 这种有 setAll 功能的哈希表,并且 put、get、containsKey 和 setAll 四个操作的时间复杂度 都为 O(1)。 思路setAll是把所有数据">
+<meta property="og:updated_time" content="2015-11-28T15:15:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12.2">
+<meta name="twitter:description" content="设计有setAll功能的哈希表哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。现在想加一个 setAll 功能,就是把所有记录的 value 都设成统一的值。请设计并实现 这种有 setAll 功能的哈希表,并且 put、get、containsKey 和 setAll 四个操作的时间复杂度 都为 O(1)。 思路setAll是把所有数据">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">12.2</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">12.2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-27T12:45:33.000Z" itemprop="datePublished" class="page-time">
+  2015-11-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设计有setAll功能的哈希表"><span class="post-toc-number">1.</span> <span class="post-toc-text">设计有setAll功能的哈希表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#思路"><span class="post-toc-number">2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#代码"><span class="post-toc-number">3.</span> <span class="post-toc-text">代码</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-12.2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">12.2</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月27日 20:45" datetime="2015-11-27T12:45:33.000Z"  itemprop="datePublished">2015-11-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/algorithm/">algorithm</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="设计有setAll功能的哈希表"><a href="#设计有setAll功能的哈希表" class="headerlink" title="设计有setAll功能的哈希表"></a>设计有setAll功能的哈希表</h1><p>哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。<br>现在想加一个 setAll 功能,就是把所有记录的 value 都设成统一的值。<br>请设计并实现 这种有 setAll 功能的哈希表,并且 put、get、containsKey 和 setAll 四个操作的时间复杂度 都为 O(1)。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>setAll是把所有数据设置为同一个值,但是时间复杂度是 O(1)</p>
+<ul>
+<li><p>普通做法<br>遍历hashMap然后把值都修改成同一个值<br>这样的时间复杂度一定不是O(1)</p>
+</li>
+<li><p>O(1)做法<br>因此提出时间戳的概念，就是setAll变为单独一个部分，加上一个时间戳，普通数据也加上一个时间戳<br>取数据的时候要判断是从setAll取还是从普通数据取，这个取决于对应的时间戳</p>
+</li>
+</ul>
+<p>在普通的hashMap中value就是一个普通的值，<br>而这里把普通数据value设置为一个带有时间戳的value，即一个新的数据结构，包含时间戳和value<br>每次对于添加value都要更新时间戳</p>
+<a id="more"></a>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">//value值是带有时间戳的</div><div class="line">public static class MyValue&lt;V&gt;&#123;</div><div class="line">	private V value;</div><div class="line">	private long time;</div><div class="line">	public MyValue(V value, long time)&#123;</div><div class="line">		this.time = time;</div><div class="line">		this.value = value;</div><div class="line">	&#125;</div><div class="line">	public V getValue()&#123;</div><div class="line">		return this.value;</div><div class="line">	&#125;</div><div class="line">	public long getTime()&#123;</div><div class="line">		return this.time;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">public static class MyHashMap&lt;K, V&gt;&#123;</div><div class="line">	//hashMap的value是带有时间戳的value</div><div class="line">	private HashMap&lt;K, MyValue&lt;V&gt;&gt; baseMap;</div><div class="line">	private long time;</div><div class="line">	//setAll变为单独的区域</div><div class="line">	private MyValue&lt;V&gt; setAll;</div><div class="line">	//初始化</div><div class="line">	public MyHashMap()&#123;</div><div class="line">		this.baseMap = new HashMap&lt;K, MyValue&lt;V&gt;&gt;();</div><div class="line">		this.time = 0;</div><div class="line">		this.setAll = new MyValue&lt;V&gt;(null, -1);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//普通的containsKey</div><div class="line">	public boolean containsKey(K key)&#123;</div><div class="line">		return this.baseMap.containsKey(key);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//添加时要添加时间戳</div><div class="line">	public void put(K key, V value) &#123;</div><div class="line">		this.baseMap.put(key, new MyValue&lt;V&gt;(value, this.time++));</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//将setAll单独设置成为一个区域，而不是改变所有的值</div><div class="line">	public void setAll(V value)&#123;</div><div class="line">		this.setAll = new MyValue&lt;V&gt;(value, time++);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//取值时，要根据时间戳来判断取出setAll还是myValue</div><div class="line">	public V get(K key)&#123;</div><div class="line">		if(this.containsKey(key))&#123;</div><div class="line">			if(this.baseMap.get(key).time &gt; this.setAll.time)&#123;</div><div class="line">				return this.baseMap.get(key).getValue();</div><div class="line">			&#125;else&#123;</div><div class="line">				return this.setAll.getValue();</div><div class="line">			&#125;</div><div class="line">		&#125;else&#123;</div><div class="line">			return null;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-28T15:15:52.000Z" itemprop="dateUpdated">2015年11月28日 23:15</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/11/27/12.2/" target="_blank" rel="external">http://duyao.github.io/2015/11/27/12.2/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/niuke/">niuke</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/27/12.2/&title=《12.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/27/12.2/&title=《12.2》 — Du Yao's blog&source=设计有setAll功能的哈希表哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。现在想加一个 s..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/27/12.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《12.2》 — Du Yao's blog&url=http://duyao.github.io/2015/11/27/12.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/27/12.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/27/12.3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">12.3</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/27/11.3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">11.3</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="12.2" data-title="12.2" data-url="http://duyao.github.io/2015/11/27/12.2/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/11/27/12.2/&title=《12.2》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/11/27/12.2/&title=《12.2》 — Du Yao's blog&source=设计有setAll功能的哈希表哈希表常见的三个操作是 put、get 和 containsKey,而且这三个操作的时间复杂度为 O(1)。现在想加一个 s..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/11/27/12.2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《12.2》 — Du Yao's blog&url=http://duyao.github.io/2015/11/27/12.2/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/11/27/12.2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/11/27/12.2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

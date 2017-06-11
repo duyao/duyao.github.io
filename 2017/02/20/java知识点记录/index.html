@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>java知识点记录 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="类方法就是静态方法，方法内不能使用this关键字比较问题对于==号，如果两边是int型，则比较的数值如果两边是Integer，则比较的是地址如果一个是Integer，另一个是int，比较的是值，因为Integer会自动拆箱123456789101112131415161718192021Integer i1 = 59; //自动装箱，调用Integer.valueOf()，指向常量池中的59int">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java知识点记录">
+<meta property="og:url" content="http://duyao.github.io/2017/02/20/java知识点记录/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="类方法就是静态方法，方法内不能使用this关键字比较问题对于==号，如果两边是int型，则比较的数值如果两边是Integer，则比较的是地址如果一个是Integer，另一个是int，比较的是值，因为Integer会自动拆箱123456789101112131415161718192021Integer i1 = 59; //自动装箱，调用Integer.valueOf()，指向常量池中的59int">
+<meta property="og:image" content="http://7xilc8.com1.z0.glb.clouddn.com/interfaceabstrct.png">
+<meta property="og:updated_time" content="2017-04-25T14:42:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java知识点记录">
+<meta name="twitter:description" content="类方法就是静态方法，方法内不能使用this关键字比较问题对于==号，如果两边是int型，则比较的数值如果两边是Integer，则比较的是地址如果一个是Integer，另一个是int，比较的是值，因为Integer会自动拆箱123456789101112131415161718192021Integer i1 = 59; //自动装箱，调用Integer.valueOf()，指向常量池中的59int">
+<meta name="twitter:image" content="http://7xilc8.com1.z0.glb.clouddn.com/interfaceabstrct.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">java知识点记录</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">java知识点记录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-20T11:10:05.000Z" itemprop="datePublished" class="page-time">
+  2017-02-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类方法就是静态方法，方法内不能使用this关键字"><span class="post-toc-number">1.</span> <span class="post-toc-text">类方法就是静态方法，方法内不能使用this关键字</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#比较问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">比较问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#list与array互相转化"><span class="post-toc-number">3.</span> <span class="post-toc-text">list与array互相转化</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#取反"><span class="post-toc-number">4.</span> <span class="post-toc-text">取反~</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#反射中，Class-forName和classloader的区别"><span class="post-toc-number">5.</span> <span class="post-toc-text">反射中，Class.forName和classloader的区别</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#继承问题"><span class="post-toc-number">6.</span> <span class="post-toc-text">继承问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Statement、PreparedStatement和CallableStatement"><span class="post-toc-number">7.</span> <span class="post-toc-text">Statement、PreparedStatement和CallableStatement</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#equals"><span class="post-toc-number">8.</span> <span class="post-toc-text">== equals</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">==</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#equals-1"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">equals</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hashCode"><span class="post-toc-number">8.3.</span> <span class="post-toc-text">hashCode()</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#接口与抽象类的区别"><span class="post-toc-number">9.</span> <span class="post-toc-text">接口与抽象类的区别</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#java三大特性"><span class="post-toc-number">10.</span> <span class="post-toc-text">java三大特性</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#springMVC注解"><span class="post-toc-number">11.</span> <span class="post-toc-text">springMVC注解</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-java知识点记录"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">java知识点记录</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年02月20日 19:10" datetime="2017-02-20T11:10:05.000Z"  itemprop="datePublished">2017-02-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="类方法就是静态方法，方法内不能使用this关键字"><a href="#类方法就是静态方法，方法内不能使用this关键字" class="headerlink" title="类方法就是静态方法，方法内不能使用this关键字"></a>类方法就是静态方法，方法内不能使用this关键字</h1><h1 id="比较问题"><a href="#比较问题" class="headerlink" title="比较问题"></a>比较问题</h1><p>对于==号，如果两边是int型，则比较的数值<br>如果两边是Integer，则比较的是地址<br>如果一个是Integer，另一个是int，比较的是值，因为Integer会自动拆箱<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Integer i1 = 59; //自动装箱，调用Integer.valueOf()，指向常量池中的59</div><div class="line">int i2 = 59;</div><div class="line">Integer i3 = Integer.valueOf(59); //Integer.valueOf()中，如果数字属于[-128,127]，那么不会产生新的对象，而是指向常量池中的59</div><div class="line">Integer i4 = new Integer(59); //有new关键字，一定会产生一个新的对象</div><div class="line"></div><div class="line"></div><div class="line">System.out.println(i1 == i3);//true，都会指向常量池中的59</div><div class="line"></div><div class="line">//12,24和23何时都相等，因为2是int,1和3、4是Integer，因为一个是基本类型，一个是封装类,比较的是数值</div><div class="line">System.out.println(i1 == i2);//true</div><div class="line">System.out.println(i2 == i4);</div><div class="line">System.out.println(i2 == i3);</div><div class="line"></div><div class="line">//无论何时14不等1与4是不同的对象，因为4被new，虽然他们都是integer</div><div class="line">System.out.println(i1 == i4);//false</div><div class="line"></div><div class="line">//基本型封装类型调用equals(),但是参数是基本类型，这时候，先会进行自动装箱，基本型转换为其封装类型</div><div class="line">int a = 1;</div><div class="line">int b =2;</div><div class="line">Integer c =3;</div><div class="line">System.out.println(c.equals(a+b));//true</div></pre></td></tr></table></figure></p>
+<p>valueOf方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public static Integer valueOf(int i) &#123;</div><div class="line">   if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</div><div class="line">       return IntegerCache.cache[i + (-IntegerCache.low)];</div><div class="line">   return new Integer(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>加入byte<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">byte b1=1,b2=2,b3,b6,b8;</div><div class="line">final byte b4=4,b5=6,b7;</div><div class="line">b3=(b1+b2);  /*语句1*/</div><div class="line">b6=b4+b5;    /*语句2*/</div><div class="line">b8=(b1+b4);  /*语句3*/</div><div class="line">b7=(b2+b5);  /*语句4*/</div><div class="line">System.out.println(b3+b6);</div></pre></td></tr></table></figure></p>
+<p>这里只有语句1正确，因为右边都是final，所以编译时就是int了<br>其余的语句因为是有变量的，所以int+byte=byte的，需要类型转换</p>
+<h1 id="list与array互相转化"><a href="#list与array互相转化" class="headerlink" title="list与array互相转化"></a>list与array互相转化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public String[] toArray(List&lt;String&gt; list)&#123;</div><div class="line">    String [] strings = new String[list.size()];</div><div class="line">    return  list.toArray(strings);</div><div class="line">&#125;</div><div class="line">public List&lt;String&gt; toArray(String[] strings)&#123;</div><div class="line">    return  Arrays.asList(strings);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是当list转化为int数组就不可以，因为list中是包装类，而返回时基本类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public int[] toArray(List&lt;Integer&gt; list)&#123;</div><div class="line">    int [] ints = new int[list.size()];</div><div class="line">    //ERROR: toArray (java.lang.Object[]) in List cannot be applied to (int[])</div><div class="line">    return  list.toArray(ints);</div><div class="line"></div><div class="line">    Integer [] ints = new Integer[list.size()];</div><div class="line">    //ERROR: toArray (T[]) in List cannot be applied to (Integer[])</div><div class="line">    return  list.toArray(ints);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="取反"><a href="#取反" class="headerlink" title="取反~"></a>取反~</h1><p><code>-n = ~n + 1</code> 负数的补码等于原码取反加一</p>
+<ul>
+<li>enum枚举<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> AccountType</div><div class="line">&#123;</div><div class="line">    SAVING, FIXED, CURRENT;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">AccountType</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(“It is a account type”);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EnumOne</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(AccountType.FIXED);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果<code>It is a account type It is a account type It is a account type FIXED</code><br>每个枚举都是实例，在实例化的时候都要调用AAA的构造器,因此要打印3次</p>
+<h1 id="反射中，Class-forName和classloader的区别"><a href="#反射中，Class-forName和classloader的区别" class="headerlink" title="反射中，Class.forName和classloader的区别"></a>反射中，Class.forName和classloader的区别</h1><p>Java中class.forName()和classLoader都可用来对类进行加载。<br><strong>class.forName()除了将类的.class文件加载到jvm中之外，还会对类进行解释，执行类中的static块。</strong><br>而<strong>classLoader只干一件事情，就是将.class文件加载到jvm中，不会执行static中的内容,只有在newInstance才会去执行static块。</strong><br>Class.forName(name, initialize, loader)带参函数也可控制是否加载static块。并且只有调用了newInstance()方法采用调用构造函数，创建类的对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Class.forName(String className)  这是1.8的源码  </span></div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> Class&lt;?&gt; forName(String className) <span class="keyword">throws</span> ClassNotFoundException &#123;  </div><div class="line">       Class&lt;?&gt; caller = Reflection.getCallerClass();  </div><div class="line">       <span class="keyword">return</span> forName0(className, <span class="keyword">true</span>, ClassLoader.getClassLoader(caller), caller);  </div><div class="line">   &#125;  </div><div class="line"><span class="comment">//注意第二个参数，是指Class被loading后是不是必须被初始化。 不初始化就是不执行static的代码即静态代码</span></div></pre></td></tr></table></figure></p>
+<p>LoadClass（）方法加载类及初始化过程：<br>类加载（loadclass（））（加载）——》newInstance（）（链接+初始化）<br>newInstance（）:<br>（开始连接）静态代码块——》普通变量分配准备（a=0;b=0;c=null）——》（开始初始化）普通变量赋值（a=1;b=2;c=”haha”）——》构造方法——》初始化成功。</p>
+<p>Class.forName(Stirng className)一个参数方法加载类及初始化过程：<br>类加载(Class.forName())（加载）——》静态代码块——》newInstance（）（链接+初始化）</p>
+<p>newInstance（）：<br>（开始连接）普通变量分配准备（a=0;b=0;c=null）——》（开始初始化）普通变量赋值（a=1;b=2;c=”haha”）——》构造方法——》初始化成功。</p>
+<h1 id="继承问题"><a href="#继承问题" class="headerlink" title="继承问题"></a>继承问题</h1><p>在调用子类构造器之前，会先调用父类构造器</p>
+<p>当子类构造器中没有使用”super(参数或无参数)”指定调用父类构造器时，是默认调用父类的无参构造器，如果父类中包含有参构造器，却没有无参构造器，则在子类构造器中一定要使用“super(参数)”指定调用父类的有参构造器，不然就会报错。<br><a href="https://www.nowcoder.com/questionTerminal/af8cf04602e045958d13d16d20a1bf02" target="_blank" rel="external">https://www.nowcoder.com/questionTerminal/af8cf04602e045958d13d16d20a1bf02</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</div><div class="line">        System.out.println(<span class="keyword">new</span> B().getValue());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</div><div class="line">        <span class="keyword">protected</span> <span class="keyword">int</span> value;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</div><div class="line">            setValue(v);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</div><div class="line">            <span class="keyword">this</span>.value = value;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">try</span>&#123;</div><div class="line">                value++;</div><div class="line">                <span class="keyword">return</span> value;</div><div class="line">            &#125; <span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">                System.out.println(e.toString());</div><div class="line">            &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                <span class="keyword">this</span>.setValue(value);</div><div class="line">                System.out.println(value);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>(<span class="number">5</span>);</div><div class="line">            setValue(getValue() - <span class="number">3</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</div><div class="line">            <span class="keyword">super</span>.setValue(<span class="number">2</span> * value);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里执行setValue是调用b的而不是a的，因为这里是new b</p>
+<h1 id="Statement、PreparedStatement和CallableStatement"><a href="#Statement、PreparedStatement和CallableStatement" class="headerlink" title="Statement、PreparedStatement和CallableStatement"></a>Statement、PreparedStatement和CallableStatement</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">接口</th>
+<th style="text-align:center">推荐使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Statement</td>
+<td style="text-align:center">使用通用访问数据库。当在运行时使用静态SQL语句。 Statement接口不能接受的参数。</td>
+</tr>
+<tr>
+<td style="text-align:center">PreparedStatement</td>
+<td style="text-align:center">当计划多次使用SQL语句。 那么可以PreparedStatement接口接收在运行时输入参数。</td>
+</tr>
+<tr>
+<td style="text-align:center">CallableStatement</td>
+<td style="text-align:center">当要访问数据库中的存储过程中使用。 CallableStatement对象的接口还可以接受运行时输入参数。</td>
+</tr>
+</tbody>
+</table>
+<p>（1）Statement：<br>每次执行sql语句，数据库都要执行sql语句的编译 ，最好用于仅执行一次查询并返回结果的情形，效率高于PreparedStatement.但存在sql注入风险</p>
+<p>（2）PreparedStatement：<br>是预编译执行的。在执行可变参数的一条SQL时，PreparedStatement比Statement的效率高，因为DBMS预编译一条SQL当然会比多次编译一条SQL的效率要高。<br>安全性更好，有效防止sql注入问题。对于多次重复执行的语句，使用PreparedStament效率会更高一点，并且在这种情况下也比较适合使用batch。</p>
+<p>执行的SQL语句中是可以带参数的,并支持批量执行SQL。由于采用Cache机制，则预先编译的语句，就会放在Cache中，下次执行相同SQL语句时，则可以直接从Cache中取出来。<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">PreparedStatement pstmt  =  con.prepareStatement(&quot;UPDATE EMPLOYEES  SET name= ? WHERE ID = ?&quot;);</div><div class="line">pstmt.setString(1, &quot;李四&quot;);</div><div class="line">pstmt.setInt(2, 1);</div><div class="line">pstmt. executeUpdate();</div></pre></td></tr></table></figure></p>
+<p>但是对于in来说不是很友好，需要自己定义写多少个问号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String[] names = new String[]&#123;&apos;name1&apos;,&apos;name2&apos;,&apos;name3&apos;&#125;;  </div><div class="line">String sql = &quot;select e.* from employee e where e.name in (?,?,?)&quot;;  </div><div class="line">rs = pstmt.excuteQuery(sql);  </div><div class="line">pstmt.setString(1,names[0]);  </div><div class="line">pstmt.setString(2,names[1]);  </div><div class="line">pstmt.setString(3,names[2]);</div></pre></td></tr></table></figure></p>
+<p>（3）CallableStatement：<br>扩展 PreparedStatement接口，用来调用存储过程,它提供了对输出和输入/输出参数的支持。CallableStatement 接口还有对 PreparedStatement 接口提供的输入参数的sql查询的支持。</p>
+<p><a href="http://www.importnew.com/5006.html" target="_blank" rel="external">http://www.importnew.com/5006.html</a></p>
+<h1 id="equals"><a href="#equals" class="headerlink" title="== equals"></a>== equals</h1><h2 id=""><a href="#" class="headerlink" title="=="></a>==</h2><p>== : 它的作用是<strong>判断两个对象的地址是不是相等</strong>。即，判断两个对象是不试同一个对象。<br>对于基本类型使用==比如int和Integer比较，会要拆装箱，然后进行值比较大小</p>
+<h2 id="equals-1"><a href="#equals-1" class="headerlink" title="equals"></a>equals</h2><p>equals() 的作用是 用来判断两个对象是否相等。<br>equals() 定义在JDK的Object.java中。通过判断两个对象的地址是否相等(即，是否是同一个对象)来区分它们是否相等<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == obj);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是java中很多类对于equals方法进行了重写。比如String中首先比较是否是同一个类型，比较字符串内容是否相等。<br>总结：<br>equals() : 它的作用也是判断两个对象是否相等。但它一般有两种使用情况：<br>情况1，类没有覆盖equals()方法。则通过equals()比较该类的两个对象时，等价于通过“==”比较这两个对象。<br>情况2，类覆盖了equals()方法。一般，我们都覆盖equals()方法来两个对象的内容相等；若它们的内容相等，则返回true(即，认为这两个对象相等)。</p>
+<h2 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h2><p>hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返回一个int整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。</p>
+<p>hashCode() 定义在JDK的Object.java中，这就意味着Java中的任何类都包含有hashCode() 函数，同时object中hashcode使用的是native方法。<br>虽然，每个Java类都包含hashCode() 函数。但是，仅仅当创建并某个“类的散列表”(关于“散列表”见下面说明)时，该类的hashCode() 才有用(作用是：确定该类的每一个对象在散列表中的位置；其它情况下(例如，创建类的单个对象，或者创建类的对象数组等等)，类的hashCode() 没有作用。<br>上面的散列表，指的是：Java集合中本质是散列表的类，如HashMap，Hashtable，HashSet。<br>也就是说：hashCode() 在散列表中才有用，在其它情况下没用。在散列表中hashCode() 的作用是获取对象的散列码，进而确定该对象在散列表中的位置。</p>
+<p>hashCode() 和 equals() 的关系<br>第一种 不会创建“类对应的散列表”<br>这里所说的“不会创建类对应的散列表”是说：我们不会在HashSet, Hashtable, HashMap等等这些本质是散列表的数据结构中，用到该类。例如，不会创建该类的HashSet集合。<br>在这种情况下，该类的“hashCode() 和 equals() ”没有半毛钱关系的！<br>这种情况下，equals() 用来比较该类的两个对象是否相等。而hashCode() 则根本没有任何作用，所以，不用理会hashCode()。<br>第二种 会创建“类对应的散列表”<br>这里所说的“会创建类对应的散列表”是说：我们会在HashSet, Hashtable, HashMap等等这些本质是散列表的数据结构中，用到该类。例如，会创建该类的HashSet集合。<br>在这种情况下，该类的“hashCode() 和 equals() ”是有关系的：<br>1)、如果两个对象相等，那么它们的hashCode()值一定相同。<br>    这里的相等是指，通过equals()比较两个对象时返回true。<br>2)、如果两个对象hashCode()相等，它们并不一定相等。<br>     因为在散列表中，hashCode()相等，即两个键值对的哈希值相等。然而哈希值相等，并不一定能得出键值对相等。补充说一句：“两个不同的键值对，哈希值相等”，这就是哈希冲突。<br>此外，在这种情况下。若要判断两个对象是否相等，除了要覆盖equals()之外，也要覆盖hashCode()函数。否则，equals()无效。<br><a href="http://www.cnblogs.com/skywang12345/p/3324958.htm" target="_blank" rel="external">http://www.cnblogs.com/skywang12345/p/3324958.htm</a></p>
+<h1 id="接口与抽象类的区别"><a href="#接口与抽象类的区别" class="headerlink" title="接口与抽象类的区别"></a>接口与抽象类的区别</h1><p>抽象类：抽象类是用来捕捉子类的通用特性的 。它不能被实例化，只能被用作子类的超类。抽象类是被用来创建继承层级里子类的模板<br>接口：接口是抽象方法的集合。如果一个类实现了某个接口，那么它就继承了这个接口的抽象方法。这就像契约模式，如果实现了这个接口，那么就必须确保使用这些方法。接口只是一种形式，接口自身不能做任何事情。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xilc8.com1.z0.glb.clouddn.com/interfaceabstrct.png" alt="接口与抽象类的区别" title="">
+                </div>
+                <div class="image-caption">接口与抽象类的区别</div>
+            </figure></p>
+<p>如果你拥有一些方法并且想让它们中的一些有默认实现，那么使用抽象类。<br>如果你想声明一些非公共的成员，使用抽象类，因为接口中所有的方法都是public。<br>如果你想实现多重继承，那么你必须使用接口。由于Java不支持多继承，子类不能够继承多个类，但可以实现多个接口。因此你就可以使用接口来解决它。<br>如果基本功能在不断改变，那么就需要使用抽象类。<br>如果不断改变基本功能并且使用接口，那么就需要改变所有实现了该接口的类。<br><a href="http://www.importnew.com/12399.html" target="_blank" rel="external">http://www.importnew.com/12399.html</a><br><a href="http://www.programmerinterview.com/index.php/java-questions/interface-vs-abstract-class/" target="_blank" rel="external">http://www.programmerinterview.com/index.php/java-questions/interface-vs-abstract-class/</a></p>
+<h1 id="java三大特性"><a href="#java三大特性" class="headerlink" title="java三大特性"></a>java三大特性</h1><p>面向对象编程有三大特性：<strong>封装、继承、多态</strong>。</p>
+<p>封装隐藏了类的内部实现机制，可以在不影响使用的情况下改变类的内部结构，同时也保护了数据。对外界而已它的内部细节是隐藏的，暴露给外界的只是它的访问方法。</p>
+<p>继承是为了重用父类代码。两个类若存在IS-A的关系就可以使用继承。同时继承也为实现多态做了铺垫。</p>
+<p>所谓多态就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量倒底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。因为在程序运行时才确定具体的类，这样，不用修改源程序代码，就可以让引用变量绑定到各种不同的类实现上，从而导致该引用调用的具体方法随之改变，即不修改程序代码就可以改变程序运行时所绑定的具体代码，让程序可以选择多个运行状态，这就是多态性。静态单分派，动态多分派</p>
+<p><a href="http://www.bkjia.com/Javabc/1112062.html" target="_blank" rel="external">http://www.bkjia.com/Javabc/1112062.html</a></p>
+<h1 id="springMVC注解"><a href="#springMVC注解" class="headerlink" title="springMVC注解"></a>springMVC注解</h1><p><a href="http://www.cnblogs.com/leskang/p/5445698.html" target="_blank" rel="external">http://www.cnblogs.com/leskang/p/5445698.html</a></p>
+<p><a href="https://wapwenku.baidu.com/view/ebbb24558f9951e79b89680203d8ce2f006665ba.html?pn=7&amp;vw=all&amp;pu=usm@1,sz@320_1001,ta@iphone_2_7.0_3_537" target="_blank" rel="external">https://wapwenku.baidu.com/view/ebbb24558f9951e79b89680203d8ce2f006665ba.html?pn=7&amp;vw=all&amp;pu=usm@1,sz@320_1001,ta@iphone_2_7.0_3_537</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-25T14:42:16.000Z" itemprop="dateUpdated">2017年4月25日 22:42</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2017/02/20/java知识点记录/" target="_blank" rel="external">http://duyao.github.io/2017/02/20/java知识点记录/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/20/java知识点记录/&title=《java知识点记录》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/20/java知识点记录/&title=《java知识点记录》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/20/java知识点记录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java知识点记录》 — Du Yao's blog&url=http://duyao.github.io/2017/02/20/java知识点记录/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/20/java知识点记录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/02/21/图及其相关/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">图及其相关</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/18/24-Swap-Nodes-in-Pairs/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">24. Swap Nodes in Pairs</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="java知识点记录" data-title="java知识点记录" data-url="http://duyao.github.io/2017/02/20/java知识点记录/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2017/02/20/java知识点记录/&title=《java知识点记录》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2017/02/20/java知识点记录/&title=《java知识点记录》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2017/02/20/java知识点记录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《java知识点记录》 — Du Yao's blog&url=http://duyao.github.io/2017/02/20/java知识点记录/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2017/02/20/java知识点记录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2017/02/20/java知识点记录/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

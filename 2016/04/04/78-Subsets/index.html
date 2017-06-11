@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>78. Subsets | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,algorithm">
+    <meta name="description" content="78. Subsets相似问题46. Permutations题解46 Answer 方法一思路利用bitmap所给数组是a[n]，则所有的方法总数是2^n的个数所有的组合形式是0-2^n-1的二进制数 &amp;gt;Number of subsets for {1 , 2 , 3 } = 2^3 . why ?case    possible outcomes for the set of subse">
+<meta name="keywords" content="leetcode,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="78. Subsets">
+<meta property="og:url" content="http://duyao.github.io/2016/04/04/78-Subsets/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="78. Subsets相似问题46. Permutations题解46 Answer 方法一思路利用bitmap所给数组是a[n]，则所有的方法总数是2^n的个数所有的组合形式是0-2^n-1的二进制数 &amp;gt;Number of subsets for {1 , 2 , 3 } = 2^3 . why ?case    possible outcomes for the set of subse">
+<meta property="og:updated_time" content="2016-04-04T14:50:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="78. Subsets">
+<meta name="twitter:description" content="78. Subsets相似问题46. Permutations题解46 Answer 方法一思路利用bitmap所给数组是a[n]，则所有的方法总数是2^n的个数所有的组合形式是0-2^n-1的二进制数 &amp;gt;Number of subsets for {1 , 2 , 3 } = 2^3 . why ?case    possible outcomes for the set of subse">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">78. Subsets</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">78. Subsets</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-04T06:18:10.000Z" itemprop="datePublished" class="page-time">
+  2016-04-04
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法一"><span class="post-toc-number">1.</span> <span class="post-toc-text">方法一</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法二"><span class="post-toc-number">2.</span> <span class="post-toc-text">方法二</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法三"><span class="post-toc-number">3.</span> <span class="post-toc-text">方法三</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-2"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码-2"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">代码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-78-Subsets"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">78. Subsets</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年04月04日 14:18" datetime="2016-04-04T06:18:10.000Z"  itemprop="datePublished">2016-04-04</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="https://leetcode.com/problems/subsets/" target="_blank" rel="external">78. Subsets</a><br>相似问题<a href="https://leetcode.com/problems/permutations/" target="_blank" rel="external">46. Permutations</a><br>题解<a href="http://duyao.github.io/2016/02/18/46-Permutations/">46 Answer</a></p>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>利用bitmap<br>所给数组是a[n]，则所有的方法总数是2^n的个数<br>所有的组合形式是0-2^n-1的二进制数</p>
+<p>&gt;<br>Number of subsets for {1 , 2 , 3 } = 2^3 . why ?<br>case    possible outcomes for the set of subsets<br>  1   -&gt;          Take or dont take = 2<br>  2   -&gt;          Take or dont take = 2<br>  3   -&gt;          Take or dont take = 2<br>therefore , total = 2<em>2</em>2 = 2^3 = { { } , {1} , {2} , {3} , {1,2} , {1,3} , {2,3} , {1,2,3} }<br>Lets assign bits to each outcome  -&gt; First bit to 1 , Second bit to 2 and third bit to 3<br>Take = 1<br>Dont take = 0<br>0) 0 0 0  -&gt; Dont take 3 , Dont take 2 , Dont take 1 = { }<br>1) 0 0 1  -&gt; Dont take 3 , Dont take 2 ,   take 1       =  {1 }<br>2) 0 1 0  -&gt; Dont take 3 ,    take 2       , Dont take 1 = { 2 }<br>3) 0 1 1  -&gt; Dont take 3 ,    take 2       ,      take 1    = { 1 , 2 }<br>4) 1 0 0  -&gt;    take 3      , Dont take 2  , Dont take 1 = { 3 }<br>5) 1 0 1  -&gt;    take 3      , Dont take 2  ,     take 1     = { 1 , 3 }<br>6) 1 1 0  -&gt;    take 3      ,    take 2       , Dont take 1 = { 2 , 3 }<br>7) 1 1 1  -&gt;    take 3     ,      take 2     ,      take 1     = { 1 , 2 , 3 }<br>In the above logic ,Insert S[i] only if (j&gt;&gt;i)&amp;1 ==true   { j E { 0,1,2,3,4,5,6,7 }   i = ith element in the input array }<br>element 1 is inserted only into those places where 1st bit of j is 1<br>   if( j &gt;&gt; 0 &amp;1 )  ==&gt; for above above eg. this is true for sl.no.( j )= 1 , 3 , 5 , 7<br>element 2 is inserted only into those places where 2nd bit of j is 1<br>   if( j &gt;&gt; 1 &amp;1 )  == for above above eg. this is true for sl.no.( j ) = 2 , 3 , 6 , 7<br>element 3 is inserted only into those places where 3rd bit of j is 1<br>   if( j &gt;&gt; 2 &amp; 1 )  == for above above eg. this is true for sl.no.( j ) = 4 , 5 , 6 , 7<br>Time complexity : O(n*2^n) , for every input element loop traverses the whole solution set length i.e. 2^n</p>
+<p>reference:<a href="https://leetcode.com/discuss/9213/my-solution-using-bit-manipulation" target="_blank" rel="external">bitmap solution</a></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public List&lt;List&lt;Integer&gt;&gt; subsets(int[] S) &#123;</div><div class="line">    Arrays.sort(S);</div><div class="line">    //所有的结果数是2^n</div><div class="line">    //&lt;&lt;是左移</div><div class="line">    int totalNumber = 1 &lt;&lt; S.length;</div><div class="line">    List&lt;List&lt;Integer&gt;&gt; collection = new ArrayList&lt;List&lt;Integer&gt;&gt;(totalNumber);</div><div class="line">    //结果所有数字的二进制表示</div><div class="line">    for (int i=0; i&lt;totalNumber; i++) &#123;</div><div class="line">        List&lt;Integer&gt; set = new LinkedList&lt;Integer&gt;();</div><div class="line">        for (int j=0; j&lt;S.length; j++) &#123;</div><div class="line">	        //System.out.println(&quot;i=&quot;+i+&quot;,j=&quot;+j+&quot;,i &amp; 1&lt;&lt;j=&quot;+(i &amp; (1&lt;&lt;j)));</div><div class="line">            //对于每个i都把其二进制中的1添加进来</div><div class="line">        	//因此把1不停的左移，就用&amp;能筛选出所有的</div><div class="line">        	if ((i &amp; (1&lt;&lt;j)) != 0) &#123;</div><div class="line">                set.add(S[j]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        collection.add(set);</div><div class="line">    &#125;</div><div class="line">    return collection;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>递归遍历，有点像dfs</p>
+<p>subsets = {1 , 2 , 3 }<br>添加顺序为<br>{}<br>{1}<br>{1,2}<br>{1,2,3}<br>{1,3}//path.remove(path.size() - 1),此时i=3,退回i=2,添加3<br>{2}<br>{2,3}<br>{3}</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums) &#123;</div><div class="line"></div><div class="line">	List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;List&lt;Integer&gt;&gt;();</div><div class="line">	res.add(new ArrayList&lt;Integer&gt;());</div><div class="line">	//添加时保证有序</div><div class="line">	Arrays.sort(nums);</div><div class="line">	f(nums, 0, new ArrayList&lt;Integer&gt;(), res);</div><div class="line">	return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public void f(int[] nums, int index, List&lt;Integer&gt; path,</div><div class="line">		List&lt;List&lt;Integer&gt;&gt; res) &#123;</div><div class="line">	</div><div class="line">	for (int i = index; i &lt; nums.length; i++) &#123;</div><div class="line">		path.add(nums[i]);</div><div class="line">		//这里添加一定要new一个，不然后面path删除元素会影响结果集</div><div class="line">		//res.add(path);</div><div class="line">		res.add(new ArrayList&lt;Integer&gt;(path));</div><div class="line">		f(nums, i + 1, path, res);</div><div class="line">		path.remove(path.size() - 1);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h2><h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><p>循环遍历</p>
+<ol>
+<li>在结果集中添加一个空元素</li>
+<li>遍历每个数字<br>2.1 ，遍历所有结果集中的结果,将这个数字添加到每个结果中<br>2.2 更新结果集</li>
+</ol>
+<p>subsets = {1 , 2 , 3 }<br>添加顺序为<br>{} //add empty<br>{1} // add 1to {}, add 1 for ends<br>{2} //add to {},{1}<br>{1,2} //add 2 for ends<br>{3} // add 3 to {}, {1}, {2}, {1,2}<br>{1,3}<br>{2,3}<br>{1,2,3} //add 3 for ends</p>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><ul>
+<li>错误一</li>
+</ul>
+<p>java.util.ConcurrentModificationException<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">for (Integer i : nums) &#123;</div><div class="line">	// java.util.ConcurrentModificationException</div><div class="line">	List&lt;List&lt;Integer&gt;&gt; tmp = new ArrayList&lt;List&lt;Integer&gt;&gt;(res);</div><div class="line">	for (List&lt;Integer&gt; sub : tmp) &#123;</div><div class="line">		List&lt;Integer&gt; tt = new ArrayList&lt;Integer&gt;(sub);</div><div class="line">		tt.add(i);</div><div class="line">		tmp.add(tt);</div><div class="line">	&#125;</div><div class="line">	res = tmp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>错误二</li>
+</ul>
+<p>添加关联影响<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">for (Integer i : nums) &#123;</div><div class="line">	List&lt;List&lt;Integer&gt;&gt; tmp = new ArrayList&lt;List&lt;Integer&gt;&gt;();</div><div class="line">	for (List&lt;Integer&gt; sub : res) &#123;</div><div class="line">		//这里sub添加后，res会马上改变</div><div class="line">		sub.add(i);</div><div class="line">		tmp.add(sub);</div><div class="line">	&#125;</div><div class="line">	res.addAll(tmp);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>正确代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public List&lt;List&lt;Integer&gt;&gt; subsets1(int[] nums)&#123;</div><div class="line">	List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;List&lt;Integer&gt;&gt;();</div><div class="line">	res.add(new ArrayList&lt;Integer&gt;());</div><div class="line">	Arrays.sort(nums);</div><div class="line">	for (Integer i : nums) &#123;			</div><div class="line">		//记录本次循环添加的list,一定与res无关，不然ConcurrentModificationException</div><div class="line">		List&lt;List&lt;Integer&gt;&gt; tmp = new ArrayList&lt;List&lt;Integer&gt;&gt;();</div><div class="line">		for (List&lt;Integer&gt; sub : res) &#123;</div><div class="line">			//对于sub建立副本，不然修改sub，res会改变</div><div class="line">			List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;(sub);</div><div class="line">			list.add(i);</div><div class="line">			tmp.add(list);</div><div class="line">		&#125;</div><div class="line">		//同步回res</div><div class="line">		res.addAll(tmp);		</div><div class="line">	&#125;</div><div class="line">	return res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-04-04T14:50:32.000Z" itemprop="dateUpdated">2016年4月4日 22:50</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2016/04/04/78-Subsets/" target="_blank" rel="external">http://duyao.github.io/2016/04/04/78-Subsets/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/04/04/78-Subsets/&title=《78. Subsets》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/04/04/78-Subsets/&title=《78. Subsets》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/04/04/78-Subsets/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《78. Subsets》 — Du Yao's blog&url=http://duyao.github.io/2016/04/04/78-Subsets/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/04/04/78-Subsets/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/04/05/307-Range-Sum-Query-Mutable/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">307. Range Sum Query - Mutable</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/04/01/93-Restore-IP-Addresses/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">93. Restore IP Addresses</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="78-Subsets" data-title="78. Subsets" data-url="http://duyao.github.io/2016/04/04/78-Subsets/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2016/04/04/78-Subsets/&title=《78. Subsets》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2016/04/04/78-Subsets/&title=《78. Subsets》 — Du Yao's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2016/04/04/78-Subsets/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《78. Subsets》 — Du Yao's blog&url=http://duyao.github.io/2016/04/04/78-Subsets/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2016/04/04/78-Subsets/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2016/04/04/78-Subsets/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

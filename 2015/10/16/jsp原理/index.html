@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>jsp原理 | Du Yao&#39;s blog | Make progress step by step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="jsp">
+    <meta name="description" content="jsp(java server page):    * 运行在服务器端 * 基础是servlet，因此也是动态网页 * 是一种综合技术=html+css+javasricp+java片段+jsp标签 * jsp无需配置，修改后无需重新发布 * 访问方法：http://ip:8080/web应用名/jsp路径(路径从webRoot开始) 原理web服务器是如何调用并执行jsp页面的例如文件为myjs">
+<meta name="keywords" content="jsp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsp原理">
+<meta property="og:url" content="http://duyao.github.io/2015/10/16/jsp原理/index.html">
+<meta property="og:site_name" content="Du Yao&#39;s blog">
+<meta property="og:description" content="jsp(java server page):    * 运行在服务器端 * 基础是servlet，因此也是动态网页 * 是一种综合技术=html+css+javasricp+java片段+jsp标签 * jsp无需配置，修改后无需重新发布 * 访问方法：http://ip:8080/web应用名/jsp路径(路径从webRoot开始) 原理web服务器是如何调用并执行jsp页面的例如文件为myjs">
+<meta property="og:updated_time" content="2015-10-16T03:12:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jsp原理">
+<meta name="twitter:description" content="jsp(java server page):    * 运行在服务器端 * 基础是servlet，因此也是动态网页 * 是一种综合技术=html+css+javasricp+java片段+jsp标签 * jsp无需配置，修改后无需重新发布 * 访问方法：http://ip:8080/web应用名/jsp路径(路径从webRoot开始) 原理web服务器是如何调用并执行jsp页面的例如文件为myjs">
+    
+        <link rel="alternative" href="/atom.xml" title="Du Yao&#39;s blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.8">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yao.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Du Yao</h5>
+          <a href="mailto:duyao_dy@163.com" title="duyao_dy@163.com" class="mail">duyao_dy@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/duyao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">jsp原理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">jsp原理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-16T01:48:39.000Z" itemprop="datePublished" class="page-time">
+  2015-10-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#web服务器是如何调用并执行jsp页面的"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">web服务器是如何调用并执行jsp页面的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#jsp的html标签的排版空间-java代码段是如何发送到客户端的"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">jsp的html标签的排版空间,java代码段是如何发送到客户端的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#web服务器调用jsp时会哪些java对象"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">web服务器调用jsp时会哪些java对象</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#jsp的4个作用域"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">jsp的4个作用域</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jsp语法"><span class="post-toc-number">2.</span> <span class="post-toc-text">jsp语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#指令元素"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">指令元素</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#脚本元素"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">脚本元素</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#动作元素"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">动作元素</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#jsp注释"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">jsp注释</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-jsp原理"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">jsp原理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月16日 9:48" datetime="2015-10-16T01:48:39.000Z"  itemprop="datePublished">2015-10-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/note/">note</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>jsp(java server page)<br>:   </p>
+<pre><code>* 运行在服务器端
+* 基础是servlet，因此也是动态网页
+* 是一种综合技术=html+css+javasricp+java片段+jsp标签
+* jsp无需配置，修改后无需重新发布
+* 访问方法：http://ip:8080/web应用名/jsp路径(路径从webRoot开始)
+</code></pre><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h4 id="web服务器是如何调用并执行jsp页面的"><a href="#web服务器是如何调用并执行jsp页面的" class="headerlink" title="web服务器是如何调用并执行jsp页面的"></a>web服务器是如何调用并执行jsp页面的</h4><p>例如文件为<code>myjsp.java</code><br>第一次访问jsp文件，服务器会将文件翻译为servlet文件<code>myjsp_jsp.java</code>并编译为<code>.class</code>文件，在文件tomcat根目录的<code>..\work\Catalina</code>中可以找到，即<code>D:\Program Files\apche\apache-tomcat-6.0.43\work\Catalina\localhost\web应用名\org\apache\jsp</code>，然后加载到服务器内存中去，如果是第二次访问，就会直接访问内存中的实例，因此jsp也是单例的，因此第一访问jsp网站速度比较慢，以后访问速度比较快。如果某个jsp被修改了，就相当于第一次访问jsp。(web服务器有一张表记录每个jsp是否是第一次访问)<br><strong>注意：jsp出错后会报出翻译后servlet中的位置</strong><br>在该<code>xxx_jsp.java</code>文件中，有几分主要函数如下，其实就是servlet中的需要实现的函数<code>init</code>,<code>destory</code>,<code>service</code></p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//myjsp_jsp.java</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">jsp1_jsp</span> </span>&#123;</div><div class="line">    </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">_jspInit</span><span class="params">()</span> </span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">_jspDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">_jspService</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">        <span class="keyword">throws</span> java.io.IOException, ServletException &#123;</div><div class="line">    ...</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="jsp的html标签的排版空间-java代码段是如何发送到客户端的"><a href="#jsp的html标签的排版空间-java代码段是如何发送到客户端的" class="headerlink" title="jsp的html标签的排版空间,java代码段是如何发送到客户端的"></a>jsp的html标签的排版空间,java代码段是如何发送到客户端的</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//myjsp_jsp.java的_jspService函数</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">_jspService</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> java.io.IOException, ServletException </span>&#123;</div><div class="line"></div><div class="line">    PageContext pageContext = <span class="keyword">null</span>;</div><div class="line">    HttpSession session = <span class="keyword">null</span>;</div><div class="line">    ServletContext application = <span class="keyword">null</span>;</div><div class="line">    ServletConfig config = <span class="keyword">null</span>;</div><div class="line">    JspWriter out = <span class="keyword">null</span>;</div><div class="line">    Object page = <span class="keyword">this</span>;</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="comment">//这里out已经设置为内部流(JspWriter out = null)，因此可以在jsp中直接使用</span></div><div class="line">    <span class="comment">//html的标签直接使用out输出</span></div><div class="line">    out.write(<span class="string">"&lt;html&gt;\r\n"</span>);</div><div class="line">    out.write(<span class="string">" &lt;head&gt;\r\n"</span>);</div><div class="line">    out.write(<span class="string">" &lt;/head&gt;\r\n"</span>);</div><div class="line">    out.write(<span class="string">" &lt;body&gt;\r\n"</span>);</div><div class="line">    out.write(<span class="string">"   &lt;h1&gt;hello,world!&lt;/h1&gt;\r\n"</span>);</div><div class="line">    out.write(<span class="string">"&lt;/html&gt;"</span>);</div><div class="line">    <span class="comment">//对于内嵌的java代码则定义为内部变量,放在_jspService函数中</span></div><div class="line">    <span class="comment">/*jsp中的源代码</span></div><div class="line">    &lt;%</div><div class="line">    int i=1;</div><div class="line">    out.print("i="i);</div><div class="line">    %&gt;</div><div class="line">    */</div><div class="line">    <span class="keyword">int</span> i=<span class="number">1</span>;</div><div class="line">    out.print(<span class="string">"i="</span>i);</div></pre></td></tr></table></figure>
+<h4 id="web服务器调用jsp时会哪些java对象"><a href="#web服务器调用jsp时会哪些java对象" class="headerlink" title="web服务器调用jsp时会哪些java对象"></a>web服务器调用jsp时会哪些java对象</h4><p>一共提供了9个，在生成的<code>xxx_jsp.java</code>文件中<code>_jspService函数</code>中可以找到</p>
+<ul>
+<li>out<br>向客户端输出字节流媒体<blockquote>
+<p>out.print();</p>
+</blockquote>
+</li>
+<li><p>request<br>接受客户端的http请求，相当于servlet中的<code>HttpServletRequest</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">request.getParameter(String);</div><div class="line">request.getParameterValues(String);</div><div class="line">request.getAttribute(String);</div><div class="line">request.getAttributeNames();</div><div class="line">request.getCookies();</div></pre></td></tr></table></figure>
+</li>
+<li><p>response<br>封装jsp产生的回应，相当于servlet的<code>HttpServletResponse</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">response.addCookie(Cookie);</div><div class="line">response.sendRedirect(String);</div></pre></td></tr></table></figure>
+</li>
+<li><p>session<br>用于保存用户信息，跟踪用户行为，相当于servlet的<code>HttpSession</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">session.getAttribute(String);</div><div class="line">session.setAttribute(String,Object);</div></pre></td></tr></table></figure>
+</li>
+<li><p>application<br>多个用户共享，保存信息，相当于servlet的<code>ServletContext</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">application.getAttribute(String);</div><div class="line">application.setAttribute(String,Object);</div></pre></td></tr></table></figure>
+</li>
+<li><p>pageContext<br>只在本页面生效的域对象，可以setAttribute等</p>
+</li>
+<li><p>exception<br>代表运行时的一个异常</p>
+</li>
+<li><p>page<br>代表jsp这个实例，相当于<code>this</code></p>
+</li>
+<li><p>config<br>得到<code>web.xml</code>的配置信息，相当于servlet的<code>ServletConfig</code></p>
+</li>
+</ul>
+<h4 id="jsp的4个作用域"><a href="#jsp的4个作用域" class="headerlink" title="jsp的4个作用域"></a>jsp的4个作用域</h4><table>
+<thead>
+<tr>
+<th>名称    　</th>
+<th>　作用域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>application</td>
+<td>在所有应用程序中有效</td>
+</tr>
+<tr>
+<td>session    　</td>
+<td>　在当前会话中有效</td>
+</tr>
+<tr>
+<td>request</td>
+<td>　　在当前请求中有效</td>
+</tr>
+<tr>
+<td>page    　</td>
+<td>　在当前页面有效</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="jsp语法"><a href="#jsp语法" class="headerlink" title="jsp语法"></a>jsp语法</h3><h4 id="指令元素"><a href="#指令元素" class="headerlink" title="指令元素"></a>指令元素</h4><p>概念：用于从jsp发送一个信息到容器，比如设置全局变量，文字编码，引入宝</p>
+<ul>
+<li><p>page指令<br><code>&lt;%@ page language=&quot;java&quot; import=&quot;java.util.*&quot; pageEncoding=&quot;ISO-8859-1&quot;%&gt;</code></p>
+<ul>
+<li>language=”java” 放入的语言</li>
+<li>import=”java.util.*” 引入了哪些包</li>
+<li>pageEncoding=”utf-8” 以什么方式翻译为servlet</li>
+<li>contentType=”text/html; charset=utf-8” 以什么方式显示网页</li>
+<li>isErrorPage=”/err”</li>
+</ul>
+</li>
+<li><p>include指令<br><code>&lt;%@include file=&quot;index.jsp&quot; %&gt;</code><br>该指令用于引入一个文件，jsp引擎通常会把这2个页面翻译成一个jsp页面，也成为静态引入，以<code>webRoot</code>为根目录<br><strong>被引入的jsp页面只保留page指令，标签<code>&lt;html&gt;</code>,<code>&lt;body&gt;</code>均要省略</strong></p>
+</li>
+<li><p>taglib指令</p>
+</li>
+</ul>
+<h4 id="脚本元素"><a href="#脚本元素" class="headerlink" title="脚本元素"></a>脚本元素</h4><ul>
+<li>scrplet<br><code>&lt;% java代码 %&gt;</code></li>
+<li>表达式<br>相当于<code>_jspService</code>的变量<br><code>&lt;%=java表达式%&gt;</code><br>例如<code>&lt;%=rs.getInt(1)%&gt;</code></li>
+<li>declaration声明<br>相当于<code>xxx——jsp.java</code>的成员变量和成员函数<br><code>&lt;%! java代码 %&gt;</code>,<code>&lt;%! java函数代码 %&gt;</code><br>与表达式声明的区别是，表示声明是局部变量，declaration是全局变量<br>而函数定义只能用在declaration中定义，不能再表达式式中定义<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;%! <span class="keyword">int</span> i=<span class="number">900</span>; <span class="comment">//全局变量 %&gt;</span></div><div class="line">&lt;% <span class="keyword">int</span> i=<span class="number">90</span>; <span class="comment">//局部变量</span></div><div class="line">  out.print(<span class="string">"i="</span>+i); </div><div class="line">%&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在对相应的<code>xx_jsp.java</code>文件中声明的位置完全不同，declaration变量时该servlet的成员变量<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//jsp1_jsp.java</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">jsp1_jsp</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> i=<span class="number">900</span>;<span class="comment">//全局变量</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">_jspInit</span><span class="params">()</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">_jspDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">_jspService</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span><span class="keyword">throws</span> java.io.IOException, ServletException </span>&#123;</div><div class="line">    <span class="keyword">int</span> i=<span class="number">90</span>;<span class="comment">//局部变量</span></div><div class="line">    out.print(<span class="string">"i="</span>+i); </div><div class="line">    ...</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h4 id="动作元素"><a href="#动作元素" class="headerlink" title="动作元素"></a>动作元素</h4><ul>
+<li><p><code>&lt;jsp:forward &gt;</code><br><code>&lt;jsp:forward page=&quot;index.jsp&quot;&gt;&lt;/jsp:forward&gt;</code><br>这里起到跳转作用，通常开发时，将各种jsp文件不直接放在<code>WebRoot</code>中，因为这样利用<code>&lt;a&gt;</code>标签可以将网站源代码下载下来，而且得到路径后可以直接访问，很不安全，因此要把jsp文件放在<code>/WebRoot/WEB-INF</code>文件夹中，这样即使得到路径也不能直接访问和下载源码。而访问网站的方法是<code>WebRoot</code>放一个<code>xxx.jsp</code>通过<code>&lt;jsp:forward page=&quot;/WEB-INF/xxx.jsp&quot;&gt;&lt;/jsp:forward&gt;</code>转向<code>/WebRoot/WEB-INF</code>文件夹要访问的jsp文件</p>
+</li>
+<li><p><code>&lt;jsp:include &gt;</code><br><code>&lt;jsp:include page=&quot;&quot;&gt;&lt;/jsp:include&gt;</code><br>这里也是引入文件，注意与<code>`&lt;%@include&gt;</code>区分，但是这里的引入是动态引入，即jsp引擎会将这2个servlet分别编译形成2个java文件，因此不必省略标签<code>&lt;html&gt;</code>,<code>&lt;body&gt;</code></p>
+</li>
+</ul>
+<h4 id="jsp注释"><a href="#jsp注释" class="headerlink" title="jsp注释"></a>jsp注释</h4><p>2种方式<br><code>&lt;-- 注释 --&gt;</code>和<code>&lt;%-- 注释 --%&gt;</code><br>没有%的可以在源码中显示，而有%的在源码中不能显示<br>建议使用<code>&lt;%-- 注释 --%&gt;</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-10-16T03:12:48.000Z" itemprop="dateUpdated">2015年10月16日 11:12</time>
+</span><br>
+
+
+        转载请注明来自于:<a href="/2015/10/16/jsp原理/" target="_blank" rel="external">http://duyao.github.io/2015/10/16/jsp原理/</a>
+    </div>
+    <footer>
+        <a href="http://duyao.github.io">
+            <img src="/img/yao.png" alt="Du Yao">
+            Du Yao
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsp/">jsp</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/16/jsp原理/&title=《jsp原理》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/16/jsp原理/&title=《jsp原理》 — Du Yao's blog&source=jsp(java server page):   
+* 运行在服务器端
+* 基础是servlet，因此也是动态网页
+* 是一种综合技术=html+css+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/16/jsp原理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《jsp原理》 — Du Yao's blog&url=http://duyao.github.io/2015/10/16/jsp原理/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/16/jsp原理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/16/maven依赖/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">maven依赖</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/15/Mybatis 接口式编程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Mybatis 接口式编程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="jsp原理" data-title="jsp原理" data-url="http://duyao.github.io/2015/10/16/jsp原理/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.8');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Du Yao's blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://duyao.github.io/2015/10/16/jsp原理/&title=《jsp原理》 — Du Yao's blog&pic=http://duyao.github.io/img/yao.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://duyao.github.io/2015/10/16/jsp原理/&title=《jsp原理》 — Du Yao's blog&source=jsp(java server page):   
+* 运行在服务器端
+* 基础是servlet，因此也是动态网页
+* 是一种综合技术=html+css+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://duyao.github.io/2015/10/16/jsp原理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《jsp原理》 — Du Yao's blog&url=http://duyao.github.io/2015/10/16/jsp原理/&via=http://duyao.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://duyao.github.io/2015/10/16/jsp原理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://duyao.github.io/2015/10/16/jsp原理/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.8"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.8" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
