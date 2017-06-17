@@ -24,7 +24,7 @@ categories: note
 用于处理update逗号，逗号等问题，与where类似
 ```xml
 <update id="update" parameterType="UserAlias">
-    UPDATE table_name 
+    UPDATE table_name
     <set>
         <if test="condition">
 	        column1 = #{value1}, column2 = #{value2}

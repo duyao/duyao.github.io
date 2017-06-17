@@ -5,7 +5,7 @@
 # Site
 title: Du Yao's blog
 subtitle: Make progress step by step
-description: java j2EE spring Mybatis struts2 springMVC
+# description: java j2EE spring Mybatis struts2 springMVC
 author: Du Yao
 language: zh-CN
 timezone: "Asia/Shanghai"
@@ -40,7 +40,7 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: true
+  auto_detect: false
   tab_replace:
 
 # Category & Tag
@@ -63,7 +63,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: yilia
+theme: indigo
+# theme: Anisina
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
@@ -72,3 +73,8 @@ deploy:
   repo: git@github.com:duyao/duyao.github.io.git
   branch: master
   message: Site updated:{{ now("YYYY-MM-DD HH:mm:ss") }}
+
+
+# search:
+#   path: search.xml
+#   field: post

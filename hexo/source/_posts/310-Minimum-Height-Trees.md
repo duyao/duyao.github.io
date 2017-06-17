@@ -1,13 +1,11 @@
 title: 310. Minimum Height Trees
 toc: true
 date: 2016-04-18 17:30:38
-tags:
-- leetcode
-- algorithm
-categories:
+tags: leetcode
+categories: algorithm
 ---
 [310. Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees/)
-
+类似题目:[210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii)
 ## 思路
 
 剥洋葱法
@@ -37,7 +35,7 @@ public List<Integer> findMinHeightTrees(int n, int[][] edges) {
     		leaves.add(i);
     	}
     }
-    
+
     while(n > 2){
     	n -= leaves.size();
     	//临时存放下次要遍历的叶子
@@ -53,7 +51,7 @@ public List<Integer> findMinHeightTrees(int n, int[][] edges) {
 			}
 		}
 	    	leaves = tleaves;
-    	
+
     }
     return leaves;
 }

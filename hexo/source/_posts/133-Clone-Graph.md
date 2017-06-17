@@ -1,8 +1,7 @@
 title: 133. Clone Graph
 date: 2016-02-16 16:31:06
-tags:
-- leetcode
-- algorithm
+tags: leetcode
+categories: algorithm
 ---
 
 [133. Clone Graph](https://leetcode.com/problems/clone-graph/)
@@ -40,7 +39,7 @@ public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
 	//map.put(node.label, node);
 	map.put(clone.label, clone);
 	for (UndirectedGraphNode next : node.neighbors) {
-		
+
 		//这里添加相邻接点必须是新构造的节点，而不是原来的
 		//clone.neighbors.add(next);
 		//递归的返回值是新的结点

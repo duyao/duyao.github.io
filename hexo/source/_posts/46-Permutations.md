@@ -1,8 +1,7 @@
 title: 46. Permutations
 date: 2016-02-18 17:47:31
-tags:
-- leetcode
-- algorithm
+tags: leetcode
+categories: algorithm
 ---
 [46. Permutations](https://leetcode.com/problems/permutations/)
 相似问题[78. Subsets](https://leetcode.com/problems/subsets/)
@@ -44,8 +43,8 @@ public static void backtrack(int[] nums, int i,List<List<Integer>> lists,List<In
 		System.out.println();
 		backtrack(nums, i+1, lists, newList);
 	}
-	
-	
+
+
 }
 
 
@@ -62,7 +61,7 @@ public static List<List<Integer>> permute(int[] nums) {
 	//对于所有元素进行添加
 	//第一个元素已经添加，所以从1开始
 	for(int i = 1; i < nums.length; i++){
-		
+
 		List<List<Integer>> newList = new ArrayList<List<Integer>>();
 		//枚举所有的位置
 		//j <= i表示位置始终与元素个数相关

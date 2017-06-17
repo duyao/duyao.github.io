@@ -1,10 +1,8 @@
 title: 48. Rotate Image
 toc: true
 date: 2016-05-04 21:47:43
-tags:
-- leetcode
-- algorithm
-categories:
+tags: leetcode
+categories: algorithm
 ---
 [48. Rotate Image](https://leetcode.com/problems/rotate-image/)
 
@@ -13,7 +11,7 @@ categories:
 ### clockwise rotate
 
 - first reverse up to down
-- then swap the symmetry 
+- then swap the symmetry
 
 ```
 1 2 3     7 8 9     7 4 1

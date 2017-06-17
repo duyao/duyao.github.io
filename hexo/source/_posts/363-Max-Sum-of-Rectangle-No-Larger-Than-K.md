@@ -1,10 +1,8 @@
 title: 363. Max Sum of Rectangle No Larger Than K
 toc: true
 date: 2016-06-27 21:22:49
-tags: 
-- leetcode
-- algorithm
-categories:
+tags: leetcode
+categories: algorithm
 ---
 [363. Max Sum of Rectangle No Larger Than K](https://leetcode.com/problems/max-sum-of-sub-matrix-no-larger-than-k/)
 
@@ -41,7 +39,7 @@ public int maxSumSubmatrix0(int[][] matrix, int k) {
 			dp[0] = a[0] > 0 ? a[0] : 0;
 			for (int h = 1; h < a.length; h++) {
 				dp[h] = dp[h-1] + a[h] > 0 ? dp[h-1] + a[h] : 0;
-				
+
 				if (dp[h] > tmpSum) {
 					tmpSum = dp[h];
 					if (dp[h - 1] > 0) {
@@ -95,9 +93,9 @@ public int maxSumSubmatrix(int[][] matrix, int k) {
 			// 填充a
 			for (int h = 0; h < matrix.length; h++) {
 				a[h] += matrix[h][j];
-				
+
 			}
-			
+
 			// 找到最大值
 			int tmpSum = 0;
 			TreeSet<Integer> set = new TreeSet<Integer>();
@@ -110,10 +108,10 @@ public int maxSumSubmatrix(int[][] matrix, int k) {
 					maxSum = Math.max(maxSum, tmpSum - tmp);
 				}
 				set.add(tmpSum);
-				
+
 			}
-			
-			
+
+
 
 		}
 	}
@@ -124,4 +122,3 @@ public int maxSumSubmatrix(int[][] matrix, int k) {
 
 ## Smallest subarray with sum greater than a given value
 [greater than a given value](http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/)
-

@@ -1,10 +1,8 @@
 title: 42. Trapping Rain Water
 toc: true
 date: 2016-05-06 11:49:15
-tags:
-- leetcode
-- algorithm
-categories:
+tags: leetcode
+categories: algorithm
 ---
 
 - easy version
@@ -74,9 +72,7 @@ return cnt;
 }
 ```
 
-## More Reference 
+## More Reference
 
 [11. Container With Most Water](https://leetcode.com/discuss/questions/oj/trapping-rain-water?sort=votes)
 [42. Trapping Rain Water](https://leetcode.com/discuss/questions/oj/container-with-most-water?sort=votes)
-
-

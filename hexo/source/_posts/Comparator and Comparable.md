@@ -7,15 +7,15 @@ categories:
 
 ## 比较
 
-在集合框架中有两种比较接口： Comparable 接口和 Comparator 接口。 
-Comparable 是通用的接口，用户可以实现它来完成自己特定的比较
-Comparator 可以看成一种算法的实现，在需要容器集合实现比较功能的时候，来指定这个比较器，这可以看成一种设计模式，将算法和数据分离。
+在集合框架中有两种比较接口： Comparable 接口和 Comparator 接口。
+Comparable 是通用的接口，用户可以实现它来完成自己特定的比较，在java.lang下
+Comparator 可以看成一种算法的实现，在需要容器集合实现比较功能的时候，来指定这个比较器，这可以看成一种设计模式，将算法和数据分离，在java.util下。
 
 前者应该比较固定，和一个具体类相绑定，而后者比较灵活，它可以被用于各个需要比较功能的类使用。
 
 一个类实现了 Camparable 接口表明这个类的对象之间是可以相互比较的。如果用数学语言描述的话就是这个类的对象组成的集合中存在一个全序。这样，这个类对象组成的集合就可以使用 Sort 方法排序了。
 
-而 Comparator 的作用有两个：
+而 Comparator 的作用有两个，体现了**策略模式**，就是不改变对象自身，而用一个策略对象（strategy object）来改变它的行为：
 1 、如果类的设计师没有考虑到 Compare 的问题而没有实现 Comparable 接口，可以通过 Comparator 来实现比较算法进行排序；
 2 、为了使用不同的排序标准做准备，比如：升序、降序或其他什么序。
 
@@ -47,34 +47,34 @@ Comparator 可以看成一种算法的实现，在需要容器集合实现比较
 
 ```
 public class Item implements Comparable<Item>{
-	
+
 	private String description;
 	private int partNum;
-	
+
 	public Item(String des, int num){
 		this.description = des;
 		this.partNum = num;
 	}
-	
+
 	public String getDescription(){
 		return this.description;
 	}
-	
+
 	public int getPartNum(){
 		return this.partNum;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "[" + description + "," + partNum + "]";
 	}
-	
+
 //	@Override
 //	public int hashCode() {
 //		return Objects.hash(description, partNum);
 //	}
-	
-	
+
+
 //	@Override
 //	public boolean equals(Object obj) {
 //		if(this == obj) return true;
@@ -84,14 +84,14 @@ public class Item implements Comparable<Item>{
 //		Item i = (Item) obj;
 //		return Objects.equals(this.description, i.description) && this.partNum == i.partNum;
 //	}
-	
-	
+
+
 	@Override
 	public int compareTo(Item o) {
 		return Integer.compare(partNum, o.partNum);
 	}
-	
-	
+
+
 
 }
 ```
@@ -113,7 +113,7 @@ public static void main(String[] args) {
 	//使用comparator，类Item可以没有实现comparable
 	//新建TreeSet通过传入比较器comparator来完成
 	SortedSet<Item> setByDes = new TreeSet<Item>(new Comparator<Item>() {
-		
+
 		@Override
 		public int compare(Item o1, Item o2) {
 			//先按照des排序，对于相等的des则按照partNum排序
@@ -130,7 +130,7 @@ public static void main(String[] args) {
 			//按照des排序，对于des相同，则只显示最小的partNum
 //				return aDes.compareTo(bDes);
 		}
-		
+
 	});
 
 //		setByDes.addAll(mySet);
@@ -142,3 +142,7 @@ public static void main(String[] args) {
 	System.out.println(setByDes);
 }
 ```
+
+
+http://blog.csdn.net/mageshuai/article/details/3849143
+http://www.cnblogs.com/sunflower627/p/3158042.html

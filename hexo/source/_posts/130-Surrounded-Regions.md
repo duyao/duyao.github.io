@@ -1,10 +1,8 @@
 title: 130. Surrounded Regions
 toc: true
 date: 2016-03-26 19:52:13
-tags: 
-- leetcode
-- algorithm
-categories:
+tags: leetcode
+categories: algorithm
 ---
 
 [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/)
@@ -47,7 +45,7 @@ public void bfsBoundary(char[][] c, int x, int y,boolean[][] in){
 	int wid = c.length;
 	int[] xx = {0, 1, 0, -1};
 	int[] yy = {-1, 0, 1, 0};
-	
+
 	LinkedList<Node> queue = new LinkedList<Node>();
 	queue.add(new Node(x, y));
 	c[x][y] = 'b';
@@ -66,14 +64,14 @@ public void bfsBoundary(char[][] c, int x, int y,boolean[][] in){
 			}
 		}
 	}
-	
+
 }
 public void solve(char[][] board) {
 
 	if(board == null || board.length == 0){
 		return;
 	}
-	
+
 	boolean[][] in = new boolean[board.length][board[0].length];
 	int len = board[0].length;
 	int wid = board.length;
@@ -105,10 +103,9 @@ public void solve(char[][] board) {
 			}
 		}
 	}
-	
+
 
 }
 
 ```
-
-
+https://leetcode.com/problems/number-of-islands/#/description

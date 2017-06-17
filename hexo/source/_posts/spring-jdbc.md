@@ -17,7 +17,7 @@ reference: [jdbc_spring](http://www.tutorialspoint.com/spring/spring_jdbc_framew
 
 `StudentJDBCTemplate.java`
 
-```java 
+```java
 
 public class StudentJDBCTemplate implements StudentDao {
 
@@ -104,6 +104,6 @@ public class StudentJDBCTemplate implements StudentDao {
 </bean>
 ```
 ---
-The `SimpleJdbcCall` class can be used to call a stored procedure with IN and OUT parameters. 
+The `SimpleJdbcCall` class can be used to call a stored procedure with IN and OUT parameters.
 
 see :[stored procedure ](http://www.tutorialspoint.com/spring/calling_stored_procedure.htm "http://www.tutorialspoint.com/spring/calling_stored_procedure.htm")
