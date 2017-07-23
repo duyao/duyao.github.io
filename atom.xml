@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://duyao.github.io/"/>
-  <updated>2017-05-30T08:52:56.000Z</updated>
+  <updated>2017-06-17T04:17:01.000Z</updated>
   <id>http://duyao.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://duyao.github.io/2017/05/28/zookeeper%E5%9F%BA%E7%A1%80/"/>
     <id>http://duyao.github.io/2017/05/28/zookeeper基础/</id>
     <published>2017-05-28T08:40:02.000Z</published>
-    <updated>2017-05-30T08:52:56.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="zk介绍"><a href="#zk介绍" class="headerlink" title="zk介绍"></a>zk介绍</h1><blockquote>
 <p>Zookeeper是Apache Hadoop的一个子项目，本质是一个分布式小文件系统，主要解决分布式系统应用中遇到的数据管理问题（一致性问题）：统一命名服务，状态同步服务，集群管理，分布式应用配置项的管理。</p>
@@ -296,7 +296,7 @@
     <link href="http://duyao.github.io/2017/05/24/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
     <id>http://duyao.github.io/2017/05/24/多线程面试题目/</id>
     <published>2017-05-24T14:25:04.000Z</published>
-    <updated>2017-05-24T15:17:56.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="wait和notify"><a href="#wait和notify" class="headerlink" title="wait和notify"></a>wait和notify</h1><blockquote>
 <p>Q1 如何让两个线程按照指定方式有序交叉运行<br>假设有两个线程，一个是线程 A，另一个是线程 B，两个线程分别依次打印 1-3 三个数字即可</p>
@@ -328,7 +328,7 @@
     <link href="http://duyao.github.io/2017/05/15/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
     <id>http://duyao.github.io/2017/05/15/背包问题/</id>
     <published>2017-05-15T02:50:12.000Z</published>
-    <updated>2017-05-17T08:41:38.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="01背包问题"><a href="#01背包问题" class="headerlink" title="01背包问题"></a>01背包问题</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有N件物品和一个容量为V的背包。第i件物品的费用是c[i]，价值是w[i]。求解将哪些物品装入背包可使价值总和最大。</p>
 <h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>这是最基础的背包问题，特点是：每种物品仅有一件，可以选择放或不放。</p>
@@ -388,7 +388,7 @@
     <link href="http://duyao.github.io/2017/05/12/Java%E6%B3%A8%E8%A7%A3/"/>
     <id>http://duyao.github.io/2017/05/12/Java注解/</id>
     <published>2017-05-12T10:59:43.000Z</published>
-    <updated>2017-05-17T08:40:02.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><h2 id="源码注解"><a href="#源码注解" class="headerlink" title="源码注解"></a>源码注解</h2><p>只存在于源码中，编译时就没有了，即class文件无注解</p>
 <h2 id="编译时注解"><a href="#编译时注解" class="headerlink" title="编译时注解"></a>编译时注解</h2><p>注解在源码和class文件都在,比如<code>Override</code></p>
@@ -414,7 +414,7 @@
     <link href="http://duyao.github.io/2017/05/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"/>
     <id>http://duyao.github.io/2017/05/08/设计模式-策略模式和模板方法模式/</id>
     <published>2017-05-08T09:10:19.000Z</published>
-    <updated>2017-05-08T11:51:24.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><p>策略模式就是要应对规则变化和新规则加入对程序带来的影响。<br>比如实现一个fly方法有很多种方式，可以做火箭飞、可以带翅膀飞等，那么当添加新的方式的时候可有选择以下方案：<br>1、继承：<br>即将设计一个抽象类，里面有这个fly的抽象方法</p>
 <ul>
@@ -510,7 +510,7 @@
     <link href="http://duyao.github.io/2017/05/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E5%92%8C%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/"/>
     <id>http://duyao.github.io/2017/05/05/设计模式-观察者模式和责任链模式/</id>
     <published>2017-05-05T12:45:43.000Z</published>
-    <updated>2017-05-08T13:56:44.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="观察模式"><a href="#观察模式" class="headerlink" title="观察模式"></a>观察模式</h1><p>观察者模式（有时又被称为发布-订阅模式、模型-视图模式、源-收听者模式或从属者模式）是软件设计模式的一种。<br>在此种模式中，一个目标物件管理所有相依于它的观察者物件，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。<br>此种模式通常被用来实作事件处理系统。<br>简单点概括成通俗的话来说，就是一个类管理着所有依赖于它的观察者类，并且它状态变化时会主动给这些依赖它的类发出通知。<br><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -571,7 +571,7 @@
     <link href="http://duyao.github.io/2017/04/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8E%9F%E5%88%99%E5%92%8CUML%E5%9B%BE/"/>
     <id>http://duyao.github.io/2017/04/30/设计模式原则和UML图/</id>
     <published>2017-04-30T08:46:35.000Z</published>
-    <updated>2017-05-19T11:32:32.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="SOLID设计原则"><a href="#SOLID设计原则" class="headerlink" title="SOLID设计原则"></a>SOLID设计原则</h1><p>SRP：单一指责，每个类，每个方法专注一件事，小方法构成大功能。但是拆分到何种程度？取决于业务，当某个业务变更时发现会同时修改几个方法，那么可以考虑合并。<br>OCP： 对修改关闭，对扩展开放，尽量不修改原有功能，原有功能已经上线，修改有风险，所以设计时考虑可扩展性，能通过扩展实现新的需求。实现OCP的思路有：多态，不要硬编码<br>LSP：里氏替换，对于有继承关系的类，使用子类替换父类。<br>ISP：接口隔离，一个大接口不如多个小接口，粒度小，灵活性好，使用小功能组装成大功能，使用一个小功能没有必要引入过多的其他功能。那么接口小到何种程度？也值得思考。<br>DIP：依赖抽象，接口，而不是依赖具体实现。Spring中体现的很明显。</p>
 <h1 id="uml图"><a href="#uml图" class="headerlink" title="uml图"></a>uml图</h1><p>类的关系有泛化(Generalization)、实现（Realization）、依赖(Dependency)和关联(Association)。<br>其中关联又分为一般关联关系和聚合关系(Aggregation)，组合关系(Composition)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">类的关系</div><div class="line">====泛华(继承)</div><div class="line">====实现(接口)</div><div class="line">====依赖(方法参数、返回值)</div><div class="line">====关联</div><div class="line">========关联关系(成员变量)</div><div class="line">========聚合关系(弱依赖)</div><div class="line">========组合关系(强依赖)</div></pre></td></tr></table></figure></p>
@@ -617,7 +617,7 @@
     <link href="http://duyao.github.io/2017/04/25/%E6%95%B0%E6%8D%AE%E5%BA%93-%E8%8C%83%E5%BC%8F/"/>
     <id>http://duyao.github.io/2017/04/25/数据库-范式/</id>
     <published>2017-04-25T02:23:30.000Z</published>
-    <updated>2017-05-08T08:29:04.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<p>范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。<br>实际上你可以把它粗略地理解为一张数据表的表结构所符合的某种设计标准的级别。</p>
 <h1 id="第一范式1NF"><a href="#第一范式1NF" class="headerlink" title="第一范式1NF"></a>第一范式1NF</h1><p>定义为：<strong>符合1NF的关系中的每个属性都不可再分</strong>。<br>1NF是所有关系型数据库的最基本要求</p>
@@ -720,7 +720,7 @@
     <link href="http://duyao.github.io/2017/04/21/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <id>http://duyao.github.io/2017/04/21/数据库/</id>
     <published>2017-04-21T01:55:53.000Z</published>
-    <updated>2017-05-16T08:50:48.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<figure class="image-bubble">
                 <div class="img-lightbox">
@@ -981,7 +981,7 @@
     <link href="http://duyao.github.io/2017/04/18/nio/"/>
     <id>http://duyao.github.io/2017/04/18/nio/</id>
     <published>2017-04-18T08:16:57.000Z</published>
-    <updated>2017-04-23T12:51:44.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="io模型"><a href="#io模型" class="headerlink" title="io模型"></a>io模型</h1><h2 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h2><h3 id="用户空间与内核空间"><a href="#用户空间与内核空间" class="headerlink" title="用户空间与内核空间"></a>用户空间与内核空间</h3><p>现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。<br>操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全。<br>操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。<br>针对Linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。<br><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -1285,7 +1285,7 @@
     <link href="http://duyao.github.io/2017/04/17/%E6%8E%92%E5%BA%8F/"/>
     <id>http://duyao.github.io/2017/04/17/排序/</id>
     <published>2017-04-17T06:57:47.000Z</published>
-    <updated>2017-04-23T06:21:14.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="各种排序算法"><a href="#各种排序算法" class="headerlink" title="各种排序算法"></a>各种排序算法</h1><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -1324,7 +1324,7 @@
     <link href="http://duyao.github.io/2017/04/12/%E5%89%91%E6%8C%87offer/"/>
     <id>http://duyao.github.io/2017/04/12/剑指offer/</id>
     <published>2017-04-12T13:26:22.000Z</published>
-    <updated>2017-05-23T13:56:50.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="二进制中1的个数"><a href="#二进制中1的个数" class="headerlink" title="二进制中1的个数"></a>二进制中1的个数</h1><p><a href="http://www.lintcode.com/zh-cn/problem/count-1-in-binary/" target="_blank" rel="external">http://www.lintcode.com/zh-cn/problem/count-1-in-binary/</a><br>原理是n&amp;(n-1)就能把最右边的1变成0<br>比如：n=5的二进制是101,n-1=4二进制是100，n&amp;(n-1)=101&amp;100=100，这样5中最右边的1就变成了0<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countOnes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</div><div class="line">        cnt++;</div><div class="line">        n = n &amp; (n - <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cnt;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>还可以判断一个是是不是2的指数(2的指数中只有1位是1)<br>还可以判断一个二进制数变为另一个二进制数需要转换几位(先异或，再求)</p>
@@ -1361,7 +1361,7 @@
     <link href="http://duyao.github.io/2017/04/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     <id>http://duyao.github.io/2017/04/10/操作系统/</id>
     <published>2017-04-10T06:42:30.000Z</published>
-    <updated>2017-05-25T03:47:12.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>程序是指令的集合，进程是程序的真正运行。<br>同一个程序对应多个进程，允许多个用户云运行同一程序。<br><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -1538,7 +1538,7 @@
     <link href="http://duyao.github.io/2017/04/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"/>
     <id>http://duyao.github.io/2017/04/05/设计模式-单例模式和工厂模式/</id>
     <published>2017-04-05T08:37:16.000Z</published>
-    <updated>2017-05-08T08:53:26.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>构造方法私有，不允许外部直接创建对象</p>
 <h2 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h2><p>创建私有静态类的实例：因为构造私有，静态的话使用类就能得到，这个就能从通过方法获得实例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">    <span class="comment">//私有且静态</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </div><div class="line">    <span class="comment">//构造方法私有</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </div><div class="line">    <span class="comment">//获取实例的方法，静态</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">      <span class="keyword">return</span> instance;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -1619,7 +1619,7 @@
     <link href="http://duyao.github.io/2017/04/01/%E5%86%85%E9%83%A8%E7%B1%BB/"/>
     <id>http://duyao.github.io/2017/04/01/内部类/</id>
     <published>2017-04-01T02:23:51.000Z</published>
-    <updated>2017-04-10T05:15:40.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<p>广泛意义上的内部类一般来说包括这四种：成员内部类、局部内部类、匿名内部类和静态内部类</p>
 <p>内部类会再生成一个class文件<br>编译器会为匿名内部类和局部内部类起名为Outter$Inner.class<br>内部类(非静态内部类)访问可以任意直接访问外部类，但是外部类不行<br>内部类(非静态内部类)不可以有静态的方法或者声明</p>
@@ -1667,7 +1667,7 @@
     <link href="http://duyao.github.io/2017/03/26/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/"/>
     <id>http://duyao.github.io/2017/03/26/分布式技术/</id>
     <published>2017-03-26T11:50:51.000Z</published>
-    <updated>2017-04-24T09:26:58.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="分布式系统的难点"><a href="#分布式系统的难点" class="headerlink" title="分布式系统的难点"></a>分布式系统的难点</h1><p>分布式系统比起单机系统存在哪些难点呢？</p>
 <h2 id="网络因素"><a href="#网络因素" class="headerlink" title="网络因素"></a>网络因素</h2><p>由于服务和数据分布在不同的机器上，每次交互都需要跨机器运行，这带来如下几个问题：<br>1.网络延迟：性能、超时</p>
@@ -1826,7 +1826,7 @@
     <link href="http://duyao.github.io/2017/03/25/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD/"/>
     <id>http://duyao.github.io/2017/03/25/反射和类加载/</id>
     <published>2017-03-25T12:37:02.000Z</published>
-    <updated>2017-05-04T03:35:50.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>在java中万事万物都是对象。<br>但是只有静态对象和<br>类是java.lang.Class的对象<br>即任何一个类都是Class的对象</p>
 <h3 id="表达实例对象"><a href="#表达实例对象" class="headerlink" title="表达实例对象"></a>表达实例对象</h3><p>表达实例对象有三种方法<br>比如Foo的实例对象如何表示<br><code>Foo foo1 = new Foo();</code>//foo1就表示出来了.<br>Foo这个类 也是一个实例对象，Class类的实例对象,如何表示呢<br>任何一个类都是Class的实例对象，这个实例对象有三种表示方式</p>
@@ -1913,7 +1913,7 @@
     <link href="http://duyao.github.io/2017/03/24/juc%E4%B9%8B%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7%E5%92%8C%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8/"/>
     <id>http://duyao.github.io/2017/03/24/juc之同步工具和并发容器/</id>
     <published>2017-03-24T05:40:21.000Z</published>
-    <updated>2017-04-27T05:03:20.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="同步工具"><a href="#同步工具" class="headerlink" title="同步工具"></a>同步工具</h1><p><a href="http://watchmen.cn/portal.php?mod=view&amp;aid=513" target="_blank" rel="external">http://watchmen.cn/portal.php?mod=view&amp;aid=513</a></p>
 <h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2><h3 id="可中断"><a href="#可中断" class="headerlink" title="可中断"></a>可中断</h3><p>public void lockInterruptibly() throws InterruptedException<br>调用<code>lockInterruptibly()</code>声明可中断</p>
@@ -2072,7 +2072,7 @@
     <link href="http://duyao.github.io/2017/03/22/395-Longest-Substring-with-At-Least-K-Repeating-Characters/"/>
     <id>http://duyao.github.io/2017/03/22/395-Longest-Substring-with-At-Least-K-Repeating-Characters/</id>
     <published>2017-03-22T12:45:03.000Z</published>
-    <updated>2017-03-22T12:48:44.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/#/description" target="_blank" rel="external">https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/#/description</a></p>
 <p>类似于二分的做法<br>找出小于k次出现的字符，然后以该字符二分区间，从而找到最长<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestSubstring</span><span class="params">(String s, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span> || k &lt; <span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">return</span> s.length();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> f(s, <span class="number">0</span>, s.length(), k);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//找出每一段区间中那个少于k次的值，然后二分法求得每一段的长度</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">f</span><span class="params">(String s, <span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (b &lt; a) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span> (b - a + <span class="number">1</span> &lt; k) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="comment">//记录下来每一个字符出现的频率</span></div><div class="line">    <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = a; i &lt; b; i++) &#123;</div><div class="line">        arr[s.charAt(i) - <span class="string">'a'</span>]++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> len = b - a;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = a; i &lt; b; i++) &#123;</div><div class="line"></div><div class="line">        <span class="comment">//找到小于k次的字符，然后用它分割整个区间</span></div><div class="line">        <span class="keyword">if</span> (arr[s.charAt(i) - <span class="string">'a'</span>] &lt; k &amp;&amp; arr[s.charAt(i) - <span class="string">'a'</span>] &gt; <span class="number">0</span>) &#123;</div><div class="line">            <span class="comment">//二分法求值</span></div><div class="line">            <span class="keyword">int</span> left = f(s, i + <span class="number">1</span>, b, k);</div><div class="line">            <span class="keyword">int</span> right = f(s, a, i, k);</div><div class="line"></div><div class="line">            <span class="keyword">return</span> Math.max(right, left);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> len;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -2096,7 +2096,7 @@
     <link href="http://duyao.github.io/2017/03/20/3-Longest-Substring-Without-Repeating-Characters/"/>
     <id>http://duyao.github.io/2017/03/20/3-Longest-Substring-Without-Repeating-Characters/</id>
     <published>2017-03-20T14:31:55.000Z</published>
-    <updated>2017-03-20T14:38:26.000Z</updated>
+    <updated>2017-06-17T04:17:01.000Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/#/solutions" target="_blank" rel="external">https://leetcode.com/problems/longest-substring-without-repeating-characters/#/solutions</a></p>
 <p>这道题目就是用map存放已经遍历过字母的位置<br>如果发现存在就重新设置起点的位置，注意设置起点位置是在当前起点和出现字符位置+1中选择大的，防止回退<br>另外每次都要更新maxl，而不是只更换起点时候更新，因为一直没有重复的就不会发生更新<br>最后计算长度的时候还要+1，因为都是闭区间</p>

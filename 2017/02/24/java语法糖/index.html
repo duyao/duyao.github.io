@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://duyao.github.io/2017/02/24/java语法糖/index.html">
 <meta property="og:site_name" content="Du Yao&#39;s blog">
 <meta property="og:description" content="语法糖（Syntactic Sugar），也称糖衣语法，是由英国计算机学家Peter.J.Landin发明的一个术语，指在计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。Java中最常用的语法糖主要有泛型、变长参数、条件编译、自动拆装箱、内部类等。虚拟机并不支持这些语法，它们在编译阶段就被还原回了简单的基础语法结构，这个过程成为解语法糖。 泛型与泛型擦除泛型实际上">
-<meta property="og:updated_time" content="2017-02-25T08:25:04.000Z">
+<meta property="og:updated_time" content="2017-07-21T07:09:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java语法糖">
 <meta name="twitter:description" content="语法糖（Syntactic Sugar），也称糖衣语法，是由英国计算机学家Peter.J.Landin发明的一个术语，指在计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。Java中最常用的语法糖主要有泛型、变长参数、条件编译、自动拆装箱、内部类等。虚拟机并不支持这些语法，它们在编译阶段就被还原回了简单的基础语法结构，这个过程成为解语法糖。 泛型与泛型擦除泛型实际上">
@@ -188,7 +188,7 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>语法糖（Syntactic Sugar），也称糖衣语法，是由英国计算机学家Peter.J.Landin发明的一个术语，指在计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。<br>Java中最常用的语法糖主要有泛型、变长参数、条件编译、自动拆装箱、内部类等。<br><strong>虚拟机并不支持这些语法，它们在编译阶段就被还原回了简单的基础语法结构</strong>，这个过程成为解语法糖。</p>
-<h2 id="泛型与泛型擦除"><a href="#泛型与泛型擦除" class="headerlink" title="泛型与泛型擦除"></a>泛型与泛型擦除</h2><p>泛型实际上只在程序源码中存在，<strong>在编译后的字节码文件中，就已经被替换为了原来的原生类型，并且在相应的地方插入了强制转型代码</strong>。<br>因此对于运行期的Java语言来说，ArrayList<string>和ArrayList<integer>就是同一个类。<br>所以泛型技术实际上是Java语言的一颗语法糖，Java语言中的泛型实现方法称为类型擦除，基于这种方法实现的泛型被称为伪泛型。</integer></string></p>
+<h2 id="泛型与泛型擦除"><a href="#泛型与泛型擦除" class="headerlink" title="泛型与泛型擦除"></a>泛型与泛型擦除</h2><p>泛型实际上只在程序源码中存在，<strong>在编译后的字节码文件中，就已经被替换为了原来的原生类型，并且在相应的地方插入了强制转型代码</strong>。<br>因此对于运行期的Java语言来说，<code>ArrayList&lt;String&gt;</code>和<code>ArrayList&lt;Integer&gt;</code>就是同一个类。<br>所以泛型技术实际上是Java语言的一颗语法糖，Java语言中的泛型实现方法称为类型擦除，基于这种方法实现的泛型被称为伪泛型。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FanxingTest</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(List&lt;String&gt; list)</span></span>&#123;  </div><div class="line">        System.out.println(<span class="string">"List String"</span>);  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(List&lt;Integer&gt; list)</span></span>&#123;  </div><div class="line">        System.out.println(<span class="string">"List Int"</span>);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当我用Javac编译器编译这段代码时，报出了如下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">FanxingTest.java:3: 名称冲突：method(java.util.List&lt;java.lang.String&gt;) 和 method</div><div class="line"></div><div class="line">(java.util.List&lt;java.lang.Integer&gt;) 具有相同疑符</div><div class="line"></div><div class="line">       public void method(List&lt;String&gt; list)&#123;</div><div class="line"></div><div class="line">                   ^</div><div class="line"></div><div class="line">FanxingTest.java:6: 名称冲突：method(java.util.List&lt;java.lang.Integer&gt;) 和 metho</div><div class="line"></div><div class="line">d(java.util.List&lt;java.lang.String&gt;) 具有相同疑符</div><div class="line"></div><div class="line">       public void method(List&lt;Integer&gt; list)&#123;</div><div class="line"></div><div class="line">                   ^</div><div class="line"></div><div class="line">2 错误</div></pre></td></tr></table></figure></p>
 <p>这是因为泛型List<string>和List<integer>编译后都被擦除了，变成了一样的原生类型List，擦除动作导致这两个方法的特征签名变得一模一样，在Class类文件结构一文中讲过，Class文件中不能存在特征签名相同的方法。</integer></string></p>
@@ -204,7 +204,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-02-25T08:25:04.000Z" itemprop="dateUpdated">2017年2月25日 16:25</time>
+    最后更新时间：<time datetime="2017-07-21T07:09:10.000Z" itemprop="dateUpdated">2017年7月21日 15:09</time>
 </span><br>
 
 
